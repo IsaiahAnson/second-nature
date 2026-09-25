@@ -8,6 +8,8 @@ Everything is one HTML file (`second-nature.html`). Open it in a browser and it 
 
 ![Quests page](docs/quests.png)
 
+![Method page](docs/method.png)
+
 ## What's inside
 
 | Section | What it does |
@@ -17,7 +19,7 @@ Everything is one HTML file (`second-nature.html`). Open it in a browser and it 
 | **Chunks → Collection** | Every chunk you've built: search, filter by subject, edit, practise its cards, and see the web of links between them. |
 | **Chunks → Traits** | Tie a technique to a moment in your day and practise it until it's automatic. |
 | **Chunks → Progress** | Does your confidence match your recall? What should you practise next? |
-| **Chunks → Method** | The five-stage chunk system the app is built on, as a reference page. |
+| **Chunks → Method** | The five-stage chunk system the app is built on, as an illustrated reference page: working memory, chunking, the two modes, the neuromodulators, procrastination, spacing and recall, with the research behind each. |
 | **Quests** | Daily quests with fuel, streaks, chapters and expeditions, a map you chart by doing them, and a journal that keeps what you've done. |
 | **Snowball → Starter** | Can't get going? A two-minute push. Each win makes the next one a little longer. |
 | **Snowball → Motivation** | What drives motivation, what to do the moment you're stuck, and how strong the evidence is behind each tool. |
