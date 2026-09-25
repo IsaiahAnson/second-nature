@@ -2,6 +2,10 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-09-25 — Progress charts and effect bars
+- Four new charts on Progress: where your chunks sit on the gap ladder (split by last score), a 12-week recall activity heatmap, weekly recalls stacked by score, and a per-subject Cold share with overdue counts. All have hover and keyboard tooltips and work in both themes.
+- Effect cards on the Quests page: the fade bar shared a class name with the Claude feedback box and inherited its padding and border. It now has its own class and a slim gradient bar.
+
 ## 2026-09-24 — audit fixes, smarter recall, Claude features
 
 ### Recall and scheduling

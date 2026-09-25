@@ -392,6 +392,39 @@ input[type="number"] { font: inherit; font-size: 0.95rem; color: var(--ink); bac
 .agenda .names { font-size: 0.92rem; line-height: 1.5; }
 .agenda-scroll { max-height: 380px; overflow-y: auto; padding-right: 4px; }
 
+/* ---------- progress charts (v64) ---------- */
+.ch-wrap { display: grid; gap: 8px; max-width: 560px; --h1: color-mix(in srgb, var(--accent) 25%, var(--sunk)); --h2: color-mix(in srgb, var(--accent) 45%, var(--sunk)); --h3: color-mix(in srgb, var(--accent) 70%, var(--sunk)); --h4: var(--accent); }
+.ch-box { position: relative; }
+.ch-box.ch-heat { max-width: 340px; } .ch-box.ch-lad { max-width: 440px; }
+.ch-box > svg { width: 100%; height: auto; display: block; overflow: visible; }
+.ch-box .ch-ax { font-family: var(--mono); font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.ch-box .ch-ink { fill: var(--ink); }
+.ch-box .ch-grid { stroke: var(--rule); stroke-width: 1; }
+.ch-box .s0 { fill: var(--s0); } .ch-box .s1 { fill: var(--s1); } .ch-box .s2 { fill: var(--s2); } .ch-box .s3 { fill: var(--s3); }
+.ch-box .s4 { fill: var(--muted); opacity: 0.4; }
+.ch-box .h0 { fill: var(--sunk); } .ch-box .h1 { fill: var(--h1); } .ch-box .h2 { fill: var(--h2); } .ch-box .h3 { fill: var(--h3); } .ch-box .h4 { fill: var(--h4); }
+.ch-box .ch-tick { fill: var(--rule); }
+.ch-box .ch-tr { fill: var(--rule); }
+.ch-box .ch-ht { outline: none; }
+.ch-box .ch-ht:focus-visible { stroke: var(--load); stroke-width: 2; }
+.ch-box .ch-hitr { fill: transparent; }
+.ch-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+.ch-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.ch-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; background: var(--c); }
+.ch-legend i.s4 { background: var(--muted); opacity: 0.4; }
+.ch-legend i.h0 { background: var(--sunk); } .ch-legend i.h1 { background: var(--h1); } .ch-legend i.h2 { background: var(--h2); } .ch-legend i.h3 { background: var(--h3); } .ch-legend i.h4 { background: var(--h4); }
+.ch-legend .ramp { gap: 2px; } .ch-legend .ramp em { font-style: normal; margin: 0 4px; }
+.ch-note { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ch-subj { display: grid; gap: 9px; }
+.ch-subj .ch-row { display: grid; grid-template-columns: minmax(0, 1.3fr) auto minmax(56px, 1fr) 2.6em; gap: 10px; align-items: center; font-size: 0.9rem; }
+.ch-subj .ch-nm { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.ch-subj .ch-nm b { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.ch-subj .ch-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; background: var(--c, var(--muted)); }
+.ch-subj .ch-n, .ch-subj .ch-pc { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ch-subj .ch-pc { text-align: right; color: var(--ink); } .ch-subj .ch-pc.none { color: var(--muted); }
+.ch-subj .ch-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 999px; padding: 0 7px; white-space: nowrap; flex: none; }
+.ch-box .ch-sbar { width: 100%; height: 8px; display: block; border-radius: 4px; overflow: hidden; outline: none; }
+.ch-box .ch-sbar:focus-visible { outline: 2px solid var(--load); outline-offset: 2px; }
 /* ---------- memory curve ---------- */
 .mcurve { position: relative; max-width: 760px; }
 .mcurve svg { width: 100%; height: auto; display: block; }
@@ -434,8 +467,9 @@ input[type="number"] { font: inherit; font-size: 0.95rem; color: var(--ink); bac
 .effects, .relics { display: flex; flex-wrap: wrap; gap: 6px; }
 .fx { display: inline-flex; flex-direction: column; gap: 3px; min-width: 8.5em; border: 1px solid color-mix(in srgb, var(--c) 38%, var(--rule)); background: color-mix(in srgb, var(--c) 7%, var(--surface)); border-radius: 10px; padding: 6px 10px 7px; font-size: 0.82rem; }
 .fx small { font-size: 0.72rem; color: var(--muted); }
-.fx .fb { height: 3px; border-radius: 2px; background: color-mix(in srgb, var(--c) 18%, transparent); overflow: hidden; }
-.fx .fb i { display: block; height: 100%; background: var(--c); }
+.fx { gap: 4px; padding: 7px 11px 8px; min-width: 9em; }
+.fx .fxb { height: 5px; margin-top: 2px; border-radius: 3px; background: color-mix(in srgb, var(--c) 14%, transparent); overflow: hidden; }
+.fx .fxb i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, color-mix(in srgb, var(--c) 45%, transparent), var(--c)); box-shadow: 0 0 6px color-mix(in srgb, var(--c) 60%, transparent); }
 .relic { font-size: 0.82rem; font-weight: 600; border-radius: 999px; padding: 4px 11px 4px 10px; border: 1px solid color-mix(in srgb, var(--c) 50%, var(--rule)); background: color-mix(in srgb, var(--c) 12%, var(--surface)); display: inline-flex; gap: 7px; align-items: center; }
 .relic::before { content: ""; width: 8px; height: 8px; background: var(--c); transform: rotate(45deg); border-radius: 2px; }
 .hints { margin: 0; padding-left: 1.1em; font-size: 0.86rem; color: var(--muted); display: flex; flex-direction: column; gap: 3px; }
@@ -1421,7 +1455,7 @@ body { padding-inline: clamp(16px, 1.8vw, 40px); }
 @keyframes railRun { 0% { top: 0; opacity: 0; } 12% { opacity: 0.9; } 82% { opacity: 0.9; } 100% { top: calc(100% - 74px); opacity: 0; } }
 
 /* a filled bar carries a slow highlight, so the bars across a card read as one system */
-.meter .bt, .zbar, .tbar, .progress, .qtb, .hp, .fx .fb { overflow: hidden; }
+.meter .bt, .zbar, .tbar, .progress, .qtb, .hp, .fx .fxb { overflow: hidden; }
 .meter .bt i, .zbar i, .tbar i, .progress i, .qtb i { position: relative; overflow: hidden; }
 .meter .bt i::after, .zbar i::after, .tbar i::after, .progress i::after, .qtb i::after {
   content: ""; position: absolute; inset: 0; border-radius: inherit;
@@ -1460,7 +1494,7 @@ body { padding-inline: clamp(16px, 1.8vw, 40px); }
 }
 
 /* effect chips breathe out as they fade, in their own colour */
-.fx .fb i { transition: width var(--d4) var(--e-out); }
+.fx .fxb i { transition: width var(--d4) var(--e-out); }
 @media (prefers-reduced-motion: no-preference) {
   :root:not([data-motion="calm"]) .relic, :root:not([data-motion="calm"]) .fx { animation: riseIn var(--d3) var(--e-out) both; }
 }
@@ -5689,7 +5723,7 @@ function renderInsight() {
   var host = $('#insightBody'), today = todayStr();
   if (!S.ready) { host.innerHTML = '<p class="muted">Loading…</p>'; return; }
   var revs = allReviews(S.chunks).filter(function (r) { return r.p != null; });
-  var html = repeaterHtml(today) + memoryCurveHtml(today) + '<div class="grid2"><div class="panel"><h2 class="insight-h p">Predicted against actual</h2>' +
+  var html = repeaterHtml(today) + memoryCurveHtml(today) + chartsHtml(today) + '<div class="grid2"><div class="panel"><h2 class="insight-h p">Predicted against actual</h2>' +
     (revs.length ? calibrationSvg(revs) + '<p class="muted" style="font-size:0.9rem">Each dot is one confidence level, placed at how often the recalls you gave that number came back Cold; the number beside it counts the recalls behind it. Dots on the dashed line mean your confidence can be trusted. Dots below it mean you felt surer than you were. ' + (revs.length < 20 ? 'You have ' + plural(revs.length, 'scored recall') + '; the picture firms up after about 20.' : 'Based on ' + revs.length + ' scored recalls.') + '</p>' + calAdviceHtml(gapStat(revs)) + aiAgreeHtml() :
       '<p class="muted">No recalls yet. Before each recall you say how sure you are that it will come back cold, and this chart shows how often it did.</p>') + '</div>';
   html += '<div class="panel"><h2 class="insight-h i">Recall calendar</h2><p class="muted small">The next 30 days. Anything overdue is listed under today, and dates move after each recall.</p><div class="agenda-scroll">' + agendaHtml(agenda(30), today) + '</div></div></div>';
@@ -5710,7 +5744,7 @@ function renderInsight() {
     '<div><h3 class="insight-h p">Illusions</h3><p class="muted" style="font-size:0.9rem">Recalls you rated 80% or more that came back Blank or in Fragments, most recent first. These are the ideas that feel known and are not.</p>' +
     (ill.length ? '<ul class="shaky illus">' + ill.map(function (r) { var c = S.chunks.get(r.id); return '<li><button class="nlink" data-act="edit" data-id="' + esc(c.id) + '">' + esc(c.name) + '</button> <span class="muted">· said ' + r.p + '%, ' + SCORES[r.s].label + ' · ' + esc(human(r.d)) + '</span></li>'; }).join('') + '</ul>' : '<p class="muted" style="padding:14px 0">None yet. When you say 80% or more and then draw a blank, it shows up here.</p>') + '</div></div>';
   host.innerHTML = html;
-  bindCurve();
+  bindCurve(); bindCharts();
 }
 /* ---------- build: reading inbox + guided distil ---------- */
 var KINDS = [
@@ -5921,6 +5955,145 @@ function mcProjection(c, today) {
     cur = { stage: r.stage, ease: r.ease, due: r.due };
   }
   return steps;
+}
+/* ---------- progress charts (v64): ladder, activity heatmap, weekly scores, subjects ---------- */
+function chartsHtml(today) {
+  var revs = allReviews(S.chunks), last = GAPS.length - 1, i, j, w;
+  var td = parseDate(today), monThis = addDays(today, -((td.getDay() + 6) % 7)), start12 = addDays(monThis, -77), start8 = addDays(today, -55);
+  var byDay = {}, wk = [], total12 = 0, subjRev = {};
+  for (i = 0; i < 12; i++) wk.push([0, 0, 0, 0]);
+  revs.forEach(function (r) {
+    if (r.d >= start12 && r.d <= today) { w = Math.floor(diffDays(r.d, start12) / 7); if (w >= 0 && w < 12) { wk[w][r.s] += 1; byDay[r.d] = (byDay[r.d] || 0) + 1; total12++; } }
+    if (r.d >= start8 && r.d <= today) { var rc = S.chunks.get(r.id), rk = rc ? (rc.domain || '') : '', ro = subjRev[rk] || (subjRev[rk] = { n: 0, cold: 0 }); ro.n++; if (r.s === 3) ro.cold++; }
+  });
+  var ladder = [], subj = {}, subjList = [], nChunks = 0;
+  for (i = 0; i <= last; i++) ladder.push([0, 0, 0, 0, 0]);
+  S.chunks.forEach(function (c) {
+    var st = Math.max(0, Math.min(last, c.stage | 0)), ls = 4;
+    for (var k = c.history.length - 1; k >= 0; k--) { if (!c.history[k].e) { ls = c.history[k].s; break; } }
+    ladder[st][ls] += 1; nChunks++;
+    var key = c.domain || '', o = subj[key]; if (!o) { o = subj[key] = { name: key, n: 0, over: 0 }; subjList.push(o); }
+    o.n++; if (c.due < today) o.over++;
+  });
+  function dm(s) { var d = parseDate(s); return d.getDate() + ' ' + MO[d.getMonth()]; }
+  function panel(cls, title, sentence, body) { return '<div class="panel"><div><h2 class="insight-h ' + cls + '">' + title + '</h2><p class="muted small">' + sentence + '</p></div>' + body + '</div>'; }
+  function empty(t) { return '<p class="muted small">' + t + '</p>'; }
+  var scoreLegend = '<div class="ch-legend">' + SCORES.map(function (s) { return '<span><i style="--c:var(--s' + s.v + ')"></i>' + s.label + '</span>'; }).join('');
+  var g, x, y, W, H, L, R, T, B;
+
+  /* 1. ladder */
+  var lad, maxRung = 0; ladder.forEach(function (row) { var t = row[0] + row[1] + row[2] + row[3] + row[4]; if (t > maxRung) maxRung = t; });
+  if (!nChunks) lad = empty('No chunks yet. Each new chunk starts on the 1-day rung.');
+  else {
+    W = 360; var rowH = 20, barH = 10, x0 = 66, maxW = W - x0 - 40; H = rowH * GAPS.length; g = '';
+    ladder.forEach(function (row, si) {
+      var t = row[0] + row[1] + row[2] + row[3] + row[4], yy = si * rowH + (rowH - barH) / 2, xx = x0, seen = 0;
+      g += '<text class="ch-ax" x="' + (x0 - 8) + '" y="' + (si * rowH + rowH / 2 + 4) + '" text-anchor="end">' + GAPS[si] + (GAPS[si] === 1 ? ' day' : ' days') + '</text>';
+      if (!t) { g += '<rect class="ch-tick" x="' + x0 + '" y="' + (yy + barH / 2 - 1) + '" width="4" height="2"></rect>'; }
+      row.forEach(function (n, sc) {
+        if (!n) return; seen += n;
+        var segW = n / maxRung * maxW, dw = seen < t ? Math.max(1, segW - 1) : Math.max(1, segW);
+        var tip = GAPS[si] + (GAPS[si] === 1 ? ' day' : ' days') + ' \u00b7 ' + plural(n, 'chunk') + ' \u00b7 ' + (sc === 4 ? 'new, not yet recalled' : 'last recall ' + SCORES[sc].label);
+        g += '<rect class="ch-ht s' + sc + '" tabindex="0" data-tip="' + esc(tip) + '" aria-label="' + esc(tip) + '" x="' + xx.toFixed(1) + '" y="' + yy + '" width="' + dw.toFixed(1) + '" height="' + barH + '"></rect>';
+        xx += segW;
+      });
+      g += '<text class="ch-ax' + (t ? ' ch-ink' : '') + '" x="' + ((t ? xx : x0 + 4) + 7).toFixed(1) + '" y="' + (si * rowH + rowH / 2 + 4) + '">' + t + '</text>';
+    });
+    var ladLabel = 'Chunks per gap: ' + ladder.map(function (row, si) { return GAPS[si] + ' days, ' + (row[0] + row[1] + row[2] + row[3] + row[4]); }).join('; ') + '.';
+    lad = '<div class="ch-wrap">' + scoreLegend + '<span><i class="s4"></i>New</span></div><div class="ch-box ch-lad"><svg viewBox="0 0 ' + W + ' ' + H + '" role="group" aria-label="' + esc(ladLabel) + '">' + g + '</svg><div class="mtip" hidden></div></div></div>';
+  }
+
+  /* 2. activity heatmap */
+  var act;
+  if (!revs.length) act = empty('No recalls yet. This fills in as you recall.');
+  else if (!total12) act = empty('No recalls in the last 12 weeks. This fills in as you recall.');
+  else {
+    var cell = 20, gap = 2, step = cell + gap, lx = 30, ty = 16, maxDay = 0, run = 0, best = 0, prevM = -1, d, n, lvl, mon, mm; W = lx + 12 * step; H = ty + 7 * step; g = '';
+    for (d in byDay) if (byDay[d] > maxDay) maxDay = byDay[d];
+    [0, 2, 4].forEach(function (r) { g += '<text class="ch-ax" x="0" y="' + (ty + r * step + cell / 2 + 4) + '">' + ['Mon', '', 'Wed', '', 'Fri'][r] + '</text>'; });
+    for (w = 0; w < 12; w++) {
+      mon = addDays(start12, w * 7); mm = parseDate(mon).getMonth();
+      if (mm !== prevM && !(w === 0 && parseDate(addDays(mon, 7)).getMonth() !== mm)) g += '<text class="ch-ax" x="' + (lx + w * step) + '" y="11">' + MO[mm] + '</text>';
+      prevM = mm;
+      for (j = 0; j < 7; j++) {
+        d = addDays(mon, j); if (d > today) break;
+        n = byDay[d] || 0; run = n ? run + 1 : 0; if (run > best) best = run;
+        lvl = !n ? 0 : maxDay <= 4 ? n : Math.max(1, Math.min(4, Math.ceil(n / maxDay * 4)));
+        var tip = human(d) + ' \u00b7 ' + (n ? plural(n, 'recall') : 'no recalls');
+        g += '<rect class="ch-ht h' + lvl + '" tabindex="0" data-tip="' + esc(tip) + '" aria-label="' + esc(tip) + '" x="' + (lx + w * step) + '" y="' + (ty + j * step) + '" width="' + cell + '" height="' + cell + '" rx="2"></rect>';
+      }
+    }
+    act = '<div class="ch-wrap"><div class="ch-legend"><span class="ramp"><em>fewer</em><i class="h0"></i><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><em>more</em></span></div>' +
+      '<div class="ch-box ch-heat"><svg viewBox="0 0 ' + W + ' ' + H + '" role="group" aria-label="' + esc('Recalls per day over the last 12 weeks: ' + total12 + ' in total.') + '">' + g + '</svg><div class="mtip" hidden></div></div>' +
+      '<p class="ch-note">' + plural(total12, 'recall') + ' in the last 12 weeks \u00b7 longest run of days: ' + best + '</p></div>';
+  }
+
+  /* 3. weekly stacked scores */
+  var wkh, maxT = 0; wk.forEach(function (c) { var t = c[0] + c[1] + c[2] + c[3]; if (t > maxT) maxT = t; });
+  if (!revs.length) wkh = empty('No recalls yet. This fills in as you recall.');
+  else if (!maxT) wkh = empty('No recalls in the last 12 weeks. This fills in as you recall.');
+  else {
+    W = 400; H = 190; L = 34; R = 6; T = 12; B = 30; var h = H - T - B, base = T + h, slot = (W - L - R) / 12, barW = 14, stp = 1, steps = [1, 2, 3, 5, 10, 15, 20, 25, 30, 50, 100, 200, 500];
+    for (i = 0; i < steps.length; i++) { if (Math.ceil(maxT / steps[i]) <= 4) { stp = steps[i]; break; } stp = steps[i]; }
+    var top = Math.max(2, Math.ceil(maxT / stp)) * stp, unit = h / top; g = '';
+    for (var v = 0; v <= top; v += stp) { y = base - v * unit; g += '<line class="ch-grid" x1="' + L + '" x2="' + (W - R) + '" y1="' + y.toFixed(1) + '" y2="' + y.toFixed(1) + '"></line><text class="ch-ax" x="' + (L - 8) + '" y="' + (y + 4).toFixed(1) + '" text-anchor="end">' + v + '</text>'; }
+    wk.forEach(function (c, wi) {
+      var t = c[0] + c[1] + c[2] + c[3], bx = L + wi * slot + (slot - barW) / 2, monday = addDays(start12, wi * 7), cum = 0, parts = [];
+      if (wi % 2 === 0) g += '<text class="ch-ax" x="' + (bx + barW / 2).toFixed(1) + '" y="' + (base + 18) + '" text-anchor="middle">' + dm(monday) + '</text>';
+      if (!t) g += '<rect class="ch-tick" x="' + bx.toFixed(1) + '" y="' + (base - 2) + '" width="' + barW + '" height="2"></rect>';
+      for (var sc = 0; sc < 4; sc++) {
+        if (!c[sc]) continue;
+        var y1 = base - cum * unit, y0 = base - (cum + c[sc]) * unit, isTop = cum + c[sc] === t, yb = cum ? y1 - 1 : y1, yt = isTop ? y0 : y0 + 1;
+        if (yb - yt < 1) yt = yb - 1;
+        if (isTop && yb - yt >= 4) g += '<path class="s' + sc + '" d="M' + bx.toFixed(1) + ' ' + yb.toFixed(1) + ' V' + (yt + 4).toFixed(1) + ' Q' + bx.toFixed(1) + ' ' + yt.toFixed(1) + ' ' + (bx + 4).toFixed(1) + ' ' + yt.toFixed(1) + ' H' + (bx + barW - 4).toFixed(1) + ' Q' + (bx + barW).toFixed(1) + ' ' + yt.toFixed(1) + ' ' + (bx + barW).toFixed(1) + ' ' + (yt + 4).toFixed(1) + ' V' + yb.toFixed(1) + ' Z"></path>';
+        else g += '<rect class="s' + sc + '" x="' + bx.toFixed(1) + '" y="' + yt.toFixed(1) + '" width="' + barW + '" height="' + (yb - yt).toFixed(1) + '"></rect>';
+        cum += c[sc];
+      }
+      for (sc = 3; sc >= 0; sc--) if (c[sc]) parts.push(c[sc] + ' ' + SCORES[sc].label);
+      var tip = 'Week of ' + dm(monday) + ' \u00b7 ' + (t ? plural(t, 'recall') + ' \u00b7 ' + parts.join(', ') : 'no recalls');
+      g += '<rect class="ch-ht ch-hitr" tabindex="0" data-tip="' + esc(tip) + '" aria-label="' + esc(tip) + '" x="' + (L + wi * slot).toFixed(1) + '" y="' + T + '" width="' + slot.toFixed(1) + '" height="' + h + '" rx="4"></rect>';
+    });
+    wkh = '<div class="ch-wrap">' + scoreLegend + '</div><div class="ch-box"><svg viewBox="0 0 ' + W + ' ' + H + '" role="group" aria-label="' + esc('Tested recalls per week for the last 12 weeks, stacked by score.') + '">' + g + '</svg><div class="mtip" hidden></div></div></div>';
+  }
+
+  /* 4. subjects */
+  var sub;
+  if (!nChunks) sub = empty('No chunks yet. Subjects appear here as you add chunks.');
+  else {
+    subjList.sort(function (a, b) { return b.n - a.n || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0); });
+    var rows = subjList.slice(0, 8), rest = subjList.slice(8);
+    rows.forEach(function (o) { var rv = subjRev[o.name] || { n: 0, cold: 0 }; o.rn = rv.n; o.rc = rv.cold; o.other = false; });
+    if (rest.length) { var oth = { name: 'Other', n: 0, over: 0, rn: 0, rc: 0, other: true }; rest.forEach(function (o) { var rv = subjRev[o.name] || { n: 0, cold: 0 }; oth.n += o.n; oth.over += o.over; oth.rn += rv.n; oth.rc += rv.cold; }); rows.push(oth); }
+    sub = '<div class="ch-wrap"><div class="ch-box ch-subj">' + rows.map(function (o) {
+      var label = o.other ? 'Other' : o.name || 'No subject', col = o.other || !o.name ? 'var(--muted)' : 'hsl(' + hue(o.name) + ' 55% 55%)';
+      var pct = o.rn ? Math.round(o.rc / o.rn * 100) : null;
+      var tip = o.rn ? 'Cold on ' + o.rc + ' of ' + plural(o.rn, 'recall') + ' in the last 8 weeks' : 'No recalls in the last 8 weeks';
+      return '<div class="ch-row"><span class="ch-nm"><i class="ch-dot" style="--c:' + col + '"></i><b title="' + esc(label) + '">' + esc(label) + '</b>' + (o.over ? '<span class="ch-tag">' + o.over + ' overdue</span>' : '') + '</span>' +
+        '<span class="ch-n">' + plural(o.n, 'chunk') + '</span>' +
+        '<svg class="ch-sbar ch-ht" viewBox="0 0 100 8" preserveAspectRatio="none" tabindex="0" data-tip="' + esc(tip) + '" role="img" aria-label="' + esc(label + ': ' + tip) + '"><rect class="ch-tr" x="0" y="0" width="100" height="8"></rect>' + (pct ? '<rect class="s3" x="0" y="0" width="' + pct + '" height="8"></rect>' : '') + '</svg>' +
+        '<span class="ch-pc' + (pct == null ? ' none' : '') + '">' + (pct == null ? '\u2013' : pct + '%') + '</span></div>';
+    }).join('') + '<div class="mtip" hidden></div></div></div>';
+  }
+
+  return '<div class="grid2">' +
+    panel('i', 'Where your chunks sit', 'One bar per gap, split by how each chunk\u2019s last recall went. Chunks move down the list as they hold.', lad) +
+    panel('p', 'Recall activity', 'One square per day for the last 12 weeks. Darker means more tested recalls that day.', act) +
+    panel('g', 'How recalls have gone', 'Tested recalls per week, stacked by score. More green over time means the gaps are holding.', wkh) +
+    panel('a', 'Subjects', 'The bar is the share of each subject\u2019s recalls in the last 8 weeks that came back Cold. A short bar is a subject to spend more time on.', sub) +
+    '</div>';
+}
+function bindCharts() {
+  Array.prototype.forEach.call(document.querySelectorAll('#insightBody .ch-box'), function (box) {
+    var tip = box.querySelector('.mtip'); if (!tip) return;
+    function show(el) { var r = el.getBoundingClientRect(), b = box.getBoundingClientRect(); tip.textContent = el.getAttribute('data-tip') || ''; tip.style.left = (r.left - b.left + r.width / 2) + 'px'; tip.style.top = (r.top - b.top) + 'px'; tip.hidden = false; }
+    function hide() { tip.hidden = true; }
+    Array.prototype.forEach.call(box.querySelectorAll('[data-tip]'), function (el) {
+      el.addEventListener('pointerenter', function () { show(el); });
+      el.addEventListener('pointerleave', hide);
+      el.addEventListener('focus', function () { show(el); });
+      el.addEventListener('blur', hide);
+    });
+  });
 }
 function memoryCurveHtml(today) {
   var narrow = window.innerWidth < 560, st = mcStages(), last = GAPS.length - 1, W = narrow ? 380 : 640, H = narrow ? 262 : 300, L = narrow ? 40 : 48, R = narrow ? 24 : 26, T = 34, B = 56, pad = narrow ? 20 : 26, w = W - L - R, h = H - T - B, base = T + h, colw = (w - pad) / last;
@@ -6347,7 +6520,7 @@ function compassSvg(st, skin) {
 function charHtml(g) {
   var ch = G.meta.get('character') || {}, name = str(ch.name, 40).trim() || 'You', now = Date.now();
   var meters = STATS.map(function (x) { var v = g.stats[x.k], fl = g.floors[x.k]; return '<div class="meter" style="--c:var(--' + x.c + ')"><span>' + x.label + '</span><span class="bt" role="meter" aria-label="' + x.label + (fl ? ', ' + fl + ' of it for good' : '') + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + v + '"' + (fl ? ' title="' + fl + ' of this stays for good"' : '') + '><i style="width:' + v + '%"></i>' + (fl ? '<b class="floor" style="left:' + fl + '%"></b>' : '') + '</span><span class="v">' + v + '</span></div>'; }).join('');
-  var fxh = g.effects.length ? g.effects.map(function (f) { var b = BUFFS[f.key]; return '<span class="fx" style="--c:var(--' + STATC[b.stat] + ')" title="' + esc(b.why) + '"><b>' + esc(b.name) + (f.n > 1 ? ' ×' + f.n : '') + '</b><small>' + STATL[b.stat] + ' · ' + fades(f.end - now) + '</small><span class="fb"><i style="width:' + Math.round(f.frac * 100) + '%"></i></span></span>'; }).join('') : '<p class="muted small">No effects right now. Tick off a quest or finish a Snowball push to start one.</p>';
+  var fxh = g.effects.length ? g.effects.map(function (f) { var b = BUFFS[f.key]; return '<span class="fx" style="--c:var(--' + STATC[b.stat] + ')" title="' + esc(b.why) + '"><b>' + esc(b.name) + (f.n > 1 ? ' ×' + f.n : '') + '</b><small>' + STATL[b.stat] + ' · ' + fades(f.end - now) + '</small><span class="fxb"><i style="width:' + Math.round(f.frac * 100) + '%"></i></span></span>'; }).join('') : '<p class="muted small">No effects right now. Tick off a quest or finish a Snowball push to start one.</p>';
   var bits = [], charted = g.zones.filter(function (z) { return z.xp > 0; }).length;
   if (charted) bits.push(charted + ' of 6 regions charted');
   if (g.traits.length) bits.push(plural(g.traits.length, 'trait'));
