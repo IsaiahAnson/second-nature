@@ -2,6 +2,11 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-09-26 — a plan for the day, and a check that learns
+- Day plan: the fuel you pick (Low, Some, Full) now shapes a plan for the rest of the day. It learns the hours you actually get things done from the last six weeks, puts the hardest recall in your best hour and the dread’s first step in the next best, and shrinks to three small things on a low day.
+- The Claude recall check learns from you: Fair, Too harsh and Too soft votes under each check, plus the gap between your scores and Claude’s, tune how generous it is.
+- Maintenance pass: once a week, Progress queues up to five suggested rewrites, better pictures, splits or new cards for chunks that keep slipping or need work. You apply or dismiss each one; nothing changes on its own.
+
 ## 2026-09-25 — tidy-ups
 - Marking a practice card no longer jumps the page to the top.
 - The "Make a card" buttons under the Claude check are gone.

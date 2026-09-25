@@ -425,6 +425,87 @@ input[type="number"] { font: inherit; font-size: 0.95rem; color: var(--ink); bac
 .ch-subj .ch-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 999px; padding: 0 7px; white-space: nowrap; flex: none; }
 .ch-box .ch-sbar { width: 100%; height: 8px; display: block; border-radius: 4px; overflow: hidden; outline: none; }
 .ch-box .ch-sbar:focus-visible { outline: 2px solid var(--load); outline-offset: 2px; }
+/* ---------- v70: energy-aware day plan (en) ---------- */
+.en-check { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 8px 12px; border-radius: 12px; background: var(--sunk); border: 1px solid var(--rule); font-size: 0.9rem; }
+.en-check .en-q { font-weight: 600; }
+.en-check.set { background: transparent; border-style: dashed; padding: 6px 12px; }
+.en-check .linkbtn { margin-top: 0; color: var(--muted); font-weight: 500; }
+.en-btns { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.en-dot { color: var(--muted); padding: 0 1px; }
+.en-l0 { --c: var(--s1); } .en-l1 { --c: var(--s2); } .en-l2 { --c: var(--s3); }
+.en-lv:hover, .en-lv.on { border-color: var(--c); color: var(--c); }
+.en-lv.on { background: color-mix(in srgb, var(--c) 14%, var(--surface)); }
+.en-check b.en-l0, .en-check b.en-l1, .en-check b.en-l2 { color: var(--c); }
+.en-plan { border-radius: 16px; border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--rule)); background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 7%, var(--surface)), var(--surface)); padding: 2px 14px 12px; }
+.en-plan.shut { padding-bottom: 2px; }
+.en-fold { display: flex; width: 100%; align-items: center; gap: 10px; background: none; border: 0; padding: 10px 0 8px; color: inherit; font: inherit; cursor: pointer; text-align: left; min-height: 40px; }
+.en-fold .k { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+.en-fold .en-sub { color: var(--muted); font-size: 0.86rem; flex: 1; min-width: 0; }
+.en-chev { flex: none; width: 8px; height: 8px; margin: 0 4px 3px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform var(--d2) var(--e-std); }
+.en-fold[aria-expanded="false"] .en-chev { transform: rotate(-45deg); margin-bottom: 0; }
+.en-blocks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.en-blk { display: grid; grid-template-columns: 7.6em minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; padding: 9px 12px; border-radius: 12px; background: color-mix(in srgb, var(--c) 9%, var(--surface)); border: 1px solid color-mix(in srgb, var(--c) 26%, var(--rule)); border-left: 3px solid var(--c); }
+.en-time { font-family: var(--mono); font-size: 0.8rem; color: var(--c); font-weight: 600; white-space: nowrap; }
+.en-time small { display: block; font-weight: 500; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.6rem; }
+.en-what { min-width: 0; }
+.en-what b { display: block; font-weight: 600; overflow-wrap: anywhere; }
+.en-why { display: block; font-size: 0.86rem; color: var(--muted); }
+.en-small { margin: 10px 0 0; font-weight: 600; color: var(--s1); }
+.en-note { margin: 8px 0 0; font-size: 0.84rem; color: var(--muted); }
+.en-empty { margin: 2px 0 0; color: var(--muted); font-size: 0.9rem; }
+.en-plan .linkbtn { --c: var(--accent); }
+.en-how { margin-top: 8px; padding: 10px 12px; border-radius: 12px; background: var(--sunk); border: 1px solid var(--rule); font-size: 0.88rem; }
+.en-how p { margin: 0 0 8px; } .en-how p:last-child { margin-bottom: 0; }
+.en-cite { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+.en-chart { display: block; width: 100%; max-width: 560px; height: auto; margin: 2px 0 10px; }
+.en-chart .en-b { fill: color-mix(in srgb, var(--muted) 38%, transparent); }
+.en-chart .en-b.past { opacity: 0.35; }
+.en-chart .en-b.pick { fill: var(--c); }
+.en-chart text { fill: var(--muted); font-family: var(--mono); font-size: 9px; }
+.en-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 0 0 8px; font-size: 0.78rem; color: var(--muted); }
+.en-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 3px; background: var(--c); margin-right: 5px; vertical-align: -1px; }
+.en-rline { margin-top: 8px; font-size: 0.88rem; color: var(--muted); }
+.en-rline b { color: var(--ink); }
+.en-rline .en-check { background: transparent; border: 0; padding: 0; }
+.en-links { display: inline-flex; flex-wrap: wrap; gap: 2px 12px; margin-left: 6px; }
+.en-rline .linkbtn { margin-top: 0; }
+.qrow.en-flash { animation: en-flash 1.8s var(--e-out); border-radius: 10px; }
+@keyframes en-flash { 0%, 30% { background: color-mix(in srgb, var(--accent) 20%, transparent); } 100% { background: transparent; } }
+@media (max-width: 560px) {
+  .en-blk { grid-template-columns: minmax(0, 1fr) auto; }
+  .en-time { grid-column: 1 / -1; }
+  .en-time small { display: inline; margin-left: 8px; }
+}
+/* ---------- al: checks that learn from you, and chunk maintenance ---------- */
+.alvote { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; border-top: 1px solid color-mix(in srgb, var(--c, var(--accent)) 30%, var(--rule)); padding-top: 10px; }
+.alvote > span { font-size: 0.86rem; color: var(--muted); margin-right: 4px; }
+.alvote .btn { min-height: 32px; }
+.alvote .btn[aria-pressed="true"] { background: var(--c, var(--accent)); color: var(--bg); border-color: transparent; font-weight: 600; }
+.alvote .almade { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+.almaint .alm-intro { font-size: 0.9rem; margin-top: 4px; }
+.alm-list { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+.alm-item { --c: var(--accent); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; background: color-mix(in srgb, var(--c) 7%, var(--surface)); border: 1px solid color-mix(in srgb, var(--c) 36%, var(--rule)); border-left: 4px solid var(--c); min-width: 0; }
+.alm-h { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
+.alm-h b { font-weight: 600; overflow-wrap: anywhere; }
+.alm-kind { font-family: var(--mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.08em; border-radius: 999px; padding: 2px 9px; background: var(--c); color: var(--bg); }
+.alm-why { margin: 0; font-size: 0.92rem; }
+.alm-diff { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.alm-old, .alm-new { border-radius: 10px; padding: 8px 10px; background: var(--surface); border: 1px solid var(--rule); font-size: 0.9rem; min-width: 0; overflow-wrap: anywhere; }
+.alm-new { border-color: color-mix(in srgb, var(--s3) 55%, var(--rule)); }
+.alm-old > span, .alm-new > span { display: block; font-family: var(--mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 3px; }
+.alm-new > span { color: var(--s3); }
+.alm-old p, .alm-new p { margin: 0; }
+.alm-old p { color: var(--muted); }
+.alm-new ol, .alm-new ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 4px; }
+.alm-act { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.alm-act .linkbtn { margin-top: 0; }
+.alm-cands { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-direction: column; gap: 8px; }
+.alm-cands li { display: flex; gap: 10px; justify-content: space-between; align-items: center; border-top: 1px solid var(--rule); padding-top: 8px; }
+.alm-cands li > div { min-width: 0; overflow-wrap: anywhere; }
+.alm-cands .muted { display: block; font-size: 0.86rem; }
+.alm-cands .btn { flex: none; }
+.alm-busy { margin: 10px 0 0; }
+@media (max-width: 620px) { .alm-diff { grid-template-columns: minmax(0, 1fr); } }
 /* ---------- memory curve ---------- */
 .mcurve { position: relative; max-width: 760px; }
 .mcurve svg { width: 100%; height: auto; display: block; }
@@ -4578,6 +4659,8 @@ function coachHtml(today, due) {
   else o = { c: 's1', ic: '+', k: 'Nothing due', t: 'Add a chunk from your next study session.', d: 'Close your notes, then write it from memory. Two minutes while it is fresh.', act: 'add', btn: 'Add a chunk' };
   return '<div class="coach" style="--c:var(--' + o.c + ')"><span class="ic" aria-hidden="true">' + o.ic + '</span><div><div class="k">' + esc(o.k) + '</div><div class="t">' + esc(o.t) + '</div><div class="d">' + esc(o.d) + '</div>' + staleLine() + (o.snow ? '<button class="linkbtn" data-act="snow-start">Not feeling it? Roll a 2-minute snowball first</button>' : '') + '</div><button class="btn primary" data-act="' + o.act + '"' + (o.id ? ' data-id="' + esc(o.id) + '"' : '') + '>' + esc(o.btn) + '</button></div>' + (leech && due.length ? '<div class="coach" style="--c:var(--s0)"><span class="ic" aria-hidden="true">✎</span><div><div class="k">Keeps slipping</div><div class="t">' + esc('Rewrite or split “' + leech.c.name + '”.') + '</div><div class="d">' + esc(leechWhy(leech.n)) + '</div></div><button class="btn" data-act="edit" data-id="' + esc(leech.c.id) + '">Open it</button></div>' : '') + (leech ? aiBoxHtml('leech', leech.c.id) : '');
 }
+var alCoachBase = coachHtml;
+coachHtml = function (today, due) { return alCoachBase(today, due) + alMaintCoach(); };
 // Gradients: Kaleidoscope (v49): decorative, so hidden from screen readers.
 var kalN = 0;
 function kaleidoSvg() {
@@ -4642,7 +4725,7 @@ function fbPrompt(c, answer) {
     '- Plain language, second person ("you"). Keep every list item under 30 words.',
     '- If the notes say what they missed last time, mention it under got when they have it now, and under missed when they still do not.',
     '',
-    'Chunk: ' + c.name,
+    alAboutLearner(c) + 'Chunk: ' + c.name,
     line('Subject', c.domain) + (c.source ? '. Source: ' + c.source : ''),
     line('Gist', c.gist),
     line('Metaphor or picture (optional aid, not required)', c.metaphor),
@@ -4717,7 +4800,7 @@ function fbBoxHtml(s) {
       (d.verdict ? '<p class="fbv">' + esc(d.verdict) + '</p>' : '') + (d.summary ? '<p>' + esc(d.summary) + '</p>' : '') +
       '<div class="fbl">' + fbGroup('You got', 's3', d.got) + fbGroup('You missed', 's1', d.missed) + fbGroup('Needs fixing', 's0', d.fix) + '</div>' +
       (d.next ? '<p class="fbn"><b>Next time:</b> ' + esc(d.next) + '</p>' : '') +
-      '<p class="help">A second opinion, not the verdict. Check it against your notes, then pick your own score below.</p>';
+      '<p class="help">A second opinion, not the verdict. Check it against your notes, then pick your own score below.</p>' + alVoteHtml(fb);
   }
   return '<div class="fb" id="fbBox" role="status" aria-live="polite" style="--c:var(--' + col + ')">' + inner + '</div>';
 }
@@ -5043,7 +5126,269 @@ function aiAgreeHtml() {
   if (n < 5) return '';
   var m = sum / n, a = Math.abs(m).toFixed(1);
   return '<p class="muted aiagree"><b>Your self-scoring vs Claude:</b> ' + (Math.abs(m) < 0.25 ? 'you and Claude agree, on average, over ' + n + ' checked recalls.'
-    : 'you score about ' + a + ' ' + (m > 0 ? 'above' : 'below') + ' Claude, over ' + n + ' checked recalls.' + (m > 0 ? ' When you are torn, the lower score is usually the honest one.' : ' You may be harder on yourself than you need to be.')) + '</p>';
+    : 'you score about ' + a + ' ' + (m > 0 ? 'above' : 'below') + ' Claude, over ' + n + ' checked recalls.' + (m > 0 ? ' When you are torn, the lower score is usually the honest one.' : ' You may be harder on yourself than you need to be.')) + alTuneLine() + '</p>';
+}
+
+/* v70: the check learns from you. Under each finished check you can say whether it was fair, too harsh or too soft.
+   Those votes (the last 60, in the meta doc "fbtune") and the gap between your own scores and Claude's over your
+   last 30 checks become a short note in the check's prompt, so it leans the way you have told it to. Numbers only:
+   nothing you wrote goes into the note. */
+var AL_VOTE = [[0, 'Fair'], [1, 'Too harsh'], [-1, 'Too soft']];
+function alVotes() {
+  var d = G.meta && G.meta.get ? G.meta.get('fbtune') : null, a = d && Array.isArray(d.votes) ? d.votes : [];
+  return a.filter(function (x) { return x && typeof x === 'object' && isDate(x.d) && validId(x.id) && (x.v === -1 || x.v === 0 || x.v === 1); })
+    .map(function (x) { return { d: x.d, id: x.id, c: [0, 1, 2, 3].indexOf(x.c) >= 0 ? x.c : null, v: x.v }; }).slice(-60);
+}
+function alVoteHtml(fb) {
+  if (!fb || fb.state !== 'done' || !fb.data || S.readOnly) return '';
+  return '<div class="alvote" role="group" aria-label="Was this check fair?"><span>Was this check fair?</span>' + AL_VOTE.map(function (o) {
+    return '<button type="button" class="btn small quiet" data-act="al-vote" data-v="' + o[0] + '" aria-pressed="' + (fb.vote === o[0]) + '">' + o[1] + '</button>';
+  }).join('') + '</div>';
+}
+function alVotePaint(fb) {
+  Array.prototype.forEach.call(document.querySelectorAll('#fbBox .alvote [data-act="al-vote"]'), function (b) { b.setAttribute('aria-pressed', String(fb.vote === +b.dataset.v)); });
+}
+// One write per vote. Changing your mind on the same check replaces that vote rather than adding a second.
+function alVote(v, t) {
+  var s = S.session, fb = s && s.fb, c = fb && S.chunks.get(fb.id);
+  if (!fb || !c || fb.state !== 'done' || !fb.data || !s.revealed || S.readOnly || [-1, 0, 1].indexOf(v) < 0 || fb.vote === v || fb.alBusy) return;
+  var votes = alVotes(), prev = fb.vote, was = G.meta.get('fbtune'), e = { d: todayStr(), id: fb.id, c: fb.data.score != null ? fb.data.score : null, v: v }, at = -1;
+  if (prev != null) for (var i = votes.length - 1; i >= 0; i--) if (votes[i].id === e.id && votes[i].d === e.d) { at = i; break; }
+  if (at >= 0) votes[at] = e; else votes.push(e);
+  var body = { votes: votes.slice(-60) };
+  fb.vote = v; fb.alBusy = true; alVotePaint(fb);
+  G.meta.set('fbtune', body);
+  store.setDoc('meta', 'fbtune', body).then(function () { fb.alBusy = false; }, function (err) {
+    fb.alBusy = false; fb.vote = prev; if (was) G.meta.set('fbtune', was); else G.meta['delete']('fbtune'); alVotePaint(fb); toast(explain(err));
+  });
+}
+// The last 30 checks (entries where Claude gave a score), the vote balance, and per-subject offsets from 5 checks up.
+function alTuneSum() {
+  var ck = [];
+  S.chunks.forEach(function (c) { c.history.forEach(function (h) { if (h.c != null) ck.push({ d: h.d, off: h.s - h.c, dom: String(c.domain || '').trim() }); }); });
+  ck.sort(function (a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : 0; });
+  ck = ck.slice(-30);
+  var sum = 0, subs = Object.create(null);
+  ck.forEach(function (x) {
+    sum += x.off; if (!x.dom) return;
+    var k = x.dom.toLowerCase(), o = subs[k] || (subs[k] = { n: 0, sum: 0 }); o.n++; o.sum += x.off;
+  });
+  var sub = Object.create(null); Object.keys(subs).forEach(function (k) { if (subs[k].n >= 5) sub[k] = { n: subs[k].n, off: subs[k].sum / subs[k].n }; });
+  var vs = alVotes().slice(-30), harsh = 0, soft = 0, fair = 0;
+  vs.forEach(function (x) { if (x.v === 1) harsh++; else if (x.v === -1) soft++; else fair++; });
+  var n = ck.length, off = n ? sum / n : 0, nv = vs.length, lean = (n >= 8 ? off : 0) + (nv >= 5 ? (harsh - soft) / nv : 0);
+  return { n: n, off: off, votes: nv, harsh: harsh, soft: soft, fair: fair, sub: sub, lean: lean, enough: n >= 8 || nv >= 5 };
+}
+function alAboutLearner(c) {
+  var t = alTuneSum(); if (!t.enough) return '';
+  var dir = t.lean >= 0.25 ? 1 : t.lean <= -0.25 ? -1 : 0, parts = [], a = Math.abs(t.off).toFixed(1);
+  if (t.n >= 8) parts.push('This learner\'s own scores have run ' + (Math.abs(t.off) < 0.15 ? 'close to yours' : 'about ' + a + ' ' + (t.off > 0 ? 'higher' : 'lower') + ' than yours') + ' over their last ' + t.n + ' checks');
+  if (t.votes >= 5) {
+    var vn = dir > 0 ? t.harsh : dir < 0 ? t.soft : t.fair, vw = dir > 0 ? 'too harsh' : dir < 0 ? 'too soft' : 'fair';
+    parts.push((parts.length ? 'and they' : 'They') + ' marked ' + vn + ' of ' + t.votes + ' recent checks ' + vw);
+  }
+  var out = parts.join(', ') + '.';
+  var sk = String(c && c.domain || '').trim().toLowerCase(), so = sk ? t.sub[sk] : null;
+  if (so && so.n < t.n && Math.abs(so.off) >= 0.15) out += ' In this chunk\'s subject their scores run about ' + Math.abs(so.off).toFixed(1) + ' ' + (so.off > 0 ? 'higher' : 'lower') + ' than yours over ' + so.n + ' checks.';
+  out += dir > 0 ? ' Lean generous: give credit for the idea in rough words, and when torn, pick the higher score.'
+    : dir < 0 ? ' Lean strict: count only what they actually wrote, do not fill gaps for them, and when torn, pick the lower score.'
+    : ' Your scoring has been about right for them; keep to the rules as they are.';
+  return 'About this learner: ' + out + '\n\n';
+}
+function alTuneLine() {
+  var t = alTuneSum(); if (!t.enough) return '';
+  var basis = [];
+  if (t.n >= 8) basis.push('your last ' + t.n + ' checks');
+  if (t.votes >= 5) basis.push(plural(t.votes, 'vote'));
+  var how = Math.abs(t.lean) < 0.25 ? 'is not leaning either way for you' : 'is leaning ' + (Math.abs(t.lean) < 0.6 ? 'a little ' : '') + (t.lean > 0 ? 'more generous' : 'stricter') + ' for you';
+  return ' The check ' + how + ', based on ' + basis.join(' and ') + '.';
+}
+
+/* v70: a chunk maintenance pass. Up to five chunks that need care (keep slipping, keep missing the same point, have
+   no gist or picture, or a gist too long to say aloud) go to Claude in one call, at most once every 7 days when
+   Progress opens, or when you press "Run it now". Each answer waits in the meta doc "maint" until you apply or
+   dismiss it; nothing is changed by itself. Without Claude the panel lists the chunks and why. */
+var AL = { tried: false }, AL_DAYS = 7, AL_KINDS = { gist: ['Sharper gist', 's2'], picture: ['Better picture', 'accent'], split: ['Split it', 's1'], cards: ['Practice cards', 's3'] };
+function alWords(s) { var o = [], seen = Object.create(null); aiNorm(s).split(' ').forEach(function (w) { if (w.length > 3 && !seen[w]) { seen[w] = 1; o.push(w); } }); return o; }
+function alSame(a, b) {
+  if (aiNorm(a) === aiNorm(b)) return true;
+  var A = alWords(a), B = alWords(b), n = 0; if (!A.length || !B.length) return false;
+  A.forEach(function (w) { if (B.indexOf(w) >= 0) n++; });
+  return n >= 3 || n / Math.min(A.length, B.length) >= 0.6;
+}
+// A miss that turns up in at least two of the last three checks.
+function alSharedMiss(c) {
+  var ck = c.history.filter(function (h) { return h.c != null || (h.m && h.m.length); }).slice(-3);
+  if (ck.length < 3) return '';
+  for (var i = 0; i < 3; i++) for (var j = i + 1; j < 3; j++) {
+    var a = ck[i].m || [], b = ck[j].m || [];
+    for (var x = 0; x < a.length; x++) for (var y = 0; y < b.length; y++) if (alSame(a[x], b[y])) return b[y];
+  }
+  return '';
+}
+function alMaintCands() {
+  var out = [];
+  S.chunks.forEach(function (c) {
+    var why = [], rank = 0, ln = lapses(c), sm = alSharedMiss(c), gl = c.gist.trim().length;
+    if (ln >= LEECH) { why.push('Keeps slipping: missed on ' + ln + ' of its last 8 recalls'); rank += 100 + ln; }
+    if (sm) { why.push('Your last three checks kept missing the same point'); rank += 60; }
+    if (gl > 600) { why.push('The gist runs to ' + gl + ' characters, too long to say aloud'); rank += 40; }
+    if (!gl) { why.push('It has no gist'); rank += 30; }
+    if (!c.metaphor.trim()) { why.push('It has no picture'); rank += 20; }
+    if (why.length) out.push({ c: c, why: why, miss: sm, rank: rank });
+  });
+  out.sort(function (a, b) { return b.rank - a.rank || byName(a.c, b.c); });
+  return out;
+}
+function alItemClean(x, ids) {
+  if (!x || typeof x !== 'object' || !validId(x.id) || !AL_KINDS[x.kind] || (ids && ids.indexOf(x.id) < 0)) return null;
+  var o = { id: x.id, kind: x.kind, why: aiS(x.why, 300), d: isDate(x.d) ? x.d : todayStr() };
+  if (x.kind === 'gist') { o.gist = aiS(x.gist, 600); if (!o.gist) return null; }
+  else if (x.kind === 'picture') { o.picture = aiS(x.picture, 600); if (!o.picture) return null; }
+  else if (x.kind === 'split') {
+    o.parts = (Array.isArray(x.parts) ? x.parts : []).slice(0, 6).map(function (p) { return p && typeof p === 'object' ? { name: aiS(p.name, 160), gist: aiS(p.gist, 600) } : null; }).filter(function (p) { return p && p.name; }).slice(0, 3);
+    if (o.parts.length < 2) return null;
+  } else {
+    o.cards = (Array.isArray(x.cards) ? x.cards : []).slice(0, 8).map(function (k) { return k && typeof k === 'object' ? { q: aiS(k.q, 300), a: aiS(k.a, 600) } : null; }).filter(function (k) { return k && k.q; }).slice(0, 3);
+    if (!o.cards.length) return null;
+  }
+  return o;
+}
+function alMaintDoc() {
+  var d = G.meta && G.meta.get ? G.meta.get('maint') : null; d = d && typeof d === 'object' ? d : {};
+  var seen = Object.create(null), items = (Array.isArray(d.items) ? d.items : []).map(function (x) { return alItemClean(x); }).filter(function (x) { if (!x || seen[x.id] || !S.chunks.has(x.id)) return false; seen[x.id] = 1; return true; });
+  return { last: typeof d.last === 'string' && !isNaN(Date.parse(d.last)) ? d.last : '', items: items };
+}
+function alMaintDue(doc) { return !doc.last || Date.now() - Date.parse(doc.last) >= AL_DAYS * 864e5; }
+function alMaintPrompt(cands) {
+  return [AI_HEAD, '', 'This is a weekly maintenance pass. Below are up to five of the learner\'s chunks that need care, each with the reason it was picked, its notes, and what recent recall checks said they missed. Suggest at most one change per chunk: the one most likely to help it stick.',
+    '', 'Kinds of change:',
+    '- gist: a sharper gist holding one idea, in plain words the learner could say aloud, under 60 words. Best when the gist is missing, muddled or too long.',
+    '- picture: a vivid, concrete picture you could see, under 40 words. Best when the picture is missing or abstract.',
+    '- split: 2 or 3 smaller chunks, each with a name and a one-sentence gist. Only when the chunk really holds more than one idea.',
+    '- cards: 1 to 3 practice cards, a question and a short answer, aimed at the point the checks keep missing.',
+    '', 'Rules:', '- Use only what the chunk\'s own notes and misses contain. Do not add facts.', '- Keep the learner\'s meaning, and their words where you can.',
+    '- why: one plain sentence under 25 words, to the learner ("you"), saying why this change should help.', '- Leave a chunk out if nothing would help. Use each id exactly as given.', '',
+    cands.map(function (x) {
+      var c = x.c, ms = [];
+      c.history.slice(-6).forEach(function (h) { (h.m || []).forEach(function (m) { if (ms.indexOf(m) < 0) ms.push(m); }); });
+      return ['--- Chunk id: ' + c.id, 'Picked because: ' + x.why.join('; '), aiChunkText(c),
+        'Practice cards it has: ' + c.cards.length + (c.cards.length ? '\n' + c.cards.slice(0, 6).map(function (k) { return '- ' + aiCap(k.q, 120); }).join('\n') : ''),
+        'What recent checks said they missed:' + (ms.length ? '\n' + ms.slice(-6).map(function (m) { return '- ' + aiCap(m, 120); }).join('\n') : ' (nothing recorded)')].join('\n');
+    }).join('\n\n'), '',
+    AI_TAIL, '{"suggestions": [{"id": "…", "kind": "gist|picture|split|cards", "why": "…", "gist": "…", "picture": "…", "parts": [{"name": "…", "gist": "…"}], "cards": [{"q": "…", "a": "…"}]}]}',
+    'Include only the field the kind needs. At most one suggestion per chunk.'].join('\n');
+}
+function alMaintClean(d, meta) {
+  var arr = aiArr(d, 'suggestions', 12); if (!arr) return null;
+  var seen = Object.create(null), out = [];
+  arr.forEach(function (x) { var o = alItemClean(x, meta.ids); if (o && !seen[o.id]) { seen[o.id] = 1; out.push(o); } });
+  return { items: out };
+}
+function alMaintSave(body) {
+  G.meta.set('maint', body);
+  return store.setDoc('meta', 'maint', body).then(null, function (e) { toast(explain(e)); throw e; });
+}
+function alMaintRun(manual) {
+  if (!sampleOn() || S.readOnly || !G.ready.meta) return;
+  var j0 = AI.almaint; if (j0 && j0.state === 'busy') return;
+  var doc = alMaintDoc(), pend = Object.create(null); doc.items.forEach(function (x) { pend[x.id] = 1; });
+  var cands = alMaintCands().filter(function (x) { return !pend[x.c.id]; }).slice(0, 5);
+  AL.tried = true; AL.err = '';
+  if (!cands.length) { if (manual) toast(doc.items.length ? 'Everything that needs care already has a suggestion waiting.' : 'Nothing needs care right now.'); return; }
+  aiCall('almaint', alMaintPrompt(cands), alMaintClean, { kind: 'almaint', meta: { ids: cands.map(function (x) { return x.c.id; }) }, onDone: function (j) {
+    if (j.state === 'done') {
+      var cur = alMaintDoc(), have = Object.create(null); cur.items.forEach(function (x) { have[x.id] = 1; });
+      var add = j.data.items.filter(function (x) { return !have[x.id]; });
+      alMaintSave({ last: new Date().toISOString(), items: cur.items.concat(add).slice(-12) }).then(null, function () {});
+      toast(add.length ? plural(add.length, 'suggestion') + ' waiting in Maintenance on Progress.' : 'Claude found nothing to change this week.');
+    } else if (j.state === 'error') AL.err = j.code;
+    alMaintPaint();
+  } });
+  alMaintPaint();
+}
+function alMaintPaint() {
+  var el = $('#alMaint'); if (el) el.outerHTML = alMaintHtml();
+  if (S.tab === 'today' && !S.session && !S.practice) renderToday(true);
+}
+function alMaintDiff(it, c) {
+  function box(k, v, cls) { return '<div class="' + cls + '"><span>' + k + '</span>' + v + '</div>'; }
+  function p(v, empty) { v = String(v || '').trim(); return '<p>' + (v ? esc(aiCap(v, 420)) : '<i>' + empty + '</i>') + '</p>'; }
+  if (it.kind === 'gist') return box('Now', p(c.gist, 'No gist yet'), 'alm-old') + box('Suggested', p(it.gist), 'alm-new');
+  if (it.kind === 'picture') return box('Now', p(c.metaphor, 'No picture yet'), 'alm-old') + box('Suggested', p(it.picture), 'alm-new');
+  if (it.kind === 'split') return box('Now', p(c.gist, 'No gist yet'), 'alm-old') + box('Suggested', '<ol>' + it.parts.map(function (x) { return '<li><b>' + esc(x.name) + '</b>. ' + esc(x.gist) + '</li>'; }).join('') + '</ol>', 'alm-new');
+  return box('Now', '<p>' + plural(c.cards.length, 'practice card') + '</p>', 'alm-old') + box('Adds', '<ul>' + it.cards.map(function (k) { return '<li>' + esc(k.q) + (k.a ? ' <span class="muted">→ ' + esc(k.a) + '</span>' : '') + '</li>'; }).join('') + '</ul>', 'alm-new');
+}
+function alMaintItem(it) {
+  var c = S.chunks.get(it.id), k = AL_KINDS[it.kind], ids = ' data-id="' + esc(it.id) + '"', btns;
+  if (it.kind === 'split') btns = '<button type="button" class="btn small primary" data-act="al-mapply" data-v="0"' + ids + '>Apply: open part 1</button>' + it.parts.slice(1).map(function (x, i) { return '<button type="button" class="linkbtn" data-act="al-mapply" data-v="' + (i + 1) + '"' + ids + '>Open part ' + (i + 2) + '</button>'; }).join('');
+  else btns = '<button type="button" class="btn small primary" data-act="al-mapply"' + ids + '>Apply</button>';
+  btns += '<button type="button" class="btn small quiet" data-act="al-mdrop"' + ids + '>Dismiss</button><button type="button" class="linkbtn" data-act="edit"' + ids + '>Open the chunk</button>';
+  return '<div class="alm-item" style="--c:var(--' + k[1] + ')" data-alm="' + esc(it.id) + '"><div class="alm-h"><b>' + esc(c.name) + '</b><span class="alm-kind">' + k[0] + '</span></div>' +
+    (it.why ? '<p class="alm-why">' + esc(it.why) + '</p>' : '') + '<div class="alm-diff">' + alMaintDiff(it, c) + '</div>' +
+    (it.kind === 'split' ? '<p class="help">Each part opens in the editor with its text in place; nothing is saved until you save. Once the parts are in, rewrite or delete the original, then dismiss this.</p>' : '') +
+    '<div class="alm-act">' + btns + '</div></div>';
+}
+function alMaintHtml() {
+  var doc = alMaintDoc(), j = AI.almaint, busy = !!j && j.state === 'busy', on = !!sampleFn, live = sampleOn(), cands = alMaintCands();
+  var pend = Object.create(null); doc.items.forEach(function (x) { pend[x.id] = 1; });
+  var fresh = cands.filter(function (x) { return !pend[x.c.id]; });
+  if (live && !busy && !AL.tried && !S.readOnly && G.ready.meta && fresh.length && alMaintDue(doc)) setTimeout(function () { if (S.tab === 'insight' && !AL.tried) alMaintRun(false); }, 0);
+  var h = '<div class="panel almaint" id="alMaint"><div class="row-between"><h2 class="insight-h g">Maintenance</h2>' +
+    (live && !S.readOnly ? (busy ? '<button type="button" class="btn small quiet" data-act="al-mstop">Stop</button>' : '<button type="button" class="btn small" data-act="al-mrun">Run it now</button>') : '') + '</div>';
+  if (!on) {
+    h += '<p class="muted alm-intro">Chunks that need care: ones that keep slipping, keep missing the same point, have no gist or picture, or have a gist too long to say aloud.</p>';
+    if (!cands.length) return h + '<p class="muted" style="padding:10px 0 0">Nothing needs care right now.</p></div>';
+    return h + '<ul class="alm-cands">' + cands.slice(0, 5).map(function (x) { return '<li><div><b>' + esc(x.c.name) + '</b><span class="muted">' + esc(x.why.join('. ')) + '.</span></div><button type="button" class="btn small" data-act="edit" data-id="' + esc(x.c.id) + '">Open</button></li>'; }).join('') + '</ul>' +
+      '<p class="help" style="margin-top:10px">Suggested fixes for these need Claude, which isn\'t available here. Open one to work on it yourself.</p></div>';
+  }
+  h += '<p class="muted alm-intro">Once a week Claude looks over up to five chunks that need care: ones that keep slipping, keep missing the same point, have no gist or picture, or have a gist too long to say aloud. Suggestions wait here. Nothing changes until you apply one.</p>';
+  if (busy) h += '<p class="fbwait alm-busy"><span class="fbdots" aria-hidden="true"><i></i><i></i><i></i></span>Claude is looking over ' + plural(Math.min(5, fresh.length), 'chunk') + '. You can carry on while it works.</p>';
+  else if (AL.err) h += '<p class="help alm-busy">No suggestions this time. ' + esc(aiErr(AL.err)) + '</p>';
+  if (doc.items.length) h += '<div class="alm-list" role="list">' + doc.items.map(alMaintItem).join('') + '</div>';
+  else if (!busy) h += '<p class="muted" style="padding:10px 0 0;font-size:0.9rem">' + (fresh.length ? plural(fresh.length, 'chunk') + ' could use a look. ' : 'Nothing needs care right now. ') + (doc.last ? 'Last pass: ' + esc(human(doc.last.slice(0, 10))) + '.' : 'No pass yet.') + '</p>';
+  return h + '</div>';
+}
+function alMaintDrop(id, t) {
+  var doc = alMaintDoc(), items = doc.items.filter(function (x) { return x.id !== id; });
+  if (items.length === doc.items.length || S.readOnly) return;
+  if (t) t.disabled = true;
+  var was = G.meta.get('maint');
+  alMaintSave({ last: doc.last, items: items }).then(function () { alMaintPaint(); }, function () { if (was) G.meta.set('maint', was); alMaintPaint(); });
+  alMaintPaint();
+}
+// Apply goes through the usual save path and changes only the field the suggestion is about.
+function alMaintApply(id, t, part) {
+  var doc = alMaintDoc(), it = null, c = S.chunks.get(id);
+  doc.items.forEach(function (x) { if (x.id === id) it = x; });
+  if (!it || !c || S.readOnly) return;
+  if (it.kind === 'split') {
+    var p = it.parts[part] || it.parts[0];
+    openEditor(null);
+    $('#fDom').value = c.domain; $('#fSrc').value = c.source; $('#fRef').value = c.ref; $('#fGist').value = p.gist; aiSet($('#fName'), p.name);
+    toast('Part ' + ((it.parts[part] ? part : 0) + 1) + ' of ' + it.parts.length + ' is open. Save it, then open the next part from Maintenance on Progress.');
+    return;
+  }
+  var done, name = c.name;
+  if (it.kind === 'cards') {
+    if (c.cards.length >= CARD_MAX) { toast('“' + name + '” already holds ' + CARD_MAX + ' cards. Split the idea into two chunks.'); return; }
+    var today = todayStr(), cards = normCards(c.cards.concat(it.cards.map(function (k) { return { k: newCardId(), q: k.q, a: k.a, r: null, d: today }; })));
+    done = store.setCards(c, cards).then(function () { var live = S.chunks.get(c.id); if (live && live.cards.length < cards.length) live.cards = cards; });
+  } else {
+    var n = normalize(c.id, toBody(c));
+    if (it.kind === 'gist') n.gist = it.gist; else n.metaphor = it.picture;
+    done = store.put(n).then(function () { S.chunks.set(n.id, n); });
+  }
+  if (t) t.disabled = true;
+  done.then(function () {
+    alMaintDrop(id);
+    toast(it.kind === 'cards' ? plural(it.cards.length, 'card') + ' added to “' + name + '”.' : (it.kind === 'gist' ? 'New gist' : 'New picture') + ' saved to “' + name + '”.');
+  }, function (e) { if (t) t.disabled = false; toast(explain(e)); });
+}
+function alMaintCoach() {
+  if (!sampleFn) return '';
+  var n = alMaintDoc().items.length; if (!n) return '';
+  return '<div class="coach" style="--c:var(--s3)"><span class="ic" aria-hidden="true">⚙</span><div><div class="k">Maintenance</div><div class="t">' + (n === 1 ? 'A suggestion is' : n + ' suggestions are') + ' waiting for your chunks.</div><div class="d">Claude looked over the chunks that need care. Nothing changes until you apply one.</div></div><button class="btn" data-act="al-mopen">Review ' + (n === 1 ? 'it' : 'them') + '</button></div>';
 }
 
 /* 4. a second look at a chunk: never automatic, and a suggestion only goes in when you tap it */
@@ -5730,6 +6075,7 @@ function renderInsight() {
     (weak.length ? weak.slice(0, 6).map(function (w) { return itemHtml(w.c, today, { review: true }); }).join('') : '<p class="muted" style="padding:14px 0">Nothing weak yet. A chunk shows up here when its last three recalls average below 2.5 on the 0 to 3 scale.</p>') + '</div></div>' +
     '<div><h3 class="insight-h g">Chunks with fewer than two links</h3><p class="muted" style="font-size:0.9rem">Isolated chunks are hard to reach and can\'t recombine. Open one and link it.</p><div class="list" style="margin-top:10px">' +
     (lonely.length ? lonely.slice(0, 6).map(function (c) { return itemHtml(c, today); }).join('') + (lonely.length > 6 ? '<p class="muted" style="padding:10px 0;font-size:0.88rem">And ' + (lonely.length - 6) + ' more.</p>' : '') : (S.chunks.size ? '<p class="muted" style="padding:14px 0">Every chunk has at least two links.</p>' : '<p class="muted" style="padding:14px 0">Nothing to show yet. Progress fills in once you have chunks and have recalled them. Add your first chunk from the Recall tab, or turn a note into one on Capture.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn small primary" data-act="add">Add a chunk</button><button class="btn small" data-act="open-capture">Open Capture</button></div>')) + '</div></div></div>';
+  html += alMaintHtml();
   /* Two kinds of trouble an average hides: chunks that keep missing however often they come round, and
      misses you did not see coming. The second is the illusion of competence, caught in the act. */
   var slips = []; S.chunks.forEach(function (c) { var ln = lapses(c); if (ln >= LEECH) slips.push({ c: c, n: ln }); });
@@ -6259,6 +6605,7 @@ function startGame(st) {
 function gameReady() { var r = G.ready; return r.quests && r.events && r.meta && r.bosses && r.days && r.runs && r.chapters && r.items && r.expeditions; }
 function gameLoaded() {
   if (G.ready.quests && G.ready.meta && !G.seeding && !S.readOnly) { var mq = G.meta.get('quests'); if (!(mq && mq.seeded) && !G.quests.size) { G.seeding = true; seedQuests(); } }
+  if (gameReady() && !EN.rolled) { EN.rolled = true; enArchive(); }   // v70
   if (gameReady() && !G.rolled) { G.rolled = true; rollUp(); }
   if (SNOWQ && SNOWQ.length) setTimeout(snowFlush, 0);
   if (S.ready) renderSoon();
@@ -6868,6 +7215,7 @@ function questsHtml(g) {
   var hrows = habits.length ? '<div class="qsec"><h4>Habits</h4><p class="muted small">No goal and no schedule. The minus is a record, never a punishment. The first three taps a day earn XP on the map.</p></div><div class="qlist">' + habits.map(habitRow).join('') + '</div>' : '';
   var offline = off.length ? '<p class="qoff">Not for today: <b>' + off.map(function (q) { return esc(q.name); }).join('</b>, <b>') + '</b>. Their trails only count the days they are due.</p>' : '';
   var yline = (g.yq || g.yp) ? '<p class="muted small">Yesterday: ' + plural(g.yq, 'quest') + ' done, ' + (g.yp === 1 ? '1 push' : g.yp + ' pushes') + '.</p>' : '';
+  nbh = enBoardHtml(g) + nbh;   // v70: check-in and plan for today
   return '<section class="panel qboard">' + head + nbh + struggleHtml(g) + '<div class="qlist">' + rows + '</div>' + offline + hrows + traitBoardHtml(g) + yline + archHtml(g) + '</section>';
 }
 
@@ -7112,6 +7460,241 @@ document.addEventListener('click', function (e) {
   var t = e.target && e.target.closest ? e.target.closest('.qbun, [data-act="j-tab"]') : null;
   if (t) bunnyHop();
 });
+
+/* ---------- v70: energy-aware day plan (en) ----------
+   A one-tap check-in (Low, Steady, Sharp) and a plan for the rest of today built from the hours when you
+   actually finish things. The last 42 days count: recalls scored Mostly or Cold, quests and quest steps ticked,
+   Snowball pushes. Each hour's share of your active days is blended with its neighbours. A level you have
+   checked in on at least 5 active days gets its own curve; otherwise every day is pooled. Before 10 active
+   days it says so and uses late morning and early evening. Raw events are pruned after two weeks, so past
+   days' hour counts are kept in the same meta doc (hrs) and the curve can keep six weeks. Nothing here
+   blocks anything, and it never calls Claude. */
+var EN = { rolled: false, edit: false, how: false, now: 0 };
+var EN_WIN = 42, EN_MIN = 10, EN_LVL_MIN = 5, EN_KEEP = 90;
+var EN_LV = ['Low fuel', 'Some fuel', 'Full fuel'];
+// the starting guess: late morning and early evening high, a dip after lunch, quiet at the edges
+var EN_DEF = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1, 0.25, 0.45, 0.7, 0.92, 1, 0.75, 0.42, 0.36, 0.48, 0.66, 0.86, 0.9, 0.7, 0.45, 0.3, 0.15, 0.08];
+var EN_KC = { recall: 's2', dread: 's0', quest: 's3', snow: 'release', recalls: 'load' };
+function enNow() { return EN.now ? new Date(EN.now) : new Date(); }
+function enHm(h) { h = h % 24; return (h < 10 ? '0' : '') + h + ':00'; }
+function enWin(h) { return enHm(h) + ' to ' + enHm(h + 1); }
+function enDoc() {
+  var d = G.ready.meta ? G.meta.get('energy') : null, days = {}, hrs = {};
+  d = d && typeof d === 'object' ? d : {};
+  if (d.days && typeof d.days === 'object') Object.keys(d.days).forEach(function (k) { var x = d.days[k]; if (isDate(k) && x && (x.v === 0 || x.v === 1 || x.v === 2)) days[k] = { v: x.v, at: typeof x.at === 'string' ? x.at.slice(0, 40) : '' }; });
+  if (d.hrs && typeof d.hrs === 'object') Object.keys(d.hrs).forEach(function (k) {
+    var x = d.hrs[k], o = {}, any = false; if (!isDate(k) || !x || typeof x !== 'object') return;
+    Object.keys(x).forEach(function (h) { var hh = Number(h), n = Number(x[h]); if (hh >= 0 && hh < 24 && hh === Math.floor(hh) && n > 0) { o[hh] = Math.min(999, Math.round(n)); any = true; } });
+    if (any) hrs[k] = o;
+  });
+  return { days: days, hrs: hrs };
+}
+function enLevel(day) {           /* v70: the fuel pick for that day wins; the plan's own record fills older days */
+  var f = runOf(day).fuel; if (f === 'low') return 0; if (f === 'some') return 1; if (f === 'full') return 2;
+  var x = enDoc().days[day]; return x ? x.v : -1;
+}
+function enSave(doc) {
+  var today = todayStr(), cut = addDays(today, -EN_KEEP), hcut = addDays(today, -(EN_WIN + 7)), body = { days: {}, hrs: {} };
+  Object.keys(doc.days).sort().forEach(function (k) { if (k >= cut) body.days[k] = doc.days[k]; });
+  Object.keys(doc.hrs).sort().forEach(function (k) { if (k >= hcut) body.hrs[k] = doc.hrs[k]; });
+  G.meta.set('energy', body);
+  if (!store || !store.setDoc) return;
+  store.setDoc('meta', 'energy', body).then(null, function (e) { if (!S.readOnly) toast(explain(e)); });
+}
+// pts is 6 + 4 × the score on a recall, so 14 or more means Mostly or Cold
+function enCounts(e) {
+  if (!e || typeof e !== 'object') return false;
+  if (e.kind === 'recall') return (Number(e.pts) || 0) >= 14;
+  return e.kind === 'quest' || e.kind === 'tick' || e.kind === 'push';
+}
+function enEventHours(from, to) {
+  var out = {};
+  G.events.forEach(function (e) {
+    if (!enCounts(e) || !isDate(e.day) || e.day < from || e.day > to) return;
+    var t = Date.parse(e.t); if (!(t > 0)) return;
+    var h = new Date(t).getHours(), d = out[e.day] || (out[e.day] = {});
+    d[h] = (d[h] || 0) + 1;
+  });
+  return out;
+}
+// past days in the window with what got done in each hour: the live events and the kept copy, merged
+function enTally(today) {
+  var from = addDays(today, -EN_WIN), to = addDays(today, -1), all = {};
+  [enDoc().hrs, enEventHours(from, to)].forEach(function (src) {
+    Object.keys(src).forEach(function (d) {
+      if (d < from || d > to) return;
+      var o = all[d] || (all[d] = {});
+      Object.keys(src[d]).forEach(function (h) { o[h] = Math.max(o[h] || 0, src[d][h]); });
+    });
+  });
+  return all;
+}
+function enCurve(level, today) {
+  today = today || todayStr();
+  var all = enTally(today), days = Object.keys(all).sort(), lv = enDoc().days, use = days, split = false;
+  if (days.length < EN_MIN) return { learned: false, n: days.length, used: 0, split: false, c: EN_DEF.slice(), start: 7, end: 22 };
+  if (level >= 0) { var mine = days.filter(function (d) { return lv[d] && lv[d].v === level; }); if (mine.length >= EN_LVL_MIN) { use = mine; split = true; } }
+  var r = [], h, first = 24, last = -1;
+  for (h = 0; h < 24; h++) r.push(0);
+  use.forEach(function (d) { Object.keys(all[d]).forEach(function (x) { r[+x] += 1; }); });
+  r = r.map(function (x) { return x / use.length; });
+  var c = r.map(function (x, i) { return 0.25 * (i ? r[i - 1] : x) + 0.5 * x + 0.25 * (i < 23 ? r[i + 1] : x); });
+  days.forEach(function (d) { Object.keys(all[d]).forEach(function (x) { x = +x; if (x < first) first = x; if (x > last) last = x; }); });
+  return { learned: true, n: days.length, used: use.length, split: split, c: c, start: Math.max(5, Math.min(7, first)), end: Math.min(24, Math.max(22, last + 1)) };
+}
+function enBest(cur, hours) { return hours.slice().sort(function (a, b) { return cur.c[b] - cur.c[a] || a - b; }); }
+// The plan for the rest of today: blocks of one hour, each with what goes there, why, and how to start it.
+function enPlan(g, now) {
+  now = now || enNow();
+  var today = todayStr(), level = enLevel(today), cur = enCurve(level, today), h0 = now.getHours() + (now.getMinutes() >= 20 ? 1 : 0), hours = [], used = {}, blocks = [], h;
+  for (h = Math.max(h0, cur.start); h < cur.end; h++) hours.push(h);
+  var best = enBest(cur, hours), low = best.slice().reverse(), lastH = cur.end - 1;
+  function take(list, notLast) { for (var i = 0; i < list.length; i++) { var x = list[i]; if (used[x] || (notLast && x === lastH)) continue; used[x] = 1; return x; } return -1; }
+  function add(hr, o) { if (hr < 0) return; o.h = hr; blocks.push(o); }
+  var due = dueList(today), hard = null, why = '';
+  due.forEach(function (c) { var lp = lapses(c); if (lp >= LEECH && (!hard || lp > hard.lp)) hard = { c: c, lp: lp }; });
+  if (hard) why = 'it keeps slipping';
+  else if (due.length) { hard = { c: due[0], lp: 0 }; var od = diffDays(today, due[0].due); why = od > 0 ? plural(od, 'day') + ' overdue for its gap' : 'it is due today'; }
+  var boss = g.active && g.active.length ? g.active[0] : null;
+  var quick = (g.qsToday || []).filter(function (q) { return !q.fixed && !q.isHabit && q.todayN < q.goal; });
+  function size(q) { return (q.eff || 0) * 100 + (q.unit === 'min' ? q.goal - q.todayN : 10 * (q.goal - q.todayN)); }
+  quick.sort(function (a, b) { return size(a) - size(b) || a.order - b.order; });
+  var small = quick.length ? quick[0] : null;
+  // quick: two pips of fuel or less, and at most 20 minutes left; if nothing is that small, the smallest one
+  quick = quick.filter(function (q) { return (q.eff || 0) <= 2 && (q.unit !== 'min' || q.goal - q.todayN <= 20); });
+  if (!quick.length && small) quick = [small];
+  function questBlock(q, w) { return { kind: 'quest', t: q.name, why: w, act: 'en-quest', id: q.id, btn: 'Go to it' }; }
+  function dreadBlock(w) { return { kind: 'dread', t: boss.step ? 'First step on “' + boss.name + '”: ' + boss.step : 'Ten minutes on “' + boss.name + '”', why: w, act: 'en-dread', id: boss.id, btn: 'Open in Snowball' }; }
+  if (level === 0) {
+    // a Low day: one short recall, the smallest quest, and a two-minute Snowball, nothing more
+    var easy = null; due.forEach(function (c) { if (!easy && lapses(c) < LEECH) easy = c; }); if (!easy && due.length) easy = due[0];
+    if (easy) add(take(best), { kind: 'recall', t: 'Recall “' + easy.name + '”', why: 'Just one, in your best hour left. It keeps the thread going.', act: 'en-recall', id: easy.id, n: 1, btn: 'Recall it' });
+    if (small) add(take(best), questBlock(small, 'The smallest thing on your list.'));
+    add(take(hours), { kind: 'snow', t: 'Roll a 2-minute snowball', why: 'Two minutes on anything, then stop if you like.', act: 'en-snow', v: '', btn: 'Start a snowball' });
+  } else {
+    var sharp = level === 2, order = sharp ? hours : best, room = 5;
+    if (hard) add(take(order), { kind: 'recall', name: hard.c.name, t: 'Recall “' + hard.c.name + '”' + (due.length > 1 ? ' first, then the rest due' : ''), why: (sharp ? 'You feel sharp, so the hardest goes first: ' : 'Your best hour left, for the hardest recall: ') + why + '.', act: 'en-recall', id: hard.c.id, n: SESSION_MAX, btn: due.length > 1 ? 'Start recall' : 'Recall it' });
+    if (boss) add(take(order, true), dreadBlock(sharp ? 'Next while you are sharp. Only the first step.' : 'Your second-best hour, well before the day ends. Only the first step.'));
+    var nq = Math.min(quick.length, room - blocks.length);
+    for (var i = 0; i < nq; i++) add(take(low), questBlock(quick[i], i ? 'Another lower hour for something quick.' : 'A lower hour: quick things fit here.'));
+    if (blocks.length < 3 && due.length > SESSION_MAX) add(take(best), { kind: 'recalls', t: 'A second recall session', why: 'More are due than one session holds. A break between them helps.', act: 'en-recall', id: '', n: SESSION_MAX, btn: 'Start recall' });
+    if (blocks.length < 3 && hours.length > blocks.length && (hard || boss || quick.length)) add(take(hours), { kind: 'snow', t: 'Roll a 2-minute snowball', why: 'Something small to get moving.', act: 'en-snow', v: '', btn: 'Start a snowball' });
+  }
+  blocks.sort(function (a, b) { return a.h - b.h; });
+  return { level: level, cur: cur, hours: hours, blocks: blocks, now: now.getHours(), best: best[0] == null ? -1 : best[0] };
+}
+function enOpen() { try { return localStorage.getItem(LS_KEY + '-en-open') !== '0'; } catch (e) { return true; } }
+function enOpenSet(v) { try { localStorage.setItem(LS_KEY + '-en-open', v ? '1' : '0'); } catch (e) {} }
+function enCheckHtml(today) {       /* v70: the check-in is the fuel pick */
+  return '<div class="en-check" role="group" aria-label="Today’s fuel"><span class="en-q">Pick today’s fuel for a plan</span><span class="en-btns">' +
+    ['low', 'some', 'full'].map(function (k, i) { return '<button class="btn small en-lv en-l' + i + '" data-act="r-fuel" data-v="' + k + '">' + FUEL[k].name + '</button>'; }).join('<span class="en-dot" aria-hidden="true">·</span>') +
+    '</span></div>';
+}
+function enChart(p) {
+  var cur = p.cur, s = cur.start, e = cur.end, n = e - s, W = 24 * n, H = 64, top = 0, pick = {}, out = '';
+  for (var h = s; h < e; h++) if (cur.c[h] > top) top = cur.c[h];
+  p.blocks.forEach(function (b) { pick[b.h] = b.kind; });
+  for (h = s; h < e; h++) {
+    var v = top ? cur.c[h] / top : 0, bh = Math.max(2, Math.round(v * (H - 16))), x = (h - s) * 24 + 3;
+    out += '<rect class="en-b' + (pick[h] ? ' pick' : h < p.now ? ' past' : '') + '"' + (pick[h] ? ' style="--c:var(--' + EN_KC[pick[h]] + ')"' : '') + ' x="' + x + '" y="' + (H - 14 - bh) + '" width="18" height="' + bh + '" rx="3"><title>' + enWin(h) + (pick[h] ? ': planned' : '') + '</title></rect>';
+    if ((h - s) % 3 === 0) out += '<text x="' + (x + 9) + '" y="' + (H - 2) + '" text-anchor="middle">' + enHm(h).slice(0, 2) + '</text>';
+  }
+  return '<svg class="en-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc((cur.learned ? 'Your learned hours' : 'The starting guess') + ', from ' + enHm(s) + ' to ' + enHm(e) + '. Taller bars are hours when you usually finish things.') + '">' + out + '</svg>';
+}
+function enHowHtml(p) {
+  var cur = p.cur, kinds = {}, leg = '';
+  p.blocks.forEach(function (b) { kinds[b.kind] = 1; });
+  [['recall', 'hard recall'], ['dread', 'dread step'], ['quest', 'quick quest'], ['recalls', 'more recall'], ['snow', 'snowball']].forEach(function (k) { if (kinds[k[0]]) leg += '<span style="--c:var(--' + EN_KC[k[0]] + ')"><i></i>' + k[1] + '</span>'; });
+  return '<div class="en-how" id="enHow">' + enChart(p) + (leg ? '<div class="en-legend">' + leg + '</div>' : '') +
+    '<p>' + (cur.learned ? 'The bars are your own hours. Over the last six weeks, the plan counts the hours when you finished something: a recall scored Mostly or Cold, a quest or quest step ticked, a Snowball push. Each hour gets its share of your active days, blended with the hours either side, so one busy afternoon does not decide much.' : 'The bars are a starting guess: late morning and early evening high, with a dip after lunch. Once you have finished things on 10 different days, the plan uses your own hours instead: recalls scored Mostly or Cold, quests ticked and Snowball pushes, counted by the hour.') + '</p>' +
+    '<p>When you have picked Low, Some or Full fuel on at least 5 active days, those days get their own curve. Until then every day counts together.</p>' +
+    '<p>The hardest recall goes in your best hour left, the first step on a dread in the second best (never the last hour of the day), and quick quests in the lower hours. Sharp puts the hard things first. Low shrinks the plan to three small things.</p>' +
+    '<p>Energy does rise and fall through the day, but the shape is personal. Whether you run early or late (your chronotype) differs a lot between people <span class="en-cite">Roenneberg et al. 2003</span>, and many people slow down after lunch <span class="en-cite">Monk 2005</span>. Your own record beats any average, so this is a suggestion, not a rule.</p></div>';
+}
+function enPlanHtml(g) {
+  var p = enPlan(g), open = enOpen(), cur = p.cur, sub, body = '';
+  if (!p.hours.length) sub = 'Not much of today left';
+  else if (!p.blocks.length) sub = 'Nothing left to plan';
+  else sub = (p.level === 0 ? 'A small day: ' : '') + plural(p.blocks.length, 'block') + ' · best hour left ' + enHm(p.best);
+  if (open) {
+    if (!p.hours.length) body += '<p class="en-empty">Not much of today is left. Rest counts too, and tomorrow’s plan starts fresh.</p>';
+    else if (!p.blocks.length) body += '<p class="en-empty">Nothing is due and nothing is left on the list. Anything else today is a bonus.</p>';
+    else body += '<ol class="en-blocks">' + p.blocks.map(function (b) {
+      return '<li class="en-blk" data-kind="' + b.kind + '" style="--c:var(--' + EN_KC[b.kind] + ')"><span class="en-time">' + enWin(b.h) + (b.h === p.now ? '<small>now</small>' : '') + '</span>' +
+        '<div class="en-what"><b>' + esc(b.t) + '</b><span class="en-why">' + esc(b.why) + '</span></div>' +
+        '<button class="btn small" data-act="' + b.act + '"' + (b.id ? ' data-id="' + esc(b.id) + '"' : '') + (b.n ? ' data-n="' + b.n + '"' : '') + (b.v != null ? ' data-v="' + esc(b.v) + '"' : '') + '>' + esc(b.btn) + '</button></li>';
+    }).join('') + '</ol>';
+    if (p.level === 0) body += '<p class="en-small">A small day still counts.</p>';
+    body += '<p class="en-note">' + (cur.learned ? 'Hours learned from ' + plural(cur.n, 'active day') + (cur.split ? ', using your ' + plural(cur.used, EN_LV[p.level] + ' day') : '') + '.' : 'Still learning your hours: ' + cur.n + ' of ' + EN_MIN + ' active days so far. Until then it uses late morning and early evening.') +
+      ' <button class="linkbtn" data-act="en-how" aria-expanded="' + EN.how + '" aria-controls="enHow">' + (EN.how ? 'Hide how this plan works' : 'How this plan works') + '</button></p>';
+    if (EN.how) body += enHowHtml(p);
+  }
+  return '<div class="en-plan' + (open ? '' : ' shut') + '" id="enPlan"><button class="en-fold" data-act="en-fold" aria-expanded="' + open + '" aria-controls="enPlanBody"><span class="k">Plan for today</span><span class="en-sub">' + esc(sub) + '</span><span class="en-chev" aria-hidden="true"></span></button>' + (open ? '<div id="enPlanBody">' + body + '</div>' : '') + '</div>';
+}
+function enBoardHtml(g) { try { return enPlanHtml(g); } catch (e) { return ''; } }   /* v70: the fuel picker above asks the question */
+// the Recall tab's start card gets one line: the check-in, or where today's hardest recall sits in the plan
+function enRecallLine() {
+  var today = todayStr(), lv = enLevel(today);
+  if (lv < 0 || EN.edit) return enCheckHtml(today);
+  var p = enPlan(gameCalc()), rb = null; p.blocks.forEach(function (b) { if (!rb && b.kind === 'recall') rb = b; });
+  var t = lv === 0 ? '<b>Low day.</b> One recall is enough today.' : rb ? 'Plan: the hardest, “' + esc(rb.name) + '”, ' + (rb.h === p.now ? '<b>now</b>.' : 'at <b>' + enWin(rb.h) + '</b>.') : 'Today: <b>' + EN_LV[lv] + '</b>.';
+  return t + '<span class="en-links"><button class="linkbtn" data-act="en-plan">See today’s plan</button><button class="linkbtn" data-act="en-edit">change</button></span>';
+}
+function enTodayHook() {
+  var host = $('#todayBody'); if (!host || !S.ready || host.dataset.run || !S.chunks.size || !gameReady()) return;
+  var coach = host.querySelector('.coach'), mid = coach && coach.children[1]; if (!mid) return;
+  try { var el = document.createElement('div'); el.className = 'en-rline'; el.innerHTML = enRecallLine(); mid.appendChild(el); } catch (e) {}
+}
+renderToday = (function (inner) { return function (fromData) { var r = inner.apply(this, arguments); enTodayHook(); return r; }; })(renderToday);
+function enSet(v) {
+  if (!G.ready.meta || !(v === 0 || v === 1 || v === 2)) return;
+  var doc = enDoc(), today = todayStr();
+  doc.days[today] = { v: v, at: new Date().toISOString() };
+  EN.edit = false; enSave(doc);
+  enRedraw();
+  toast(v === 0 ? 'Low day noted. The plan is smaller today.' : v === 2 ? 'Sharp day noted. The hard things go first.' : 'Steady day noted.');
+}
+function enRedraw() { renderQuests(true); if (S.tab === 'today' && !S.session && !S.practice) renderToday(); }
+chooseFuel = (function (inner) { return function (v) {   /* v70: a fuel pick is also the plan's check-in */
+  var r = inner.apply(this, arguments);
+  try { var m = { low: 0, some: 1, full: 2 }[v]; if (m != null && G.ready.meta) { var doc = enDoc(); doc.days[todayStr()] = { v: m, at: new Date().toISOString() }; EN.edit = false; enSave(doc); }
+    if (S.tab === 'today' && !S.session && !S.practice) renderToday(); } catch (e) {}
+  return r; }; })(chooseFuel);
+function enRecall(id, n) {
+  var s = S.session;
+  if (S.practice) { setTab('today'); toast('Finish or end the practice round first.'); return; }
+  if (s && s.idx < s.ids.length) { setTab('today'); window.scrollTo(0, 0); toast('Finish or end the current session first.'); return; }
+  var due = dueList(todayStr()), ids = [];
+  if (id && S.chunks.has(id)) ids.push(id);
+  interleave(due.filter(function (c) { return c.id !== id; })).forEach(function (c) { if (ids.length < n) ids.push(c.id); });
+  if (!ids.length) { toast('Nothing is due right now.'); return; }
+  startSession(ids.slice(0, Math.max(1, n)));
+}
+function enToQuest(id) {
+  var els = document.querySelectorAll('#questBody .qlist [data-id]'), row = null;
+  for (var i = 0; i < els.length && !row; i++) if (els[i].getAttribute('data-id') === id) row = els[i].closest('.qrow');
+  if (!row) { toast('That quest is not on today’s list any more.'); return; }
+  row.classList.remove('en-flash'); void row.offsetWidth; row.classList.add('en-flash');
+  setTimeout(function () { row.classList.remove('en-flash'); }, 1900);
+  if (row.scrollIntoView) row.scrollIntoView({ block: 'center', behavior: calmMotion() ? 'auto' : 'smooth' });
+  var b = row.querySelector('.qa button'); if (b) setTimeout(function () { try { b.focus({ preventScroll: true }); } catch (e) {} }, 60);
+}
+// Past days' hour counts are copied into meta/energy once per load, before the raw events are pruned.
+function enArchive() {
+  if (S.readOnly || !G.ready.meta || !G.ready.events) return;
+  var today = todayStr(), doc = enDoc(), ev = enEventHours(addDays(today, -EN_WIN), addDays(today, -1)), changed = false;
+  Object.keys(ev).forEach(function (d) {
+    var a = doc.hrs[d] || {}, o = {}, diff = false;
+    Object.keys(a).forEach(function (h) { o[h] = a[h]; });
+    Object.keys(ev[d]).forEach(function (h) { if (ev[d][h] > (o[h] || 0)) { o[h] = ev[d][h]; diff = true; } });
+    if (diff) { doc.hrs[d] = o; changed = true; }
+  });
+  var cut = addDays(today, -EN_KEEP), hcut = addDays(today, -(EN_WIN + 7));
+  if (Object.keys(doc.days).some(function (d) { return d < cut; }) || Object.keys(doc.hrs).some(function (d) { return d < hcut; })) changed = true;
+  if (changed) enSave(doc);
+}
+window.__enTest = { EN: EN, enCurve: enCurve, enPlan: enPlan, enTally: enTally, enLevel: enLevel, enDoc: enDoc, enArchive: enArchive, EN_DEF: EN_DEF,
+  plan: function () { return enPlan(gameCalc()); }, render: function () { renderQuests(true); }, state: function () { return { tab: S.tab, session: S.session ? S.session.ids.slice() : null, link: G.link ? { kind: G.link.kind, id: G.link.id } : null }; } };
 
 function renderQuests(force) {
   if (QD) return;                                   // v50: never redraw the board under a drag
@@ -9281,6 +9864,21 @@ document.addEventListener('click', function (e) {
   else if (act === 'practise-shown') startPractice(pickCards(shownChunks(), PRACTICE_MAX));
   else if (act === 'drill-relearn' && s && s.relearn) { var dc = S.chunks.get(id); if (dc) startPractice(pickCards([dc], 0), true); }
   else if (act === 'drill-session' && s) { var dl = []; s.results.forEach(function (r) { var ch = S.chunks.get(r.id); if (r.s <= 2 && ch) dl.push(ch); }); S.session = null; startPractice(pickCards(dl, PRACTICE_MAX)); }
+  else if (act === 'en-set') enSet(+t.dataset.v);
+  else if (act === 'en-edit') { EN.edit = !EN.edit; enRedraw(); }
+  else if (act === 'en-fold') { enOpenSet(!enOpen()); renderQuests(true); }
+  else if (act === 'en-how') { EN.how = !EN.how; renderQuests(true); }
+  else if (act === 'en-recall') enRecall(id, +t.dataset.n || SESSION_MAX);
+  else if (act === 'en-dread') bossFace(id);
+  else if (act === 'en-quest') enToQuest(id);
+  else if (act === 'en-snow') toSnowball(t.dataset.v || '', null);
+  else if (act === 'en-plan') { if (!enOpen()) enOpenSet(true); setTab('snow'); var enp = $('#enPlan'); if (enp && enp.scrollIntoView) enp.scrollIntoView({ block: 'start', behavior: calmMotion() ? 'auto' : 'smooth' }); }
+  else if (act === 'al-vote') alVote(+t.dataset.v, t);
+  else if (act === 'al-mrun') alMaintRun(true);
+  else if (act === 'al-mstop') aiStop('almaint');
+  else if (act === 'al-mapply') alMaintApply(id, t, +(t.dataset.v || 0));
+  else if (act === 'al-mdrop') alMaintDrop(id, t);
+  else if (act === 'al-mopen') { setTab('insight'); var alm = $('#alMaint'); if (alm && alm.scrollIntoView) alm.scrollIntoView({ block: 'start' }); }
   else if (act === 'p-reveal' && S.practice) { S.practice.revealed = true; renderPractice(); }
   else if (act === 'p-mark') markPractice(+t.dataset.v);
   else if (act === 'p-skip' && S.practice && !S.practice.revealed && S.practice.queue.length > 1) { S.practice.queue.push(S.practice.queue.shift()); renderPractice(); }
