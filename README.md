@@ -49,7 +49,7 @@ The file is plain HTML, CSS and JavaScript with no build step and no dependencie
 - **Starter chunks:** the `STARTERS` array near the top of the main script. Replace them with your own subject, or empty the array.
 - **Quests:** `DEFAULT_QUESTS` in the main script, seeded once into a fresh database.
 - **Review gaps and scores:** `GAPS`, `PRED` and `SCORES`, next to `STARTERS`.
-- **Method and Motivation pages:** two `<template>` blocks (`methodTpl`, `motivTpl`) rendered into shadow roots, each with its own CSS. Edit the copy there.
+- **Method and Motivation pages:** two `<template>` blocks (`methodTpl`, `motivTpl`), each with its own CSS. Method is cloned straight into the page; Motivation renders inside a shadow root. Edit the copy there.
 - **Snowball:** the `snowTpl` template and the last `<script>`.
 
 The main script is written in plain ES5-style JavaScript with no framework: one state object (`S`), one for the quests game (`G`), a `store` object that talks to either the artifact database or local storage, `renderAll()` to redraw, and one delegated click handler that dispatches on `data-act` attributes.

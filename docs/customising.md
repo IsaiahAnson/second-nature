@@ -14,7 +14,7 @@ The whole app is one file. These are the places most worth knowing about, in the
 - **Quests:** `DEFAULT_QUESTS`, seeded once. Each is `[id, name, category, unit, goal, buff]`; categories are `body`, `home`, `work` and `mind`.
 - **Review gaps:** `GAPS`. **Prediction chips:** `PRED`. **Scores and their labels:** `SCORES`.
 - **The guide** on the Recall page ("How to use Second Nature") is plain markup in `#guide`.
-- **Method** and **Motivation** are reference pages inside `<template id="methodTpl">` and `<template id="motivTpl">`, each with its own CSS and script, rendered into a shadow root so their styles stay separate.
+- **Method** and **Motivation** are reference pages inside `<template id="methodTpl">` and `<template id="motivTpl">`, each with its own CSS. Method is cloned straight into the page (its rules are scoped with `#view-method`); Motivation has its own script and renders inside a shadow root so its styles stay separate.
 
 ## Adding a page
 
