@@ -929,7 +929,11 @@ dialog::backdrop { background: rgba(4, 4, 8, 0.72); }
 /* ---------- the aurora ----------
    Three soft fields drifting behind the whole app. Only transform moves, so it costs the compositor
    and nothing else. */
-.aurora { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.aurora { position: fixed; inset: -160px 0 0 0; z-index: 0; overflow: hidden; pointer-events: none; }
+/* v62: the scroll parallax moves the aurora down by up to 140px, which used to reveal its top edge as a
+   darker band. It now starts 160px above the viewport, and its fields sit where they always did. */
+.aurora > i { translate: 0 160px; }
+@supports not (translate: 0 1px) { .aurora { inset: 0; } }
 .app { position: relative; z-index: 1; }
 .aurora i {
   position: absolute; display: block; border-radius: 50%;
@@ -1245,47 +1249,136 @@ body { padding-inline: clamp(16px, 1.8vw, 40px); }
    moves the texture. */
 .aurora i { filter: blur(56px); }
 @supports not (filter: blur(1px)) { .aurora i { opacity: 0.26; } }
-.aurora .a1 {
-  background: radial-gradient(circle at 50% 50%,
+/* v61: the aurora, smoother still. The rings that were left were not the stops: a screen shows a very
+   dark gradient in whole steps of 1/255, and each step is a perfect circle the eye picks out. Two
+   changes. The falloff is now a bell curve in 37 stops that reaches nothing well inside the element,
+   so the shape has no corners and no outer edge of its own; and
+   the noise on top is coarser-valued turbulence at a higher opacity, enough to break every step
+   into speckle too fine to see, which is what a dither is. */
+.aurora .a1 { background: radial-gradient(circle at 50% 50%,
     color-mix(in srgb, var(--g1) 30%, transparent) 0%,
-    color-mix(in srgb, var(--g1) 24%, transparent) 16%,
-    color-mix(in srgb, var(--g1) 17%, transparent) 31%,
-    color-mix(in srgb, var(--g1) 11%, transparent) 45%,
-    color-mix(in srgb, var(--g1) 6%, transparent) 59%,
-    color-mix(in srgb, var(--g1) 2.5%, transparent) 73%,
-    color-mix(in srgb, var(--g1) 1%, transparent) 88%,
-    transparent 100%);
-}
-.aurora .a2 {
-  background: radial-gradient(circle at 50% 50%,
+    color-mix(in srgb, var(--g1) 29.9%, transparent) 2.8%,
+    color-mix(in srgb, var(--g1) 29.6%, transparent) 5.6%,
+    color-mix(in srgb, var(--g1) 29%, transparent) 8.3%,
+    color-mix(in srgb, var(--g1) 28.2%, transparent) 11.1%,
+    color-mix(in srgb, var(--g1) 27.3%, transparent) 13.9%,
+    color-mix(in srgb, var(--g1) 26.2%, transparent) 16.7%,
+    color-mix(in srgb, var(--g1) 24.9%, transparent) 19.4%,
+    color-mix(in srgb, var(--g1) 23.6%, transparent) 22.2%,
+    color-mix(in srgb, var(--g1) 22.1%, transparent) 25%,
+    color-mix(in srgb, var(--g1) 20.6%, transparent) 27.8%,
+    color-mix(in srgb, var(--g1) 19%, transparent) 30.6%,
+    color-mix(in srgb, var(--g1) 17.4%, transparent) 33.3%,
+    color-mix(in srgb, var(--g1) 15.9%, transparent) 36.1%,
+    color-mix(in srgb, var(--g1) 14.3%, transparent) 38.9%,
+    color-mix(in srgb, var(--g1) 12.9%, transparent) 41.7%,
+    color-mix(in srgb, var(--g1) 11.4%, transparent) 44.4%,
+    color-mix(in srgb, var(--g1) 10.1%, transparent) 47.2%,
+    color-mix(in srgb, var(--g1) 8.9%, transparent) 50%,
+    color-mix(in srgb, var(--g1) 7.7%, transparent) 52.8%,
+    color-mix(in srgb, var(--g1) 6.6%, transparent) 55.6%,
+    color-mix(in srgb, var(--g1) 5.7%, transparent) 58.3%,
+    color-mix(in srgb, var(--g1) 4.8%, transparent) 61.1%,
+    color-mix(in srgb, var(--g1) 4.1%, transparent) 63.9%,
+    color-mix(in srgb, var(--g1) 3.4%, transparent) 66.7%,
+    color-mix(in srgb, var(--g1) 2.6%, transparent) 69.4%,
+    color-mix(in srgb, var(--g1) 1.9%, transparent) 72.2%,
+    color-mix(in srgb, var(--g1) 1.2%, transparent) 75%,
+    color-mix(in srgb, var(--g1) 0.8%, transparent) 77.8%,
+    color-mix(in srgb, var(--g1) 0.4%, transparent) 80.6%,
+    color-mix(in srgb, var(--g1) 0.2%, transparent) 83.3%,
+    color-mix(in srgb, var(--g1) 0.1%, transparent) 86.1%,
+    color-mix(in srgb, var(--g1) 0%, transparent) 88.9%,
+    color-mix(in srgb, var(--g1) 0%, transparent) 91.7%,
+    color-mix(in srgb, var(--g1) 0%, transparent) 94.4%,
+    color-mix(in srgb, var(--g1) 0%, transparent) 97.2%,
+    color-mix(in srgb, var(--g1) 0%, transparent) 100%); }
+.aurora .a2 { background: radial-gradient(circle at 50% 50%,
     color-mix(in srgb, var(--g3) 25%, transparent) 0%,
-    color-mix(in srgb, var(--g3) 20%, transparent) 16%,
-    color-mix(in srgb, var(--g3) 14%, transparent) 31%,
-    color-mix(in srgb, var(--g3) 9%, transparent) 45%,
-    color-mix(in srgb, var(--g3) 5%, transparent) 59%,
-    color-mix(in srgb, var(--g3) 2%, transparent) 73%,
-    color-mix(in srgb, var(--g3) 1%, transparent) 88%,
-    transparent 100%);
-}
+    color-mix(in srgb, var(--g3) 24.9%, transparent) 2.8%,
+    color-mix(in srgb, var(--g3) 24.6%, transparent) 5.6%,
+    color-mix(in srgb, var(--g3) 24.2%, transparent) 8.3%,
+    color-mix(in srgb, var(--g3) 23.5%, transparent) 11.1%,
+    color-mix(in srgb, var(--g3) 22.8%, transparent) 13.9%,
+    color-mix(in srgb, var(--g3) 21.8%, transparent) 16.7%,
+    color-mix(in srgb, var(--g3) 20.8%, transparent) 19.4%,
+    color-mix(in srgb, var(--g3) 19.6%, transparent) 22.2%,
+    color-mix(in srgb, var(--g3) 18.4%, transparent) 25%,
+    color-mix(in srgb, var(--g3) 17.2%, transparent) 27.8%,
+    color-mix(in srgb, var(--g3) 15.8%, transparent) 30.6%,
+    color-mix(in srgb, var(--g3) 14.5%, transparent) 33.3%,
+    color-mix(in srgb, var(--g3) 13.2%, transparent) 36.1%,
+    color-mix(in srgb, var(--g3) 11.9%, transparent) 38.9%,
+    color-mix(in srgb, var(--g3) 10.7%, transparent) 41.7%,
+    color-mix(in srgb, var(--g3) 9.5%, transparent) 44.4%,
+    color-mix(in srgb, var(--g3) 8.4%, transparent) 47.2%,
+    color-mix(in srgb, var(--g3) 7.4%, transparent) 50%,
+    color-mix(in srgb, var(--g3) 6.4%, transparent) 52.8%,
+    color-mix(in srgb, var(--g3) 5.5%, transparent) 55.6%,
+    color-mix(in srgb, var(--g3) 4.7%, transparent) 58.3%,
+    color-mix(in srgb, var(--g3) 4%, transparent) 61.1%,
+    color-mix(in srgb, var(--g3) 3.4%, transparent) 63.9%,
+    color-mix(in srgb, var(--g3) 2.8%, transparent) 66.7%,
+    color-mix(in srgb, var(--g3) 2.2%, transparent) 69.4%,
+    color-mix(in srgb, var(--g3) 1.6%, transparent) 72.2%,
+    color-mix(in srgb, var(--g3) 1%, transparent) 75%,
+    color-mix(in srgb, var(--g3) 0.6%, transparent) 77.8%,
+    color-mix(in srgb, var(--g3) 0.3%, transparent) 80.6%,
+    color-mix(in srgb, var(--g3) 0.1%, transparent) 83.3%,
+    color-mix(in srgb, var(--g3) 0%, transparent) 86.1%,
+    color-mix(in srgb, var(--g3) 0%, transparent) 88.9%,
+    color-mix(in srgb, var(--g3) 0%, transparent) 91.7%,
+    color-mix(in srgb, var(--g3) 0%, transparent) 94.4%,
+    color-mix(in srgb, var(--g3) 0%, transparent) 97.2%,
+    color-mix(in srgb, var(--g3) 0%, transparent) 100%); }
 .aurora .a3 {
   opacity: 0.3;
   background: radial-gradient(circle at 50% 50%,
     color-mix(in srgb, var(--g2) 20%, transparent) 0%,
-    color-mix(in srgb, var(--g2) 15%, transparent) 18%,
-    color-mix(in srgb, var(--g2) 10%, transparent) 34%,
-    color-mix(in srgb, var(--g2) 6%, transparent) 50%,
-    color-mix(in srgb, var(--g2) 2.5%, transparent) 66%,
-    color-mix(in srgb, var(--g2) 1%, transparent) 84%,
-    transparent 100%);
-}
+    color-mix(in srgb, var(--g2) 19.9%, transparent) 2.8%,
+    color-mix(in srgb, var(--g2) 19.7%, transparent) 5.6%,
+    color-mix(in srgb, var(--g2) 19.3%, transparent) 8.3%,
+    color-mix(in srgb, var(--g2) 18.8%, transparent) 11.1%,
+    color-mix(in srgb, var(--g2) 18.2%, transparent) 13.9%,
+    color-mix(in srgb, var(--g2) 17.5%, transparent) 16.7%,
+    color-mix(in srgb, var(--g2) 16.6%, transparent) 19.4%,
+    color-mix(in srgb, var(--g2) 15.7%, transparent) 22.2%,
+    color-mix(in srgb, var(--g2) 14.7%, transparent) 25%,
+    color-mix(in srgb, var(--g2) 13.7%, transparent) 27.8%,
+    color-mix(in srgb, var(--g2) 12.7%, transparent) 30.6%,
+    color-mix(in srgb, var(--g2) 11.6%, transparent) 33.3%,
+    color-mix(in srgb, var(--g2) 10.6%, transparent) 36.1%,
+    color-mix(in srgb, var(--g2) 9.6%, transparent) 38.9%,
+    color-mix(in srgb, var(--g2) 8.6%, transparent) 41.7%,
+    color-mix(in srgb, var(--g2) 7.6%, transparent) 44.4%,
+    color-mix(in srgb, var(--g2) 6.7%, transparent) 47.2%,
+    color-mix(in srgb, var(--g2) 5.9%, transparent) 50%,
+    color-mix(in srgb, var(--g2) 5.1%, transparent) 52.8%,
+    color-mix(in srgb, var(--g2) 4.4%, transparent) 55.6%,
+    color-mix(in srgb, var(--g2) 3.8%, transparent) 58.3%,
+    color-mix(in srgb, var(--g2) 3.2%, transparent) 61.1%,
+    color-mix(in srgb, var(--g2) 2.7%, transparent) 63.9%,
+    color-mix(in srgb, var(--g2) 2.3%, transparent) 66.7%,
+    color-mix(in srgb, var(--g2) 1.7%, transparent) 69.4%,
+    color-mix(in srgb, var(--g2) 1.2%, transparent) 72.2%,
+    color-mix(in srgb, var(--g2) 0.8%, transparent) 75%,
+    color-mix(in srgb, var(--g2) 0.5%, transparent) 77.8%,
+    color-mix(in srgb, var(--g2) 0.3%, transparent) 80.6%,
+    color-mix(in srgb, var(--g2) 0.1%, transparent) 83.3%,
+    color-mix(in srgb, var(--g2) 0%, transparent) 86.1%,
+    color-mix(in srgb, var(--g2) 0%, transparent) 88.9%,
+    color-mix(in srgb, var(--g2) 0%, transparent) 91.7%,
+    color-mix(in srgb, var(--g2) 0%, transparent) 94.4%,
+    color-mix(in srgb, var(--g2) 0%, transparent) 97.2%,
+    color-mix(in srgb, var(--g2) 0%, transparent) 100%); }
 /* The dither: fine fractal noise, far too faint to read as texture, just enough to break a band. */
 .aurora::after {
-  content: ""; position: absolute; inset: -20px; pointer-events: none; opacity: 0.045;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  content: ""; position: absolute; inset: -20px; pointer-events: none; opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 :root[data-theme="light"] .aurora i { opacity: 0.24; }
-:root[data-theme="light"] .aurora::after { opacity: 0.03; }
+:root[data-theme="light"] .aurora::after { opacity: 0.06; }
 
 /* ---------- 2. the Snowball sits beside Today's quests ---------- */
 @media (min-width: 1280px) {
@@ -2253,6 +2346,128 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
 #view-method .disc { width: 48px; height: 48px; font-size: 1.2rem; }
 #view-method .plate { padding: 16px; }
 }
+/* v62: more of the course, drawn. Shared parts for the new figures. */
+#view-method .fx-head { fill: color-mix(in srgb, var(--ink) 3%, var(--surface)); stroke: color-mix(in srgb, var(--muted) 80%, var(--rule)); stroke-width: 1.5; }
+#view-method .fx-brain { fill: color-mix(in srgb, var(--ink) 5%, var(--surface)); stroke: color-mix(in srgb, var(--muted) 60%, var(--rule)); stroke-width: 1.2; }
+#view-method .fx-gyri { fill: none; stroke: var(--muted); stroke-width: 1; opacity: 0.4; stroke-linecap: round; }
+#view-method .fx-front { fill: color-mix(in srgb, var(--release) 18%, transparent); stroke: var(--release); stroke-width: 1.5; }
+#view-method .fx-ball { fill: var(--load); }
+#view-method .fx-ball-hi { fill: #ffffff; opacity: 0.38; }
+#view-method .fx-crate { fill: color-mix(in srgb, var(--lock) 28%, var(--surface)); stroke: var(--lock); stroke-width: 1.5; }
+#view-method .fx-arrow { fill: none; stroke: var(--spark); stroke-width: 2; }
+#view-method .fx-dot { fill: color-mix(in srgb, var(--muted) 45%, transparent); }
+#view-method .fx-tent { fill: none; stroke: var(--load); stroke-width: 5.5; stroke-linecap: round; opacity: 0.92; }
+#view-method .fx-lit { fill: var(--load); }
+#view-method .fx-litring { fill: none; stroke: var(--load); stroke-width: 2; opacity: 0.45; }
+#view-method .fx-diff { fill: none; stroke: var(--release); stroke-width: 2.5; stroke-linecap: round; opacity: 0.85; }
+#view-method .fx-diffdot { fill: var(--release); }
+#view-method .fx-octo { fill: var(--load); }
+#view-method .fx-octo-hi { fill: #ffffff; opacity: 0.28; }
+#view-method .fx-eye { fill: #ffffff; }
+#view-method .fx-pupil { fill: #1a1630; }
+#view-method .fx-smile { fill: none; stroke: #1a1630; stroke-width: 1.6; stroke-linecap: round; }
+#view-method .fx-loose { fill: color-mix(in srgb, var(--ink) 7%, var(--surface)); stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 3; stroke-linejoin: round; }
+#view-method .fx-bound { fill: var(--load); stroke: none; }
+#view-method .fx-letter { font-family: var(--display); font-weight: 700; font-size: 28px; fill: var(--ink); }
+#view-method .fx-letter.on { fill: var(--on-stage); }
+#view-method .fx-pips rect { fill: color-mix(in srgb, var(--muted) 30%, transparent); }
+#view-method .fx-pips rect.on { fill: var(--load); }
+#view-method .fx-zip path { fill: color-mix(in srgb, var(--load) 22%, var(--surface)); stroke: var(--load); stroke-width: 1.5; stroke-linejoin: round; }
+#view-method .fx-box { fill: color-mix(in srgb, var(--ink) 6%, var(--surface)); stroke: var(--muted); stroke-width: 1.5; }
+#view-method .fx-door rect { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+#view-method .fx-box.open { stroke: var(--release); stroke-dasharray: 6 5; }
+#view-method .fx-cortex { stroke: color-mix(in srgb, var(--ink) 45%, var(--rule)); }
+#view-method .fx-lock { fill: none; stroke: var(--no); stroke-width: 2; }
+#view-method .fx-lock rect { fill: color-mix(in srgb, var(--no) 25%, var(--surface)); }
+#view-method .fx-in path { fill: none; stroke: var(--release); stroke-width: 2; }
+#view-method .fx-cortex { fill: color-mix(in srgb, var(--ink) 5%, var(--surface)); stroke: color-mix(in srgb, var(--muted) 75%, var(--rule)); stroke-width: 1.5; }
+#view-method .fx-cereb { fill: color-mix(in srgb, var(--ink) 7%, var(--surface)); stroke: color-mix(in srgb, var(--muted) 75%, var(--rule)); stroke-width: 1.5; }
+#view-method .fx-stem { fill: color-mix(in srgb, var(--ink) 8%, var(--surface)); stroke: color-mix(in srgb, var(--muted) 75%, var(--rule)); stroke-width: 1.5; }
+#view-method .fx-bg { fill: color-mix(in srgb, var(--spark) 14%, transparent); stroke: color-mix(in srgb, var(--spark) 60%, transparent); stroke-width: 1.2; }
+#view-method .fx-amyg { fill: color-mix(in srgb, var(--release) 40%, var(--surface)); stroke: var(--release); stroke-width: 1.5; }
+#view-method .fx-hipp { fill: none; stroke: var(--lock); stroke-width: 2.5; stroke-linecap: round; }
+#view-method .fx-ach, #view-method .fx-ach path { fill: none; stroke: var(--link); stroke-width: 2; opacity: 0.95; }
+#view-method .fx-da, #view-method .fx-da path { fill: none; stroke: var(--spark); stroke-width: 2.2; }
+#view-method .fx-ser, #view-method .fx-ser path { fill: none; stroke: var(--no); stroke-width: 2; opacity: 0.95; }
+#view-method .fx-panel rect { fill: color-mix(in srgb, var(--ink) 4%, var(--surface)); stroke: var(--rule); stroke-width: 1; }
+#view-method .fx-num { font-family: var(--mono); font-size: 12px; fill: var(--muted); }
+#view-method .fx-face { fill: color-mix(in srgb, var(--ink) 9%, var(--surface)); stroke: var(--ink); stroke-width: 1.8; }
+#view-method .fx-eyes { fill: var(--ink); }
+#view-method .fx-brow, #view-method .fx-mouth { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
+#view-method .fx-sweat { fill: var(--release); }
+#view-method .fx-pain { fill: color-mix(in srgb, var(--no) 16%, transparent); stroke: var(--no); stroke-width: 1.5; stroke-dasharray: 4 4; }
+#view-method .fx-glow { fill: color-mix(in srgb, var(--spark) 16%, transparent); stroke: var(--spark); stroke-width: 1.5; stroke-dasharray: 4 4; }
+#view-method .fx-funnel { fill: color-mix(in srgb, var(--ink) 10%, var(--surface)); stroke: var(--ink); stroke-width: 1.8; stroke-linejoin: round; }
+#view-method .fx-att { fill: none; stroke: var(--ink); stroke-width: 2; }
+#view-method .fx-phone { fill: var(--ink); }
+#view-method .fx-screen { fill: var(--spark); }
+#view-method .fx-flow path { fill: none; stroke: var(--ink); stroke-width: 2; }
+#view-method .fx-cut path { stroke: var(--load); stroke-width: 3; stroke-linecap: round; }
+#view-method .fx-pill { fill: color-mix(in srgb, var(--load) 14%, var(--surface)); stroke: var(--load); stroke-width: 1.2; }
+#view-method .fx-seq path { fill: none; stroke: var(--load); stroke-width: 2.2; }
+#view-method .fx-seqnode circle { fill: color-mix(in srgb, var(--load) 25%, var(--surface)); stroke: var(--load); stroke-width: 2; }
+#view-method .fx-hol path { fill: none; stroke: var(--release); stroke-width: 2.2; }
+#view-method .fx-holnode circle { fill: color-mix(in srgb, var(--release) 25%, var(--surface)); stroke: var(--release); stroke-width: 2; }
+#view-method .fx-dend path { fill: none; stroke: var(--load); stroke-width: 2; stroke-linecap: round; }
+#view-method .fx-dend.thin path { stroke: var(--muted); stroke-width: 1.4; }
+#view-method .fx-axon path { fill: none; stroke: var(--load); stroke-width: 3; stroke-linecap: round; }
+#view-method .fx-axon.thin path { stroke: var(--muted); stroke-width: 1.4; }
+#view-method .fx-myelin rect { fill: color-mix(in srgb, var(--spark) 42%, var(--surface)); stroke: var(--spark); stroke-width: 1.2; }
+#view-method .fx-soma circle { fill: color-mix(in srgb, var(--load) 32%, var(--surface)); stroke: var(--load); stroke-width: 2; }
+#view-method .fx-soma.thin circle { fill: color-mix(in srgb, var(--muted) 18%, var(--surface)); stroke: var(--muted); stroke-width: 1.4; }
+#view-method .fx-nucleus circle { fill: var(--ink); opacity: 0.6; }
+#view-method .fx-pulse circle { fill: var(--spark); stroke: var(--surface); stroke-width: 2; }
+#view-method .fx-pulse.faint circle { fill: var(--muted); opacity: 0.6; }
+#view-method .fx-leak path { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.7; }
+#view-method .fx-board { fill: color-mix(in srgb, var(--ink) 4%, var(--surface)); stroke: var(--rule); stroke-width: 1.5; }
+#view-method .fx-bdot { fill: color-mix(in srgb, var(--muted) 40%, transparent); }
+#view-method .fx-ch { fill: none; stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+#view-method .fx-ch.faint { stroke-width: 3; opacity: 0.38; }
+#view-method .fx-whisper { fill: none; stroke: var(--link); stroke-width: 2.4; stroke-dasharray: 5 4; stroke-linecap: round; }
+#view-method .fx-star { fill: var(--link); }
+#view-method .fx-legend text { }
+@media (prefers-reduced-motion: no-preference) {
+  #view-method .fx-pulse:not(.faint) circle { animation: fxPulse 1.6s ease-in-out infinite; }
+}
+@keyframes fxPulse { 50% { opacity: 0.45; } }
+/* the octopus, redrawn: pink like the course's, wavy tentacles, a box of stored patterns */
+#view-method .fx-wmbox { fill: color-mix(in srgb, var(--release) 6%, transparent); stroke: var(--release); stroke-width: 1.6; }
+#view-method .fx-tent { fill: var(--g3); stroke: color-mix(in srgb, var(--g3) 60%, #000); stroke-width: 1.1; stroke-linejoin: round; opacity: 0.95; }
+#view-method .fx-squig { fill: var(--g3); stroke: color-mix(in srgb, var(--g3) 60%, #000); stroke-width: 0.9; opacity: 0.9; }
+#view-method .fx-lit { fill: var(--g3); }
+#view-method .fx-litring { stroke: var(--g3); }
+#view-method .fx-octo { fill: var(--g3); stroke: color-mix(in srgb, var(--g3) 60%, #000); stroke-width: 1.4; }
+#view-method .fx-tongue { fill: #e11d48; }
+#view-method .fx-cheek { fill: #ffffff; opacity: 0.35; }
+#view-method .fx-nuc { stroke: var(--surface); stroke-width: 2; }
+/* the light that follows the pointer, on every figure plate, and a glow on the pieces of a picture */
+#view-method .plate { position: relative; transition: border-color var(--d3, 0.3s) ease; }
+#view-method .plate::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--c, var(--g2)) 13%, transparent), transparent 70%); transition: opacity var(--d3, 0.3s) ease; }
+#view-method .slot { position: relative; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+#view-method .slot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; background: radial-gradient(140px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--load) 22%, transparent), transparent 70%); transition: opacity 0.3s ease; }
+#view-method .hot { transition: filter 0.28s ease, transform 0.28s ease; transform-box: fill-box; transform-origin: center; }
+#view-method .bar-row .bt i { transition: filter 0.25s ease, width 0.4s ease; }
+#view-method .protocol li, #view-method .legend li, #view-method .rrr li, #view-method .levers li { transition: background 0.25s ease, border-color 0.25s ease; border-radius: 8px; }
+#view-method .jump a { transition: transform 0.2s ease, filter 0.2s ease; }
+#view-method .rcard, #view-method .test { transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+#view-method .pb-felt, #view-method .nw, #view-method .dial .seg, #view-method .legend i, #view-method .tier .meter, #view-method .sdays i { transition: filter 0.3s ease; }
+@media (hover: hover) {
+  #view-method .plate:hover::after { opacity: 1; }
+  #view-method .plate:hover { border-color: color-mix(in srgb, var(--c, var(--g2)) 45%, var(--rule)); }
+  #view-method .slot:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -16px color-mix(in srgb, var(--load) 70%, transparent); }
+  #view-method .slot:hover::after { opacity: 1; }
+  #view-method .hot:hover { filter: brightness(1.28) drop-shadow(0 0 5px color-mix(in srgb, var(--c, var(--g2)) 70%, transparent)) drop-shadow(0 0 14px color-mix(in srgb, var(--c, var(--g2)) 35%, transparent)); transform: scale(1.04); }
+  #view-method .bar-row:hover .bt i { filter: brightness(1.3) drop-shadow(0 0 6px color-mix(in srgb, var(--c, var(--lock)) 60%, transparent)); }
+  #view-method .protocol li:hover, #view-method .legend li:hover, #view-method .rrr li:hover, #view-method .levers li:hover { background: color-mix(in srgb, var(--c, var(--g2)) 7%, transparent); }
+  #view-method .jump a:hover { transform: translateY(-2px); filter: brightness(1.12) drop-shadow(0 6px 12px color-mix(in srgb, var(--c) 45%, transparent)); }
+  #view-method .rcard:hover, #view-method .test:hover { border-color: color-mix(in srgb, var(--c, var(--lock)) 50%, var(--rule)); box-shadow: 0 14px 32px -20px color-mix(in srgb, var(--c, var(--lock)) 70%, transparent); }
+  #view-method .sub:hover .pb-felt, #view-method .nw:hover, #view-method .dial .seg:hover, #view-method .legend li:hover i, #view-method .tier:hover .meter { filter: brightness(1.22); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #view-method .plate, #view-method .plate::after, #view-method .slot, #view-method .slot::after, #view-method .hot, #view-method .jump a, #view-method .bar-row .bt i { transition: none; }
+  #view-method .hot:hover, #view-method .slot:hover, #view-method .jump a:hover { transform: none; }
+}
+:root[data-motion="calm"] #view-method .hot:hover, :root[data-motion="calm"] #view-method .slot:hover, :root[data-motion="calm"] #view-method .jump a:hover { transform: none; }
 #view-method .mtitle { font-size: clamp(1.8rem, 4.4vw, 2.8rem); }
 #view-method .wrap { gap: 64px; }
 </style>
@@ -2353,6 +2568,104 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
       </div>
     </div>
 
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah-spark" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--spark)"></path></marker>
+        <marker id="ah-load" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--load)"></path></marker>
+        <marker id="ah-release" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--release)"></path></marker>
+        <marker id="ah-no" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--no)"></path></marker>
+        <marker id="ah-link" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--link)"></path></marker>
+        <marker id="ah-ink" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--ink)"></path></marker>
+      </defs>
+    </svg>
+
+    <figure class="fig">
+      <figcaption>
+        <span class="ft">Three letters, one chunk</span>
+        <span class="fr">A chunk is a set of pieces bound together by meaning or use. P, O and P are three things to hold; “pop” is one, with the letters folded inside. The course's other image is a ZIP file: one name on the outside, all the detail packed within. Notice the loose pieces have no edges to fit each other: a fact memorised without understanding has nothing to connect to.</span>
+      </figcaption>
+      <div class="plate scroll">
+        <svg class="viz wide" viewBox="0 0 720 210" role="img" aria-label="Three separate tiles labelled P, O and P, each taking one working-memory slot, become one tile labelled pop that takes a single slot.">
+          <g class="fx-loose">
+            <path class="hot" d="M52 62 h64 v22 a8 8 0 0 0 0 16 v26 h-64 v-26 a8 8 0 0 1 0 -16 z"></path>
+            <path class="hot" d="M156 62 h64 v22 a8 8 0 0 1 0 16 v26 h-64 v-26 a8 8 0 0 0 0 -16 z"></path>
+            <path class="hot" d="M260 62 h30 a8 8 0 0 1 16 0 h18 v64 h-64 z"></path>
+          </g>
+          <g class="fx-letter"><text x="84" y="106" text-anchor="middle">P</text><text x="188" y="106" text-anchor="middle">O</text><text x="292" y="106" text-anchor="middle">P</text></g>
+          <text x="188" y="152" text-anchor="middle">no edges that fit each other</text>
+          <g class="fx-pips" transform="translate(120 170)"><rect x="0" y="0" width="22" height="7" rx="3.5" class="on"></rect><rect x="28" y="0" width="22" height="7" rx="3.5" class="on"></rect><rect x="56" y="0" width="22" height="7" rx="3.5" class="on"></rect><rect x="84" y="0" width="22" height="7" rx="3.5"></rect></g>
+          <text x="188" y="196" text-anchor="middle"><tspan class="t-ink">3 of 4</tspan> slots</text>
+
+          <path d="M350 94 H405" fill="none" style="stroke:var(--muted)" stroke-width="2" marker-end="url(#ah)"></path>
+          <text x="378" y="80" text-anchor="middle" style="font-size:10px">bind by</text>
+          <text x="378" y="118" text-anchor="middle" style="font-size:10px">meaning + use</text>
+
+          <g class="fx-bound hot">
+            <path d="M448 56 h48 a8 8 0 0 1 16 0 h48 v26 a8 8 0 0 0 0 16 v34 h-112 v-34 a8 8 0 0 1 0 -16 z"></path>
+          </g>
+          <text class="fx-letter on" x="504" y="106" text-anchor="middle">pop</text>
+          <g class="fx-zip hot" transform="translate(600 62)">
+            <path d="M0 6 h26 l6 6 h48 v48 h-80 z"></path>
+            <path d="M40 18 v6 M40 30 v6 M40 42 v6 M40 54 v4" stroke-dasharray="none"></path>
+          </g>
+          <text x="640" y="140" text-anchor="middle" style="font-size:10px">one name outside,</text>
+          <text x="640" y="154" text-anchor="middle" style="font-size:10px">all the detail inside</text>
+          <g class="fx-pips" transform="translate(462 170)"><rect x="0" y="0" width="22" height="7" rx="3.5" class="on"></rect><rect x="28" y="0" width="22" height="7" rx="3.5"></rect><rect x="56" y="0" width="22" height="7" rx="3.5"></rect><rect x="84" y="0" width="22" height="7" rx="3.5"></rect></g>
+          <text x="504" y="196" text-anchor="middle"><tspan class="t-ink">1 of 4</tspan> slots · three free</text>
+        </svg>
+      </div>
+      <span class="kind"><b>Illustration</b> the “pop” and ZIP-file examples from <em>Learning How to Learn</em></span>
+    </figure>
+
+    <figure class="fig">
+      <figcaption>
+        <span class="ft">A blackboard behind the forehead, a warehouse everywhere else</span>
+        <span class="fr">Working memory sits mostly in the prefrontal cortex and holds about four chunks. It is a poor blackboard: what you don't keep rewriting is wiped by the brain's own housekeeping, which the course calls metabolic vampires. Long-term memory is a warehouse spread across the whole brain with room for billions of items, so many that they bury each other. Attention reaches from the board into the warehouse to pull a memory back out.</span>
+      </figcaption>
+      <div class="plate scroll">
+        <svg class="viz wide" viewBox="0 0 720 340" role="img" aria-label="A head seen from above. The front of the brain is highlighted and holds four balls: working memory, about four chunks. Small crates are scattered across the rest of the brain: long-term memory, distributed. Arrows reach from the front into the crates.">
+          <g transform="translate(190 170)">
+            <ellipse class="fx-head" cx="0" cy="0" rx="120" ry="142"></ellipse>
+            <ellipse class="fx-head" cx="-126" cy="4" rx="8" ry="18"></ellipse>
+            <ellipse class="fx-head" cx="126" cy="4" rx="8" ry="18"></ellipse>
+            <ellipse class="fx-brain" cx="0" cy="0" rx="100" ry="122"></ellipse>
+            <g class="fx-gyri">
+              <path d="M0 -118 V118"></path>
+              <path d="M-70 -60 c14 10 8 26 -6 30 M-78 -10 c20 -4 26 16 12 26 M-64 40 c18 4 16 24 0 30 M-46 84 c14 -2 22 10 12 20"></path>
+              <path d="M70 -60 c-14 10 -8 26 6 30 M78 -10 c-20 -4 -26 16 -12 26 M64 40 c-18 4 -16 24 0 30 M46 84 c-14 -2 -22 10 -12 20"></path>
+            </g>
+            <path class="fx-front" d="M-94.5 -40 A100 122 0 0 1 94.5 -40 Z"></path>
+            <g class="fx-ball hot">
+              <circle cx="-30" cy="-90" r="12"></circle><circle cx="30" cy="-90" r="12"></circle><circle cx="-30" cy="-58" r="12"></circle><circle cx="30" cy="-58" r="12"></circle>
+            </g>
+            <g class="fx-ball-hi"><circle cx="-34" cy="-94" r="3.5"></circle><circle cx="26" cy="-94" r="3.5"></circle><circle cx="-34" cy="-62" r="3.5"></circle><circle cx="26" cy="-62" r="3.5"></circle></g>
+            <g class="fx-arrow hot">
+              <path d="M-14 -36 C-26 -20 -34 -8 -38 4" marker-end="url(#ah-spark)"></path>
+              <path d="M14 -36 C24 -22 30 -12 36 -6" marker-end="url(#ah-spark)"></path>
+              <path d="M0 -36 C2 0 4 30 8 52" marker-end="url(#ah-spark)"></path>
+            </g>
+            <g class="fx-crate hot">
+              <rect x="-50" y="8" width="16" height="16" rx="3"></rect><rect x="34" y="-2" width="16" height="16" rx="3"></rect><rect x="0" y="58" width="16" height="16" rx="3"></rect>
+              <rect x="-78" y="46" width="16" height="16" rx="3"></rect><rect x="58" y="44" width="16" height="16" rx="3"></rect><rect x="-38" y="92" width="16" height="16" rx="3"></rect><rect x="30" y="96" width="16" height="16" rx="3"></rect><rect x="-8" y="-4" width="16" height="16" rx="3"></rect>
+            </g>
+          </g>
+          <circle cx="376" cy="66" r="9" class="fx-ball"></circle><circle cx="373" cy="63" r="2.6" class="fx-ball-hi"></circle>
+          <text class="t-name" x="396" y="71">Working memory</text>
+          <text x="396" y="94">the prefrontal cortex, behind the forehead</text>
+          <text x="396" y="112">about four chunks at once</text>
+          <text x="396" y="130">a blackboard: rewrite it, or it is wiped</text>
+          <rect x="368" y="176" width="16" height="16" rx="3" class="fx-crate"></rect>
+          <text class="t-name" x="396" y="190">Long-term memory</text>
+          <text x="396" y="213">a warehouse spread across the whole brain</text>
+          <text x="396" y="231">room for billions, so items bury each other</text>
+          <text x="396" y="249">visit it a few times, or it can't be found</text>
+          <path d="M368 296 H388" class="fx-arrow" marker-end="url(#ah-spark)"></path>
+          <text class="t-ink" x="396" y="300">attention reaches from board to warehouse</text>
+        </svg>
+      </div>
+      <span class="kind"><b>Illustration</b> after the course's blackboard and warehouse · Cowan 2001 for the four · the prefrontal cortex is where working memory is centred, not the only place involved</span>
+    </figure>
+
     <figure class="fig">
       <figcaption>
         <span class="ft">Where a memory lives, and which stage moves it</span>
@@ -2383,11 +2696,11 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
           <text x="625" y="126" text-anchor="middle">years, if recalled</text>
           <text class="t-ink" x="211" y="84" text-anchor="middle">attention</text>
           <text x="211" y="112" text-anchor="middle" style="fill:var(--load)">LOAD</text>
-          <text x="488" y="58" text-anchor="middle" style="fill:var(--load)">LOAD, then LOCK</text>
-          <text class="t-ink" x="488" y="74" text-anchor="middle">encoding</text>
+          <text x="488" y="56" text-anchor="middle" style="fill:var(--load)">LOAD, then LOCK</text>
+          <text class="t-ink" x="488" y="76" text-anchor="middle">encoding</text>
           <text class="t-ink" x="488" y="134" text-anchor="middle">retrieval</text>
           <text x="488" y="150" text-anchor="middle" style="fill:var(--lock)">every recall</text>
-          <text x="340" y="18" text-anchor="middle">rehearsal keeps it here; it does not store it</text>
+          <text x="340" y="22" text-anchor="middle">rehearsal keeps it here; it does not store it</text>
           <text x="95" y="216" text-anchor="middle">gone in under a second</text>
           <text x="340" y="216" text-anchor="middle">gone in seconds</text>
           <text x="625" y="216" text-anchor="middle">fades slowly without recall</text>
@@ -2495,6 +2808,99 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
       <span class="kind"><b>Illustration</b> the pinball metaphor from <em>Learning How to Learn</em></span>
     </figure>
 
+    <figure class="fig">
+      <figcaption>
+        <span class="ft">The octopus of attention</span>
+        <span class="fr">When you focus, it is as if an octopus in the prefrontal cortex slips its four tentacles through the four slots of working memory and reaches into other parts of the brain, tying ideas together. That is focused mode, and it is often what starts a chunk. Diffuse mode makes long, random connections with no octopus at all. Under stress the octopus loses its grip on some of those connections, which is why thinking goes wrong when you are angry, afraid or rushed.</span>
+      </figcaption>
+      <div class="plate scroll">
+        <svg class="viz wide" viewBox="0 0 720 350" role="img" aria-label="Two heads from above. Left, working memory in focused mode: a pink octopus at the front of the brain reaches four wavy tentacles down into a box of dots, lighting four of them. Right, diffuse mode: the same box with short pink squiggles scattered across it and no octopus.">
+          <g transform="translate(185 170)">
+            <ellipse class="fx-head" cx="0" cy="0" rx="120" ry="142"></ellipse><ellipse class="fx-head" cx="-126" cy="4" rx="8" ry="18"></ellipse><ellipse class="fx-head" cx="126" cy="4" rx="8" ry="18"></ellipse>
+            <ellipse class="fx-brain" cx="0" cy="0" rx="100" ry="122"></ellipse>
+            <path class="fx-gyri" d="M0 -118 V118 M-70 -70 c14 10 8 26 -6 30 M-80 -20 c20 -4 26 16 12 26 M-72 30 c18 4 16 24 0 30 M-52 80 c14 -2 22 10 12 20 M70 -70 c-14 10 -8 26 6 30 M80 -20 c-20 -4 -26 16 -12 26 M72 30 c-18 4 -16 24 0 30 M52 80 c-14 -2 -22 10 -12 20 M-30 -100 c10 8 4 20 -6 22 M30 -100 c-10 8 -4 20 6 22"></path>
+            <rect class="fx-wmbox" x="-84" y="-40" width="168" height="158" rx="26"></rect>
+            <g class="fx-dot"><circle cx="-60" cy="-20" r="4.5"></circle><circle cx="-60" cy="10" r="4.5"></circle><circle cx="-60" cy="40" r="4.5"></circle><circle cx="-60" cy="70" r="4.5"></circle><circle cx="-60" cy="100" r="4.5"></circle><circle cx="-30" cy="-20" r="4.5"></circle><circle cx="-30" cy="10" r="4.5"></circle><circle cx="-30" cy="40" r="4.5"></circle><circle cx="-30" cy="70" r="4.5"></circle><circle cx="-30" cy="100" r="4.5"></circle><circle cx="0" cy="-20" r="4.5"></circle><circle cx="0" cy="10" r="4.5"></circle><circle cx="0" cy="40" r="4.5"></circle><circle cx="0" cy="70" r="4.5"></circle><circle cx="0" cy="100" r="4.5"></circle><circle cx="30" cy="-20" r="4.5"></circle><circle cx="30" cy="10" r="4.5"></circle><circle cx="30" cy="40" r="4.5"></circle><circle cx="30" cy="70" r="4.5"></circle><circle cx="30" cy="100" r="4.5"></circle><circle cx="60" cy="-20" r="4.5"></circle><circle cx="60" cy="10" r="4.5"></circle><circle cx="60" cy="40" r="4.5"></circle><circle cx="60" cy="70" r="4.5"></circle><circle cx="60" cy="100" r="4.5"></circle></g>
+            <path class="fx-tent hot" d="M-19.6 -65.4 L-21.7 -63.8 L-23.8 -62.3 L-25.9 -60.9 L-28.1 -59.4 L-30.3 -58.0 L-32.5 -56.6 L-34.7 -55.2 L-36.9 -53.7 L-39.1 -52.2 L-41.3 -50.7 L-43.5 -49.1 L-45.6 -47.4 L-47.7 -45.7 L-49.7 -43.9 L-51.7 -42.0 L-53.5 -40.1 L-55.2 -38.0 L-56.7 -35.9 L-58.1 -33.7 L-59.4 -31.4 L-60.5 -29.1 L-61.5 -26.8 L-62.3 -24.5 L-62.9 -22.2 L-63.4 -19.9 L-63.8 -17.6 L-64.1 -15.4 L-64.3 -13.3 L-64.5 -11.2 L-64.5 -9.2 L-64.6 -7.4 L-64.6 -5.7 L-64.6 -4.1 L-64.6 -2.6 L-64.6 -1.3 L-64.7 -0.2 L-64.7 0.8 L-64.8 1.7 L-64.9 2.3 L-65.1 2.9 L-65.2 3.3 L-65.3 3.6 L-65.4 3.8 L-65.5 4.0 L-65.7 4.3 L-66.1 4.6 L-66.5 5.0 L-67.2 5.6 L-67.9 6.5 L-68.7 7.7 L-69.0 9.4 L-68.8 11.3 L-67.8 12.9 L-66.4 14.0 L-64.9 14.5 L-63.3 14.6 L-61.9 14.4 L-60.6 13.9 L-59.3 13.2 L-57.6 11.7 L-55.3 7.4 L-55.0 2.6 L-56.7 -1.6 L-59.7 -4.3 L-63.4 -5.4 L-66.9 -4.8 L-69.6 -2.9 L-71.0 -0.2 L-71.2 2.7 L-70.1 5.1 L-68.3 6.7 L-66.5 7.3 L-65.2 2.7 L-65.9 2.5 L-66.0 2.3 L-66.2 1.9 L-66.1 1.3 L-65.7 0.7 L-64.9 0.2 L-63.8 0.1 L-62.5 0.5 L-61.3 1.6 L-60.6 3.4 L-60.8 5.7 L-62.4 8.3 L-62.4 8.0 L-63.0 8.3 L-63.3 8.3 L-63.5 8.3 L-63.5 8.3 L-63.2 8.3 L-62.8 8.6 L-62.4 9.2 L-62.3 9.9 L-62.4 10.5 L-62.5 10.8 L-62.4 10.8 L-62.1 10.7 L-61.6 10.3 L-61.0 9.9 L-60.2 9.3 L-59.5 8.6 L-58.8 7.7 L-58.2 6.7 L-57.7 5.6 L-57.3 4.5 L-56.9 3.3 L-56.6 2.0 L-56.4 0.7 L-56.3 -0.7 L-56.1 -2.2 L-56.0 -3.8 L-55.9 -5.4 L-55.8 -7.0 L-55.6 -8.7 L-55.5 -10.5 L-55.2 -12.3 L-55.0 -14.1 L-54.6 -15.9 L-54.2 -17.8 L-53.7 -19.6 L-53.1 -21.4 L-52.4 -23.2 L-51.5 -24.9 L-50.6 -26.6 L-49.6 -28.2 L-48.4 -29.8 L-47.1 -31.4 L-45.7 -32.9 L-44.2 -34.4 L-42.6 -35.9 L-40.8 -37.3 L-39.0 -38.6 L-37.0 -40.0 L-35.0 -41.3 L-32.9 -42.6 L-30.7 -43.9 L-28.5 -45.2 L-26.3 -46.5 L-24.0 -47.8 L-21.7 -49.1 L-19.4 -50.4 L-17.0 -51.8 L-14.7 -53.2 L-12.4 -54.6 Z"></path>
+            <path class="fx-tent hot" d="M-11.8 -61.0 L-12.9 -58.6 L-14.0 -56.3 L-15.1 -54.0 L-16.3 -51.7 L-17.6 -49.4 L-18.8 -47.1 L-20.1 -44.7 L-21.4 -42.2 L-22.6 -39.7 L-23.7 -37.1 L-24.7 -34.5 L-25.6 -31.8 L-26.4 -29.0 L-27.0 -26.2 L-27.3 -23.3 L-27.5 -20.5 L-27.5 -17.6 L-27.2 -14.8 L-26.8 -12.0 L-26.2 -9.2 L-25.4 -6.6 L-24.5 -4.0 L-23.6 -1.5 L-22.6 1.0 L-21.6 3.3 L-20.6 5.6 L-19.6 7.8 L-18.8 9.9 L-18.0 12.0 L-17.3 14.0 L-16.8 16.0 L-16.5 17.9 L-16.2 19.8 L-16.2 21.6 L-16.2 23.5 L-16.4 25.3 L-16.8 27.2 L-17.3 29.1 L-17.9 31.0 L-18.7 32.9 L-19.5 34.8 L-20.5 36.7 L-21.5 38.6 L-22.5 40.5 L-23.5 42.4 L-24.5 44.2 L-25.5 46.1 L-26.4 47.9 L-27.3 49.8 L-28.0 51.6 L-28.7 53.4 L-29.3 55.2 L-29.8 57.0 L-30.3 58.8 L-30.7 60.6 L-31.0 62.3 L-31.4 64.0 L-31.8 65.7 L-32.2 67.3 L-33.0 69.9 L-32.3 74.9 L-29.7 79.0 L-25.9 81.3 L-21.8 81.8 L-18.2 80.5 L-15.8 77.9 L-14.7 74.8 L-15.1 71.8 L-16.6 69.4 L-18.9 68.0 L-21.4 67.8 L-23.1 68.4 L-21.5 72.9 L-20.9 72.7 L-20.6 72.7 L-20.3 73.0 L-20.0 73.4 L-19.9 74.2 L-20.3 75.0 L-21.1 75.8 L-22.4 76.2 L-24.0 76.0 L-25.6 75.0 L-26.8 73.0 L-27.0 70.1 L-26.5 69.2 L-25.9 67.4 L-25.4 65.5 L-24.9 63.8 L-24.5 62.1 L-24.0 60.5 L-23.5 58.9 L-23.0 57.3 L-22.4 55.8 L-21.7 54.3 L-21.0 52.7 L-20.1 51.2 L-19.2 49.5 L-18.2 47.8 L-17.1 46.1 L-16.0 44.2 L-14.8 42.3 L-13.7 40.3 L-12.6 38.3 L-11.5 36.1 L-10.5 33.9 L-9.6 31.6 L-8.9 29.2 L-8.3 26.8 L-7.9 24.3 L-7.7 21.8 L-7.6 19.3 L-7.8 16.8 L-8.2 14.3 L-8.7 11.8 L-9.4 9.3 L-10.1 6.9 L-11.0 4.5 L-11.9 2.1 L-12.8 -0.3 L-13.6 -2.6 L-14.5 -4.8 L-15.2 -7.1 L-15.8 -9.3 L-16.4 -11.5 L-16.7 -13.7 L-17.0 -15.8 L-17.1 -17.9 L-17.0 -20.0 L-16.8 -22.1 L-16.4 -24.2 L-15.8 -26.2 L-15.1 -28.3 L-14.3 -30.4 L-13.4 -32.5 L-12.3 -34.7 L-11.1 -36.8 L-9.8 -39.0 L-8.5 -41.2 L-7.2 -43.4 L-5.8 -45.7 L-4.4 -48.0 L-3.0 -50.3 L-1.6 -52.7 L-0.2 -55.0 Z"></path>
+            <path class="fx-tent hot" d="M0.1 -55.3 L1.2 -53.1 L2.1 -51.1 L2.9 -49.0 L3.5 -46.8 L4.0 -44.6 L4.4 -42.3 L4.7 -40.0 L4.9 -37.6 L5.1 -35.2 L5.3 -32.8 L5.5 -30.3 L5.7 -27.8 L6.0 -25.3 L6.4 -22.8 L6.8 -20.2 L7.4 -17.7 L8.2 -15.2 L9.0 -12.8 L10.0 -10.3 L11.0 -7.9 L12.1 -5.6 L13.3 -3.3 L14.5 -1.0 L15.7 1.3 L16.9 3.5 L18.1 5.7 L19.1 7.8 L20.1 9.9 L21.0 11.9 L21.7 13.9 L22.3 15.9 L22.8 17.8 L23.1 19.6 L23.2 21.4 L23.3 23.2 L23.2 25.1 L22.9 26.9 L22.6 28.8 L22.1 30.7 L21.6 32.6 L21.0 34.6 L20.4 36.6 L19.7 38.7 L19.1 40.9 L18.5 43.0 L18.0 45.2 L17.7 47.5 L17.5 49.7 L17.4 52.0 L17.6 54.3 L17.9 56.5 L18.5 58.6 L19.3 60.7 L20.2 62.7 L21.3 64.5 L22.5 66.3 L23.8 67.9 L25.1 69.4 L26.5 70.8 L27.4 71.4 L28.4 74.1 L28.2 76.4 L27.2 78.0 L25.9 78.9 L24.5 79.1 L23.4 78.8 L22.7 78.1 L22.5 77.5 L22.5 76.9 L22.7 76.5 L22.9 76.4 L23.6 76.3 L23.1 71.5 L21.3 71.8 L19.2 73.0 L17.7 75.3 L17.3 78.1 L18.3 81.0 L20.6 83.3 L24.0 84.5 L27.8 84.1 L31.3 82.0 L33.7 78.2 L34.2 73.4 L32.6 68.6 L30.8 66.6 L29.7 65.3 L28.6 64.0 L27.6 62.6 L26.7 61.2 L26.0 59.8 L25.4 58.3 L24.9 56.8 L24.6 55.2 L24.4 53.6 L24.4 52.0 L24.5 50.3 L24.8 48.5 L25.1 46.7 L25.6 44.9 L26.2 43.0 L26.9 41.1 L27.6 39.1 L28.4 37.1 L29.1 35.0 L29.8 32.8 L30.5 30.6 L31.0 28.4 L31.4 26.0 L31.7 23.6 L31.7 21.2 L31.6 18.7 L31.3 16.2 L30.9 13.8 L30.2 11.3 L29.5 8.8 L28.6 6.4 L27.6 4.0 L26.5 1.6 L25.4 -0.8 L24.3 -3.1 L23.2 -5.3 L22.1 -7.6 L21.2 -9.8 L20.3 -11.9 L19.5 -14.0 L18.8 -16.1 L18.2 -18.1 L17.7 -20.2 L17.3 -22.2 L17.0 -24.3 L16.8 -26.4 L16.7 -28.6 L16.6 -30.9 L16.6 -33.3 L16.5 -35.8 L16.5 -38.3 L16.3 -41.0 L16.1 -43.7 L15.8 -46.5 L15.4 -49.4 L14.8 -52.2 L14.0 -55.1 L13.0 -58.0 L11.9 -60.7 Z"></path>
+            <path class="fx-tent hot" d="M12.2 -54.7 L14.3 -53.4 L16.2 -52.0 L18.0 -50.5 L19.7 -49.0 L21.4 -47.3 L23.0 -45.6 L24.6 -43.8 L26.1 -42.0 L27.6 -40.1 L29.1 -38.1 L30.5 -36.2 L32.0 -34.3 L33.4 -32.3 L34.9 -30.4 L36.3 -28.5 L37.9 -26.7 L39.4 -24.9 L41.0 -23.2 L42.7 -21.5 L44.3 -20.0 L46.0 -18.4 L47.8 -17.0 L49.5 -15.6 L51.3 -14.4 L53.1 -13.1 L54.8 -11.9 L56.5 -10.8 L58.1 -9.7 L59.7 -8.6 L61.1 -7.5 L62.5 -6.4 L63.8 -5.4 L65.0 -4.4 L66.0 -3.4 L66.9 -2.4 L67.6 -1.4 L68.2 -0.4 L68.7 0.5 L69.0 1.4 L69.3 2.2 L69.4 3.1 L69.4 3.9 L69.3 4.7 L69.1 5.5 L68.9 6.2 L68.5 6.9 L68.1 7.4 L67.7 7.8 L67.4 8.1 L67.0 8.3 L66.8 8.4 L66.6 8.4 L66.3 8.4 L65.8 8.3 L65.2 8.2 L64.5 8.0 L63.6 7.8 L62.8 7.6 L61.8 7.4 L61.7 7.6 L59.4 5.7 L58.4 3.6 L58.5 1.6 L59.3 0.2 L60.4 -0.6 L61.5 -0.9 L62.4 -0.6 L62.9 -0.2 L63.2 0.3 L63.2 0.7 L63.1 1.0 L62.5 1.4 L65.3 5.3 L66.7 4.2 L68.0 2.1 L68.2 -0.6 L67.1 -3.2 L64.8 -5.3 L61.7 -6.2 L58.2 -5.6 L55.1 -3.4 L53.1 0.2 L52.8 4.7 L54.7 9.1 L58.3 12.4 L60.2 13.2 L61.2 13.5 L61.9 13.7 L62.6 14.0 L63.2 14.2 L63.8 14.5 L64.7 14.8 L65.9 15.1 L67.3 15.2 L68.9 14.9 L70.5 14.4 L72.0 13.5 L73.3 12.4 L74.5 11.1 L75.4 9.6 L76.2 8.1 L76.7 6.4 L77.0 4.7 L77.1 2.9 L77.0 1.1 L76.7 -0.7 L76.2 -2.4 L75.5 -4.2 L74.6 -5.8 L73.6 -7.4 L72.4 -9.0 L71.1 -10.4 L69.7 -11.8 L68.2 -13.2 L66.7 -14.5 L65.1 -15.8 L63.5 -17.0 L61.9 -18.3 L60.3 -19.5 L58.7 -20.7 L57.1 -22.0 L55.6 -23.2 L54.1 -24.5 L52.7 -25.8 L51.3 -27.2 L49.9 -28.6 L48.6 -30.1 L47.3 -31.7 L46.1 -33.3 L44.8 -35.0 L43.6 -36.8 L42.3 -38.7 L41.0 -40.6 L39.7 -42.6 L38.3 -44.7 L36.9 -46.8 L35.4 -49.0 L33.8 -51.1 L32.1 -53.3 L30.3 -55.4 L28.4 -57.5 L26.4 -59.6 L24.2 -61.6 L22.0 -63.5 L19.8 -65.3 Z"></path>
+            <g class="fx-litring"><circle cx="-60" cy="10" r="11"></circle><circle cx="-30" cy="70" r="11"></circle><circle cx="30" cy="70" r="11"></circle><circle cx="60" cy="10" r="11"></circle></g>
+            <g class="fx-lit hot"><circle cx="-60" cy="10" r="6.5"></circle><circle cx="-30" cy="70" r="6.5"></circle><circle cx="30" cy="70" r="6.5"></circle><circle cx="60" cy="10" r="6.5"></circle></g>
+            <g class="hot">
+              <path class="fx-octo" d="M-32 -70 C-38 -104 -20 -118 0 -118 C20 -118 38 -104 32 -70 C28 -56 16 -50 0 -50 C-16 -50 -28 -56 -32 -70 Z"></path>
+              <ellipse class="fx-octo-hi" cx="-10" cy="-104" rx="9" ry="5.5"></ellipse><ellipse class="fx-octo-hi" cx="10" cy="-98" rx="4" ry="2.6"></ellipse>
+              <g class="fx-eye"><ellipse cx="-11" cy="-78" rx="8" ry="9"></ellipse><ellipse cx="11" cy="-78" rx="8" ry="9"></ellipse></g>
+              <g class="fx-pupil"><circle cx="-9" cy="-76" r="4.2"></circle><circle cx="13" cy="-76" r="4.2"></circle></g>
+              <g class="fx-eye"><circle cx="-7.5" cy="-78.5" r="1.5"></circle><circle cx="14.5" cy="-78.5" r="1.5"></circle></g>
+              <g class="fx-cheek"><ellipse cx="-22" cy="-66" rx="4.5" ry="2.6"></ellipse><ellipse cx="22" cy="-66" rx="4.5" ry="2.6"></ellipse></g>
+              <path class="fx-smile" d="M-8 -63 Q0 -56 8 -63"></path><ellipse class="fx-tongue" cx="3" cy="-59.5" rx="3" ry="2"></ellipse>
+            </g>
+          </g>
+          <g transform="translate(535 170)">
+            <ellipse class="fx-head" cx="0" cy="0" rx="120" ry="142"></ellipse><ellipse class="fx-head" cx="-126" cy="4" rx="8" ry="18"></ellipse><ellipse class="fx-head" cx="126" cy="4" rx="8" ry="18"></ellipse>
+            <ellipse class="fx-brain" cx="0" cy="0" rx="100" ry="122"></ellipse>
+            <path class="fx-gyri" d="M0 -118 V118 M-70 -70 c14 10 8 26 -6 30 M-80 -20 c20 -4 26 16 12 26 M-72 30 c18 4 16 24 0 30 M-52 80 c14 -2 22 10 12 20 M70 -70 c-14 10 -8 26 6 30 M80 -20 c-20 -4 -26 16 -12 26 M72 30 c-18 4 -16 24 0 30 M52 80 c-14 -2 -22 10 -12 20 M-30 -100 c10 8 4 20 -6 22 M30 -100 c-10 8 -4 20 6 22"></path>
+            <rect class="fx-wmbox" x="-84" y="-40" width="168" height="158" rx="26"></rect>
+            <g class="fx-dot"><circle cx="-60" cy="-20" r="4.5"></circle><circle cx="-60" cy="10" r="4.5"></circle><circle cx="-60" cy="40" r="4.5"></circle><circle cx="-60" cy="70" r="4.5"></circle><circle cx="-60" cy="100" r="4.5"></circle><circle cx="-30" cy="-20" r="4.5"></circle><circle cx="-30" cy="10" r="4.5"></circle><circle cx="-30" cy="40" r="4.5"></circle><circle cx="-30" cy="70" r="4.5"></circle><circle cx="-30" cy="100" r="4.5"></circle><circle cx="0" cy="-20" r="4.5"></circle><circle cx="0" cy="10" r="4.5"></circle><circle cx="0" cy="40" r="4.5"></circle><circle cx="0" cy="70" r="4.5"></circle><circle cx="0" cy="100" r="4.5"></circle><circle cx="30" cy="-20" r="4.5"></circle><circle cx="30" cy="10" r="4.5"></circle><circle cx="30" cy="40" r="4.5"></circle><circle cx="30" cy="70" r="4.5"></circle><circle cx="30" cy="100" r="4.5"></circle><circle cx="60" cy="-20" r="4.5"></circle><circle cx="60" cy="10" r="4.5"></circle><circle cx="60" cy="40" r="4.5"></circle><circle cx="60" cy="70" r="4.5"></circle><circle cx="60" cy="100" r="4.5"></circle></g>
+            <path class="fx-squig hot" d="M-67.3 -13.1 L-66.6 -12.0 L-66.1 -10.8 L-65.7 -9.5 L-65.3 -8.0 L-65.0 -6.5 L-64.6 -4.9 L-64.1 -3.2 L-63.5 -1.6 L-62.5 -0.1 L-61.3 1.3 L-59.9 2.4 L-58.3 3.4 L-56.6 4.2 L-54.8 4.8 L-53.1 5.4 L-51.4 5.9 L-49.9 6.4 L-48.6 7.0 L-47.5 7.7 L-46.7 8.4 L-46.0 9.2 L-45.5 10.1 L-45.0 11.2 L-44.6 12.5 L-44.3 14.0 L-43.9 15.6 L-43.4 17.3 L-42.8 19.0 L-42.0 20.7 L-41.5 21.3 L-41.1 24.2 L-41.8 26.3 L-43.1 27.6 L-44.5 28.1 L-45.7 27.9 L-46.5 27.4 L-46.8 26.8 L-46.8 26.4 L-46.7 26.2 L-46.6 26.2 L-46.7 26.3 L-46.2 26.4 L-45.6 19.7 L-47.7 19.6 L-50.3 20.7 L-52.4 22.9 L-53.3 25.9 L-52.8 29.2 L-50.8 32.1 L-47.5 34.0 L-43.5 34.2 L-39.6 32.7 L-36.5 29.3 L-35.1 24.6 L-35.8 19.7 L-37.0 17.8 L-37.5 16.7 L-38.0 15.5 L-38.5 14.1 L-38.9 12.6 L-39.4 10.9 L-40.0 9.3 L-40.8 7.6 L-41.9 6.0 L-43.2 4.6 L-44.7 3.5 L-46.4 2.6 L-48.2 1.9 L-50.0 1.3 L-51.8 0.8 L-53.5 0.4 L-55.0 -0.1 L-56.4 -0.6 L-57.5 -1.2 L-58.5 -1.8 L-59.2 -2.6 L-59.9 -3.6 L-60.4 -4.7 L-60.9 -6.0 L-61.4 -7.4 L-61.8 -9.0 L-62.3 -10.6 L-63.0 -12.1 L-63.8 -13.6 L-64.7 -14.9 Z"></path>
+            <path class="fx-squig hot" d="M-8.4 -20.5 L-7.3 -20.1 L-6.3 -19.6 L-5.4 -19.0 L-4.3 -18.3 L-3.2 -17.5 L-2.1 -16.7 L-0.8 -15.9 L0.5 -15.2 L2.0 -14.7 L3.6 -14.4 L5.2 -14.4 L6.8 -14.7 L8.4 -15.0 L9.9 -15.5 L11.4 -16.1 L12.7 -16.6 L14.0 -17.0 L15.2 -17.3 L16.2 -17.4 L17.1 -17.4 L18.0 -17.2 L18.8 -16.9 L19.7 -16.5 L20.7 -15.8 L21.8 -15.1 L22.9 -14.3 L24.2 -13.5 L25.5 -12.7 L27.0 -12.0 L29.5 -11.5 L34.3 -12.4 L38.3 -15.3 L40.5 -19.3 L40.7 -23.5 L39.1 -27.2 L36.3 -29.7 L32.9 -30.7 L29.6 -30.1 L27.1 -28.2 L25.6 -25.6 L25.5 -22.7 L26.2 -20.8 L32.4 -23.6 L32.1 -23.9 L32.1 -23.8 L32.0 -23.9 L32.2 -24.1 L32.6 -24.2 L33.3 -24.1 L34.0 -23.5 L34.6 -22.5 L34.6 -20.9 L33.7 -19.3 L32.0 -17.9 L29.0 -17.4 L28.9 -17.6 L28.0 -17.9 L27.0 -18.4 L26.0 -19.0 L24.8 -19.7 L23.6 -20.5 L22.2 -21.2 L20.7 -21.9 L19.1 -22.3 L17.4 -22.5 L15.8 -22.4 L14.1 -22.1 L12.5 -21.6 L11.0 -21.1 L9.6 -20.4 L8.3 -19.9 L7.0 -19.3 L5.8 -19.0 L4.8 -18.8 L3.8 -18.7 L2.9 -18.8 L2.0 -19.0 L1.0 -19.4 L-0.1 -19.9 L-1.2 -20.6 L-2.3 -21.3 L-3.6 -22.1 L-4.9 -22.7 L-6.3 -23.2 L-7.6 -23.5 Z"></path>
+            <path class="fx-squig hot" d="M41.1 -17.2 L40.1 -16.5 L39.0 -16.1 L37.9 -15.6 L36.6 -15.3 L35.1 -14.9 L33.7 -14.5 L32.1 -14.0 L30.7 -13.3 L29.3 -12.4 L28.0 -11.1 L27.1 -9.7 L26.3 -8.1 L25.8 -6.4 L25.4 -4.7 L25.0 -3.0 L24.7 -1.4 L24.4 0.1 L24.0 1.3 L23.5 2.3 L23.0 3.1 L22.3 3.7 L21.6 4.2 L20.6 4.6 L19.5 5.0 L18.1 5.4 L16.7 5.8 L15.1 6.3 L13.5 6.9 L12.0 7.7 L11.6 8.2 L8.6 8.9 L6.5 8.3 L5.1 7.1 L4.5 5.7 L4.6 4.5 L5.1 3.7 L5.6 3.3 L6.1 3.3 L6.3 3.4 L6.3 3.4 L6.2 3.4 L6.1 3.8 L12.9 4.0 L12.8 2.0 L11.6 -0.6 L9.2 -2.5 L6.1 -3.3 L2.9 -2.5 L0.1 -0.3 L-1.5 3.0 L-1.6 7.0 L0.3 10.9 L3.8 13.7 L8.6 14.8 L13.5 13.8 L15.2 12.6 L16.1 12.1 L17.1 11.6 L18.4 11.1 L19.8 10.7 L21.3 10.2 L22.8 9.5 L24.3 8.7 L25.8 7.6 L27.0 6.3 L28.0 4.7 L28.6 3.0 L29.1 1.3 L29.4 -0.5 L29.7 -2.2 L29.9 -3.8 L30.2 -5.3 L30.5 -6.6 L30.9 -7.7 L31.4 -8.5 L32.0 -9.2 L32.8 -9.9 L33.7 -10.4 L34.9 -10.9 L36.2 -11.3 L37.6 -11.8 L39.1 -12.3 L40.5 -13.0 L41.8 -13.8 L42.9 -14.8 Z"></path>
+            <path class="fx-squig hot" d="M-59.4 33.4 L-59.9 34.4 L-60.5 35.2 L-61.2 36.0 L-62.0 36.9 L-62.9 37.8 L-63.9 38.8 L-64.8 39.9 L-65.6 41.1 L-66.3 42.4 L-66.8 43.9 L-67.0 45.5 L-66.9 47.0 L-66.7 48.6 L-66.4 50.1 L-66.0 51.5 L-65.7 52.9 L-65.4 54.2 L-65.3 55.3 L-65.3 56.3 L-65.4 57.1 L-65.6 57.8 L-66.0 58.6 L-66.6 59.3 L-67.3 60.1 L-68.1 61.0 L-69.0 62.0 L-70.0 63.1 L-70.9 64.3 L-71.8 65.6 L-72.6 67.9 L-72.3 72.8 L-70.0 77.1 L-66.3 79.8 L-62.1 80.6 L-58.3 79.6 L-55.5 77.1 L-54.1 73.9 L-54.2 70.5 L-55.7 67.7 L-58.1 66.0 L-61.0 65.4 L-62.9 65.9 L-61.0 72.4 L-60.6 72.2 L-60.7 72.1 L-60.6 72.1 L-60.5 72.3 L-60.4 72.7 L-60.6 73.4 L-61.3 74.0 L-62.4 74.4 L-63.9 74.2 L-65.4 73.2 L-66.5 71.2 L-66.7 68.2 L-66.6 68.3 L-66.1 67.5 L-65.5 66.6 L-64.8 65.7 L-64.0 64.7 L-63.1 63.6 L-62.2 62.4 L-61.4 61.1 L-60.7 59.6 L-60.4 58.0 L-60.2 56.4 L-60.4 54.8 L-60.7 53.2 L-61.1 51.7 L-61.5 50.3 L-61.9 48.9 L-62.3 47.7 L-62.5 46.5 L-62.6 45.5 L-62.6 44.7 L-62.4 43.8 L-62.1 43.0 L-61.6 42.2 L-61.0 41.3 L-60.2 40.3 L-59.3 39.3 L-58.5 38.2 L-57.7 37.1 L-57.0 35.8 L-56.6 34.6 Z"></path>
+            <path class="fx-squig hot" d="M6.6 27.4 L7.9 26.9 L9.1 26.6 L10.5 26.4 L12.0 26.3 L13.6 26.3 L15.2 26.2 L16.9 26.0 L18.6 25.6 L20.3 24.9 L21.8 24.0 L23.2 22.8 L24.5 21.4 L25.5 19.8 L26.4 18.2 L27.3 16.6 L28.1 15.0 L28.9 13.6 L29.7 12.4 L30.5 11.5 L31.4 10.8 L32.3 10.2 L33.3 9.9 L34.4 9.6 L35.8 9.4 L37.3 9.3 L38.9 9.2 L40.7 9.1 L42.5 8.8 L44.3 8.3 L44.9 7.8 L47.9 7.9 L49.8 9.0 L50.9 10.5 L51.1 12.0 L50.8 13.1 L50.2 13.8 L49.5 14.0 L49.1 13.9 L48.9 13.8 L48.9 13.7 L49.0 13.8 L49.2 13.4 L42.6 11.7 L42.2 13.7 L42.8 16.5 L44.7 18.8 L47.5 20.3 L50.8 20.3 L54.0 18.8 L56.4 15.9 L57.4 12.1 L56.5 7.9 L53.7 4.3 L49.3 2.1 L44.3 2.0 L42.2 2.8 L41.1 3.2 L39.8 3.4 L38.4 3.6 L36.8 3.8 L35.1 4.0 L33.3 4.3 L31.6 4.9 L29.8 5.6 L28.2 6.7 L26.8 8.0 L25.7 9.5 L24.7 11.1 L23.8 12.8 L23.1 14.5 L22.3 16.1 L21.6 17.5 L20.9 18.8 L20.1 19.8 L19.3 20.6 L18.4 21.3 L17.3 21.7 L16.1 22.1 L14.8 22.4 L13.3 22.6 L11.7 22.7 L10.0 23.0 L8.4 23.3 L6.8 23.9 L5.4 24.6 Z"></path>
+            <path class="fx-squig hot" d="M52.5 40.4 L52.8 41.6 L52.9 42.7 L52.8 44.0 L52.7 45.3 L52.5 46.8 L52.3 48.3 L52.3 49.9 L52.4 51.5 L52.8 53.2 L53.5 54.8 L54.5 56.2 L55.7 57.5 L57.1 58.6 L58.5 59.6 L60.0 60.5 L61.4 61.4 L62.6 62.3 L63.6 63.1 L64.4 63.9 L64.9 64.7 L65.2 65.5 L65.4 66.3 L65.5 67.4 L65.4 68.6 L65.3 70.0 L65.1 71.5 L65.0 73.1 L65.0 74.8 L65.3 76.6 L66.1 79.0 L69.4 82.6 L74.0 84.5 L78.5 84.2 L82.3 82.2 L84.6 78.9 L85.2 75.2 L84.2 71.8 L82.0 69.3 L79.0 68.1 L76.0 68.3 L73.5 69.7 L72.3 71.3 L77.9 75.1 L78.1 74.7 L77.9 74.7 L78.0 74.6 L78.2 74.7 L78.6 75.0 L78.8 75.6 L78.7 76.5 L78.1 77.6 L76.8 78.4 L75.0 78.5 L72.9 77.8 L70.9 75.5 L71.0 75.3 L70.8 74.4 L70.7 73.2 L70.7 71.9 L70.8 70.4 L70.9 68.8 L70.8 67.1 L70.6 65.4 L70.1 63.7 L69.3 62.0 L68.2 60.6 L66.9 59.3 L65.4 58.3 L63.9 57.3 L62.4 56.5 L61.0 55.7 L59.7 54.9 L58.6 54.1 L57.7 53.4 L57.1 52.6 L56.7 51.8 L56.4 50.8 L56.2 49.7 L56.2 48.5 L56.2 47.1 L56.3 45.6 L56.3 44.1 L56.3 42.5 L56.0 40.9 L55.5 39.6 Z"></path>
+            <path class="fx-squig hot" d="M-40.7 87.4 L-39.6 88.0 L-38.6 88.8 L-37.6 89.6 L-36.6 90.6 L-35.6 91.7 L-34.5 92.7 L-33.3 93.8 L-32.0 94.8 L-30.5 95.6 L-29.0 96.2 L-27.3 96.6 L-25.6 96.8 L-23.8 96.8 L-22.1 96.6 L-20.5 96.4 L-18.9 96.3 L-17.4 96.2 L-16.1 96.2 L-14.9 96.3 L-13.9 96.5 L-12.9 96.9 L-12.0 97.5 L-11.1 98.2 L-10.1 99.0 L-9.1 100.0 L-8.0 101.1 L-6.8 102.2 L-5.5 103.3 L-4.0 104.3 L-3.4 104.4 L-1.6 106.8 L-1.2 109.0 L-1.7 110.7 L-2.7 111.9 L-3.8 112.3 L-4.7 112.3 L-5.3 111.9 L-5.5 111.5 L-5.5 111.3 L-5.5 111.2 L-5.5 111.3 L-5.0 111.3 L-7.8 105.1 L-9.6 106.0 L-11.4 108.3 L-12.1 111.2 L-11.4 114.3 L-9.4 116.9 L-6.2 118.4 L-2.4 118.5 L1.2 116.8 L3.9 113.4 L4.9 109.0 L3.8 104.2 L0.8 100.3 L-1.1 99.2 L-2.1 98.6 L-3.1 97.8 L-4.2 97.0 L-5.3 96.0 L-6.5 94.9 L-7.8 93.9 L-9.2 93.0 L-10.8 92.2 L-12.5 91.6 L-14.3 91.3 L-16.0 91.2 L-17.8 91.3 L-19.5 91.5 L-21.1 91.8 L-22.7 92.0 L-24.1 92.2 L-25.5 92.3 L-26.7 92.3 L-27.8 92.1 L-28.9 91.8 L-29.9 91.3 L-30.9 90.7 L-31.9 89.9 L-33.0 88.9 L-34.1 87.9 L-35.3 87.0 L-36.6 86.0 L-37.9 85.2 L-39.3 84.6 Z"></path>
+            <path class="fx-squig hot" d="M16.7 77.1 L16.1 78.0 L15.3 78.7 L14.5 79.4 L13.5 80.0 L12.4 80.7 L11.3 81.5 L10.2 82.4 L9.1 83.4 L8.2 84.6 L7.4 86.0 L6.9 87.5 L6.7 89.0 L6.6 90.6 L6.6 92.1 L6.6 93.6 L6.7 95.0 L6.7 96.3 L6.6 97.4 L6.4 98.4 L6.2 99.2 L5.8 99.8 L5.3 100.5 L4.6 101.1 L3.7 101.8 L2.7 102.5 L1.6 103.2 L0.5 104.1 L-0.7 105.1 L-1.8 106.3 L-3.0 108.3 L-3.8 113.2 L-2.4 117.9 L0.7 121.3 L4.7 122.9 L8.7 122.6 L11.9 120.8 L13.9 117.8 L14.5 114.6 L13.6 111.5 L11.5 109.3 L8.9 108.2 L6.8 108.3 L7.4 115.1 L7.8 114.9 L7.8 114.8 L7.8 114.8 L8.0 115.0 L8.0 115.5 L7.6 116.1 L6.8 116.6 L5.7 116.7 L4.2 116.2 L2.9 114.9 L2.2 112.8 L2.7 109.8 L2.8 109.9 L3.4 109.2 L4.1 108.5 L5.0 107.7 L6.0 106.9 L7.1 106.0 L8.3 105.0 L9.3 103.9 L10.2 102.6 L10.9 101.1 L11.4 99.5 L11.6 97.9 L11.6 96.3 L11.5 94.7 L11.3 93.2 L11.2 91.8 L11.1 90.5 L11.1 89.4 L11.2 88.4 L11.4 87.5 L11.7 86.8 L12.2 86.0 L12.8 85.3 L13.7 84.5 L14.6 83.8 L15.6 82.9 L16.7 82.1 L17.7 81.1 L18.6 80.0 L19.3 78.9 Z"></path>
+            <path class="fx-squig hot" d="M60.5 90.6 L59.6 90.1 L58.8 89.6 L58.0 89.0 L57.1 88.3 L56.2 87.4 L55.2 86.6 L54.1 85.8 L52.9 85.0 L51.6 84.4 L50.1 84.1 L48.6 84.1 L47.1 84.2 L45.6 84.6 L44.2 85.0 L42.8 85.5 L41.6 86.0 L40.4 86.3 L39.3 86.6 L38.4 86.6 L37.7 86.6 L37.0 86.4 L36.4 86.1 L35.7 85.7 L34.9 85.1 L34.0 84.3 L33.0 83.5 L31.9 82.6 L30.7 81.7 L29.4 81.0 L29.0 81.0 L26.8 78.9 L26.2 76.8 L26.4 74.9 L27.3 73.7 L28.3 73.1 L29.2 73.1 L29.9 73.3 L30.1 73.7 L30.2 73.9 L30.1 74.0 L30.1 73.9 L29.7 74.0 L33.2 79.8 L34.9 78.6 L36.4 76.2 L36.7 73.2 L35.6 70.2 L33.3 67.9 L29.9 66.7 L26.2 67.2 L22.8 69.3 L20.6 73.0 L20.1 77.5 L21.8 82.1 L25.3 85.6 L27.1 86.4 L27.8 86.7 L28.6 87.2 L29.5 87.9 L30.5 88.6 L31.6 89.4 L32.8 90.2 L34.1 90.9 L35.6 91.4 L37.2 91.7 L38.8 91.7 L40.3 91.4 L41.8 91.0 L43.2 90.4 L44.5 89.9 L45.8 89.3 L46.9 88.9 L48.0 88.6 L48.9 88.4 L49.7 88.3 L50.4 88.4 L51.2 88.7 L52.0 89.1 L52.9 89.6 L53.8 90.3 L54.8 91.1 L55.9 91.9 L57.1 92.6 L58.3 93.1 L59.5 93.4 Z"></path>
+            <path class="fx-squig hot" d="M-68.9 65.1 L-68.2 64.5 L-67.6 64.1 L-66.8 63.7 L-65.8 63.3 L-64.8 62.9 L-63.7 62.5 L-62.6 61.9 L-61.5 61.2 L-60.4 60.3 L-59.6 59.1 L-59.0 57.8 L-58.7 56.4 L-58.5 55.0 L-58.4 53.6 L-58.4 52.3 L-58.4 51.0 L-58.3 49.9 L-58.2 49.0 L-58.0 48.3 L-57.7 47.8 L-57.4 47.4 L-57.0 47.0 L-56.4 46.7 L-55.7 46.3 L-54.7 45.9 L-53.6 45.5 L-52.5 44.9 L-51.3 44.3 L-50.1 43.4 L-48.6 41.6 L-47.2 37.0 L-47.8 32.1 L-50.3 28.3 L-54.0 26.1 L-58.0 25.8 L-61.5 27.1 L-63.9 29.6 L-65.0 32.8 L-64.5 36.0 L-62.9 38.5 L-60.4 39.9 L-58.4 40.2 L-57.9 33.4 L-58.4 33.5 L-58.3 33.6 L-58.4 33.6 L-58.5 33.4 L-58.4 32.9 L-58.0 32.4 L-57.1 32.0 L-55.9 32.0 L-54.6 32.8 L-53.5 34.3 L-53.1 36.4 L-54.1 39.4 L-54.0 39.1 L-54.5 39.5 L-55.2 39.9 L-56.0 40.4 L-57.0 40.9 L-58.1 41.4 L-59.3 42.1 L-60.4 43.0 L-61.4 44.1 L-62.2 45.3 L-62.8 46.8 L-63.1 48.2 L-63.2 49.6 L-63.2 51.0 L-63.1 52.4 L-63.0 53.6 L-63.0 54.8 L-63.0 55.7 L-63.2 56.5 L-63.4 57.1 L-63.6 57.6 L-64.1 58.1 L-64.6 58.5 L-65.4 59.0 L-66.3 59.5 L-67.3 60.0 L-68.4 60.6 L-69.4 61.2 L-70.4 62.1 L-71.1 62.9 Z"></path>
+          </g>
+          <text class="t-name" x="185" y="328" text-anchor="middle">Working memory · focused mode</text>
+          <text x="185" y="344" text-anchor="middle">four tentacles, four slots, chosen connections</text>
+          <text class="t-name" x="535" y="328" text-anchor="middle">Diffuse mode</text>
+          <text x="535" y="344" text-anchor="middle">short random links all over, no octopus</text>
+        </svg>
+      </div>
+      <span class="kind"><b>Illustration</b> after the course's octopus of attention · the dots stand for stored patterns anywhere in the brain</span>
+    </figure>
+
+    <figure class="fig">
+      <figcaption>
+        <span class="ft">A bigger working memory is not simply better</span>
+        <span class="fr">A large working memory holds nine things instead of four and grips them like a bulldog, which makes learning easier and creativity harder: the idea already in mind is held so tightly that a fresh one cannot get in. That is Einstellung again. A smaller working memory loses focus, daydreams in lectures and needs a quiet room, but because it holds ideas loosely, input from the senses, from dreams, from the rest of the brain gets through, and the same chunk gets turned inside out into new combinations.</span>
+      </figcaption>
+      <div class="plate scroll">
+        <svg class="viz wide" viewBox="0 0 720 230" role="img" aria-label="Left: a box holding nine balls with its doors shut, labelled holds ideas tightly. Right: a box holding four balls with its doors open and arrows coming in from outside, labelled holds them loosely.">
+          <g class="hot" transform="translate(60 36)">
+            <rect class="fx-box" x="0" y="0" width="170" height="130" rx="14"></rect>
+            <g class="fx-ball"><circle cx="45" cy="38" r="12"></circle><circle cx="85" cy="38" r="12"></circle><circle cx="125" cy="38" r="12"></circle><circle cx="45" cy="70" r="12"></circle><circle cx="85" cy="70" r="12"></circle><circle cx="125" cy="70" r="12"></circle><circle cx="45" cy="102" r="12"></circle><circle cx="85" cy="102" r="12"></circle><circle cx="125" cy="102" r="12"></circle></g>
+            <g class="fx-door"><rect x="164" y="30" width="10" height="70" rx="2"></rect><rect x="-4" y="30" width="10" height="70" rx="2"></rect></g>
+            <g class="fx-lock"><rect x="178" y="58" width="14" height="12" rx="2"></rect><path d="M181 58 v-5 a4 4 0 0 1 8 0 v5"></path></g>
+          </g>
+          <text class="t-name" x="60" y="196">Holds ideas tightly</text>
+          <text x="60" y="214" style="font-size:10px">nine things at once, and lets none of them go</text>
+          <text x="282" y="86" class="t-ink" style="font-size:12px">Einstellung</text>
+          <text x="282" y="102" style="font-size:10px">the idea in hand</text>
+          <text x="282" y="115" style="font-size:10px">blocks the new one</text>
+          <path d="M276 92 L258 98" fill="none" style="stroke:var(--muted)" stroke-width="1.2" stroke-dasharray="3 3"></path>
+          <g class="hot" transform="translate(420 36)">
+            <rect class="fx-box open" x="0" y="0" width="170" height="130" rx="14"></rect>
+            <g class="fx-ball"><circle cx="62" cy="52" r="12"></circle><circle cx="108" cy="52" r="12"></circle><circle cx="62" cy="88" r="12"></circle><circle cx="108" cy="88" r="12"></circle></g>
+            <g class="fx-in">
+              <path d="M232 40 H156" marker-end="url(#ah-release)"></path>
+              <path d="M232 70 H156" marker-end="url(#ah-release)"></path>
+              <path d="M232 100 H156" marker-end="url(#ah-release)"></path>
+            </g>
+          </g>
+          <text x="658" y="80" style="font-size:10px;fill:var(--release)">senses</text>
+          <text x="658" y="110" style="font-size:10px;fill:var(--release)">dreams</text>
+          <text x="658" y="140" style="font-size:10px;fill:var(--release)">elsewhere</text>
+          <text class="t-name" x="420" y="196">Holds them loosely</text>
+          <text x="420" y="214" style="font-size:10px">four things, doors open to new combinations</text>
+        </svg>
+      </div>
+      <span class="kind"><b>Illustration</b> after the course's “no need for genius envy” · both kinds of memory learn; they trade ease for flexibility</span>
+    </figure>
+
     <div class="stack">
       <h3>What “the subconscious mind” means here</h3>
       <div class="scroll">
@@ -2568,14 +2974,61 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
             <circle cx="160.9" cy="54.8" r="5.5" style="fill:var(--spark)"></circle>
             <text class="t-ink" x="84" y="122" text-anchor="end">cold start</text>
             <text class="t-ink" x="150" y="48" text-anchor="end">after a 2-minute skim</text>
-            <text x="200" y="24" text-anchor="middle">peak: a gap you can see</text>
-            <text x="40" y="12">↑ curiosity</text>
+            <text x="236" y="24">peak: a gap you can see</text>
+            <text x="40" y="14" style="font-size:10px">curiosity ↑</text>
             <text x="40" y="176">know nothing</text>
             <text x="200" y="176" text-anchor="middle">know some</text>
             <text x="360" y="176" text-anchor="end">know it all</text>
           </svg>
         </div>
         <span class="kind"><b>Schematic</b> shape after Loewenstein 1994 · Kang et al. 2009 measured the same inverted U against confidence</span>
+      </figure>
+
+      <figure class="fig">
+        <figcaption>
+          <span class="ft">The chemicals that decide what is worth keeping</span>
+          <span class="fr">Most neurons carry what is happening. A few small clusters deep in the brain spray the whole cortex with chemicals that carry something else: how important this is for your future. Acetylcholine flows when you pay close attention and opens the door to new long-term memory. Dopamine fires on an unexpected reward and learns to predict the next one, which is what a promised treat after a session taps into. Serotonin tracks mood and standing. The amygdala, where emotion and memory meet, has to be settled for any of it to work.</span>
+        </figcaption>
+        <div class="plate scroll">
+          <svg class="viz wide" viewBox="0 0 900 300" role="img" aria-label="Three side views of the brain, one per chemical. Acetylcholine, green: from the basal forebrain fanning up across the cortex. Dopamine, amber: from the midbrain to the basal ganglia and forward to the frontal cortex. Serotonin, red: from the brainstem forward, up, and down the cord. The amygdala is marked in teal in each.">
+          <g transform="translate(0 12)">
+            <path class="fx-cortex" d="M40 128 C24 104 30 64 66 46 C92 30 132 26 160 36 C186 24 226 28 246 50 C270 66 274 100 262 122 C254 138 238 150 216 152 C200 158 182 156 168 152 C158 156 148 156 140 152 C120 150 106 142 102 134 C82 136 60 138 48 132 Z"></path>
+            <path class="fx-gyri" d="M78 66 c12 -10 28 -6 24 8 M110 50 c14 6 14 22 0 28 M150 46 c-10 12 4 24 18 18 M196 50 c12 8 4 24 -10 24 M228 70 c-12 4 -14 20 -2 26 M84 100 c-12 8 -4 24 10 20 M130 100 c14 4 16 22 2 28 M180 96 c12 6 10 22 -4 26"></path>
+            <ellipse class="fx-cereb" cx="232" cy="164" rx="28" ry="14"></ellipse><path class="fx-gyri" d="M212 162 h40 M216 168 h32"></path>
+            <path class="fx-stem" d="M168 152 C166 170 170 186 176 198 L192 198 C198 186 196 168 194 152 Z"></path>
+            <ellipse class="fx-amyg" cx="132" cy="134" rx="9" ry="6"></ellipse>
+            <g class="hot"><circle class="fx-nuc" cx="118" cy="128" r="6" style="fill:var(--link)"></circle><path class="fx-ach" d="M118 128 C100 100 86 82 78 62" marker-end="url(#ah-link)"></path><path class="fx-ach" d="M118 128 C124 96 138 66 150 48" marker-end="url(#ah-link)"></path><path class="fx-ach" d="M118 128 C160 110 200 90 224 68" marker-end="url(#ah-link)"></path><path class="fx-ach" d="M118 128 C180 130 222 118 250 104" marker-end="url(#ah-link)"></path></g>
+          </g>
+          <text class="t-name" x="150" y="238" text-anchor="middle" style="fill:var(--link)">Acetylcholine</text>
+          <text x="150" y="254" text-anchor="middle" style="font-size:9.5px">basal forebrain · while you pay attention</text>
+          <text x="150" y="268" text-anchor="middle" style="font-size:9.5px">opens the door to new long-term memory</text>
+          <g transform="translate(300 12)">
+            <path class="fx-cortex" d="M40 128 C24 104 30 64 66 46 C92 30 132 26 160 36 C186 24 226 28 246 50 C270 66 274 100 262 122 C254 138 238 150 216 152 C200 158 182 156 168 152 C158 156 148 156 140 152 C120 150 106 142 102 134 C82 136 60 138 48 132 Z"></path>
+            <path class="fx-gyri" d="M78 66 c12 -10 28 -6 24 8 M110 50 c14 6 14 22 0 28 M150 46 c-10 12 4 24 18 18 M196 50 c12 8 4 24 -10 24 M228 70 c-12 4 -14 20 -2 26 M84 100 c-12 8 -4 24 10 20 M130 100 c14 4 16 22 2 28 M180 96 c12 6 10 22 -4 26"></path>
+            <ellipse class="fx-cereb" cx="232" cy="164" rx="28" ry="14"></ellipse><path class="fx-gyri" d="M212 162 h40 M216 168 h32"></path>
+            <path class="fx-stem" d="M168 152 C166 170 170 186 176 198 L192 198 C198 186 196 168 194 152 Z"></path>
+            <ellipse class="fx-amyg" cx="132" cy="134" rx="9" ry="6"></ellipse>
+            <g class="hot"><ellipse class="fx-bg" cx="150" cy="104" rx="24" ry="15"></ellipse><text x="150" y="107" text-anchor="middle" style="font-size:8.5px">basal ganglia</text><circle class="fx-nuc" cx="178" cy="150" r="6" style="fill:var(--spark)"></circle><path class="fx-da" d="M178 150 C168 134 160 124 156 118" marker-end="url(#ah-spark)"></path><path class="fx-da" d="M178 150 C140 140 100 110 72 80" marker-end="url(#ah-spark)"></path><path class="fx-da" d="M178 150 C150 160 110 156 84 140" marker-end="url(#ah-spark)"></path></g>
+          </g>
+          <text class="t-name" x="450" y="238" text-anchor="middle" style="fill:var(--spark)">Dopamine</text>
+          <text x="450" y="254" text-anchor="middle" style="font-size:9.5px">midbrain · to the basal ganglia and the front</text>
+          <text x="450" y="268" text-anchor="middle" style="font-size:9.5px">an unexpected reward, then a prediction</text>
+          <g transform="translate(600 12)">
+            <path class="fx-cortex" d="M40 128 C24 104 30 64 66 46 C92 30 132 26 160 36 C186 24 226 28 246 50 C270 66 274 100 262 122 C254 138 238 150 216 152 C200 158 182 156 168 152 C158 156 148 156 140 152 C120 150 106 142 102 134 C82 136 60 138 48 132 Z"></path>
+            <path class="fx-gyri" d="M78 66 c12 -10 28 -6 24 8 M110 50 c14 6 14 22 0 28 M150 46 c-10 12 4 24 18 18 M196 50 c12 8 4 24 -10 24 M228 70 c-12 4 -14 20 -2 26 M84 100 c-12 8 -4 24 10 20 M130 100 c14 4 16 22 2 28 M180 96 c12 6 10 22 -4 26"></path>
+            <ellipse class="fx-cereb" cx="232" cy="164" rx="28" ry="14"></ellipse><path class="fx-gyri" d="M212 162 h40 M216 168 h32"></path>
+            <path class="fx-stem" d="M168 152 C166 170 170 186 176 198 L192 198 C198 186 196 168 194 152 Z"></path>
+            <ellipse class="fx-amyg" cx="132" cy="134" rx="9" ry="6"></ellipse>
+            <g class="hot"><circle class="fx-nuc" cx="182" cy="178" r="6" style="fill:var(--no)"></circle><path class="fx-ser" d="M182 178 C150 150 110 120 80 92" marker-end="url(#ah-no)"></path><path class="fx-ser" d="M182 178 C170 130 160 96 156 60" marker-end="url(#ah-no)"></path><path class="fx-ser" d="M182 178 C206 150 230 120 246 92" marker-end="url(#ah-no)"></path><path class="fx-ser" d="M182 178 C186 188 188 194 186 200" marker-end="url(#ah-no)"></path></g>
+          </g>
+          <text class="t-name" x="750" y="238" text-anchor="middle" style="fill:var(--no)">Serotonin</text>
+          <text x="750" y="254" text-anchor="middle" style="font-size:9.5px">brainstem · everywhere</text>
+          <text x="750" y="268" text-anchor="middle" style="font-size:9.5px">mood, standing, appetite for risk</text>
+          <text class="t-ink" x="12" y="16" style="font-size:10.5px">they carry importance and value, not content</text>
+          <ellipse class="fx-amyg" cx="450" cy="288" rx="8" ry="5"></ellipse><text x="464" y="292" style="font-size:10px">the amygdala, where emotion meets memory: keep it settled</text>
+          </svg>
+        </div>
+        <span class="kind"><b>Schematic</b> three diffuse neuromodulator systems after Sejnowski's lecture · positions are approximate · brainfacts.org for more</span>
       </figure>
 
       <p class="callout">Desire improves encoding and persistence. Passionate rereading is still rereading.</p>
@@ -2610,6 +3063,58 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
           </ul>
         </div>
       </div>
+
+      <figure class="fig">
+        <figcaption>
+          <span class="ft">Where procrastination starts, and where the Pomodoro cuts in</span>
+          <span class="fr">Think about something you would rather not do and the pain centres of the brain light up. Attention slides to something pleasanter, and you feel better, for now. Each lap makes the next detour a little easier, the way the arsenic eaters built up a tolerance one tiny dose at a time and looked healthy while it did its damage. A 25-minute timer aimed at process, not product, breaks the loop at the first step: it takes the pain out of starting.</span>
+        </figcaption>
+        <div class="plate scroll">
+          <svg class="viz wide" viewBox="0 0 720 290" role="img" aria-label="A three-step loop. One: an unhappy face with the pain centres lit, thinking of the task. Two: attention funnels onto a phone. Three: a happy face, relieved for now. An arrow returns from three to one labelled 'next time the detour is easier'. A Pomodoro marker cuts the arrow between one and two.">
+            <g class="fx-panel"><rect x="24" y="22" width="200" height="196" rx="16"></rect><rect x="260" y="22" width="200" height="196" rx="16"></rect><rect x="496" y="22" width="200" height="196" rx="16"></rect></g>
+            <text class="fx-num" x="40" y="46">1</text><text class="fx-num" x="276" y="46">2</text><text class="fx-num" x="512" y="46">3</text>
+            <g class="hot" transform="translate(124 110)">
+              <circle class="fx-pain" cx="0" cy="0" r="46"></circle>
+              <circle class="fx-face" cx="0" cy="0" r="32"></circle>
+              <g class="fx-eyes"><circle cx="-11" cy="-6" r="3.5"></circle><circle cx="11" cy="-6" r="3.5"></circle></g>
+              <path class="fx-brow" d="M-18 -18 L-6 -13 M18 -18 L6 -13"></path>
+              <path class="fx-mouth" d="M-12 14 Q0 4 12 14"></path>
+              <path class="fx-sweat" d="M28 -18 c4 6 4 10 0 12 c-4 -2 -4 -6 0 -12 z"></path>
+              <text x="0" y="66" text-anchor="middle" class="t-ink" style="font-size:12px">An unhappy feeling</text>
+              <text x="0" y="82" text-anchor="middle" style="font-size:10px">the pain centres light up</text>
+            </g>
+            <g class="hot" transform="translate(360 100)">
+              <path class="fx-funnel" d="M-46 -44 H46 L10 -2 V26 L-10 34 V-2 Z"></path>
+              <path class="fx-att" d="M-30 -34 H30" marker-end="url(#ah-ink)"></path>
+              <rect class="fx-phone" x="-20" y="36" width="40" height="28" rx="5"></rect>
+              <rect class="fx-screen" x="-15" y="40" width="30" height="16" rx="2"></rect>
+              <text x="0" y="90" text-anchor="middle" class="t-ink" style="font-size:12px">Attention funnels away</text>
+              <text x="0" y="106" text-anchor="middle" style="font-size:10px">onto something pleasanter</text>
+            </g>
+            <g class="hot" transform="translate(596 110)">
+              <circle class="fx-glow" cx="0" cy="0" r="46"></circle>
+              <circle class="fx-face" cx="0" cy="0" r="32"></circle>
+              <g class="fx-eyes"><circle cx="-11" cy="-6" r="3.5"></circle><circle cx="11" cy="-6" r="3.5"></circle></g>
+              <path class="fx-mouth" d="M-13 8 Q0 20 13 8"></path>
+              <text x="0" y="66" text-anchor="middle" class="t-ink" style="font-size:12px">Feels better</text>
+              <text x="0" y="82" text-anchor="middle" style="font-size:10px">for now</text>
+            </g>
+            <g class="fx-flow">
+              <path d="M226 110 H256" marker-end="url(#ah-ink)"></path>
+              <path d="M462 110 H492" marker-end="url(#ah-ink)"></path>
+              <path d="M596 222 C596 276 124 276 124 224" marker-end="url(#ah-ink)"></path>
+            </g>
+            <text x="360" y="252" text-anchor="middle" style="font-size:10.5px" class="ko">and next time the detour is a little easier · tiny doses</text>
+            <g class="fx-cut" transform="translate(241 110)">
+              <path d="M-9 -9 L9 9 M9 -9 L-9 5"></path>
+            </g>
+            <rect class="fx-pill" x="196" y="52" width="92" height="22" rx="11"></rect>
+            <text x="242" y="67" text-anchor="middle" style="font-size:10.5px;fill:var(--load)" font-weight="600">one Pomodoro</text>
+            <path d="M242 76 V98" fill="none" style="stroke:var(--load)" stroke-width="1.4" stroke-dasharray="3 3"></path>
+          </svg>
+        </div>
+        <span class="kind"><b>Diagram</b> the course's zombie loop and the arsenic eaters of 1875 · the pain is real: anticipated effort activates the same regions as physical discomfort, Lyons &amp; Beilock 2012</span>
+      </figure>
 
       <figure class="fig narrow">
         <figcaption>
@@ -2776,6 +3281,40 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
         <span class="kind"><b>Data</b> share of each group that discovered the shortcut · practical reading: rest and sleep help; don't over-engineer the nap</span>
       </figure>
 
+      <figure class="fig">
+        <figcaption>
+          <span class="ft">Two ways to reach an answer</span>
+          <span class="fr">Sequential reasoning walks from one step to the next, each one deliberate: that is focused mode. Intuition seems to need diffuse mode linking several focused-mode thoughts at once, in a leap. Most hard concepts are grasped the second way, because a new idea sits away from what you already know. The catch is that diffuse mode makes connections semi-randomly, so what it hands you has to be checked, step by step, in focused mode.</span>
+        </figcaption>
+        <div class="plate scroll">
+          <svg class="viz wide" viewBox="0 0 720 270" role="img" aria-label="Top: five nodes in a row joined by arrows, labelled sequential, focused mode. Bottom: five nodes joined by long arching arrows that skip over their neighbours, labelled holistic, diffuse mode.">
+            <text class="t-name" x="30" y="76">Sequential</text>
+            <text x="30" y="92" style="font-size:10px">focused mode</text>
+            <text x="30" y="105" style="font-size:10px">step by deliberate step</text>
+            <g class="fx-seq">
+              <path d="M268 84 H328" marker-end="url(#ah-load)"></path><path d="M358 84 H418" marker-end="url(#ah-load)"></path><path d="M448 84 H508" marker-end="url(#ah-load)"></path><path d="M538 84 H598" marker-end="url(#ah-load)"></path>
+            </g>
+            <g class="fx-seqnode hot"><circle cx="250" cy="84" r="14"></circle><circle cx="340" cy="84" r="14"></circle><circle cx="430" cy="84" r="14"></circle><circle cx="520" cy="84" r="14"></circle><circle cx="610" cy="84" r="14"></circle></g>
+            <circle cx="610" cy="84" r="20" fill="none" style="stroke:var(--spark)" stroke-width="2.5"></circle>
+            <text x="642" y="88" style="font-size:10px">answer</text>
+            <text class="t-name" x="30" y="208">Holistic</text>
+            <text x="30" y="224" style="font-size:10px">diffuse mode</text>
+            <text x="30" y="237" style="font-size:10px">several thoughts, one leap</text>
+            <g class="fx-hol">
+              <path d="M250 200 C290 130 390 130 430 200" marker-end="url(#ah-release)"></path>
+              <path d="M340 200 C400 120 550 120 610 200" marker-end="url(#ah-release)"></path>
+              <path d="M430 226 C460 262 500 262 520 226" marker-end="url(#ah-release)"></path>
+              <path d="M520 200 C550 150 590 150 606 196" marker-end="url(#ah-release)"></path>
+            </g>
+            <g class="fx-holnode hot"><circle cx="250" cy="212" r="14"></circle><circle cx="340" cy="212" r="14"></circle><circle cx="430" cy="212" r="14"></circle><circle cx="520" cy="212" r="14"></circle><circle cx="610" cy="212" r="14"></circle></g>
+            <circle cx="610" cy="212" r="20" fill="none" style="stroke:var(--spark)" stroke-width="2.5"></circle>
+            <text x="642" y="216" style="font-size:10px">a leap</text>
+            <text x="610" y="258" text-anchor="middle" style="font-size:10px;fill:var(--load)">then check it in focused mode</text>
+          </svg>
+        </div>
+        <span class="kind"><b>Illustration</b> after the course's sequential and holistic diagram · intuitive insights are not always correct</span>
+      </figure>
+
       <p class="callout">No load, no insight. Diffuse mode only recombines what focused mode put there.</p>
 
       <div class="yesno">
@@ -2854,6 +3393,44 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
           <div class="sweeks"><span>week 1</span><span>week 2</span><span>week 3</span><span>week 4</span></div>
         </div>
         <span class="kind"><b>Schematic</b> equal study time · Cepeda et al. 2006 reviewed 317 experiments: spaced practice beat massed practice at every retention interval tested</span>
+      </figure>
+
+      <figure class="fig">
+        <figcaption>
+          <span class="ft">What practice does to the wire</span>
+          <span class="fr">Using a circuit helps wrap its axons in myelin, the fatty insulation that lets a signal travel fast and clean. That wrapping is not finished in some people until their twenties, which is part of why control over impulse arrives late. Practising a thought builds the highway between the brain's control centres and the places that hold what you know. This is the physical side of “the ribbon gets darker”: an unpractised chunk runs on a bare, leaky wire.</span>
+        </figcaption>
+        <div class="plate scroll">
+          <svg class="viz wide" viewBox="0 0 720 262" role="img" aria-label="Two chains of three neurons. Top, practised: the axons between them are wrapped in myelin segments and a bright signal travels along them. Bottom, new: bare thin axons, a faint signal.">
+            <text class="t-name" x="30" y="30">Practised</text>
+            <text x="112" y="30">myelin wrapped · the signal flies</text>
+            <g class="hot" transform="translate(0 84)">
+              <g class="fx-dend"><path d="M84 -18 l-14 -16 M84 -6 l-18 -4 M84 6 l-18 4 M84 18 l-14 16 M72 -24 l-6 -12 M72 24 l-6 12"></path><path d="M304 -18 l-14 -16 M304 -6 l-18 -4 M304 6 l-18 4 M304 18 l-14 16" ></path><path d="M524 -18 l-14 -16 M524 -6 l-18 -4 M524 6 l-18 4 M524 18 l-14 16"></path></g>
+              <g class="fx-axon"><path d="M114 0 H286"></path><path d="M334 0 H506"></path><path d="M554 0 H690"></path></g>
+              <g class="fx-myelin">
+                <rect x="124" y="-6" width="26" height="12" rx="6"></rect><rect x="156" y="-6" width="26" height="12" rx="6"></rect><rect x="188" y="-6" width="26" height="12" rx="6"></rect><rect x="220" y="-6" width="26" height="12" rx="6"></rect><rect x="252" y="-6" width="26" height="12" rx="6"></rect>
+                <rect x="344" y="-6" width="26" height="12" rx="6"></rect><rect x="376" y="-6" width="26" height="12" rx="6"></rect><rect x="408" y="-6" width="26" height="12" rx="6"></rect><rect x="440" y="-6" width="26" height="12" rx="6"></rect><rect x="472" y="-6" width="26" height="12" rx="6"></rect>
+                <rect x="564" y="-6" width="26" height="12" rx="6"></rect><rect x="596" y="-6" width="26" height="12" rx="6"></rect><rect x="628" y="-6" width="26" height="12" rx="6"></rect><rect x="660" y="-6" width="26" height="12" rx="6"></rect>
+              </g>
+              <g class="fx-soma"><circle cx="100" cy="0" r="16"></circle><circle cx="320" cy="0" r="16"></circle><circle cx="540" cy="0" r="16"></circle></g>
+              <g class="fx-nucleus"><circle cx="100" cy="0" r="5"></circle><circle cx="320" cy="0" r="5"></circle><circle cx="540" cy="0" r="5"></circle></g>
+              <g class="fx-pulse"><circle cx="200" cy="0" r="7"></circle><circle cx="420" cy="0" r="7"></circle><circle cx="640" cy="0" r="7"></circle></g>
+              <text x="200" y="-20" text-anchor="middle" style="font-size:10px;fill:var(--spark)">fast</text>
+            </g>
+            <text class="t-name" x="30" y="158">New</text>
+            <text x="70" y="158">a bare wire · slow, and the signal leaks</text>
+            <g class="hot" transform="translate(0 212)">
+              <g class="fx-dend thin"><path d="M84 -18 l-14 -16 M84 -6 l-18 -4 M84 6 l-18 4 M84 18 l-14 16"></path><path d="M304 -18 l-14 -16 M304 -6 l-18 -4 M304 6 l-18 4 M304 18 l-14 16"></path><path d="M524 -18 l-14 -16 M524 -6 l-18 -4 M524 6 l-18 4 M524 18 l-14 16"></path></g>
+              <g class="fx-axon thin"><path d="M114 0 H286"></path><path d="M334 0 H506"></path><path d="M554 0 H690"></path></g>
+              <g class="fx-leak"><path d="M160 -3 l0 -9 M200 3 l0 9 M240 -3 l0 -9 M380 3 l0 9 M420 -3 l0 -9 M460 3 l0 9 M600 -3 l0 -9 M640 3 l0 9"></path></g>
+              <g class="fx-soma thin"><circle cx="100" cy="0" r="16"></circle><circle cx="320" cy="0" r="16"></circle><circle cx="540" cy="0" r="16"></circle></g>
+              <g class="fx-nucleus"><circle cx="100" cy="0" r="5"></circle><circle cx="320" cy="0" r="5"></circle><circle cx="540" cy="0" r="5"></circle></g>
+              <g class="fx-pulse faint"><circle cx="150" cy="0" r="5"></circle></g>
+              <text x="150" y="-20" text-anchor="middle" style="font-size:10px">slow</text>
+            </g>
+          </svg>
+        </div>
+        <span class="kind"><b>Illustration</b> after the course's mature and immature neuron · myelination and practice: Fields 2015 · the strength of a chunk is a network property, not one cell</span>
       </figure>
 
       <figure class="fig">
@@ -3041,6 +3618,51 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
           </ul>
         </div>
       </div>
+
+      <figure class="fig">
+        <figcaption>
+          <span class="ft">The library of chunks</span>
+          <span class="fr">Every chunk you practise is a pattern on the board. New ones are faint; practised ones are longer and darker, and easier to find. Chess masters hold thousands of them, and so, in their own fields, do musicians and doctors. With a well-stocked library, a whisper from diffuse mode can join two patterns into a solution you had not seen. It gets easier as it fills: the second chunk in a subject goes in more easily than the first, and the third more easily still.</span>
+        </figcaption>
+        <div class="plate scroll">
+          <svg class="viz wide" viewBox="0 0 720 340" role="img" aria-label="A board of dots. Several patterns are drawn on it in different colours: three solid, well practised; two faint, new. A dashed green line joins two of the solid patterns with a star where they meet. A legend explains faint, solid and the diffuse-mode link.">
+            <rect class="fx-board" x="24" y="20" width="440" height="300" rx="24"></rect>
+            <g class="fx-bdot">
+              <circle cx="60" cy="50" r="4"></circle><circle cx="98" cy="50" r="4"></circle><circle cx="136" cy="50" r="4"></circle><circle cx="174" cy="50" r="4"></circle><circle cx="212" cy="50" r="4"></circle><circle cx="250" cy="50" r="4"></circle><circle cx="288" cy="50" r="4"></circle><circle cx="326" cy="50" r="4"></circle><circle cx="364" cy="50" r="4"></circle><circle cx="402" cy="50" r="4"></circle><circle cx="440" cy="50" r="4"></circle>
+              <circle cx="60" cy="90" r="4"></circle><circle cx="98" cy="90" r="4"></circle><circle cx="136" cy="90" r="4"></circle><circle cx="174" cy="90" r="4"></circle><circle cx="212" cy="90" r="4"></circle><circle cx="250" cy="90" r="4"></circle><circle cx="288" cy="90" r="4"></circle><circle cx="326" cy="90" r="4"></circle><circle cx="364" cy="90" r="4"></circle><circle cx="402" cy="90" r="4"></circle><circle cx="440" cy="90" r="4"></circle>
+              <circle cx="60" cy="130" r="4"></circle><circle cx="98" cy="130" r="4"></circle><circle cx="136" cy="130" r="4"></circle><circle cx="174" cy="130" r="4"></circle><circle cx="212" cy="130" r="4"></circle><circle cx="250" cy="130" r="4"></circle><circle cx="288" cy="130" r="4"></circle><circle cx="326" cy="130" r="4"></circle><circle cx="364" cy="130" r="4"></circle><circle cx="402" cy="130" r="4"></circle><circle cx="440" cy="130" r="4"></circle>
+              <circle cx="60" cy="170" r="4"></circle><circle cx="98" cy="170" r="4"></circle><circle cx="136" cy="170" r="4"></circle><circle cx="174" cy="170" r="4"></circle><circle cx="212" cy="170" r="4"></circle><circle cx="250" cy="170" r="4"></circle><circle cx="288" cy="170" r="4"></circle><circle cx="326" cy="170" r="4"></circle><circle cx="364" cy="170" r="4"></circle><circle cx="402" cy="170" r="4"></circle><circle cx="440" cy="170" r="4"></circle>
+              <circle cx="60" cy="210" r="4"></circle><circle cx="98" cy="210" r="4"></circle><circle cx="136" cy="210" r="4"></circle><circle cx="174" cy="210" r="4"></circle><circle cx="212" cy="210" r="4"></circle><circle cx="250" cy="210" r="4"></circle><circle cx="288" cy="210" r="4"></circle><circle cx="326" cy="210" r="4"></circle><circle cx="364" cy="210" r="4"></circle><circle cx="402" cy="210" r="4"></circle><circle cx="440" cy="210" r="4"></circle>
+              <circle cx="60" cy="250" r="4"></circle><circle cx="98" cy="250" r="4"></circle><circle cx="136" cy="250" r="4"></circle><circle cx="174" cy="250" r="4"></circle><circle cx="212" cy="250" r="4"></circle><circle cx="250" cy="250" r="4"></circle><circle cx="288" cy="250" r="4"></circle><circle cx="326" cy="250" r="4"></circle><circle cx="364" cy="250" r="4"></circle><circle cx="402" cy="250" r="4"></circle><circle cx="440" cy="250" r="4"></circle>
+              <circle cx="60" cy="290" r="4"></circle><circle cx="98" cy="290" r="4"></circle><circle cx="136" cy="290" r="4"></circle><circle cx="174" cy="290" r="4"></circle><circle cx="212" cy="290" r="4"></circle><circle cx="250" cy="290" r="4"></circle><circle cx="288" cy="290" r="4"></circle><circle cx="326" cy="290" r="4"></circle><circle cx="364" cy="290" r="4"></circle><circle cx="402" cy="290" r="4"></circle><circle cx="440" cy="290" r="4"></circle>
+            </g>
+            <path class="fx-ch hot" style="stroke:var(--load)" d="M98 90 L136 50 L174 90 L174 130 L136 170 L98 130 Z"></path>
+            <path class="fx-ch hot" style="stroke:var(--spark)" d="M250 130 L326 90 L402 130 L364 210 L288 250 L250 210 Z"></path>
+            <path class="fx-ch hot" style="stroke:var(--link)" d="M60 250 L98 290 L136 250 L98 210 Z"></path>
+            <path class="fx-ch faint hot" style="stroke:var(--release)" d="M402 210 L440 250 L402 290 L364 250 Z"></path>
+            <path class="fx-ch faint hot" style="stroke:var(--no)" d="M136 290 L174 250 L212 290 Z"></path>
+            <path class="fx-ch faint hot" style="stroke:var(--load)" d="M288 50 L326 50 L364 90"></path>
+            <path class="fx-whisper" d="M136 250 C160 196 210 186 250 210"></path>
+            <path class="fx-star hot" d="M193 196 l3.2 8.8 8.8 3.2 -8.8 3.2 -3.2 8.8 -3.2 -8.8 -8.8 -3.2 8.8 -3.2 z"></path>
+            <g class="fx-ch" style="stroke:var(--load)"><path d="M496 60 h40"></path></g>
+            <text class="t-name" x="548" y="64">Solid: practised</text>
+            <text x="496" y="84" style="font-size:10px">the ribbon is longer and darker,</text>
+            <text x="496" y="98" style="font-size:10px">and quick to find when you need it</text>
+            <g class="fx-ch faint" style="stroke:var(--release)"><path d="M496 130 h40"></path></g>
+            <text class="t-name" x="548" y="134">Faint: new</text>
+            <text x="496" y="154" style="font-size:10px">it stays faint until you practise it,</text>
+            <text x="496" y="168" style="font-size:10px">and the big picture stays hard to see</text>
+            <path class="fx-whisper" d="M496 200 h40"></path>
+            <text class="t-name" x="548" y="204">A diffuse-mode whisper</text>
+            <text x="496" y="224" style="font-size:10px">two practised chunks joined into a</text>
+            <text x="496" y="238" style="font-size:10px">solution you had not seen</text>
+            <text class="t-ink" x="496" y="276" style="font-size:11px">Luck favours the one who tries.</text>
+            <text x="496" y="292" style="font-size:10px">get the first chunk in; the second</text>
+            <text x="496" y="306" style="font-size:10px">goes in more easily</text>
+          </svg>
+        </div>
+        <span class="kind"><b>Illustration</b> after the course's library of chunked patterns · transfer: a chunk from one field can fit another, Gick &amp; Holyoak 1980</span>
+      </figure>
 
       <figure class="fig cmap">
         <figcaption>
@@ -5505,7 +6127,7 @@ function bootNav() {
 function bootGlow() {
   if (!window.matchMedia || !window.matchMedia('(hover: hover)').matches) return;
   document.addEventListener('pointermove', function (e) {
-    var el = e.target.closest ? e.target.closest('.gcard, .btn.primary') : null;
+    var el = e.target.closest ? e.target.closest('.gcard, .btn.primary, #view-method .plate, #view-method .slot') : null;
     if (!el) return;
     var r = el.getBoundingClientRect();
     el.style.setProperty('--mx', Math.round(e.clientX - r.left) + 'px');
