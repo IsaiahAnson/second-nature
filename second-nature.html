@@ -4020,8 +4020,8 @@ var PRED = [0, 20, 40, 60, 80, 100];
 var SCORES = [
   { v: 0, label: 'Blank', desc: 'Nothing came back.' },
   { v: 1, label: 'Fragments', desc: 'Bits and pieces, not the whole.' },
-  { v: 2, label: 'Mostly', desc: 'Produced it, but shaky on why, when or links.' },
-  { v: 3, label: 'Cold', desc: 'All four parts, no cues.' }
+  { v: 2, label: 'Mostly', desc: 'Produced it, but shaky on why or when.' },
+  { v: 3, label: 'Cold', desc: 'The idea, the why and the when, no cues.' }
 ];
 var LS_KEY = 'chunk-ledger-v1';
 var STARTERS = /*STARTERS*/[{"id":"lhl-modes","name":"Focused and diffuse modes","domain":"Learning How to Learn","gist":"The brain works in two modes that can't run at the same time. Focused mode works a problem through patterns I already have. Diffuse mode ranges widely and finds new connections. Hard problems need both, in turn.","metaphor":"A pinball machine. Tight bumpers keep the ball rattling in one corner; wide bumpers let it cross the whole board.","useWhen":"Stuck and getting frustrated after honest effort: switch to a walk, a shower or sleep, then come back.","notWhen":"Not an excuse to skip the focused work. Diffuse mode only recombines what was loaded first.","links":["lhl-chunking","lhl-einstellung","lhl-pomodoro"],"cards":[{"q":"Which mode finds new connections, and what has to happen first?","a":"Diffuse mode. Focused work has to load the material first."},{"q":"You are stuck and frustrated after honest effort. What do you do?","a":"Switch off: a walk, a shower or sleep. Then come back."}]},{"id":"lhl-chunking","name":"Chunking","domain":"Learning How to Learn","gist":"A chunk is a set of ideas bound together by meaning and practice so that it takes up one working-memory slot. It is built by focused attention, understanding, and practice in context.","metaphor":"Getting dressed: forty separate steps for a toddler, one thought for me.","useWhen":"Learning any procedure or concept I will need to use without looking it up.","notWhen":"Understanding alone is not a chunk. If I can't produce it with the book closed, it isn't built yet.","links":["lhl-slots","lhl-recall","lhl-modes"],"cards":[{"q":"What three things build a chunk?","a":"Focused attention, understanding, and practice in context."},{"q":"How do you know a chunk is not built yet?","a":"You cannot produce it with the book closed."}]},{"id":"lhl-slots","name":"Working memory's four slots","domain":"Learning How to Learn","gist":"Conscious thought holds about four items at once. New material fills all of them; a chunk frees three.","metaphor":"A four-armed octopus reaching out from the front of the brain, each arm holding one idea.","useWhen":"Explains why notifications wreck learning, and why writing a task list clears my head.","notWhen":"It is not long-term memory. Holding something in mind is not the same as having stored it.","links":["lhl-chunking","lhl-pomodoro"],"cards":[{"q":"About how many items can working memory hold at once?","a":"About four."},{"q":"How many slots does a well-built chunk take?","a":"One. That frees the other three."}]},{"id":"lhl-recall","name":"Recall beats rereading","domain":"Learning How to Learn","gist":"Looking away and pulling the main ideas out of memory builds them far better than rereading or highlighting, which mostly build a feeling of knowing.","metaphor":"Rereading is watching someone else lift the weights. Recall is lifting them.","useWhen":"At the end of every study session and at every review. Try it in different places.","notWhen":"Don't test myself on material I never understood. Get the gist first.","links":["lhl-illusions","lhl-spacing","lhl-chunking"],"cards":[{"q":"Why does rereading feel effective?","a":"It builds a feeling of knowing, not the memory itself."},{"q":"When should you not test yourself?","a":"On material you never understood. Get the gist first."}]},{"id":"lhl-spacing","name":"Spaced repetition","domain":"Learning How to Learn","gist":"Repeat over days, with growing gaps. Each successful recall slows the next round of forgetting, so the reviews can spread out.","metaphor":"A brick wall: the mortar has to set before the next course goes on.","useWhen":"Anything I need for longer than a week.","notWhen":"Cramming feels productive and is mostly gone a week later. Don't keep repeating in one sitting what I already know.","links":["lhl-recall","lhl-sleep","lhl-illusions"],"cards":[{"q":"What are the review gaps, in days?","a":"They start at 1, 2, 4, 9, 19, 55, then 180, and each chunk drifts from there to its own pace."},{"q":"Why can the gaps keep growing?","a":"Each successful recall slows the next round of forgetting."}]},{"id":"lhl-illusions","name":"Illusions of competence","domain":"Learning How to Learn","gist":"Rereading, highlighting, looking at a worked solution, or repeating the easy part makes material feel known when it isn't.","metaphor":"Reading the map is not walking the route.","useWhen":"Whenever study feels smooth: test myself and compare what I predicted with what I got.","notWhen":"Don't swing the other way into imposter feelings. The test result is the evidence, in both directions.","links":["lhl-recall","lhl-einstellung","lhl-spacing"],"cards":[{"q":"Name three habits that create an illusion of competence.","a":"Rereading, highlighting, and looking at a worked solution. Repeating the easy part is a fourth."},{"q":"What is the cure for an illusion of competence?","a":"Test yourself, then compare what you predicted with what you got."}]},{"id":"lhl-einstellung","name":"Einstellung","domain":"Learning How to Learn","gist":"An idea I already hold blocks a better one. The familiar solution comes to mind first and quietly stops the search.","metaphor":"A rut in a dirt road: the wheels follow it even when I mean to turn.","useWhen":"A problem resists my usual approach: step away, mix in other problem types, borrow an analogy from another field.","notWhen":"Not a reason to distrust all expertise. Most of the time the familiar pattern is the right one.","links":["lhl-modes","lhl-illusions"],"cards":[{"q":"What is Einstellung?","a":"An idea you already hold blocks a better one."},{"q":"Name three ways out of Einstellung.","a":"Step away, mix in other problem types, borrow an analogy from another field."}]},{"id":"lhl-pomodoro","name":"Process over product (Pomodoro)","domain":"Learning How to Learn","gist":"Procrastination starts as discomfort at the thought of the task. Aiming at 25 minutes of process, not at finishing, sidesteps the discomfort, and a reward afterwards builds the habit.","metaphor":"Don't look at the summit. Look at the next twenty-five steps.","useWhen":"Starting anything I am avoiding. Phone out of the room, timer on, reward after.","notWhen":"Not for measuring output. Don't judge the session by how much got finished.","links":["lhl-modes","lhl-slots"],"cards":[{"q":"How long is one Pomodoro, and what follows it?","a":"25 minutes of focused process, then a reward."},{"q":"What starts procrastination?","a":"Discomfort at the thought of the task."}]},{"id":"lhl-sleep","name":"Sleep as part of learning","domain":"Learning How to Learn","gist":"Sleep clears metabolic waste from the brain, strengthens what matters, prunes the rest, and rehearses the hard parts.","metaphor":"The night shift that cleans the workshop and files the day's work.","useWhen":"Review the hardest chunk before bed. Never trade sleep for extra study before a test.","notWhen":"It doesn't replace the learning. Sleep consolidates only what focused work put there.","links":["lhl-spacing","lhl-modes"],"cards":[{"q":"Name four things sleep does for learning.","a":"Clears waste, strengthens what matters, prunes the rest, rehearses the hard parts."},{"q":"What should you review just before bed?","a":"The hardest chunk."}]}]/*END*/;
@@ -4617,37 +4617,37 @@ var FB_OFF = { not_granted: 1, sampling_disabled: 1, not_declared: 1, capability
 function sampleOn() { return !!sampleFn && !sampleOff; }
 function fbHint() { return sampleOn() ? '<span class="help">When you reveal, Claude checks what you typed against your notes and suggests a score.</span>' : ''; }
 function fbPrompt(c, answer) {
-  var links = connected(c, S.chunks).map(function (id) { var x = S.chunks.get(id); return x ? x.name : ''; }).filter(Boolean);
   var cards = (c.cards || []).slice(0, 12).map(function (k) { return '- ' + k.q + ' -> ' + k.a; });
   function line(k, v) { v = String(v == null ? '' : v).trim(); return k + ': ' + (v || '(not written)'); }
   return [
     'You are checking one recall attempt in a spaced-repetition learning app called Second Nature. The learner tried to recall a "chunk" from memory, with nothing open, and typed what they remembered. Compare their answer with their own notes for that chunk, then give short, specific, honest feedback. Be warm but do not flatter.',
     '',
-    'The chunk test used here: a chunk is fully recalled when the learner can (1) produce it: state the core idea, (2) say why it works, (3) say when it applies and when it does not, and (4) say what it connects to: other chunks, or ideas they already know.',
+    'The chunk test used here: a chunk is recalled when the learner can (1) produce it: state the core idea in their own words, (2) say roughly why it works, and (3) say when it applies. A metaphor or picture, and links to other ideas, are memory aids: welcome when they appear, never required.',
     'Scores:',
     '0 Blank: nothing came back.',
     '1 Fragments: bits and pieces, not the whole.',
-    '2 Mostly: produced the core idea, but shaky or missing on why, when, or connections.',
-    '3 Cold: all four parts, no cues.',
+    '2 Mostly: produced the core idea, but shaky or missing on why or when.',
+    '3 Cold: the core idea, the why, and the when, in their own words, without cues.',
     '',
     'Rules:',
     '- Judge meaning, not wording. Their own words are good; never ask them to match the notes word for word.',
     '- The notes are the answer key, but they are not the limit. A claim that is true but not in the notes counts in their favour (list it under got if it matters). Never put something under fix just because the notes leave it out.',
     '- fix is only for claims that are wrong, confused, or contradict the notes. If you rely on general knowledge to call something wrong, say so.',
     '- Be specific: refer to what they actually wrote.',
-    '- Practice cards are extra detail. Missing a card detail matters less than missing the gist, the why, the when, or the links.',
-    '- When torn between two scores, pick the lower one.',
-    '- Part 4 is met by any real connection the learner names in their own words, to another chunk or to an idea from elsewhere, even when the notes list no linked chunks. Never keep a score below Cold only because no links exist yet.',
+    '- Practice cards are extra detail. Missing a card detail matters less than missing the gist, the why, or the when.',
+    '- Be reasonable and generous: give credit for the sense of an answer, not its completeness. A rough paraphrase that captures the idea counts as got.',
+    '- When torn between two scores, pick the higher one if the core idea is clearly there.',
+    '- Never lower the score, and never list under missed, the metaphor or picture, links to other chunks, or card details. Mention the metaphor under got only if they used it.',
+    '- missed holds at most two or three points that matter for using the idea. Small omissions are not misses; leave them out rather than pad the list.',
     '- Plain language, second person ("you"). Keep every list item under 30 words.',
     '- If the notes say what they missed last time, mention it under got when they have it now, and under missed when they still do not.',
     '',
     'Chunk: ' + c.name,
     line('Subject', c.domain) + (c.source ? '. Source: ' + c.source : ''),
     line('Gist', c.gist),
-    line('Metaphor or picture', c.metaphor),
+    line('Metaphor or picture (optional aid, not required)', c.metaphor),
     line('When to use it', c.useWhen),
     line('When not to', c.notWhen),
-    'Linked chunks: ' + (links.length ? links.join('; ') : '(none)'),
     'Practice cards (question -> answer):' + (cards.length ? '\n' + cards.join('\n') : ' (none)') + fbLastMiss(c),
     '',
     'The learner\'s answer, between the lines:',
@@ -5465,7 +5465,7 @@ function renderReview() {
   if (!s.revealed) {
     html += '<div class="step"><span class="q" id="predQ">1. Before you try: how sure are you that you can recall this cold?</span><span class="help">Go with your gut in a second or two. Afterwards it is checked against whether the recall really came back Cold, so an honest guess is what makes it useful.</span><div class="chips" role="group" aria-labelledby="predQ">' +
       PRED.map(function (p) { return '<button class="chip" data-act="pred" data-v="' + p + '" aria-pressed="' + (s.pred === p) + '">' + p + '%</button>'; }).join('') + '</div></div>' +
-      '<div class="step"><span class="q">2. Now recall it. Aloud, on paper, or below. Nothing open.</span><span class="help">Give it a real try, up to a minute or two. Struggling is the point. If nothing comes, that is a valid result: reveal and score it Blank.</span><ol class="test4"><li>Produce it: state it, solve it, or perform it.</li><li>Say why it works.</li><li>Say when it applies, and when it doesn\'t.</li><li>Say what it connects to: other chunks, or ideas you know.</li></ol>' +
+      '<div class="step"><span class="q">2. Now recall it. Aloud, on paper, or below. Nothing open.</span><span class="help">Give it a real try, up to a minute or two. Struggling is the point. If nothing comes, that is a valid result: reveal and score it Blank.</span><ol class="test4"><li>Produce it: state it, solve it, or perform it.</li><li>Say why it works.</li><li>Say when it applies, and when it doesn\'t.</li><li>Optional: a picture, or a link to another idea, helps it stick but is not required.</li></ol>' +
       '<label class="f" for="scratch">Scratch space (kept with your session)<textarea id="scratch" placeholder="Type what you can recall…">' + esc(s.scratch) + '</textarea></label>' + fbHint() + '</div>' +
       '<div><button class="btn primary" data-act="reveal" id="revealBtn"' + (s.pred == null ? ' disabled' : '') + '>I have tried. Show my notes</button> <button class="btn quiet" data-act="skip">Skip for now</button> <span class="muted" style="font-size:0.86rem" id="revealHint">' + (s.pred == null ? 'Pick a confidence first.' : '') + '</span></div>';
   } else {
@@ -8954,7 +8954,10 @@ function scoreCurrent(v) {
     if (S.session !== s) { S.chunks.set(c.id, c); renderStats(); return; }
     s.results.push(early ? { id: c.id, p: s.pred, s: v, e: 1 } : { id: c.id, p: s.pred, s: v }); s.pred = null; s.revealed = false; s.scratch = ''; s.busy = false; s.fb = null;
     if (v <= 1) s.relearn = true; else s.idx++;
-    S.chunks.set(c.id, c); renderStats(); renderReview(); window.scrollTo(0, 0);
+    S.chunks.set(c.id, c); renderStats();
+    /* v67: a chunk's practice cards follow its recall, inside the same session; the round returns here when done */
+    if (v >= 2 && c.cards && c.cards.length) { startPractice(pickCards([c], 0), true); return; }
+    renderReview(); window.scrollTo(0, 0);
   }, function (e) { s.busy = false; toast(explain(e)); });
 }
 

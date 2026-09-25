@@ -2,6 +2,11 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-09-25 — a kinder recall check, cards after each recall
+- The Claude recall check now scores on three parts (the idea, the why, the when). The metaphor and links to other chunks are memory aids: welcome, never required, never counted as misses. When torn between two scores it now picks the higher one if the core idea is there, and lists at most two or three misses that matter.
+- The self-scoring copy says the same: Cold is the idea, the why and the when; the fourth point on the recall card is marked optional.
+- A chunk's practice cards now run straight after its recall (Mostly or Cold), inside the same session, and the session resumes at the next chunk when the round is done.
+
 ## 2026-09-25 — Method figures keep their hover, lose the pointer light
 - The Method page figures no longer carry the pointer-following light; the hover border, lift and glow stay.
 
