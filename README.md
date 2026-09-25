@@ -62,6 +62,9 @@ Nothing leaves the page unless you publish it as an artifact, in which case your
 
 Issues and pull requests are welcome. Keep changes small and self-contained, and check the page still opens on its own (no artifact) after your change.
 
-## Licence
+## License
 
-MIT. See [LICENSE](LICENSE).
+Copyright (c) 2026 Isaiah Anson. All rights reserved. You may use the released software for
+personal, non-commercial use; copying, modifying or redistributing it requires written
+permission. See [LICENSE](LICENSE).
+
