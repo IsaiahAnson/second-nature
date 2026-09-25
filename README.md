@@ -36,7 +36,7 @@ The app ships with nine starter chunks from *Learning How to Learn* (Barbara Oak
 
 - `db` — a shared document database, so your data lives with the page and follows you between devices.
 - `user` — your private folder in that database, used to sync a paused recall session between devices.
-- `sample` — lets the Recall page ask Claude to check what you typed against your notes. Optional; the page works without it.
+- `sample` — lets the page ask Claude for help: checking a recall against your notes, suggesting practice cards and links, checking a chunk before you save it, drafting wizard fields, and turning a dreaded task into a first step. Optional; every Claude button disappears when it is not granted.
 - `downloads` — the backup buttons.
 
 The page checks for each capability at load and quietly falls back when one is missing, so it also runs fine with none of them.
