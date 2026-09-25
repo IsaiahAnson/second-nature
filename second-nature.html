@@ -2055,7 +2055,14 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
 <section class="glance" id="glance" aria-label="At a glance"></section>
 
   <nav class="tabs" role="tablist" aria-label="Sections">
-    <button class="tab" role="tab" id="tab-snow" data-act="tab" data-tab="snow" aria-selected="false" aria-controls="view-snow"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 21V4"></path><path d="M5 4h12l-2.5 4.5L17 13H5"></path></svg><span class="tl">Quests</span></button>
+    <div class="tgrp" data-grp="quests" style="--g:var(--s1)">
+      <button type="button" class="tpar" id="par-quests" aria-haspopup="true" aria-expanded="false" aria-controls="menu-quests"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 21V4"></path><path d="M5 4h12l-2.5 4.5L17 13H5"></path></svg><span class="tl">Quests</span><span class="tcar" aria-hidden="true"></span></button>
+      <div class="tmenu" id="menu-quests" role="group" aria-labelledby="par-quests">
+        <button class="tab" role="tab" id="tab-snow" data-act="tab" data-tab="snow" aria-selected="false" aria-controls="view-snow">Quests<span class="tsub">today’s run, and the map</span></button>
+        <button class="tab" role="tab" id="tab-snowball" data-act="tab" data-tab="snowball" aria-selected="false" aria-controls="view-snowball">Starter<span class="tsub">a two-minute push to get going</span><span class="count" id="cnt-snow" hidden></span></button>
+        <button class="tab" role="tab" id="tab-motiv" data-act="tab" data-tab="motiv" aria-selected="false" aria-controls="view-motiv">Motivation<span class="tsub">what drives it, and how to get unstuck</span></button>
+      </div>
+    </div>
     <button class="tab" role="tab" id="tab-today" data-act="tab" data-tab="today" aria-selected="true" aria-controls="view-today"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 11a8 8 0 1 0-2.3 6.3"></path><path d="M20 4v7h-7"></path></svg><span class="tl">Recall</span><span class="count" id="cnt-today">0</span></button>
     <div class="tgrp" data-grp="chunks" style="--g:var(--s1)">
       <button type="button" class="tpar" id="par-chunks" aria-haspopup="true" aria-expanded="false" aria-controls="menu-chunks"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8l8 4.4v9.6l-8 4.4-8-4.4V7.2z"></path><path d="M4 7.2l8 4.6 8-4.6M12 11.8v9.4"></path></svg><span class="tl">Chunks</span><span class="tcar" aria-hidden="true"></span></button>
@@ -2065,13 +2072,6 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
         <button class="tab" role="tab" id="tab-traits" data-act="tab" data-tab="traits" aria-selected="false" aria-controls="view-traits">Traits<span class="tsub">turn what you know into what you do</span><span class="count" id="cnt-traits" hidden>0</span></button>
         <button class="tab" role="tab" id="tab-insight" data-act="tab" data-tab="insight" aria-selected="false" aria-controls="view-insight">Progress<span class="tsub">confidence against recall</span></button>
         <button class="tab" role="tab" id="tab-method" data-act="tab" data-tab="method" aria-selected="false" aria-controls="view-method">Method<span class="tsub">the five-stage system</span></button>
-      </div>
-    </div>
-    <div class="tgrp" data-grp="snowball" style="--g:var(--s1)">
-      <button type="button" class="tpar" id="par-snowball" aria-haspopup="true" aria-expanded="false" aria-controls="menu-snowball"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"></path><path d="M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"></path></svg><span class="tl">Snowball</span><span class="tcar" aria-hidden="true"></span></button>
-      <div class="tmenu" id="menu-snowball" role="group" aria-labelledby="par-snowball">
-        <button class="tab" role="tab" id="tab-snowball" data-act="tab" data-tab="snowball" aria-selected="false" aria-controls="view-snowball">Starter<span class="tsub">a two-minute push to get going</span><span class="count" id="cnt-snow" hidden></span></button>
-        <button class="tab" role="tab" id="tab-motiv" data-act="tab" data-tab="motiv" aria-selected="false" aria-controls="view-motiv">Motivation<span class="tsub">what drives it, and how to get unstuck</span></button>
       </div>
     </div>
   </nav>
@@ -4715,7 +4715,7 @@ function fbBoxHtml(s) {
     if (sc != null) col = 's' + sc;
     inner = '<div class="fbh"><span class="fbk">Claude\'s check</span>' + (sc != null ? '<span class="fbs">Suggests ' + sc + ' · ' + esc(SCORES[sc].label) + '</span>' : '') + '</div>' +
       (d.verdict ? '<p class="fbv">' + esc(d.verdict) + '</p>' : '') + (d.summary ? '<p>' + esc(d.summary) + '</p>' : '') +
-      '<div class="fbl">' + fbGroup('You got', 's3', d.got) + fbGroup('You missed', 's1', d.missed, 'm', fb.made) + fbGroup('Needs fixing', 's0', d.fix, 'f', fb.made) + '</div>' +
+      '<div class="fbl">' + fbGroup('You got', 's3', d.got) + fbGroup('You missed', 's1', d.missed) + fbGroup('Needs fixing', 's0', d.fix) + '</div>' +
       (d.next ? '<p class="fbn"><b>Next time:</b> ' + esc(d.next) + '</p>' : '') +
       '<p class="help">A second opinion, not the verdict. Check it against your notes, then pick your own score below.</p>';
   }
@@ -5565,7 +5565,7 @@ function markPractice(v) {
   var it = p.queue[0], key = it.id + '/' + it.k; p.revealed = false;
   if (v === 1) { p.queue.shift(); p.cleared++; p.results.push({ id: it.id, k: it.k, r: p.missed[key] ? 0 : 1 }); }
   else { p.missed[key] = 1; p.queue.push(p.queue.shift()); }
-  if (!p.queue.length) finishPractice(); else { renderPractice(); window.scrollTo(0, 0); }
+  if (!p.queue.length) finishPractice(); else renderPractice();   /* v69: stay where the reader is */
 }
 function finishPractice() {
   var p = S.practice; if (!p) return;

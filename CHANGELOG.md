@@ -2,6 +2,11 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-09-25 — tidy-ups
+- Marking a practice card no longer jumps the page to the top.
+- The "Make a card" buttons under the Claude check are gone.
+- The Snowball tab group is folded into a Quests menu (Quests, Starter, Motivation) to save room in the tab bar.
+
 ## 2026-09-25 — a kinder recall check, cards after each recall
 - The Claude recall check now scores on three parts (the idea, the why, the when). The metaphor and links to other chunks are memory aids: welcome, never required, never counted as misses. When torn between two scores it now picks the higher one if the core idea is there, and lists at most two or three misses that matter.
 - The self-scoring copy says the same: Cold is the idea, the why and the when; the fourth point on the recall card is marked optional.
