@@ -1361,7 +1361,11 @@ body { padding-inline: clamp(16px, 1.8vw, 40px); }
    readable circle edge. A real blur removes both at once: it is what the look is actually made of,
    and it is applied to the moving element so the compositor rasterises it once and then just
    moves the texture. */
-.aurora i { filter: blur(56px); }
+/* v72: no live blur. The bell-curve falloff and the dither below already make the field soft; the filter cost a
+   full re-raster of three screen-sized layers every frame on machines without graphics acceleration. */
+.aurora i { filter: none; }
+/* v72: nothing drifts while the tab is hidden */
+:root[data-hidden] .aurora i, :root[data-hidden] .current::after { animation-play-state: paused; }
 @supports not (filter: blur(1px)) { .aurora i { opacity: 0.26; } }
 /* v61: the aurora, smoother still. The rings that were left were not the stops: a screen shows a very
    dark gradient in whole steps of 1/255, and each step is a perfect circle the eye picks out. Two
@@ -4533,11 +4537,38 @@ function setMotion(v) {
   if (tx) tx.textContent = calm ? 'Calm' : 'Motion';
   smilSync();
 }
+/* v72: a first visit on a device that cannot keep up (no graphics acceleration, an old laptop, a remote desktop)
+   turns motion down by itself and says so once. Anyone who has tapped Motion is never second-guessed. */
+var MOTION_SLOW_MS = 34;   /* a median frame slower than this is under 30 fps */
+function motionWatch(skipProbe) {
+  function hid() { if (document.hidden) document.documentElement.setAttribute('data-hidden', ''); else document.documentElement.removeAttribute('data-hidden'); }
+  document.addEventListener('visibilitychange', hid); hid();
+  if (skipProbe || !window.requestAnimationFrame || !window.performance) return;
+  function probe() {
+    if (document.hidden) { setTimeout(probe, 1500); return; }
+    var gaps = [], last = 0, t0 = performance.now();
+    (function frame(t) {
+      if (last) gaps.push(t - last); last = t;
+      if (t - t0 < 1600 && !document.hidden) { requestAnimationFrame(frame); return; }
+      if (document.hidden || gaps.length < 4) { setTimeout(probe, 1500); return; }
+      gaps.sort(function (a, b) { return a - b; });
+      var med = gaps[Math.floor(gaps.length / 2)];
+      if (med > MOTION_SLOW_MS && document.documentElement.getAttribute('data-motion') !== 'calm') {
+        setMotion('calm');
+        toast('Motion turned down: this device was drawing slowly. Tap Motion at the top to bring it back.');
+      }
+    })(t0);
+  }
+  setTimeout(probe, 2500);
+}
 function bootMotion() {
   var v = '';
   try { v = localStorage.getItem(LS_MOTION) || ''; } catch (e) {}
+  var chosen = v === 'calm' || v === 'full';
   if (v !== 'calm' && v !== 'full') v = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 'calm' : 'full';
   setMotion(v);
+  if (!chosen) { try { localStorage.removeItem(LS_MOTION); } catch (e) {} }   /* v72: only a tap counts as a choice */
+  motionWatch(chosen || v === 'calm');
   var b = document.getElementById('motionBtn');
   if (b) b.addEventListener('click', function () { setMotion(document.documentElement.getAttribute('data-motion') === 'calm' ? 'full' : 'calm'); });
 }

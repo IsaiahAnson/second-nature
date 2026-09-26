@@ -2,6 +2,11 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-09-26 — smooth on every computer
+- The background glows no longer blur on every frame. On computers without graphics acceleration (acceleration switched off, older laptops, virtual machines, remote desktops) a first visit ran at about 13 frames a second; it now runs at 60. It looks the same.
+- If a device still draws slowly, a first visit switches to Calm motion by itself and says so once. Anyone who has tapped Motion keeps their choice.
+- The background stops moving while the tab is hidden.
+
 ## 2026-09-26 — a plan for the day, and a check that learns
 - Day plan: the fuel you pick (Low, Some, Full) now shapes a plan for the rest of the day. It learns the hours you actually get things done from the last six weeks, puts the hardest recall in your best hour and the dread’s first step in the next best, and shrinks to three small things on a low day.
 - The Claude recall check learns from you: Fair, Too harsh and Too soft votes under each check, plus the gap between your scores and Claude’s, tune how generous it is.
