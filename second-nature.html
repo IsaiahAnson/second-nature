@@ -506,6 +506,266 @@ input[type="number"] { font: inherit; font-size: 0.95rem; color: var(--ink); bac
 .alm-cands .btn { flex: none; }
 .alm-busy { margin: 10px 0 0; }
 @media (max-width: 620px) { .alm-diff { grid-template-columns: minmax(0, 1fr); } }
+/* ---------- v75: quests (q75) ---------- */
+:root { --q75-bz: #DB9160; --q75-sv: #C4CEDF; --q75-au: #F4C451; --q75-sky: #5AB0FF; --q75-track: color-mix(in srgb, var(--muted) 30%, transparent); }
+:root[data-theme="light"] { --q75-bz: #A5582A; --q75-sv: #56627C; --q75-au: #A87200; --q75-sky: #1F6FB8; }
+.q75-ic { width: 16px; height: 16px; display: block; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.q75-ci { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; color: var(--k); background: color-mix(in srgb, var(--k) 15%, transparent); border: 1px solid color-mix(in srgb, var(--k) 32%, transparent); vertical-align: middle; }
+/* the icon sits in front of the name, and a long name wraps in line with the text, not under the icon */
+.qboard .qlist > .qrow .qn { display: flex; align-items: flex-start; gap: 9px; }
+.qn .q75-ci { width: 22px; height: 22px; border-radius: 7px; margin-top: 1px; }
+.qn .q75-ci .q75-ic { width: 13px; height: 13px; stroke-width: 1.8; }
+.q75-nw { white-space: nowrap; }
+/* The board breathes a little more. The row keeps the width it always had; its tint is a soft band behind it
+   that reaches into the panel's padding, and a finished quest's lit edge sits inside that band. */
+.qboard .qlist > .qrow:not(.qedit) { position: relative; isolation: isolate; padding-block: 12px; }
+.qboard .qlist > .qrow:not(.qedit)::after { content: ""; position: absolute; z-index: -1; inset: 3px -10px; border-radius: 10px; background: transparent; pointer-events: none; transition: background var(--d2) var(--e-std); }
+.qboard .qlist > .qrow:not(.qedit):hover::after { background: color-mix(in srgb, var(--c) 6%, transparent); }
+.qboard .qlist > .qrow.done:not(.qedit)::after { background: color-mix(in srgb, var(--c) 8%, transparent); }
+.qboard .qlist > .qrow.done:not(.qedit)::before { left: -7px; top: 13px; bottom: 13px; opacity: 0.9; }
+.qboard .qm { margin-top: 2px; }
+.q75-done { display: block; width: min(240px, 100%); height: 6px; margin-top: 8px; border-radius: 4px; background: var(--q75-track); overflow: hidden; }
+.q75-done i { display: block; height: 100%; border-radius: 4px; background: var(--grad); transition: width var(--d4) var(--e-out); }
+.q75-end { display: flex; gap: 10px; align-items: center; margin: 0; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; background: color-mix(in srgb, var(--c) 8%, var(--surface)); border: 1px solid color-mix(in srgb, var(--c) 30%, var(--rule)); }
+.q75-end b { color: var(--c); }
+:root[data-theme="light"] .q75-end b { color: color-mix(in srgb, var(--c) 72%, var(--ink)); }
+/* adding a quest */
+.q75-addq { display: flex; align-items: center; gap: 12px; width: 100%; padding: 11px 14px; min-height: 48px; border-radius: 14px; border: 1.5px dashed color-mix(in srgb, var(--accent) 45%, var(--rule)); background: transparent; color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: background var(--d2) var(--e-std), border-color var(--d2) var(--e-std); }
+.q75-addq:hover { background: color-mix(in srgb, var(--accent) 7%, transparent); border-color: var(--accent); }
+.q75-addp { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--grad); color: var(--accent-ink); font-size: 1.2rem; font-weight: 700; line-height: 1; }
+.q75-addq b { display: block; font-weight: 600; }
+.q75-addq small { display: block; color: var(--muted); font-size: 0.82rem; }
+.q75-addrow { display: flex; flex-wrap: wrap; gap: 8px; }
+.q75-lib { display: flex; flex-direction: column; gap: 12px; padding: 14px; border-radius: 16px; background: color-mix(in srgb, var(--accent) 5%, var(--sunk)); border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--rule)); }
+.q75-libhead { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; justify-content: space-between; }
+.q75-libhead h4 { margin: 0; font-family: var(--display); font-size: 1.05rem; }
+.q75-libhead p { margin: 2px 0 0; font-size: 0.86rem; color: var(--muted); }
+.q75-lib input[type="search"] { width: 100%; font: inherit; font-size: 0.95rem; padding: 10px 12px; color: var(--ink); border: 1px solid var(--rule); }
+.q75-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.q75-chip { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: 0.84rem; font-weight: 600; padding: 6px 12px; min-height: 36px; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
+.q75-chip .q75-ic { width: 14px; height: 14px; color: var(--k, var(--muted)); }
+.q75-chip:hover { border-color: var(--k, var(--accent)); }
+.q75-chip[aria-pressed="true"] { background: var(--grad); color: var(--accent-ink); border-color: transparent; }
+.q75-chip[aria-pressed="true"] .q75-ic { color: var(--accent-ink); }
+.q75-lgs { display: flex; flex-direction: column; gap: 14px; }
+.q75-lg h5 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font-family: var(--mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--k); }
+:root[data-theme="light"] .q75-lg h5 { color: color-mix(in srgb, var(--k) 72%, var(--ink)); }
+.q75-lg h5 .q75-ic { width: 14px; height: 14px; color: var(--k); }
+.q75-ideas { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+.q75-idea { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 10px; min-height: 54px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--k) 24%, var(--rule)); background: var(--surface); color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: background var(--d2) var(--e-std), border-color var(--d2) var(--e-std); }
+.q75-idea:hover:not(:disabled) { border-color: var(--k); background: color-mix(in srgb, var(--k) 8%, var(--surface)); }
+.q75-idea b { display: block; font-weight: 600; font-size: 0.92rem; line-height: 1.3; overflow-wrap: anywhere; }
+.q75-idea small { display: block; color: var(--muted); font-size: 0.78rem; line-height: 1.35; }
+.q75-plus { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: var(--k); border: 1.5px solid color-mix(in srgb, var(--k) 55%, var(--rule)); font-weight: 700; line-height: 1; }
+/* an idea already on the board: full-strength text on a sunk card, with a filled tick */
+.q75-idea:disabled { cursor: default; background: var(--sunk); border-color: var(--rule); color: var(--ink); }
+.q75-idea:disabled .q75-plus { background: var(--k); color: var(--surface); border-color: transparent; }
+.q75-none { margin: 0; color: var(--muted); font-size: 0.9rem; }
+.q75-libfoot { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: flex-start; }
+.q75-libfoot .aibox.idle { flex: 1 1 240px; }
+.q75-libfoot .aibox.fb { flex: 1 1 100%; }
+.q75-lib .aibox.idle .btn.quiet { background: var(--surface); }
+.q75-aiq { display: flex; align-items: flex-start; gap: 10px; flex-wrap: nowrap; }
+.q75-aiq > span:last-child { min-width: 0; }
+.qrow.q75-flash.qedit { animation: q75-flash 1.8s var(--e-out); border-radius: 10px; }
+.qboard .qlist > .qrow.q75-flash:not(.qedit)::after { animation: q75-flash 1.8s var(--e-out); }
+@keyframes q75-flash { 0%, 30% { background: color-mix(in srgb, var(--accent) 22%, transparent); } 100% { background: transparent; } }
+/* rank */
+.q75-rank { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: center; padding: 12px 14px; border-radius: 14px; background: linear-gradient(135deg, color-mix(in srgb, var(--r) 15%, var(--surface)), var(--surface) 72%); border: 1px solid color-mix(in srgb, var(--r) 38%, var(--rule)); }
+.q75-emb { width: 56px; height: 63px; display: block; overflow: visible; }
+.q75-emb .sh { fill: color-mix(in srgb, var(--r) 20%, var(--surface)); stroke: var(--r); stroke-width: 2.4; stroke-linejoin: round; }
+.q75-emb .in { fill: none; stroke: var(--r); stroke-width: 1.1; opacity: 0.5; stroke-dasharray: 3 2.4; }
+.q75-emb .mk { fill: none; stroke: var(--r); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.q75-emb .mk.thin { stroke-width: 1.8; }
+.q75-emb .st { fill: var(--r); stroke: var(--r); stroke-width: 1.2; stroke-linejoin: round; }
+.q75-rn { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 10px; }
+.q75-k { flex-basis: 100%; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.q75-rn b { font-family: var(--display); font-size: 1.3rem; line-height: 1.2; color: var(--r); }
+.q75-lv { font-size: 0.84rem; color: var(--muted); }
+.q75-rbar { height: 8px; margin-top: 8px; border-radius: 5px; background: var(--q75-track); overflow: hidden; }
+.q75-rbar i { display: block; height: 100%; border-radius: 5px; background: var(--r); transition: width var(--d4) var(--e-out); }
+.q75-rnext { margin-top: 5px; font-size: 0.84rem; color: var(--muted); }
+.q75-rnext b { color: var(--ink); }
+.q75-ladder { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.q75-ladder i { width: 16px; height: 6px; border-radius: 3px; background: var(--q75-track); }
+.q75-ladder i.got { background: color-mix(in srgb, var(--r) 55%, transparent); }
+.q75-ladder i.now { background: var(--r); box-shadow: 0 0 0 2px color-mix(in srgb, var(--r) 32%, transparent); }
+/* achievements */
+.q75-ach { gap: 14px; }
+.q75-achhead { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.q75-achhead > div:first-child { flex: 1 1 220px; min-width: 0; }
+.q75-achhead h3 { display: flex; align-items: center; gap: 8px; }
+.q75-achhead h3 .q75-ic { width: 18px; height: 18px; color: var(--q75-au); }
+.q75-tally { display: flex; flex-wrap: wrap; gap: 6px; }
+.q75-tl { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; background: color-mix(in srgb, var(--m) 13%, transparent); border: 1px solid color-mix(in srgb, var(--m) 42%, var(--rule)); }
+.q75-tl i { width: 10px; height: 10px; border-radius: 50%; background: var(--m); }
+.q75-tl.t0, .q75-card.t0, .q75-tier.t0 { --m: var(--q75-bz); }
+.q75-tl.t1, .q75-card.t1, .q75-tier.t1 { --m: var(--q75-sv); }
+.q75-tl.t2, .q75-card.t2, .q75-tier.t2 { --m: var(--q75-au); }
+.q75-ag + .q75-ag { margin-top: 14px; }
+.q75-agh { margin: 0 0 8px; font-family: var(--mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.q75-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 8px; }
+.q75-card { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 10px; align-items: center; padding: 10px 12px; border-radius: 14px; background: var(--sunk); border: 1px solid var(--rule); }
+.q75-card.got { background: linear-gradient(150deg, color-mix(in srgb, var(--m) 13%, var(--surface)), var(--surface) 78%); border-color: color-mix(in srgb, var(--m) 42%, var(--rule)); }
+.q75-medal { width: 46px; height: 56px; display: block; overflow: visible; }
+.q75-medal .rb { fill: var(--c); }
+.q75-medal .rb2 { fill: color-mix(in srgb, var(--c) 60%, var(--bg)); }
+.q75-medal .dk { fill: color-mix(in srgb, var(--m) 30%, var(--surface)); stroke: var(--m); stroke-width: 2.6; }
+.q75-medal .dr { fill: none; stroke: var(--m); stroke-width: 1; stroke-dasharray: 2 2.2; opacity: 0.8; }
+.q75-medal .mi { fill: none; stroke: var(--ink); stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
+.q75-medal .gl { fill: none; stroke: var(--m); stroke-width: 1.4; stroke-linecap: round; opacity: 0.9; }
+.q75-card.off .q75-medal { opacity: 0.6; }
+.q75-card.off .q75-medal .rb, .q75-card.off .q75-medal .rb2 { fill: color-mix(in srgb, var(--muted) 35%, var(--surface)); }
+.q75-card.off .q75-medal .dk { fill: var(--surface); stroke: var(--muted); stroke-dasharray: 3.2 2.6; stroke-width: 1.8; }
+.q75-card.off .q75-medal .dr { display: none; }
+.q75-card.off .q75-medal .mi { stroke: var(--muted); }
+.q75-cn { display: flex; flex-wrap: wrap; gap: 0 8px; align-items: baseline; }
+.q75-cn b { font-weight: 600; font-size: 0.94rem; }
+.q75-card.off .q75-cn b { color: var(--muted); }
+.q75-tier { font-family: var(--mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--m); }
+.q75-cv { font-size: 0.8rem; color: var(--muted); }
+.q75-bar { height: 5px; margin-top: 6px; border-radius: 3px; background: var(--q75-track); overflow: hidden; }
+.q75-bar i { display: block; height: 100%; border-radius: 3px; background: var(--c); }
+.q75-card.off .q75-bar i { background: color-mix(in srgb, var(--c) 55%, var(--muted)); }
+.q75-cnext { margin-top: 4px; font-size: 0.75rem; color: var(--muted); }
+/* a medal toast carries a small medal in the colour of the tier it announces */
+#toast[data-q75m="0"] { --q75m: var(--q75-bz); }
+#toast[data-q75m="1"] { --q75m: var(--q75-sv); }
+#toast[data-q75m="2"] { --q75m: var(--q75-au); }
+#toast[data-q75m]::before { content: ""; display: inline-block; width: 14px; height: 14px; margin-right: 9px; vertical-align: -2px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--q75m) 45%, #fff), var(--q75m) 62%); box-shadow: 0 0 0 2px color-mix(in srgb, var(--q75m) 32%, transparent); }
+@media (max-width: 560px) {
+  .q75-rank { grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 12px; }
+  .q75-emb { width: 48px; height: 54px; }
+  .q75-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .q75-card { grid-template-columns: minmax(0, 1fr); justify-items: start; align-items: start; align-content: start; gap: 6px; padding: 10px; }
+  .q75-card > div { width: 100%; }
+  .q75-medal { width: 40px; height: 49px; }
+  .q75-ideas { grid-template-columns: minmax(0, 1fr); }
+}
+/* ---------- v75 pet75: the fox and its feelings ---------- */
+:root { --pet75-cream: #FFF3DF; --pet75-eye: #2B2118; --pet75-page: #F7F3EA; --pet75-snow: #EEF6FF; --pet75-shine: #FFFFFF; --pet75-fur: var(--s1); --pet75-glow: #FFE39A; --pet75-flame: #FFF6D2; }
+:root[data-theme="light"] { --pet75-page: #FFFFFF; --pet75-snow: #FFFFFF; --pet75-fur: color-mix(in srgb, var(--s1) 62%, #FFB347); --pet75-glow: #FFC933; --pet75-flame: #FFB000; }
+.companion.pet75 { background: color-mix(in srgb, var(--pc) 8%, var(--surface)); border-color: color-mix(in srgb, var(--pc) 36%, var(--rule)); align-items: start; }
+.companion .pet75-fox { width: 90px; height: auto; display: block; overflow: visible; margin-top: 2px; }
+@media (min-width: 440px) { .companion .pet75-fox { width: 108px; } }
+.pet75-txt { min-width: 0; }
+.pet75-chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.pet75-chip { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.03em; line-height: 1.5; padding: 0 8px; border-radius: 999px; color: var(--ink); background: color-mix(in srgb, var(--c) 18%, transparent); border: 1px solid color-mix(in srgb, var(--c) 50%, transparent); }
+.pet75-chip.pet75-chip-o { background: transparent; border-color: color-mix(in srgb, var(--muted) 70%, transparent); color: var(--ink); }
+.pet75-line { margin-top: 3px; }
+.pet75-line, .pet75-how li span { overflow-wrap: anywhere; }
+.pet75-how { margin-top: 4px; }
+.pet75-how > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--muted); border-radius: 6px; min-height: 28px; padding: 5px 8px 5px 2px; margin: -5px 0 -5px -2px; }
+@media (pointer: coarse) { .pet75-how > summary { min-height: 42px; margin-block: -11px; } }
+.pet75-how > summary::-webkit-details-marker { display: none; }
+.pet75-how > summary::before { content: "?"; display: inline-grid; place-items: center; width: 15px; height: 15px; border-radius: 50%; font-family: var(--mono); font-size: 0.66rem; color: var(--ink); background: color-mix(in srgb, var(--pc) 22%, transparent); }
+.pet75-how > summary:hover { color: var(--ink); }
+.pet75-how[open] > summary::before { content: "\2013"; }
+.pet75-how ul { list-style: none; margin: 6px 0 4px; padding: 0; display: grid; gap: 3px; font-size: 0.8rem; }
+.pet75-how li { display: grid; grid-template-columns: 10px minmax(0, 1fr); gap: 6px; align-items: baseline; }
+.pet75-how li i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); display: block; }
+.pet75-how .pet75-note { font-size: 0.74rem; color: var(--muted); margin-top: 4px; }
+.pet75-fox .p-fur { fill: var(--pet75-fur); }
+.pet75-fox .p-belly { fill: var(--pet75-cream); }
+.pet75-fox .p-inner { fill: color-mix(in srgb, var(--pet75-fur) 50%, var(--pet75-eye)); }
+.pet75-fox .p-paw { fill: color-mix(in srgb, var(--pet75-fur) 38%, var(--pet75-eye)); }
+.pet75-fox .p-eye, .pet75-fox .p-nose, .pet75-fox .p-mouth { fill: var(--pet75-eye); }
+.pet75-fox .p-shine { fill: var(--pet75-shine); }
+.pet75-fox .p-line { fill: none; stroke: var(--pet75-eye); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.pet75-fox .p-brow { fill: none; stroke: var(--pet75-eye); stroke-width: 1.6; stroke-linecap: round; }
+.pet75-fox .p-tongue { fill: var(--s0); }
+.pet75-fox .p-blush { fill: color-mix(in srgb, var(--g3) 75%, transparent); }
+.pet75-fox .p-star { fill: var(--spark); stroke: var(--s1); stroke-width: 0.6; stroke-linejoin: round; }
+.pet75-fox .p-spark { fill: none; stroke: var(--accent); stroke-width: 1.3; stroke-linecap: round; }
+.pet75-fox .p-sun { fill: var(--spark); }
+.pet75-fox .p-rays, .pet75-fox .p-ray2 { fill: none; stroke: var(--spark); stroke-width: 1.3; stroke-linecap: round; }
+.pet75-fox .p-ray3 { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; }
+.pet75-fox .p-snow { fill: var(--pet75-snow); stroke: var(--release); stroke-width: 1.2; }
+.pet75-fox .p-snowshade { fill: color-mix(in srgb, var(--release) 30%, var(--pet75-snow)); }
+.pet75-fox .p-snowline { fill: none; stroke: var(--release); stroke-width: 0.9; stroke-linecap: round; }
+.pet75-fox .p-mot { fill: none; stroke: var(--release); stroke-width: 1.3; stroke-linecap: round; }
+.pet75-fox .p-mot2 { fill: none; stroke: var(--g3); stroke-width: 1.3; stroke-linecap: round; }
+.pet75-fox .p-mot3 { fill: var(--s3); }
+.pet75-fox .p-whoosh { fill: none; stroke: var(--s3); stroke-width: 1.2; stroke-linecap: round; }
+.pet75-fox .p-bulb { fill: var(--spark); }
+.pet75-fox .p-bulbbase { fill: var(--muted); }
+.pet75-fox .p-bulbline { fill: none; stroke: var(--s1); stroke-width: 0.8; stroke-linecap: round; }
+.pet75-fox .p-dot { fill: var(--s2); }
+.pet75-fox .p-book, .pet75-fox .p-card { fill: var(--pet75-page); stroke: var(--s2); stroke-width: 1; stroke-linejoin: round; }
+.pet75-fox .p-card { stroke: var(--accent); }
+.pet75-fox .p-bookline { fill: none; stroke: color-mix(in srgb, var(--s2) 70%, transparent); stroke-width: 0.8; stroke-linecap: round; }
+.pet75-fox .p-clip { fill: var(--accent); }
+.pet75-fox .p-tick { fill: none; stroke: var(--s3); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.pet75-fox .p-mug { fill: var(--s0); }
+.pet75-fox .p-handle { fill: none; stroke: var(--s0); stroke-width: 1.6; stroke-linecap: round; }
+.pet75-fox .p-hang { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-linecap: round; }
+.pet75-fox .p-steam { fill: none; stroke: var(--muted); stroke-width: 1.1; stroke-linecap: round; }
+.pet75-fox .p-scarf { fill: var(--s0); }
+.pet75-fox .p-stem { fill: none; stroke: var(--s3); stroke-width: 1.2; stroke-linecap: round; }
+.pet75-fox .p-leaf { fill: var(--s3); }
+.pet75-fox .p-petal { fill: var(--g3); }
+.pet75-fox .p-core { fill: var(--spark); }
+.pet75-fox .p-dust { fill: color-mix(in srgb, var(--muted) 55%, transparent); }
+.pet75-fox .p-z { fill: var(--load); font-family: var(--mono); font-size: 8px; font-weight: 600; }
+.pet75-fox .p-z.sm { font-size: 6px; }
+.pet75-fox .p-moon { fill: var(--spark); }
+.pet75-fox .p-glows { filter: blur(1.3px); }
+.pet75-fox .p-glow { fill: var(--pet75-glow); opacity: 0.18; }
+.pet75-fox .p-glow.g2 { opacity: 0.26; }
+.pet75-fox .p-glow.g3 { opacity: 0.42; }
+.pet75-fox .p-cap { fill: var(--muted); }
+.pet75-fox .p-glass { fill: color-mix(in srgb, var(--pet75-glow) 55%, var(--surface)); stroke: var(--muted); stroke-width: 0.8; }
+.pet75-fox .p-flame { fill: var(--pet75-flame); stroke: color-mix(in srgb, var(--pet75-glow) 70%, var(--spark)); stroke-width: 0.5; }
+.pet75-fox .p-feather { fill: var(--pet75-page); stroke: var(--release); stroke-width: 1; stroke-linejoin: round; }
+.pet75-fox .p-rib { fill: none; stroke: var(--release); stroke-width: 0.9; stroke-linecap: round; }
+.pet75-fox .p-ball { fill: var(--g3); }
+.pet75-fox .p-ballline { fill: none; stroke: var(--spark); stroke-width: 1.5; stroke-linecap: round; }
+.pet75-fox .p-print { fill: color-mix(in srgb, var(--s3) 75%, transparent); }
+.pet75-fox .p-heart { fill: var(--s0); }
+.pet75-fox .pa-wag, .pet75-fox .pa-swish { transform-box: view-box; transform-origin: 42px 43px; }
+.pet75-fox .pa-breathe { transform-box: fill-box; transform-origin: 50% 100%; }
+.pet75-fox .pa-twinkle, .pet75-fox .pa-twinkle2, .pet75-fox .pa-glow, .pet75-fox .pa-beat, .pet75-fox .pa-roll, .pet75-fox .pa-spin, .pet75-fox .pa-drift { transform-box: fill-box; transform-origin: 50% 50%; }
+.pet75-fox .pa-flicker, .pet75-fox .pa-sway { transform-box: fill-box; transform-origin: 50% 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-motion="calm"]) .pet75-fox .pa-bob { animation: pet75bob 2.6s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-hop { animation: pet75bob 1.3s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-wag { animation: pet75wag 1.1s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-swish { animation: pet75swish 2.4s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-breathe { animation: pet75breathe 4s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-twinkle { animation: pet75twinkle 2.4s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-twinkle2 { animation: pet75twinkle 2.4s ease-in-out 1.2s infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-float { animation: pet75float 3s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-steam { animation: pet75steam 2.6s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-glow { animation: pet75glow 2.2s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-beat { animation: pet75beat 1.8s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-roll { animation: pet75roll 5s linear infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-bounce { animation: pet75bounce 1.4s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-flicker { animation: pet75flicker 1.6s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-drift { animation: pet75drift 4.5s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-spin { animation: pet75spin 30s linear infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-sway { animation: pet75sway 3.4s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-puff { animation: pet75puff 1.8s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-d1 { animation: pet75dot 2.4s ease-in-out infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-d2 { animation: pet75dot 2.4s ease-in-out 0.4s infinite; }
+  :root:not([data-motion="calm"]) .pet75-fox .pa-d3 { animation: pet75dot 2.4s ease-in-out 0.8s infinite; }
+}
+@keyframes pet75bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.6px); } }
+@keyframes pet75wag { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-10deg); } }
+@keyframes pet75swish { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(12deg); } 65% { transform: rotate(-7deg); } }
+@keyframes pet75breathe { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.035); } }
+@keyframes pet75twinkle { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.75; } }
+@keyframes pet75float { 0% { transform: translateY(1px); opacity: 0.45; } 50% { opacity: 1; } 100% { transform: translateY(-2px); opacity: 0.45; } }
+@keyframes pet75steam { 0% { transform: translateY(0.5px); opacity: 0.35; } 50% { opacity: 0.95; } 100% { transform: translateY(-1.8px); opacity: 0.2; } }
+@keyframes pet75glow { 0%, 100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.08); opacity: 1; } }
+@keyframes pet75beat { 0%, 60%, 100% { transform: scale(1); } 20% { transform: scale(1.16); } 40% { transform: scale(1.06); } }
+@keyframes pet75roll { to { transform: rotate(360deg); } }
+@keyframes pet75bounce { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-3px); } }
+@keyframes pet75flicker { 0%, 100% { transform: scaleY(1); } 35% { transform: scaleY(1.12); } 70% { transform: scaleY(0.92); } }
+@keyframes pet75drift { 0%, 100% { transform: translate(0, -1px) rotate(-6deg); } 50% { transform: translate(-1.8px, 2.2px) rotate(8deg); } }
+@keyframes pet75spin { to { transform: rotate(360deg); } }
+@keyframes pet75sway { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+@keyframes pet75puff { 0%, 100% { opacity: 0.35; transform: translateX(0); } 50% { opacity: 0.9; transform: translateX(-1.2px); } }
+@keyframes pet75dot { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
 /* ---------- memory curve ---------- */
 .mcurve { position: relative; max-width: 760px; }
 .mcurve svg { width: 100%; height: auto; display: block; }
@@ -5665,6 +5925,45 @@ document.addEventListener('snowball:smaller', function (e) {
   aiCall('snow', p, aiStepClean, { quick: true, onDone: function (j) { reply(j.state === 'done' ? { step: j.data.step } : { stopped: j.state === 'stopped', error: j.state === 'stopped' ? '' : aiErr(j.code) }); } });
 });
 
+/* v75 (sb75): when a push is done, the Snowball asks for three next steps toward the same goal.
+   One quick call; the answer is cleaned, capped and deduplicated against the steps already done. */
+function sb75NextClean(d, meta) {
+  var arr = aiArr(d, 'steps', 8); if (!arr) return null;
+  var seen = {}, out = [];
+  ((meta && meta.done) || []).forEach(function (s) { seen[aiNorm(s)] = 1; });
+  arr.forEach(function (x) {
+    var s = aiStepText(x); if (!s) return;
+    if (s.length > 90) { s = s.slice(0, 89); var sp = s.lastIndexOf(' '); if (sp > 50) s = s.slice(0, sp); s = s.replace(/[\s,;:.-]+$/, '') + '…'; }
+    var k = aiNorm(s); if (!k || seen[k] || out.length >= 3) return; seen[k] = 1; out.push(s);
+  });
+  return out.length ? { steps: out } : null;
+}
+AIF.sb75next = { label: 'Next steps', busy: 'Claude is finding next steps', title: 'Next steps', quick: true,
+  prompt: function (d) {
+    d = d || {};
+    var done = d.done || [], avoid = d.avoid || [];
+    return ['Someone is using a starter timer called Snowball, in an app called Second Nature, to chip away at a goal in short pushes. They just finished a push. Suggest three different next steps toward the same goal.', '',
+      'Rules:', '- Each step takes 2 to 10 minutes and is one concrete action someone could see them do.', '- Start with a verb. Under 12 words. No advice, no pep talk, no numbering.',
+      '- Build on what they have done so far and do not repeat it.', '- Put the natural next part first, and make one of the three very easy.',
+      avoid.length ? '- Do not suggest these again: ' + avoid.map(function (s) { return aiCap(s, 80); }).join('; ') : '', '',
+      'The goal: ' + (aiCap(d.goal, 200) || '(not named)'),
+      'Done so far, oldest first:' + (done.length ? '\n' + done.map(function (s) { return '- ' + aiCap(s, 120); }).join('\n') : ' (nothing written yet)'), '',
+      AI_TAIL, '{"steps": ["…", "…", "…"]}'].join('\n');
+  },
+  clean: sb75NextClean,
+  body: function (d) { return '<ol class="aisteps">' + d.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>'; } };
+document.addEventListener('snowball:next', function (e) {
+  var d = e.detail || {}, rid = typeof d.rid === 'string' ? d.rid.slice(0, 40) : '';
+  function reply(o) { o.rid = rid; try { document.dispatchEvent(new CustomEvent('snowball:next-done', { detail: o })); } catch (er) {} }
+  if (d.stop) { aiStop('sb75next'); return; }
+  if (!sampleOn()) { reply({ error: aiErr('capability_removed') }); return; }
+  function strs(a, n) { return Array.isArray(a) ? a.filter(function (s) { return typeof s === 'string' && s.trim(); }).slice(-n) : []; }
+  var done = strs(d.done, 8), avoid = strs(d.avoid, 3);
+  aiCall('sb75next', AIF.sb75next.prompt({ goal: typeof d.goal === 'string' ? d.goal : '', done: done, avoid: avoid }), sb75NextClean,
+    { kind: 'sb75next', meta: { done: done.concat(avoid) }, quick: true, fresh: !!d.fresh,
+      onDone: function (j) { reply(j.state === 'done' ? { steps: j.data.steps.slice() } : { stopped: j.state === 'stopped', error: j.state === 'stopped' ? '' : aiErr(j.code) }); } });
+});
+
 /* ---------- v58: a recall session survives leaving it ----------
    The session and any practice round lived only in memory, so a reload, a new version of the page,
    or a phone dropping a background tab threw away where you were: the chunk you were on, what you
@@ -7097,7 +7396,7 @@ function habitRow(q) {
     ? w.clear + ' of 7 days clear'
     : w.up + ' in the last 7 days';
   return '<div class="qrow habit" style="--c:var(--' + STATC[b.stat] + ')"><span class="qc hb" aria-hidden="true"></span><div>' +
-    '<div class="qn">' + esc(q.name) + '</div>' +
+    '<div class="qn">' + q75CatIcon(q) + esc(q.name) + '</div>' +
     '<div class="qm">' + bits.join(' <span class="muted">·</span> ') + ' today <span class="muted">· ' + esc(wk) +
     (q.stage ? ' · <span class="tpill">' + TRAIL[q.stage][1] + '</span>' : '') + '</span></div></div>' +
     '<div class="qa">' +
@@ -7178,6 +7477,7 @@ function habitDown(id) {
 }
 
 function struggleHtml(g) {
+  if (Q75_HIDE.struggle) return '';   /* v75: off for now; set Q75_HIDE.struggle = false to bring it back */
   var q = null; g.quests.forEach(function (x) { if (!q && x.struggle && !x.fixed) q = x; });
   if (!q) return '';
   var id = esc(q.id), half = Math.max(1, Math.round(q.goal / 2)), wd = '0' + q.days.slice(1, 6) + '0', b = [];
@@ -7230,9 +7530,9 @@ function questFix(id, v) {
 }
 function questsHtml(g) {
   var qs = g.qsToday || g.quests, habits = g.quests.filter(function (q) { return q.isHabit; }), off = g.quests.filter(function (q) { return !q.isHabit && q.onToday === false; }), nb = nextBest(g);
-  var head = '<div class="row-between"><div><h3>Today’s quests</h3><p class="muted small">' + g.done + ' of ' + qs.length + ' done' + (g.fuel ? ' · ' + Math.max(0, g.fuel.left) + ' of ' + g.fuel.max + ' pips left' : ' · resets at midnight') + '</p></div><div class="qhead-btns">' + (G.editing ? '' : '<button class="btn small' + (G.reorder ? ' primary' : ' quiet') + '" data-act="q-order">' + (G.reorder ? 'Done' : 'Reorder') + '</button>') + (G.reorder ? '' : '<button class="btn small' + (G.editing ? ' primary' : ' quiet') + '" data-act="q-edit">' + (G.editing ? 'Done editing' : 'Edit quests') + '</button>') + '</div></div>';
+  var head = '<div class="row-between"><div><h3>Today’s quests</h3><p class="muted small">' + g.done + ' of ' + qs.length + ' done' + (g.fuel ? ' · ' + Math.max(0, g.fuel.left) + ' of ' + g.fuel.max + ' pips left' : ' · resets at midnight') + '</p>' + q75DoneBar(g.done, qs.length) + '</div><div class="qhead-btns">' + (G.editing ? '' : '<button class="btn small' + (G.reorder ? ' primary' : ' quiet') + '" data-act="q-order">' + (G.reorder ? 'Done' : 'Reorder') + '</button>') + (G.reorder ? '' : '<button class="btn small' + (G.editing ? ' primary' : ' quiet') + '" data-act="q-edit">' + (G.editing ? 'Done editing' : 'Edit quests') + '</button>') + '</div></div>';
   if (G.reorder) return qorderHtml(head);
-  if (G.editing) return '<section class="panel qboard">' + head + '<p class="muted small">Recall what’s due is always on the list: its goal is whatever your library has due that day.</p><div class="qlist">' + questList().filter(function (q) { return !q.archived; }).map(qEditHtml).join('') + '</div><div><button class="btn small" data-act="q-add">Add a quest</button></div><p class="muted small">Changes save as you make them. The effect is what a quest gives you when you tick it off. Kind decides which region of your map it charts.</p>' + archHtml(g) + '</section>';
+  if (G.editing) return '<section class="panel qboard">' + head + '<p class="muted small">Recall what’s due is always on the list: its goal is whatever your library has due that day.</p><div class="qlist">' + questList().filter(function (q) { return !q.archived; }).map(qEditHtml).join('') + '</div><div class="q75-addrow"><button class="btn small" data-act="q-add">Add a quest</button><button class="btn small primary" data-act="q75-lib" aria-expanded="' + Q75.lib + '">' + (Q75.lib ? 'Hide ideas' : 'Choose from ideas') + '</button></div>' + q75LibHtml() + '<p class="muted small">Changes save as you make them. The effect is what a quest gives you when you tick it off. Kind decides which region of your map it charts.</p>' + archHtml(g) + '</section>';
   var nbh = '';
   if (nb) nbh = nextHtml(nb, g);
   else if (g.fuel && g.fuel.done && g.done < qs.length) nbh = '<div class="nextq" style="--c:var(--s3)"><div><div class="k">Run complete</div><div>You’ve spent today’s fuel. Anything more is a bonus, and rest is part of the plan.</div></div></div>';
@@ -7240,14 +7540,15 @@ function questsHtml(g) {
   else if (qs.length) nbh = '<div class="nextq" style="--c:var(--s3)"><div><div class="k">All done</div><div>Every quest is done for today. Anything else is a bonus.</div></div></div>';
   var rows = qs.length ? qs.map(function (q) {
     var bb = BUFFS[q.buff], done = q.todayN >= q.goal;
-    return '<div class="qrow' + (done ? ' done' : '') + '" style="--c:var(--' + STATC[bb.stat] + ')"><span class="qc" aria-hidden="true"></span><div><div class="qn">' + esc(q.name) + '</div><div class="qm">' + qProgress(q) + ' · <span title="' + esc(bb.why) + '">' + esc(bb.name) + ', ' + STATL[bb.stat] + ' ' + hoursText(bb.hours) + '</span>' + (q.stage ? ' · <span class="tpill">' + TRAIL[q.stage][1] + '</span>' : '') + (q.eff ? ' · <span class="qcost" title="Costs ' + plural(q.eff, 'pip') + ' of fuel" aria-label="Costs ' + plural(q.eff, 'pip') + ' of fuel">' + new Array(q.eff + 1).join('<i></i>') + '</span>' : '') + '</div>' + qStepsRow(q) + qtRow(q) + idleHtml(q) + '</div>' +
+    return '<div class="qrow' + (done ? ' done' : '') + '" style="--c:var(--' + STATC[bb.stat] + ')"><span class="qc" aria-hidden="true"></span><div><div class="qn">' + q75CatIcon(q) + esc(q.name) + '</div><div class="qm">' + qProgress(q) + ' · <span title="' + esc(bb.why) + '">' + esc(bb.name) + ', ' + STATL[bb.stat] + ' ' + hoursText(bb.hours) + '</span>' + (q.stage ? ' · <span class="tpill">' + TRAIL[q.stage][1] + '</span>' : '') + (q.eff ? ' <span class="q75-nw">· <span class="qcost" title="Costs ' + plural(q.eff, 'pip') + ' of fuel" aria-label="Costs ' + plural(q.eff, 'pip') + ' of fuel">' + new Array(q.eff + 1).join('<i></i>') + '</span></span>' : '') + '</div>' + qStepsRow(q) + qtRow(q) + idleHtml(q) + '</div>' +
       '<div class="qa">' + qAction(q) + (q.unit === 'min' && !(qtLive() && qtLive().id === q.id) ? '<button class="btn small quiet" data-act="qt-pick" data-id="' + esc(q.id) + '">Timer</button>' : '') + (done ? '' : q.fixed ? '<button class="btn small quiet" data-act="snow-start">Snowball</button>' : '<button class="btn small quiet" data-act="q-snow" data-id="' + esc(q.id) + '" aria-label="Start a snowball for ' + esc(q.name) + '">Snowball</button>') + '</div></div>';
   }).join('') : '<p class="muted" style="padding:10px 0">Nothing is scheduled for today. That is allowed.</p>';
   var hrows = habits.length ? '<div class="qsec"><h4>Habits</h4><p class="muted small">No goal and no schedule. The minus is a record, never a punishment. The first three taps a day earn XP on the map.</p></div><div class="qlist">' + habits.map(habitRow).join('') + '</div>' : '';
   var offline = off.length ? '<p class="qoff">Not for today: <b>' + off.map(function (q) { return esc(q.name); }).join('</b>, <b>') + '</b>. Their trails only count the days they are due.</p>' : '';
   var yline = (g.yq || g.yp) ? '<p class="muted small">Yesterday: ' + plural(g.yq, 'quest') + ' done, ' + (g.yp === 1 ? '1 push' : g.yp + ' pushes') + '.</p>' : '';
+  if (Q75_HIDE.nextBest) nbh = '';   /* v75: Next best is off for now; q75EndHtml says when the list is done */
   nbh = enBoardHtml(g) + nbh;   // v70: check-in and plan for today
-  return '<section class="panel qboard">' + head + nbh + struggleHtml(g) + '<div class="qlist">' + rows + '</div>' + offline + hrows + traitBoardHtml(g) + yline + archHtml(g) + '</section>';
+  return '<section class="panel qboard">' + head + nbh + struggleHtml(g) + '<div class="qlist">' + rows + '</div>' + q75EndHtml(g, qs, nb) + q75AddRowHtml() + offline + hrows + traitBoardHtml(g) + yline + archHtml(g) + '</section>';
 }
 
 /* ---------- the journal: map, trails, dreads ---------- */
@@ -7662,7 +7963,7 @@ function enPlanHtml(g) {
   }
   return '<div class="en-plan' + (open ? '' : ' shut') + '" id="enPlan"><button class="en-fold" data-act="en-fold" aria-expanded="' + open + '" aria-controls="enPlanBody"><span class="k">Plan for today</span><span class="en-sub">' + esc(sub) + '</span><span class="en-chev" aria-hidden="true"></span></button>' + (open ? '<div id="enPlanBody">' + body + '</div>' : '') + '</div>';
 }
-function enBoardHtml(g) { try { return enPlanHtml(g); } catch (e) { return ''; } }   /* v70: the fuel picker above asks the question */
+function enBoardHtml(g) { if (Q75_HIDE.plan) return ''; try { return enPlanHtml(g); } catch (e) { return ''; } }   /* v70: the fuel picker above asks the question */
 // the Recall tab's start card gets one line: the check-in, or where today's hardest recall sits in the plan
 function enRecallLine() {
   var today = todayStr(), lv = enLevel(today);
@@ -7672,6 +7973,7 @@ function enRecallLine() {
   return t + '<span class="en-links"><button class="linkbtn" data-act="en-plan">See today’s plan</button><button class="linkbtn" data-act="en-edit">change</button></span>';
 }
 function enTodayHook() {
+  if (Q75_HIDE.plan) return;   /* v75: the plan this line pointed at is off for now */
   var host = $('#todayBody'); if (!host || !S.ready || host.dataset.run || !S.chunks.size || !gameReady()) return;
   var coach = host.querySelector('.coach'), mid = coach && coach.children[1]; if (!mid) return;
   try { var el = document.createElement('div'); el.className = 'en-rline'; el.innerHTML = enRecallLine(); mid.appendChild(el); } catch (e) {}
@@ -7727,6 +8029,433 @@ function enArchive() {
 window.__enTest = { EN: EN, enCurve: enCurve, enPlan: enPlan, enTally: enTally, enLevel: enLevel, enDoc: enDoc, enArchive: enArchive, EN_DEF: EN_DEF,
   plan: function () { return enPlan(gameCalc()); }, render: function () { renderQuests(true); }, state: function () { return { tab: S.tab, session: S.session ? S.session.ids.slice() : null, link: G.link ? { kind: G.link.kind, id: G.link.id } : null }; } };
 
+/* ---------- v75: quests (q75) ----------
+   Three cards are off for now, each behind one switch: set a flag to false and it comes back. The board gains
+   a library of ready-made quests, category icons, ranks on the character card and an Achievements panel. */
+var Q75_HIDE = { struggle: true, nextBest: true, plan: true };
+var Q75 = { lib: false, cat: '', q: '', doc: null, shown: Object.create(null), t: 0 };
+// The row's own "Not done in N weeks. Archive it" line steps aside for the struggle card's quest, because that card
+// used to offer the archive. With the card off, that quest gets the line back instead of no nudge at all.
+idleHtml = (function (inner) { return function (q) {
+  if (Q75_HIDE.struggle && q && q.struggle) { var c = Object.create(q); c.struggle = false; return inner.call(this, c); }
+  return inner.apply(this, arguments);
+}; })(idleHtml);
+var Q75I = {
+  check: 'M3.2 8.6l3.1 3.1 6.5-6.8',
+  heart: 'M8 13.4C5.2 11.6 2.4 9.2 2.4 6.3a2.8 2.8 0 0 1 5.6-.9 2.8 2.8 0 0 1 5.6.9c0 2.9-2.8 5.3-5.6 7.1z',
+  bulb: 'M5.4 10.2A4.3 4.3 0 1 1 10.6 10.2c-.6.5-.9 1.1-.9 1.8H6.3c0-.7-.3-1.3-.9-1.8zM6.3 14h3.4',
+  work: 'M2.4 5.4h11.2v7.8H2.4zM5.9 5.4V3.6h4.2v1.8M2.4 8.8h11.2',
+  house: 'M2.2 7.6L8 2.9l5.8 4.7M3.9 6.4v6.8h8.2V6.4M6.7 13.2V9.9h2.6v3.3',
+  loop: 'M3 8a5 5 0 0 1 8.7-3.4M13 8a5 5 0 0 1-8.7 3.4M11.9 2.3v2.6H9.3M4.1 13.7v-2.6h2.6',
+  card: 'M2.8 3.4h10.4v9.2H2.8zM5.3 6.5h5.4M5.3 9.3h3.4',
+  bolt: 'M9.2 1.8L3.9 9h4.2l-1.3 5.2L12.1 7H7.9z',
+  flame: 'M8 14.2c-2.7 0-4.6-1.9-4.6-4.5 0-2.7 2.3-4 2.7-7 1.4 1 2.1 2.3 2.2 3.8.6-.6 1-1.5 1-2.5 1.7 1.3 3.3 3.3 3.3 5.7 0 2.6-1.9 4.5-4.6 4.5z',
+  steps: 'M1.8 13.8h3.6v-3.5H9V6.8h3.6V3.2h1.8',
+  cal: 'M2.5 3.9h11v9.6h-11zM2.5 6.9h11M5.3 2.3v3M10.7 2.3v3M5.6 10.2l1.6 1.5 3.2-3.2',
+  snow: 'M8 1.6v12.8M2.5 4.8l11 6.4M2.5 11.2l11-6.4M6.2 2.6L8 4.3l1.8-1.7M6.2 13.4L8 11.7l1.8 1.7',
+  peak: 'M1.6 13.4L6.3 5l2.7 4.2 1.7-2.4 3.7 6.6zM6.3 5l1.4 2.2',
+  spark: 'M8 1.8v3.4M8 10.8v3.4M1.8 8h3.4M10.8 8h3.4M3.6 3.6l2.1 2.1M10.3 10.3l2.1 2.1M12.4 3.6l-2.1 2.1M5.7 10.3l-2.1 2.1',
+  cube: 'M8 2.1l5.3 3v5.8L8 13.9l-5.3-3V5.1zM2.7 5.1L8 8l5.3-2.9M8 8v5.9',
+  pin: 'M8 14.1S3.7 9.8 3.7 6.5a4.3 4.3 0 0 1 8.6 0c0 3.3-4.3 7.6-4.3 7.6zM8 5.1a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z',
+  sword: 'M13.3 2.7L6.2 9.8M13.3 2.7l-.5 2.7-6 6M4.1 8.2l3.7 3.7M5.2 10.8l-2.5 2.5',
+  flag: 'M4 14.2V2.4M4 2.9h7.8l-1.9 2.7 1.9 2.7H4',
+  book: 'M2.3 3.4c2.1-.8 3.9-.7 5.7.6v9.2c-1.8-1.3-3.6-1.4-5.7-.6zM13.7 3.4c-2.1-.8-3.9-.7-5.7.6v9.2c1.8-1.3 3.6-1.4 5.7-.6z',
+  hex: 'M8 1.9l5.3 3.05v6.1L8 14.1l-5.3-3.05v-6.1zM8 5.4v5.2M5.7 6.7L8 8l2.3-1.3',
+  medal: 'M5.5 1.8h2l1.3 4.4M10.5 1.8h-2M8 6.4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM8 8.6l.7 1.4 1.5.2-1.1 1 .3 1.5L8 12l-1.4.7.3-1.5-1.1-1 1.5-.2z'
+};
+function q75Svg(k, cls) { return '<svg class="' + (cls || 'q75-ic') + '" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="' + (Q75I[k] || Q75I.check) + '"></path></svg>'; }
+var Q75CAT = { body: { i: 'heart', c: 's3' }, mind: { i: 'bulb', c: 's2' }, work: { i: 'work', c: 'accent' }, home: { i: 'house', c: 's1' } };
+// A habit keeps the loop it had in the library; its kind is still named in the tooltip.
+function q75CatIcon(q) {
+  var hab = q.kind === 'habit' || !!q.isHabit;
+  var k = q.fixed ? { i: 'card', c: 's2' } : hab ? { i: 'loop', c: 'release' } : Q75CAT[q.cat] || Q75CAT.body;
+  var lbl = q.fixed ? 'Recall' : (QCATS[q.cat] ? QCATS[q.cat].label : 'Body') + (hab ? ' habit' : ' quest');
+  return '<span class="q75-ci" style="--k:var(--' + k.c + ')" title="' + esc(lbl) + '">' + q75Svg(k.i) + '</span>';
+}
+function q75N(n) { return String(Math.round(Number(n) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+function q75DoneBar(d, n) { var p = n ? Math.round(Math.min(1, d / n) * 100) : 0; return '<span class="q75-done" role="progressbar" aria-label="Quests done today" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + p + '"><i style="width:' + p + '%"></i></span>'; }
+// With Next best off, one short line says when the list is done or nothing more fits today's fuel.
+function q75EndHtml(g, qs, nb) {
+  if (!Q75_HIDE.nextBest || !qs || !qs.length) return '';
+  var f = g.fuel, t = '', c = 's3', i = 'check';
+  if (g.done >= qs.length) t = '<b>All done for today.</b> Anything else is a bonus.';
+  else if (f && f.done) { t = '<b>Run complete.</b> You’ve spent today’s fuel, so the rest is a bonus.'; i = 'bolt'; }
+  else if (f && !qs.some(function (q) { return !q.isHabit && q.todayN < q.goal && (q.eff || 0) <= f.left; })) {
+    t = '<b>Low on fuel.</b> Nothing left fits your last ' + plural(Math.max(0, f.left), 'pip') + '. Rest counts too.'; c = 's1'; i = 'bolt';
+  }
+  if (!t) return '';
+  return '<p class="q75-end" role="status" style="--c:var(--' + c + ')"><span class="q75-ci" style="--k:var(--' + c + ')">' + q75Svg(i) + '</span><span>' + t + '</span></p>';
+}
+
+/* the quest library: generic, nothing personal. [name, kind, unit, goal, effort 0 to 3, effect, habit: '' | 'up' | 'down'] */
+var Q75_LIB = [
+  ['Go for a walk', 'body', 'min', 20, 1, 'moved'], ['Drink a glass of water', 'body', 'times', 6, 0, 'cared'], ['Stretch', 'body', 'min', 10, 0, 'moved'],
+  ['Eat a proper breakfast', 'body', 'times', 1, 1, 'fed'], ['Eat some fruit or veg', 'body', 'times', 3, 0, 'fed'], ['Exercise', 'body', 'min', 30, 2, 'moved'],
+  ['Shower', 'body', 'times', 1, 1, 'fresh'], ['Brush your teeth', 'body', 'times', 2, 0, 'fresh'], ['Take your vitamins or medicine', 'body', 'times', 1, 0, 'cared'],
+  ['Get some daylight outside', 'body', 'min', 15, 1, 'cared'], ['Lights out on time', 'body', 'times', 1, 1, 'rested'],
+  ['Read', 'mind', 'min', 20, 1, 'studied'], ['Learn something new', 'mind', 'min', 30, 2, 'studied'], ['Practise a skill', 'mind', 'min', 20, 2, 'studied'],
+  ['Practise a language', 'mind', 'min', 15, 1, 'studied'], ['Write in a journal', 'mind', 'min', 10, 1, 'studied'], ['Meditate', 'mind', 'min', 10, 1, 'cared'],
+  ['Listen to a podcast or talk', 'mind', 'min', 20, 0, 'studied'], ['Write down three good things', 'mind', 'times', 1, 0, 'cared'],
+  ['Do your most important task first', 'work', 'times', 1, 2, 'progress'], ['Focused work block', 'work', 'min', 45, 2, 'progress'], ['Plan tomorrow', 'work', 'times', 1, 1, 'progress'],
+  ['Clear your inbox', 'work', 'times', 1, 1, 'tidy'], ['Reply to messages', 'work', 'times', 1, 1, 'tidy'], ['Do one task you’ve been putting off', 'work', 'times', 1, 3, 'courage'],
+  ['Make that phone call', 'work', 'times', 1, 2, 'courage'], ['Update your to-do list', 'work', 'times', 1, 0, 'tidy'], ['Take a proper break', 'work', 'times', 2, 0, 'cared'],
+  ['Tidy up for 10 minutes', 'home', 'times', 1, 1, 'tidy'], ['Do the dishes', 'home', 'times', 1, 1, 'tidy'], ['Make your bed', 'home', 'times', 1, 0, 'tidy'],
+  ['Do a load of washing', 'home', 'times', 1, 1, 'tidy'], ['Cook a meal', 'home', 'times', 1, 2, 'fed'], ['Take the bins out', 'home', 'times', 1, 0, 'tidy'],
+  ['Water the plants', 'home', 'times', 1, 0, 'cared'], ['Clear one surface', 'home', 'times', 1, 1, 'tidy'], ['Sort one bit of post or admin', 'home', 'times', 1, 1, 'courage'],
+  ['Get things ready for tomorrow', 'home', 'times', 1, 0, 'tidy'], ['Hoover one room', 'home', 'times', 1, 1, 'tidy'],
+  ['Took the stairs', 'body', 'times', 1, 0, 'moved', 'up'], ['Did something kind', 'mind', 'times', 1, 0, 'cared', 'up'], ['Mindless scrolling', 'mind', 'times', 1, 0, 'studied', 'down'],
+  ['Sugary drink', 'body', 'times', 1, 0, 'fed', 'down'], ['Snoozed the alarm', 'body', 'times', 1, 0, 'rested', 'down']
+];
+var Q75G = [['body', 'Body'], ['mind', 'Mind'], ['work', 'Work'], ['home', 'Home'], ['habit', 'Habits']];
+function q75GIcon(k) { return k === 'habit' ? { i: 'loop', c: 'release' } : Q75CAT[k]; }
+function q75Words(v) { return String(v || '').toLowerCase().split(/\s+/).filter(Boolean); }
+function q75Hay(d) { return (d[0] + ' ' + (QCATS[d[1]] ? QCATS[d[1]].label : '') + ' ' + (BUFFS[d[5]] ? BUFFS[d[5]].name : '') + (d[6] ? ' habit' : '') + (d[2] === 'min' ? ' minutes' : '')).toLowerCase(); }
+function q75Hit(hay, words) { for (var i = 0; i < words.length; i++) if (hay.indexOf(words[i]) < 0) return false; return true; }
+function q75IdeaMeta(d) {
+  if (d[6]) return d[6] === 'down' ? 'Habit · tally it to do less' : 'Habit · tally it to do more';
+  var b = BUFFS[d[5]];
+  return (d[2] === 'min' ? d[3] + ' min a day' : d[3] === 1 ? 'Once a day' : d[3] + ' times a day') + ' · ' + COST_L[d[4]] + (b ? ' · ' + b.name : '');
+}
+function q75OnBoard() { var o = Object.create(null); questList().forEach(function (q) { if (!q.archived) o[q.name.toLowerCase()] = 1; }); return o; }
+function q75AddRowHtml() {
+  if (Q75.lib) return q75LibHtml();
+  return '<button type="button" class="q75-addq" data-act="q75-lib" aria-expanded="false"><span class="q75-addp" aria-hidden="true">+</span><span><b>Add a quest</b><small>Pick one from ideas, or write your own</small></span></button>';
+}
+// While there are words in the search box, it looks through every group; the chip comes back when it is cleared.
+function q75ViewCat(words) { return words.length ? '' : Q75.cat; }
+function q75Narrow() { try { return !!(window.matchMedia && matchMedia('(max-width: 560px)').matches); } catch (e) { return false; } }
+function q75LibHtml() {
+  if (!Q75.lib) return '';
+  var on = q75OnBoard(), words = q75Words(Q75.q), any = 0, cat = q75ViewCat(words);
+  var chips = [['', 'All']].concat(Q75G).map(function (c) {
+    var ic = c[0] ? q75GIcon(c[0]) : null;
+    return '<button type="button" class="q75-chip" data-act="q75-libcat" data-v="' + c[0] + '" aria-pressed="' + (cat === c[0]) + '"' + (ic ? ' style="--k:var(--' + ic.c + ')"' : '') + '>' + (ic ? q75Svg(ic.i) : '') + c[1] + '</button>';
+  }).join('');
+  var groups = Q75G.map(function (gr) {
+    var items = '', vis = 0, gi = q75GIcon(gr[0]), off = !!cat && cat !== gr[0];
+    Q75_LIB.forEach(function (d, i) {
+      if ((d[6] ? 'habit' : d[1]) !== gr[0]) return;
+      var hay = q75Hay(d), hit = q75Hit(hay, words), have = !!on[d[0].toLowerCase()], ic = d[6] ? gi : Q75CAT[d[1]];
+      if (hit) vis++;
+      items += '<button type="button" class="q75-idea" data-act="q75-add" data-i="' + i + '" data-s="' + esc(hay) + '" style="--k:var(--' + ic.c + ')"' + (hit ? '' : ' hidden') + (have ? ' disabled' : '') + '>' +
+        '<span class="q75-ci">' + q75Svg(ic.i) + '</span><span class="q75-it"><b>' + esc(d[0]) + '</b><small>' + esc(have ? 'On your board' : q75IdeaMeta(d)) + '</small></span><span class="q75-plus" aria-hidden="true">' + (have ? '✓' : '+') + '</span></button>';
+    });
+    if (!off) any += vis;
+    return '<section class="q75-lg" data-g="' + gr[0] + '" data-off="' + (off ? 1 : 0) + '" style="--k:var(--' + gi.c + ')"' + (off || !vis ? ' hidden' : '') + '><h5>' + q75Svg(gi.i) + gr[1] + '</h5><div class="q75-ideas">' + items + '</div></section>';
+  }).join('');
+  // Write your own and Claude sit right under the search box, so they are always in reach above the list.
+  return '<div class="q75-lib" id="q75Lib" role="region" aria-label="Quest ideas"><div class="q75-libhead"><div><h4>Pick a quest</h4><p>Tap one to add it. You can change anything after.</p></div><button type="button" class="btn small quiet" data-act="q75-lib-x">Close</button></div>' +
+    '<input type="search" id="q75LibQ" maxlength="80" autocomplete="off" placeholder="Search ideas, like walk or read" aria-label="Search quest ideas" value="' + esc(Q75.q) + '">' +
+    '<div class="q75-libfoot"><button type="button" class="btn small" data-act="q75-own">Write your own</button>' + aiBoxHtml('q75shape', '') + '</div>' +
+    '<div class="q75-chips" role="group" aria-label="Show ideas for">' + chips + '</div><div class="q75-lgs"' + (any ? '' : ' hidden') + '>' + groups + '</div>' +
+    '<p class="q75-none"' + (any ? ' hidden' : '') + '>Nothing matches. Write your own, or try other words.</p></div>';
+}
+// Typing filters the list in place, so the box keeps focus and nothing redraws.
+function q75LibFilter(v) {
+  Q75.q = String(v || '').slice(0, 80);
+  var words = q75Words(Q75.q), box = document.getElementById('q75Lib'), any = 0, cat = q75ViewCat(words); if (!box) return;
+  Array.prototype.forEach.call(box.querySelectorAll('.q75-chip'), function (c) {
+    var was = c.getAttribute('aria-pressed'), now = String((c.getAttribute('data-v') || '') === cat); if (was === now) return;
+    c.setAttribute('aria-pressed', now);
+    // Chromium does not always repaint an SVG stroke that follows currentColor when only the colour changes, so the
+    // icon is swapped for a fresh copy and paints in its new colour.
+    var s = c.querySelector('svg'); if (s) s.parentNode.replaceChild(s.cloneNode(true), s);
+  });
+  Array.prototype.forEach.call(box.querySelectorAll('.q75-lg'), function (sec) {
+    var vis = 0, off = !!cat && sec.getAttribute('data-g') !== cat;
+    sec.setAttribute('data-off', off ? '1' : '0');
+    Array.prototype.forEach.call(sec.querySelectorAll('.q75-idea'), function (b) { var ok = q75Hit(b.getAttribute('data-s') || '', words); b.hidden = !ok; if (ok) vis++; });
+    sec.hidden = off || !vis; if (!off) any += vis;
+  });
+  var none = box.querySelector('.q75-none'), lgs = box.querySelector('.q75-lgs');
+  if (none) none.hidden = any > 0;
+  if (lgs) lgs.hidden = !any;
+}
+document.addEventListener('input', function (e) { var t = e.target; if (t && t.id === 'q75LibQ') q75LibFilter(t.value); });
+function q75AddQuest(o) {
+  var qs = questList(), id = 'q' + newId();
+  var q = normQuest(id, { name: o.name, cat: o.cat, unit: o.unit, goal: o.goal, cost: o.cost, buff: o.buff, kind: o.kind, plus: o.plus, minus: o.minus, order: qs.length ? qs[qs.length - 1].order + 1 : 1 });
+  G.quests.set(id, questBody(q));
+  store.setDoc('quests', id, questBody(q)).then(null, function (er) { toast(explain(er)); });
+  renderQuests(true);
+  var hit = document.querySelector('#questBody .qlist [data-id="' + id + '"]'), row = hit ? hit.closest('.qrow') : document.querySelector('#questBody [data-qid="' + id + '"]');
+  if (row) { row.classList.add('q75-flash'); setTimeout(function () { row.classList.remove('q75-flash'); }, 1900); }
+  toast('Added “' + q.name + '”. ' + (G.editing ? 'Change anything in its row.' : 'Change it any time with Edit quests.'));
+  return q;
+}
+function q75AddIdea(i) {
+  var d = Q75_LIB[i]; if (!d) return;
+  if (q75OnBoard()[d[0].toLowerCase()]) { toast('“' + d[0] + '” is already on your board.'); return; }
+  q75AddQuest({ name: d[0], cat: d[1], unit: d[2], goal: d[3], cost: d[4], buff: d[5], kind: d[6] ? 'habit' : 'quest', plus: d[6] !== 'down', minus: d[6] === 'down' });
+  q75FocusAfterAdd(i);
+}
+// The idea just added is now disabled and cannot hold focus, so focus moves to the next idea you can still add
+// in the same group (or the one before it), and otherwise to the search box, so you keep your place in the list.
+function q75FocusAfterAdd(i) {
+  var lib = document.getElementById('q75Lib'), me = lib ? lib.querySelector('[data-act="q75-add"][data-i="' + i + '"]') : null, sec = me ? me.closest('.q75-lg') : null, to = null;
+  var can = function (b) { return b && !b.disabled && !b.hidden; };
+  if (sec) {
+    var list = Array.prototype.slice.call(sec.querySelectorAll('.q75-idea')), k = list.indexOf(me), j;
+    for (j = k + 1; j < list.length && !to; j++) if (can(list[j])) to = list[j];
+    for (j = k - 1; j >= 0 && !to; j--) if (can(list[j])) to = list[j];
+  }
+  if (!to && lib) to = lib.querySelector('#q75LibQ');
+  if (to) try { to.focus({ preventScroll: true }); } catch (e) {}
+}
+function q75Focus(sel) { var el = document.querySelector(sel); if (el) try { el.focus({ preventScroll: true }); } catch (e) {} return el; }
+// The board redraws when a save comes back, which replaces the button you were on. Inside the library, the
+// Achievements panel and the add row, focus goes back to the same control after the redraw.
+function q75FocusKey(a) {
+  if (!a || !a.closest || !a.closest('#q75Lib, #q75Ach, .q75-addq, .q75-addrow')) return '';
+  if (a.id) return '#' + a.id;
+  var act = a.getAttribute('data-act'); if (!act) return '';
+  return '#questBody [data-act="' + act + '"]' + (a.hasAttribute('data-i') ? '[data-i="' + a.getAttribute('data-i') + '"]' : '') + (a.hasAttribute('data-v') ? '[data-v="' + a.getAttribute('data-v') + '"]' : '');
+}
+renderQuests = (function (inner) { return function () {
+  var a = document.activeElement, key = q75FocusKey(a), r = inner.apply(this, arguments);
+  if (key && a && !document.contains(a)) { var el = document.querySelector(key); if (el && !el.disabled) try { el.focus({ preventScroll: true }); } catch (e) {} }
+  return r;
+}; })(renderQuests);
+function q75Act(act, t) {
+  if (act === 'q75-lib') {
+    // On a phone the library opens on one group (Body, or the chip you used last) rather than all 44 ideas at once.
+    Q75.lib = !Q75.lib; if (Q75.lib) { Q75.q = ''; Q75.cat = q75Narrow() ? (typeof Q75.last === 'string' ? Q75.last : 'body') : ''; }
+    renderQuests(true);
+    var box = document.getElementById('q75Lib');
+    if (box) { if (box.scrollIntoView) box.scrollIntoView({ block: 'nearest', behavior: calmMotion() ? 'auto' : 'smooth' }); if (window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) q75Focus('#q75LibQ'); }
+    else q75Focus('#questBody [data-act="q75-lib"]');
+  }
+  else if (act === 'q75-lib-x') { Q75.lib = false; renderQuests(true); q75Focus('#questBody [data-act="q75-lib"]'); }
+  else if (act === 'q75-libcat') {
+    // picking a chip clears the search, so the chip is what you see
+    Q75.cat = t.dataset.v || ''; Q75.last = Q75.cat; Q75.q = ''; renderQuests(true);
+    q75Focus('#questBody [data-act="q75-libcat"][data-v="' + Q75.cat + '"]');
+  }
+  else if (act === 'q75-add') q75AddIdea(+t.dataset.i);
+  else if (act === 'q75-own') { Q75.lib = false; G.editing = true; G.reorder = false; questAdd(); }
+  else if (act === 'q75-achfold') { var op = t.getAttribute('aria-expanded') !== 'true'; try { localStorage.setItem(LS_KEY + '-q75-ach', op ? '1' : '0'); } catch (e) {} Q75.achOpen = op; renderQuests(true); q75Focus('#questBody [data-act="q75-achfold"]'); }
+}
+/* Claude shapes what you typed in the search box into a quest; nothing is added until you tap Add it */
+var Q75_BUFFK = ['fed', 'fresh', 'moved', 'rested', 'cared', 'tidy', 'progress', 'courage', 'studied'];
+AIF.q75shape = { label: 'Shape it with Claude', busy: 'Claude is shaping a quest', title: 'A quest to add', c: 's2', quick: true, hint: 'Type what you want to do in the search box, in your own words.',
+  prompt: function (a, meta) {
+    var el = document.getElementById('q75LibQ'), txt = String(el ? el.value : Q75.q).trim();
+    if (txt.length < 3) { meta.need = 'Type what you want to do in the search box first.'; return ''; }
+    return ['Someone is adding a daily quest in a habits app called Second Nature. A quest is one small action done most days, with a goal of a number of times a day or minutes a day, and an effort cost from a small daily fuel. Shape what they typed into one quest.',
+      '', 'Rules:', '- name: a short line under 50 characters that starts with a verb, like "Go for a walk".', '- cat: one of "body", "mind", "work", "home".',
+      '- unit: "times" or "min". goal: a whole number, 1 to 12 times a day, or 5 to 120 minutes a day. Small enough for a bad day.',
+      '- cost: the effort, 0 none, 1 light, 2 medium, 3 heavy.', '- buff: the effect it gives, one of ' + Q75_BUFFK.map(function (k) { return '"' + k + '" (' + BUFFS[k].name + ')'; }).join(', ') + '.',
+      '- kind: "habit" for something to tally rather than finish, such as something to do less of; otherwise "quest". minus: true only for a habit to do less of.',
+      '- why: one plain sentence under 20 words about this shape. No flattery.', '', 'What they typed: ' + aiCap(txt, 160), '',
+      AI_TAIL, '{"name": "…", "cat": "body", "unit": "times", "goal": 1, "cost": 1, "buff": "moved", "kind": "quest", "minus": false, "why": "…"}'].join('\n');
+  },
+  clean: function (d) {
+    d = aiObj(d); if (!d) return null;
+    var name = aiS(d.name, 60).replace(/[.\s]+$/, ''); if (!name) return null;
+    var kind = d.kind === 'habit' ? 'habit' : 'quest', minus = kind === 'habit' && d.minus === true;
+    var q = normQuest('q75x', { name: name, cat: QCATS[d.cat] ? d.cat : 'body', unit: d.unit === 'min' ? 'min' : 'times', goal: d.goal, cost: d.cost, buff: Q75_BUFFK.indexOf(d.buff) >= 0 ? d.buff : '', kind: kind, plus: !minus, minus: minus });
+    return { name: q.name, cat: q.cat, unit: q.unit, goal: q.goal, cost: q.cost, buff: q.buff, kind: q.kind, plus: q.plus, minus: q.minus, why: aiS(d.why, 200) };
+  },
+  body: function (d) {
+    var m = d.kind === 'habit' ? (d.minus ? 'Habit · tally it to do less' : 'Habit · tally it to do more') : (d.unit === 'min' ? d.goal + ' min a day' : plural(d.goal, 'time') + ' a day') + ' · ' + COST_L[d.cost] + ' · ' + BUFFS[d.buff].name;
+    return '<p class="q75-aiq">' + q75CatIcon(d) + '<span><b>' + esc(d.name) + '</b> <span class="muted">' + esc(m) + '</span></span></p>' + (d.why ? '<p>' + esc(d.why) + '</p>' : '') +
+      '<div class="qa"><button type="button" class="btn small primary" data-ai="use" data-k="q75shape" data-a="" data-v="1">Add it</button></div>';
+  },
+  act: function (a, j) { var d = j.data; aiDrop(j.key); q75AddQuest(d); } };
+
+/* ranks: the map XP you already have, on the levelling maths the regions use (level = floor(sqrt(xp / 20))) */
+// Every rank has its own colour, the first one too: green for a sprout, then teal, sky, lavender, violet, pink, gold, red.
+var Q75_RANKS = [['Newcomer', 0, 's3'], ['Apprentice', 2, 'release'], ['Adventurer', 5, 'q75-sky'], ['Ranger', 9, 's2'], ['Knight', 14, 'accent'], ['Hero', 20, 'g3'], ['Champion', 28, 's1'], ['Mythic', 38, 's0']];
+function q75Xp(g) { var x = 0; (g && g.zones || []).forEach(function (z) { x += Number(z.xp) || 0; }); return Math.round(x); }
+function q75Rank(xp) {
+  xp = Math.max(0, Math.round(Number(xp) || 0));
+  var lvl = zoneLevel(xp), i = 0; Q75_RANKS.forEach(function (r, k) { if (lvl >= r[1]) i = k; });
+  var lo = 20 * Q75_RANKS[i][1] * Q75_RANKS[i][1], nx = Q75_RANKS[i + 1] || null, hi = nx ? 20 * nx[1] * nx[1] : lo;
+  return { i: i, name: Q75_RANKS[i][0], c: Q75_RANKS[i][2], lvl: lvl, xp: xp, lo: lo, hi: hi, next: nx ? nx[0] : '', nextLvl: nx ? nx[1] : 0, frac: nx ? Math.max(0, Math.min(1, (xp - lo) / (hi - lo))) : 1, left: nx ? Math.max(1, hi - xp) : 0 };
+}
+function q75Star(cx, cy, R, r) { var p = []; for (var i = 0; i < 10; i++) { var a = Math.PI / 5 * i - Math.PI / 2, d = i % 2 ? r : R; p.push((cx + d * Math.cos(a)).toFixed(1) + ',' + (cy + d * Math.sin(a)).toFixed(1)); } return p.join(' '); }
+// A shield drawn by hand: a sprout for a newcomer, then chevrons, then a star with chevrons, then a crown over a star.
+function q75Emblem(i) {
+  var ch = [0, 1, 2, 3, 0, 1, 2, 0][i] || 0, star = i >= 4, y0 = star ? 30.5 : 21.5 + (3 - ch) * 3.2, mk = '';
+  if (i === 0) mk = '<path class="mk" d="M24 37.5v-10.5"></path><path class="mk thin" d="M24 30.2c-4.3.2-6.8-2.3-7.2-6.1 4.1.1 6.8 2.2 7.2 6.1zM24 28c.3-4.1 3-6.5 7.2-6.7-.2 4.1-3.1 6.5-7.2 6.7z"></path>';
+  for (var k = 0; k < ch; k++) mk += '<path class="mk" d="M15.6 ' + (y0 + k * 6.3).toFixed(1) + 'l8.4 5 8.4-5"></path>';
+  if (star) mk = '<polygon class="st" points="' + q75Star(24, i === 7 ? 30 : 19.8, i === 7 ? 8 : 7.2, i === 7 ? 3.4 : 3) + '"></polygon>' + mk;
+  if (i === 7) mk += '<path class="st" d="M16.2 19.4l-1.3-8.3 5.3 3.7L24 9.2l3.8 5.6 5.3-3.7-1.3 8.3z"></path>';
+  return '<svg class="q75-emb" viewBox="0 0 48 54" aria-hidden="true" focusable="false"><path class="sh" d="M24 2.8c5.8 2.7 11.5 3.9 18.6 3.8.4 17.8-4.7 33.1-18.6 44.4C10.1 39.7 5 24.4 5.4 6.6c7.1.1 12.8-1.1 18.6-3.8z"></path><path class="in" d="M24 8.2c4.4 2 8.9 2.9 14 3-.5 13.7-4.6 25.6-14 34.2-9.4-8.6-13.5-20.5-14-34.2 5.1-.1 9.6-1 14-3z"></path>' + mk + '</svg>';
+}
+// The card's header already shows a title and a legend number, so the rank says what it is ("Quest rank") and
+// counts in XP only, with no second level number to confuse with the legend.
+function q75RankHtml(g) {
+  var r = q75Rank(q75Xp(g)), pct = Math.round(r.frac * 100);
+  var ladder = Q75_RANKS.map(function (x, k) { return '<i class="' + (k < r.i ? 'got' : k === r.i ? 'now' : '') + '" style="--r:var(--' + x[2] + ')" title="' + x[0] + (k ? ' at ' + q75N(20 * x[1] * x[1]) + ' XP' : ', where everyone starts') + '"></i>'; }).join('');
+  return '<div class="q75-rank" id="q75Rank" style="--r:var(--' + r.c + ')" title="Your rank comes from all the XP on your map. Your title above comes from your legend.">' + q75Emblem(r.i) +
+    '<div class="q75-rk"><div class="q75-rn"><span class="q75-k">Quest rank ' + (r.i + 1) + ' of ' + Q75_RANKS.length + '</span><b>' + r.name + '</b><span class="q75-lv">' + q75N(r.xp) + ' map XP</span></div>' +
+    '<div class="q75-rbar" role="progressbar" aria-label="' + (r.next ? 'Progress to ' + r.next : 'Top rank') + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><i style="width:' + pct + '%"></i></div>' +
+    '<div class="q75-rnext">' + (r.next ? q75N(r.left) + ' XP to <b>' + r.next + '</b>' : 'The top rank. Every quest still counts on your map.') + '</div>' +
+    '<div class="q75-ladder" role="img" aria-label="' + esc('Ranks: ' + Q75_RANKS.map(function (x) { return x[0]; }).join(', ')) + '">' + ladder + '</div></div></div>';
+}
+charHtml = (function (inner) { return function (g) {
+  var h = inner.apply(this, arguments), r = '';
+  try { r = q75RankHtml(g); } catch (e) { r = ''; }
+  return r && h.indexOf('<div class="meters">') >= 0 ? h.replace('<div class="meters">', function () { return r + '<div class="meters">'; }) : h;
+}; })(charHtml);
+
+/* achievements: bronze, silver and gold, worked out from what is already stored */
+var Q75_TN = ['Bronze', 'Silver', 'Gold'];
+var Q75_ACH = [
+  { k: 'quests', grp: 'Quests', n: 'Quest keeper', i: 'check', c: 's3', t: [10, 100, 500], u: ['quest done', 'quests done'] },
+  { k: 'body', n: 'Strong body', i: 'heart', c: 's3', t: [10, 50, 200], u: ['body quest done', 'body quests done'] },
+  { k: 'mind', n: 'Busy mind', i: 'bulb', c: 's2', t: [10, 50, 200], u: ['mind quest done', 'mind quests done'] },
+  { k: 'work', n: 'Hard worker', i: 'work', c: 'accent', t: [10, 50, 200], u: ['work quest done', 'work quests done'] },
+  { k: 'home', n: 'Home maker', i: 'house', c: 's1', t: [10, 50, 200], u: ['home quest done', 'home quests done'] },
+  { k: 'runs', n: 'Full tank', i: 'bolt', c: 's1', t: [3, 20, 100], u: ['full run', 'full runs'] },
+  { k: 'runrow', n: 'On a roll', i: 'flame', c: 's0', t: [3, 7, 21], u: ['full run in a row', 'full runs in a row'], best: 1 },
+  { k: 'trail', n: 'Trailblazer', i: 'steps', c: 's3', t: [7, 31, 66], u: ['day on one quest', 'days on one quest'], best: 1 },
+  { k: 'days', grp: 'Showing up', n: 'Regular', i: 'cal', c: 'release', t: [7, 60, 250], u: ['day you showed up', 'days you showed up'] },
+  { k: 'dayrow', n: 'Streak', i: 'flame', c: 's1', t: [3, 14, 60], u: ['day in a row', 'days in a row'], best: 1 },
+  { k: 'pushes', n: 'Snowballer', i: 'snow', c: 'release', t: [10, 100, 500], u: ['Snowball push', 'Snowball pushes'] },
+  { k: 'pushday', n: 'Avalanche', i: 'peak', c: 'release', t: [3, 6, 10], u: ['push in one day', 'pushes in one day'], best: 1 },
+  { k: 'recalls', grp: 'Recall and chunks', n: 'Memory', i: 'spark', c: 's2', t: [25, 250, 1000], u: ['recall', 'recalls'] },
+  { k: 'recallrow', n: 'Sharp streak', i: 'flame', c: 's2', t: [3, 14, 45], u: ['day in a row with a recall', 'days in a row with a recall'], best: 1 },
+  { k: 'chunks', n: 'Builder', i: 'cube', c: 'accent', t: [5, 25, 100], u: ['chunk built', 'chunks built'] },
+  { k: 'locked', n: 'Landmarks', i: 'pin', c: 's2', t: [1, 10, 40], u: ['chunk locked in', 'chunks locked in'] },
+  { k: 'felled', grp: 'Journey', n: 'Dread feller', i: 'sword', c: 's0', t: [1, 5, 15], u: ['dread felled', 'dreads felled'] },
+  { k: 'summits', n: 'Summiteer', i: 'flag', c: 'accent', t: [1, 3, 8], u: ['expedition finished', 'expeditions finished'] },
+  { k: 'chapters', n: 'Storyteller', i: 'book', c: 's1', t: [1, 4, 12], u: ['chapter closed', 'chapters closed'] },
+  { k: 'regions', n: 'Explorer', i: 'hex', c: 's3', t: [3, 5, 6], u: ['map region charted', 'map regions charted'] }
+];
+var Q75_AK = Object.create(null); Q75_ACH.forEach(function (a) { Q75_AK[a.k] = a; });
+// Each count, and the day it first reached each tier, so medals earned before this existed keep their real date.
+function q75Stats(g) {
+  var today = todayStr(), v = Object.create(null), at = Object.create(null), qm = Object.create(null), walk = Object.create(null), zs = Object.create(null);
+  Q75_ACH.forEach(function (a) { v[a.k] = 0; at[a.k] = ['', '', '']; });
+  function hit(k, day) { var a = Q75_AK[k]; for (var t = 0; t < 3; t++) if (v[k] >= a.t[t] && !at[k][t]) at[k][t] = isDate(day) && day <= today ? day : today; }
+  function dated(k, days) { days.filter(isDate).sort().forEach(function (d) { v[k]++; hit(k, d); }); }
+  G.quests.forEach(function (d, id) { qm[id] = normQuest(id, d); });
+  var prev = '', row = 0, lastRun = '', runRow = 0, lastRec = '', recRow = 0;
+  (g.dr || []).forEach(function (r) {
+    var D = r.day, c = r.c || {}, tr = r.tr || {};
+    Object.keys(tr).forEach(function (id) {
+      if (id === 'q-recall') return;
+      walk[id] = (walk[id] || 0) + (Number(tr[id]) || 0); if (walk[id] > v.trail) v.trail = walk[id];
+      var q = qm[id]; if (tr[id] !== 1 || (q && q.kind === 'habit')) return;
+      v.quests++; if (q && Q75CAT[q.cat]) v[q.cat]++;
+    });
+    ['quests', 'body', 'mind', 'work', 'home', 'trail'].forEach(function (k) { hit(k, D); });
+    v.days++; row = prev && diffDays(D, prev) === 1 ? row + 1 : 1; prev = D; if (row > v.dayrow) v.dayrow = row; hit('days', D); hit('dayrow', D);
+    if (r.run) { v.runs++; runRow = lastRun && diffDays(D, lastRun) === 1 ? runRow + 1 : 1; lastRun = D; if (runRow > v.runrow) v.runrow = runRow; hit('runs', D); hit('runrow', D); }
+    var p = Number(c.p) || 0; v.pushes += p; if (p > v.pushday) v.pushday = p; hit('pushes', D); hit('pushday', D);
+    var rc = Number(c.r) || 0; if (rc > 0) { v.recalls += rc; recRow = lastRec && diffDays(D, lastRec) === 1 ? recRow + 1 : 1; lastRec = D; if (recRow > v.recallrow) v.recallrow = recRow; hit('recalls', D); hit('recallrow', D); }
+    Object.keys(r.xp || {}).forEach(function (z) { if (ZONEK[z] && r.xp[z] > 0 && !zs[z]) { zs[z] = 1; v.regions++; } }); hit('regions', D);
+  });
+  v.trail = Math.floor(v.trail);
+  var built = []; S.chunks.forEach(function (c) { if (!c.starter) built.push(isDate(c.created) ? c.created : today); }); dated('chunks', built);
+  v.locked = (g.landmarks || []).length; hit('locked', today);
+  dated('felled', (g.felled || []).map(function (b) { return b.done; }));
+  dated('summits', (g.summits || []).map(function (x) { return x.done || today; }));
+  var ch = []; G.chapters.forEach(function (d, id) { var c = normChapter(id, d); if (c.closed) ch.push(c.review.on || (isDate(id) ? addDays(id, 6) : today)); }); dated('chapters', ch.map(function (d) { return d > today ? today : d; }));
+  return { v: v, at: at };
+}
+function q75Doc() {
+  var d = G.meta.get('ach'), got = Object.create(null);
+  [d && d.got, Q75.doc && Q75.doc.got].forEach(function (src) {
+    if (!src || typeof src !== 'object') return;
+    Q75_ACH.forEach(function (a) {
+      var x = src[a.k]; if (!Array.isArray(x)) return;
+      var cur = got[a.k] || (got[a.k] = ['', '', '']);
+      for (var t = 0; t < 3; t++) if (isDate(x[t]) && (!cur[t] || x[t] < cur[t])) cur[t] = x[t];
+    });
+  });
+  return { has: !!(d && d.got && typeof d.got === 'object') || !!Q75.doc, got: got };
+}
+// Kept medals stay: a tier counts if it is stored or if the numbers reach it now. fresh = reached but not stored yet.
+function q75Ach(g) {
+  var st = q75Stats(g), doc = q75Doc(), today = todayStr(), list = [], fresh = [];
+  Q75_ACH.forEach(function (a) {
+    var gv = doc.got[a.k] || ['', '', ''], tiers = [], n = 0;
+    for (var t = 0; t < 3; t++) {
+      var dd = gv[t] || '';
+      if (!dd && st.v[a.k] >= a.t[t]) { dd = st.at[a.k][t] || today; fresh.push({ a: a, t: t, d: dd }); }
+      tiers.push(dd); if (dd) n = t + 1;
+    }
+    list.push({ a: a, v: st.v[a.k], tiers: tiers, n: n });
+  });
+  return { list: list, fresh: fresh, has: doc.has, got: doc.got };
+}
+function q75AchMsg(news, first) {
+  function one(f) { return f.a.n + ', ' + Q75_TN[f.t].toLowerCase(); }
+  if (news.length === 1) { var f = news[0], k = f.a.t[f.t]; return 'Medal earned: ' + one(f) + '. ' + q75N(k) + ' ' + (k === 1 ? f.a.u[0] : f.a.u[1]) + '.'; }
+  if (first) return 'You’ve already earned ' + news.length + ' medals. See them on Quests.';
+  return news.length + ' new medals: ' + listJoin(news.slice(0, 4).map(one)) + (news.length > 4 ? ' and more' : '') + '.';
+}
+// A medal toast wears a small medal in the tier's colour; the next toast, whatever it says, takes it off.
+toast = (function (inner) { return function () { var el = document.getElementById('toast'); if (el && el.hasAttribute('data-q75m')) el.removeAttribute('data-q75m'); return inner.apply(this, arguments); }; })(toast);
+function q75MedalToast(msg, tier) { toast(msg); var el = document.getElementById('toast'); if (el) el.setAttribute('data-q75m', String(tier)); }
+// Once the data is in, new tiers are saved in one write to meta/ach and announced once, but only after the save
+// worked: if it fails, the error stays on screen and the medals are announced on a later load instead.
+function q75AchCheck() {
+  if (!S.ready || S.readOnly || G.dead || !gameReady() || !G.ready.meta || !store || !store.setDoc) return null;
+  var s = q75Ach(gameCalc()); if (!s.fresh.length) return s;
+  var body = { v: 1, got: {} };
+  Q75_ACH.forEach(function (a) { var x = (s.got[a.k] || ['', '', '']).slice(); s.fresh.forEach(function (f) { if (f.a.k === a.k) x[f.t] = f.d; }); if (x[0] || x[1] || x[2]) body.got[a.k] = x; });
+  Q75.doc = body; G.meta.set('ach', body);   // kept either way, so this session does not try again in a loop
+  var news = s.fresh.filter(function (f) { var key = f.a.k + ':' + f.t; if (Q75.shown[key]) return false; Q75.shown[key] = 1; return true; });
+  var msg = news.length ? q75AchMsg(news, !s.has) : '', top = 0;
+  news.forEach(function (f) { if (f.t > top) top = f.t; });
+  store.setDoc('meta', 'ach', body).then(function () {
+    if (msg) setTimeout(function () { q75MedalToast(msg, top); }, s.has ? 2200 : 700);
+  }, function (e) { toast(explain(e)); });
+  return s;
+}
+function q75AchSoon() { clearTimeout(Q75.t); Q75.t = setTimeout(function () { try { q75AchCheck(); } catch (e) {} }, 450); }
+afterData = (function (inner) { return function () { var r = inner.apply(this, arguments); q75AchSoon(); return r; }; })(afterData);
+// Open by default only once something is earned and there is room for it; on a phone, or with nothing earned yet,
+// the panel starts folded so it does not push the Journal down. Your own choice is remembered.
+function q75AchOpen(earned) {
+  if (typeof Q75.achOpen === 'boolean') return Q75.achOpen;
+  var v = null; try { v = localStorage.getItem(LS_KEY + '-q75-ach'); } catch (e) {}
+  if (v === '1') return true; if (v === '0') return false;
+  return earned > 0 && !q75Narrow();
+}
+function q75Medal(a, t) {
+  var m = t < 0 ? 'muted' : ['q75-bz', 'q75-sv', 'q75-au'][t];
+  return '<svg class="q75-medal" viewBox="0 0 48 58" aria-hidden="true" focusable="false" style="--m:var(--' + m + ')">' +
+    '<path class="rb" d="M14.2 2.4h8.4l5.9 20.2h-8.6z"></path><path class="rb2" d="M33.8 2.4h-8.4l-5.9 20.2h8.6z"></path>' +
+    '<circle class="dk" cx="24" cy="38" r="17"></circle><circle class="dr" cx="24" cy="38" r="12.8"></circle>' +
+    (t >= 2 ? '<path class="gl" d="M12.3 28.6a14.5 14.5 0 0 1 5.4-5.2"></path>' : '') +
+    '<g class="mi" transform="translate(12.8 26.8) scale(1.4)"><path d="' + (Q75I[a.i] || Q75I.check) + '"></path></g></svg>';
+}
+function q75MedalCard(x) {
+  var a = x.a, n = x.n, nx = a.t[Math.min(2, n)], pct = n >= 3 ? 100 : Math.round(Math.min(1, x.v / nx) * 100);
+  function unit(k) { return q75N(k) + ' ' + (k === 1 ? a.u[0] : a.u[1]); }
+  var line = n >= 3 ? 'All three earned' : Q75_TN[n] + ' at ' + unit(nx), when = n ? Q75_TN[n - 1] + ' earned ' + human(x.tiers[n - 1]) : 'Not earned yet';
+  return '<div class="q75-card ' + (n ? 'got t' + (n - 1) : 'off') + '" data-k="' + a.k + '" data-n="' + n + '" style="--c:var(--' + a.c + ')" title="' + esc(when) + '">' + q75Medal(a, n - 1) +
+    '<div><div class="q75-cn"><b>' + esc(a.n) + '</b>' + (n ? '<span class="q75-tier t' + (n - 1) + '">' + Q75_TN[n - 1] + '</span>' : '') + '</div>' +
+    '<div class="q75-cv">' + (a.best ? 'Best: ' : '') + esc(unit(x.v)) + '</div>' +
+    '<div class="q75-bar" role="progressbar" aria-label="' + esc(a.n + ': ' + line) + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><i style="width:' + pct + '%"></i></div>' +
+    '<div class="q75-cnext">' + esc(line) + '</div></div></div>';
+}
+function q75AchHtml(g) {
+  var s; try { s = q75Ach(g); } catch (e) { return ''; }
+  var open, cnt = [0, 0, 0], total = 0, body = '', grp = '';
+  s.list.forEach(function (x) { for (var t = 0; t < x.n; t++) cnt[t]++; total += x.n; });
+  open = q75AchOpen(total);
+  var head = '<div class="q75-achhead"><div><h3>' + q75Svg('medal') + 'Achievements</h3><p class="muted small">' + total + ' of ' + (3 * Q75_ACH.length) + ' medals. Each one comes in bronze, silver and gold, and stays once earned.</p></div>' +
+    '<div class="q75-tally">' + [0, 1, 2].map(function (t) { return '<span class="q75-tl t' + t + '"><i aria-hidden="true"></i>' + cnt[t] + ' ' + Q75_TN[t].toLowerCase() + '</span>'; }).join('') + '</div>' +
+    '<button type="button" class="btn small quiet" data-act="q75-achfold" aria-expanded="' + open + '" aria-controls="q75AchBody">' + (open ? 'Hide' : 'Show medals') + '</button></div>';
+  if (open) {
+    s.list.forEach(function (x) {
+      if (x.a.grp) { if (grp) body += '</div></div>'; grp = x.a.grp; body += '<div class="q75-ag"><h4 class="q75-agh">' + grp + '</h4><div class="q75-grid">'; }
+      body += q75MedalCard(x);
+    });
+    body = '<div id="q75AchBody">' + body + '</div></div></div>';
+  }
+  return '<section class="panel q75-ach' + (open ? '' : ' shut') + '" id="q75Ach">' + head + body + '</section>';
+}
+window.__q75Test = { HIDE: Q75_HIDE, Q75: Q75, LIB: Q75_LIB, ACH: Q75_ACH, RANKS: Q75_RANKS, rank: q75Rank, emblem: q75Emblem, endHtml: q75EndHtml,
+  xp: function () { return q75Xp(gameCalc()); }, ach: function () { return q75Ach(gameCalc()); }, stats: function () { return q75Stats(gameCalc()); }, check: q75AchCheck,
+  card: q75MedalCard, toast: function (m) { toast(m); }, medalToast: q75MedalToast, render: function () { renderQuests(true); }, today: function () { renderToday(); }, g: function () { return gameCalc(); }, state: function () { return { tab: S.tab, editing: G.editing, lib: Q75.lib }; } };
+
 function renderQuests(force) {
   if (QD) return;                                   // v50: never redraw the board under a drag
   var host = $('#questBody'); if (!host) return;
@@ -7736,7 +8465,7 @@ function renderQuests(force) {
   var g = gameCalc(); if (g.newTraits.length) saveTraits(g.newTraits); if (g.newStars.length) starsSoon();
   host.innerHTML = runHtml(g) +
     '<div class="qgrid"><div class="qcol qmain">' + questsHtml(g) + '</div>' +
-    '<div class="qcol qside">' + charHtml(g) + journalHtml(g) + '</div></div>';
+    '<div class="qcol qside">' + charHtml(g) + q75AchHtml(g) + journalHtml(g) + '</div></div>';
 }
 
 /* ---------- actions ---------- */
@@ -8351,32 +9080,322 @@ function scrollOn(day) { var s = null; G.items.forEach(function (d, id) { var it
 
 /* the companion: a fox whose mood mirrors how you're looking after yourself, never hurt, never sad at you */
 function careList(g) { var map = { fed: 'fed', rested: 'rested', moved: 'stretched', fresh: 'fresh', cared: 'looked after' }, out = []; g.effects.forEach(function (f) { if (map[f.key]) out.push(map[f.key]); }); return out; }
-function companionMood(g) {
-  var today = todayStr(), last = g.dr.length ? g.dr[g.dr.length - 1].day : '', care = careList(g).length;
-  if (last !== today && g.home && !g.home.scroll) return 'sleep';
-  if (g.fuel && g.fuel.done) return 'proud';
-  if (care >= 2) return 'happy';
-  if (care === 1 || last === today) return 'content';
-  return 'curious';
+/* ---------- v75 pet75: the companion's feelings ----------
+   The fox reads what you did today and lately (quest kinds, recalls and how they went, Snowball pushes,
+   dreads, chunks, streaks, gaps, fuel, time of day, weekends) and feels up to two things at once. The
+   first feeling in PET75_ORDER that applies leads; the next one that fits is blended in ("proud, but
+   sleepy"). The line names what caused the lead feeling, and no feeling is ever a telling-off. */
+var PET75 = { clock: 0, open: false };
+var PET75_ORDER = ['hopeful', 'proud', 'determined', 'lonely', 'sleepy', 'content', 'restless', 'energetic', 'bright', 'thoughtful', 'curious', 'focused', 'cosy', 'cared', 'steady', 'gentle', 'playful', 'eager', 'calm'];
+// A streak milestone is big news for that one day, so steady moves up to just after determined: 7, 14, 21,
+// 30 and 75 days, then every 50 and every year. On other days it keeps its place and often blends in.
+function pet75Mile(n) { return n >= 7 && (n === 7 || n === 14 || n === 21 || n === 30 || n === 75 || n % 50 === 0 || n % 365 === 0); }
+var PET75_LOW = { sleepy: 1, restless: 1, thoughtful: 1, lonely: 1, gentle: 1 };
+// feelings that never blend: a sleepy fox does not ask for a walk or bounce about, and a balanced day is not restless
+var PET75_CLASH = { 'sleepy|restless': 1, 'sleepy|energetic': 1, 'sleepy|eager': 1, 'content|restless': 1 };
+// c: the colour token. feelB: the lead line when a second feeling follows. tail: how a second feeling is said.
+var PET75_F = {
+  hopeful: { w: 'Hopeful', c: 'release', feel: 'I’m so glad you’re here.' },
+  proud: { w: 'Proud', c: 'spark', feel: 'I’m strutting about camp.' },
+  determined: { w: 'Determined', c: 'accent', feel: 'I’m pushing right beside you.' },
+  lonely: { w: 'Missing you', c: 'muted', feel: 'I kept the lantern lit. Nothing is lost.', tail: 'But I missed you.' },
+  sleepy: { w: 'Sleepy', c: 'load', feel: 'I’m curling up. Rest counts too.', tail: 'But I’m getting sleepy.' },
+  content: { w: 'Content', c: 'link', feel: 'I feel in balance.' },
+  restless: { w: 'Restless', c: 'g3', feel: 'My paws want a walk. Five minutes would do.', feelB: 'My paws want a short walk.', tail: 'But my paws want a walk.' },
+  energetic: { w: 'Energetic', c: 's0', feel: 'I feel light.' },
+  bright: { w: 'Bright', c: 'spark', feel: 'I feel bright. Ideas are sticking.' },
+  thoughtful: { w: 'Thoughtful', c: 'release', feel: 'Tough ones grow the most. I’m mulling them over.', tail: 'And I’m mulling things over.' },
+  curious: { w: 'Curious', c: 'accent', feel: 'I want to know more.' },
+  focused: { w: 'Focused', c: 'release', feel: 'Ears forward. We’re getting it done.' },
+  cosy: { w: 'Cosy', c: 'spark', feel: 'I’ve made us a nest.' },
+  cared: { w: 'Looked after', c: 'g3', feel: 'I feel looked after too.', feelB: 'I feel looked after.', tail: 'And I feel looked after.' },
+  steady: { w: 'Steady', c: 'link', feel: 'I like our rhythm.' },
+  gentle: { w: 'Gentle', c: 'release', feel: 'We’ll go softly. Small still counts.', tail: 'We’ll go softly.' },
+  playful: { w: 'Playful', c: 'accent', feel: 'Want to play?' },
+  eager: { w: 'Eager', c: 'g3', feel: 'I’m ready when you are.' },
+  calm: { w: 'Calm', c: 'muted', feel: 'I’m resting by the fire, ready when you are.' }
+};
+// tokens that look alike in one theme or the other count as one colour family
+var PET75_FAM = { spark: 'a', s1: 'a', load: 'v', s2: 'v', g1: 'v', accent: 'p', g2: 'p', link: 'g', s3: 'g', release: 't', g3: 'k', s0: 'k', muted: 'm' };
+var PET75_ZC = { wilds: 'body', archive: 'mind', frontier: 'work', hearth: 'home' };
+// effects that look after you rather than move you or teach you
+var PET75_CARE = { fed: 1, fresh: 1, rested: 1, cared: 1 };
+
+function pet75Now() { return PET75.clock ? new Date(PET75.clock) : new Date(); }
+// What today and the last few days hold, read from the events and the day archive.
+function pet75Sig(g) {
+  var today = todayStr(), now = pet75Now(), hr = now.getHours(), wd = now.getDay(), yd = addDays(today, -1);
+  var s = { hr: hr, weekend: wd === 0 || wd === 6, q: { body: [], mind: [], work: [], home: [] }, mindQ: [], workQ: [], moved: [], care: [], careFx: [], rec: 0, good: 0, hard: 0, practice: 0, built: [], pushes: 0, hits: [], felled: [], finished: [], summits: [], run: false,
+    fuel: g.run && g.run.fuel ? g.run.fuel : '', active: false, streak: 0, gap: 0, home: 0, movedY: false, sitY: false, sit: 0, cats: [] };
+  var units = Object.create(null), last = Object.create(null), hits = [], fell = Object.create(null);
+  G.events.forEach(function (e) {
+    if (!e || typeof e !== 'object' || e.day !== today) return;
+    var k = e.kind, lb = str(e.label, 80).trim(), ref = typeof e.ref === 'string' ? e.ref : '';
+    if (k === 'quest' && ref) { units[ref] = (units[ref] || 0) + (Number(e.n) || 0); last[ref] = e; }
+    else if (k === 'recall') { var v = clampN(((Number(e.pts) || 6) - 6) / 4, 0, 3); s.rec++; if (v >= 2) s.good++; else s.hard++; }
+    else if (k === 'practice') s.practice++;
+    else if (k === 'build') s.built.push(lb);
+    else if (k === 'push') s.pushes++;
+    else if (k === 'finish') s.finished.push(lb || 'a snowball');
+    else if (k === 'hit') hits.push({ t: lb || 'a dread', ref: ref });
+    else if (k === 'felled') { s.felled.push(lb || 'a dread'); if (ref) fell['r' + ref] = 1; fell['l' + (lb || 'a dread')] = 1; }
+    else if (k === 'summit') s.summits.push(lb || 'an expedition');
+    else if (k === 'run') s.run = true;
+    else if (k === 'step' && PET75_ZC[e.zone]) s.q[PET75_ZC[e.zone]].push({ t: lb || 'a step', step: true });
+  });
+  // a hit on a dread you went on to beat today is part of beating it, so it is not named twice
+  hits.forEach(function (h) { if (!(h.ref && fell['r' + h.ref]) && !fell['l' + h.t]) s.hits.push(h.t); });
+  Object.keys(units).forEach(function (id) {
+    if (!(units[id] > 0)) return;
+    var e = last[id], q = questById(id), cat = q ? q.cat : PET75_ZC[e.zone] || '', buff = q ? q.buff : e.buff, nm = q ? q.name : str(e.label, 80).trim() || 'a quest';
+    if (!cat) return;
+    // part: today's amount is still short of the goal, so it is a start, not a tick
+    var x = { t: nm, part: !!q && units[id] < q.goal, min: !!q && q.unit === 'min', care: !!PET75_CARE[buff] };
+    s.q[cat].push(x);
+    if (x.care && cat !== 'home') s.care.push(x);
+    else if (cat === 'body' && buff === 'moved') s.moved.push(x);
+  });
+  s.q.body.forEach(function (x) { if (x.step) s.moved.push(x); });
+  s.mindQ = s.q.mind.filter(function (x) { return !x.care; });
+  s.workQ = s.q.work.filter(function (x) { return !x.care; });
+  if (g.fuel && g.fuel.done) s.run = true;
+  careList(g).forEach(function (c) { if (c !== 'stretched') s.careFx.push(c); });
+  ['body', 'mind', 'work', 'home'].forEach(function (c) { if (s.q[c].length || (c === 'mind' && (s.rec || s.practice || s.built.length))) s.cats.push(c); });
+  // time at a desk: study, work, recall and practice. A Snowball push can be anything, so it does not count.
+  s.sit = s.mindQ.length + s.workQ.length + s.rec + s.practice + s.built.length;
+  var days = Object.create(null), prev = '';
+  (g.dr || []).forEach(function (r) { if (r && r.n > 0 && isDate(r.day)) { days[r.day] = r; if (r.day < today) prev = r.day; } });
+  s.active = !!days[today];
+  if (s.active) { var d = today; while (days[d]) { s.streak++; d = addDays(d, -1); } }
+  s.gap = prev ? diffDays(today, prev) : 0;
+  // the Welcome back banner is showing: the fox says the same number of days it does
+  if (g.home && g.home.left && !g.home.scroll) s.home = Math.max(1, Number(g.home.away) || 0);
+  var ry = days[yd], rx = ry && ry.xp ? ry.xp : {};
+  s.movedY = !!rx.wilds;
+  s.sitY = !!ry && !rx.wilds && !rx.hearth && !!(rx.archive || rx.frontier);
+  return s;
 }
-function foxSvg(mood, name) {
-  var up = mood === 'happy' || mood === 'proud';
-  var eyes = mood === 'sleep' ? '<path class="fx-line" d="M26.2 22.4q1.8 1.4 3.6 0M34.2 22.4q1.8 1.4 3.6 0"></path>' : up ? '<path class="fx-line" d="M26.2 23.2q1.8 -2 3.6 0M34.2 23.2q1.8 -2 3.6 0"></path>' : '<circle class="fx-eye" cx="28" cy="22.4" r="1.5"></circle><circle class="fx-eye" cx="36" cy="22.4" r="1.5"></circle>';
-  var tail = up ? 'M43 42C52 40 58 30 55 17C53 28 48 34 41 36Z' : mood === 'sleep' ? 'M43 45C52 49 44 55 27 53C36 52 41 50 43 45Z' : 'M43 44C56 44 60 32 53 24C55 34 49 40 41 39Z';
-  var extra = mood === 'sleep' ? '<text class="fx-z" x="45" y="13">z</text><text class="fx-z sm" x="50" y="8">z</text>' : mood === 'proud' ? '<path class="fx-star" d="M51 3l1.4 2.9 3.2.5-2.3 2.2.5 3.2-2.8-1.5-2.8 1.5.5-3.2-2.3-2.2 3.2-.5z"></path>' : mood === 'happy' ? '<path class="fx-spark" d="M12 12v5M9.5 14.5h5M53 8v4M51 10h4"></path>' : '';
-  return '<svg class="fox fox-' + mood + '" viewBox="0 0 64 56" role="img" aria-label="' + esc(name) + ', a small fox, ' + ({ sleep: 'asleep', proud: 'proud', happy: 'happy', content: 'content', curious: 'curious' })[mood] + '">' +
-    '<path class="fx-fur" d="' + tail + '"></path><ellipse class="fx-fur" cx="32" cy="41" rx="12.5" ry="10.5"></ellipse><ellipse class="fx-belly" cx="32" cy="44" rx="6.5" ry="6.5"></ellipse>' +
-    '<g' + (mood === 'curious' ? ' transform="rotate(-9 32 24)"' : '') + '><path class="fx-fur" d="M22.5 18L21 5.5L30 13Z M41.5 18L43 5.5L34 13Z"></path><path class="fx-ear" d="M23.5 15.5L22.6 8.5L27.5 12.8Z M40.5 15.5L41.4 8.5L36.5 12.8Z"></path><circle class="fx-fur" cx="32" cy="23.5" r="11"></circle><ellipse class="fx-belly" cx="32" cy="28.5" rx="6" ry="4.2"></ellipse><circle class="fx-eye" cx="32" cy="26.4" r="1.4"></circle>' + eyes + '</g>' + extra + '</svg>';
+function pet75Q(t) { return '“' + t + '”'; }
+function pet75Did(x) {
+  if (x.step) return 'you took the step ' + pet75Q(x.t);
+  if (x.part) return (x.min ? 'you put time into ' : 'you made a start on ') + pet75Q(x.t);
+  return 'you ticked off ' + pet75Q(x.t);
 }
+// Every feeling that applies right now, each with the plain reason for it, in priority order.
+function pet75List(s) {
+  var out = [];
+  function add(k, cause, feel) { out.push(feel ? { k: k, cause: cause, feel: feel } : { k: k, cause: cause }); }
+  if (s.home || (s.active && s.gap >= 3)) add('hopeful', (s.active ? 'you came back after ' : 'you’re back after ') + plural(s.home || s.gap - 1, 'day') + ' away');
+  if (s.felled.length) add('proud', 'you beat ' + pet75Q(s.felled[0]));
+  else if (s.summits.length) add('proud', 'you reached the top of ' + pet75Q(s.summits[0]));
+  else if (s.finished.length) add('proud', 'you finished ' + pet75Q(s.finished[0]));
+  else if (s.run) add('proud', s.fuel === 'low' ? 'you finished your run on a low day' : 'your run is done');
+  if (s.hits.length) add('determined', 'you landed a hit on ' + pet75Q(s.hits[0]));
+  else if (s.pushes) add('determined', s.pushes === 1 ? 'you pushed a snowball' : s.pushes === 2 ? 'you pushed a snowball twice' : 'you pushed a snowball ' + s.pushes + ' times');
+  // full days away, the way the Welcome back banner counts them
+  if (!s.active && !s.home && s.gap >= 3) add('lonely', 'you’ve been away for ' + plural(s.gap - 1, 'day'));
+  if (s.hr >= 22 || s.hr < 5) add('sleepy', s.hr < 5 ? 'it’s the small hours' : 'it’s late');
+  if (s.cats.length >= 3) add('content', 'you did something for ' + listJoin(s.cats) + ' today');
+  // restless only when nothing active happened today: no movement, no home job, no step outdoors
+  if (!s.moved.length && !s.q.home.length && s.hr >= 14 && s.sit >= 2) add('restless', s.sitY ? 'you’ve mostly been sitting, today and yesterday' : 'you’ve mostly been sitting today');
+  if (s.moved.length) add('energetic', pet75Did(s.moved[0]) + (s.movedY ? ', two days running' : ''));
+  if (s.rec && s.good > s.hard) add('bright', s.rec === 1 ? 'your recall went well' : s.good + ' of ' + s.rec + ' recalls went well');
+  if (s.rec && s.hard >= s.good) add('thoughtful', s.rec === 1 ? 'that recall was a tough one' : 'some recalls were foggy', s.rec === 1 ? 'Tough ones grow the most. I’m mulling it over.' : '');
+  if (s.built.length) add('curious', 'you built a new chunk' + (s.built[0] ? ', ' + pet75Q(s.built[0]) : ''));
+  else if (s.mindQ.length) add('curious', pet75Did(s.mindQ[0]));
+  else if (s.practice) add('curious', 'you practised');
+  if (s.workQ.length) add('focused', pet75Did(s.workQ[0]));
+  if (s.q.home.length) add('cosy', pet75Did(s.q.home[0]));
+  if (s.care.length) add('cared', pet75Did(s.care[0]));
+  else if (s.careFx.length) add('cared', 'you’re ' + listJoin(s.careFx));
+  if (s.streak >= 3) add('steady', 'that’s ' + s.streak + ' days in a row');
+  if (s.fuel === 'low' && !s.run) add('gentle', 'you picked low fuel today');
+  if (s.weekend) add('playful', 'it’s the weekend');
+  if (s.fuel === 'full' && !s.run) add('eager', 'you picked full fuel');
+  else if (!s.active && s.hr >= 5 && s.hr < 11) add('eager', 'it’s a fresh morning');
+  add('calm', s.active ? 'things are quiet for now' : 'it’s a quiet day so far');
+  var order = PET75_ORDER.slice();
+  if (pet75Mile(s.streak)) { order.splice(order.indexOf('steady'), 1); order.splice(order.indexOf('determined') + 1, 0, 'steady'); }
+  out.sort(function (a, b) { return order.indexOf(a.k) - order.indexOf(b.k); });
+  return out;
+}
+// Which second feeling can sit with the first. Missing you only pairs with sleepy; calm never pairs.
+function pet75Pair(a, b) {
+  if (a === 'calm' || b === 'calm') return false;
+  if (a === 'lonely' || b === 'lonely') return a === 'sleepy' || b === 'sleepy';
+  return !PET75_CLASH[a + '|' + b] && !PET75_CLASH[b + '|' + a];
+}
+function pet75Cap(t) { return t.charAt(0).toUpperCase() + t.slice(1); }
+// One cause per line: what led to the first feeling, how it feels, then the second feeling as a short tail.
+// "How I feel" names the cause of every feeling.
+function pet75Line(p, sec) {
+  var f = PET75_F[p.k], feel = p.feel || (sec && f.feelB) || f.feel;
+  if (!sec) return pet75Cap(p.cause) + '. ' + feel;
+  var f2 = PET75_F[sec.k];
+  return pet75Cap(p.cause) + '. ' + feel + ' ' + (f2.tail || 'And I’m ' + f2.w.toLowerCase() + ' too.');
+}
+function pet75Read(g) {
+  var s = pet75Sig(g), list = pet75List(s), p = list[0], sec = null;
+  for (var i = 1; i < list.length; i++) if (pet75Pair(p.k, list[i].k)) { sec = list[i]; break; }
+  return { s: s, list: list, p: p, sec: sec, line: pet75Line(p, sec) };
+}
+
+/* the art: one fox, many moods. Each feeling sets the ears, eyes, mouth, tail, pose, props and motion;
+   a blended second feeling always adds one prop (in its own corner, or the mirrored one if that is taken),
+   and sleepy, restless or missing-you also shade the face or the tail. */
+var PET75_ART = {
+  hopeful: { ears: 'perk', eyes: 'up', mouth: 'smile', blush: 1, tail: 'up', props: ['sun'], move: 'bob' },
+  proud: { head: 'proud', ears: 'up', eyes: 'happy', mouth: 'smile', blush: 1, tail: 'up', props: ['star', 'sparks'], move: 'bob' },
+  determined: { ears: 'perk', eyes: 'focus', mouth: 'set', tail: 'rest', props: ['snowball'] },
+  lonely: { head: 'low', ears: 'down', eyes: 'down', mouth: 'flat', tail: 'wrap', props: ['lantern'], move: 'breathe' },
+  sleepy: { pose: 'lie', ears: 'soft', eyes: 'closed', tail: 'lie', props: ['zz', 'moon'], move: 'breathe' },
+  content: { ears: 'soft', eyes: 'happy', mouth: 'smile', blush: 1, tail: 'wrap', props: ['flower'], move: 'breathe' },
+  restless: { ears: 'tilt', eyes: 'side', mouth: 'wobble', tail: 'rest', tailMove: 'swish', props: ['dust', 'squiggle'] },
+  energetic: { ears: 'perk', eyes: 'wide', mouth: 'open', tail: 'up', tailMove: 'wag', props: ['speed', 'sparks'], move: 'hop' },
+  bright: { ears: 'perk', eyes: 'wide', mouth: 'smile', tail: 'rest', props: ['bulb'] },
+  thoughtful: { head: 'tilt2', ears: 'soft', eyes: 'up', mouth: 'wobble', tail: 'rest', props: ['dots'] },
+  curious: { head: 'tilt', ears: 'tilt', eyes: 'quiz', tail: 'rest', props: ['book'] },
+  focused: { ears: 'perk', eyes: 'intent', mouth: 'flat', tail: 'rest', props: ['clip'] },
+  cosy: { ears: 'soft', eyes: 'closed', mouth: 'smile', blush: 1, tail: 'wrap', props: ['scarf', 'mug'] },
+  cared: { ears: 'soft', eyes: 'happy', mouth: 'smile', blush: 1, tail: 'rest', props: ['heart'] },
+  steady: { ears: 'up', eyes: 'open', mouth: 'smile', tail: 'rest', props: ['prints'] },
+  gentle: { pose: 'lie', ears: 'soft', eyes: 'soft', mouth: 'smile', blush: 1, tail: 'lie', props: ['feather'] },
+  playful: { head: 'bow', ears: 'perk', eyes: 'wink', mouth: 'tongue', tail: 'up', tailMove: 'wag', props: ['ball'] },
+  eager: { ears: 'perk', eyes: 'wide', mouth: 'open', tail: 'up', tailMove: 'wag', props: ['alert'], move: 'bob' },
+  calm: { ears: 'up', eyes: 'open', tail: 'wrap', props: [], move: 'breathe' }
+};
+var PET75_TAIL = {
+  rest: 'M43 44C56 44 60 32 53 24C55 34 49 40 41 39Z',
+  up: 'M43 42C52 40 58 30 55 17C53 28 48 34 41 36Z',
+  wrap: 'M43 45C52 49 44 55 27 53C36 52 41 50 43 45Z',
+  lie: 'M46 47C57 48 58 55 46 56.5C40 57 34 56.5 30 55.5C39 55 46 53.5 46 47Z'
+};
+// ears as [base x, base y, tip x, tip y, base x, base y] for the left ear; the right one is mirrored.
+// down: the ears hang against the sides of the head, tips pointing down and out, and the crown stays round.
+var PET75_EARS = { up: [22.5, 18, 21, 5.5, 30, 13], perk: [22.5, 18, 19.5, 2.5, 30, 13], soft: [22.5, 18, 17, 7.5, 29.5, 12.5], down: [21, 22.6, 12.4, 28.4, 25.4, 14.4], fold: [22.5, 18, 15, 10.5, 29.5, 13] };
+var PET75_HEAD = { proud: 'translate(0 -1.5)', tilt: 'rotate(-10 32 24)', tilt2: 'rotate(7 32 24)', bow: 'translate(-1 4) rotate(-8 32 24)', low: 'translate(0 1.5) rotate(3 32 24)', lie: 'translate(-4 8)' };
+function pet75Paw(x, y) { return '<ellipse class="p-print" cx="' + x + '" cy="' + y + '" rx="2.1" ry="1.7"></ellipse><circle class="p-print" cx="' + (x - 2) + '" cy="' + (y - 2.5) + '" r="0.8"></circle><circle class="p-print" cx="' + x + '" cy="' + (y - 3.3) + '" r="0.8"></circle><circle class="p-print" cx="' + (x + 2) + '" cy="' + (y - 2.5) + '" r="0.8"></circle>'; }
+// [corner, art, spare corner, art for the spare corner]. With no art of its own, the spare is the prop mirrored.
+var PET75_PROPS = {
+  sun: ['tl', '<circle class="p-sun" cx="7" cy="6" r="4"></circle><path class="p-rays pa-spin" d="M7 -0.5v-2.2M7 12.5v2.2M0.5 6h-2.2M13.5 6h2.2M2.4 1.4l-1.5-1.5M11.6 1.4l1.5-1.5M2.4 10.6l-1.5 1.5M11.6 10.6l1.5 1.5"></path>', 'tr'],
+  star: ['tr', '<path class="p-star pa-twinkle" d="M53 1l1.5 3.1 3.4.5-2.5 2.4.6 3.4-3-1.6-3 1.6.6-3.4-2.5-2.4 3.4-.5z"></path>', 'tl'],
+  sparks: ['tl', '<path class="p-spark pa-twinkle2" d="M9 10v5M6.5 12.5h5M16 1v3.4M14.3 2.7h3.4"></path>', 'tr'],
+  snowball: ['br', '<path class="p-mot" d="M65.5 44h4M66.5 48.5h5M65.5 53h3"></path><g class="pa-roll"><circle class="p-snow" cx="57" cy="48.5" r="6.5"></circle><path class="p-snowshade" d="M61.98 44.32A6.5 6.5 0 0 1 52.82 53.48A7.6 7.6 0 0 0 61.98 44.32Z"></path><path class="p-snowline" d="M53.5 46q2-2.6 5-1.8M56 52.5q2.2.6 4-1"></path></g>'],
+  // energetic: tapered streaks behind the body, long in the middle, and a whoosh under the back paw
+  speed: ['bl', '<path class="p-mot3" d="M18.6 33.2L12.2 32.5Q11.5 33.2 12.2 33.9Z"></path><path class="p-mot3" d="M17.4 39.2L6.2 38.3Q5.3 39.2 6.2 40.1Z"></path><path class="p-mot3" d="M18 45.2L10.4 44.5Q9.6 45.2 10.4 45.9Z"></path><path class="p-whoosh" d="M13 52.6q3.6 2.4 9.2 1.6"></path>'],
+  bulb: ['tr', '<path class="p-ray2" d="M55 -3v-2M61.4 0l1.6-1.4M48.6 0l-1.6-1.4M63.4 6h2M46.6 6h-2"></path><circle class="p-bulb pa-glow" cx="55" cy="6" r="4.3"></circle><rect class="p-bulbbase" x="53" y="9.8" width="4" height="3" rx="0.8"></rect><path class="p-bulbline" d="M53.8 5.4l1.2 1.4 1.2-1.4"></path>', 'tl'],
+  dots: ['tr', '<circle class="p-dot pa-d1" cx="45.5" cy="11.5" r="1.3"></circle><circle class="p-dot pa-d2" cx="49.5" cy="7.2" r="1.9"></circle><circle class="p-dot pa-d3" cx="55" cy="2" r="2.8"></circle>', 'tl'],
+  book: ['front', '<path class="p-book" d="M21.5 49.5q5.2-2.2 10.5.4q5.3-2.6 10.5-.4v6.2q-5.2-2.2-10.5.4q-5.3-2.6-10.5-.4z"></path><path class="p-bookline" d="M32 50v6.4M24 51.8q3-1.1 6 0M34 51.8q3-1.1 6 0M24 54q3-1.1 6 0M34 54q3-1.1 6 0"></path>'],
+  clip: ['br', '<rect class="p-card" x="50" y="37" width="12" height="15" rx="1.8"></rect><rect class="p-clip" x="53.5" y="35.3" width="5" height="3.2" rx="0.9"></rect><path class="p-tick" d="M52.3 42.2l1.3 1.3 2.3-2.5M52.3 47.6l1.3 1.3 2.3-2.5"></path><path class="p-bookline" d="M57.2 42.6h3M57.2 48h3"></path>', 'bl',
+    '<rect class="p-card" x="2" y="37" width="12" height="15" rx="1.8"></rect><rect class="p-clip" x="5.5" y="35.3" width="5" height="3.2" rx="0.9"></rect><path class="p-tick" d="M4.3 42.2l1.3 1.3 2.3-2.5M4.3 47.6l1.3 1.3 2.3-2.5"></path><path class="p-bookline" d="M9.2 42.6h3M9.2 48h3"></path>'],
+  mug: ['br', '<path class="p-steam pa-steam" d="M53.5 39q-1.6-2 0-4t0-4M57.5 39q-1.6-2 0-4t0-4"></path><path class="p-mug" d="M51 41.5h9.5v7.5a3.2 3.2 0 0 1-3.2 3.2h-3.1a3.2 3.2 0 0 1-3.2-3.2z"></path><path class="p-handle" d="M60.5 43.6a2.6 2.6 0 0 1 0 5.2"></path>', 'bl'],
+  scarf: ['neck', '<path class="p-scarf" d="M22.3 32.2q9.7 5.6 19.4 0l.9 3.3q-10.6 5.8-21.2 0z"></path><path class="p-scarf" d="M35.5 36.4l2.2 6.3 3.2-1.1-1.8-5.9z"></path>'],
+  flower: ['br', '<g class="pa-sway"><path class="p-stem" d="M57 56q-1.2-5 0-9.5"></path><path class="p-leaf" d="M57 52.5q3.2-3.4 5.6-1.2q-2.4 3.2-5.6 1.2z"></path><circle class="p-petal" cx="57" cy="42.6" r="2"></circle><circle class="p-petal" cx="59.3" cy="44.3" r="2"></circle><circle class="p-petal" cx="58.4" cy="47" r="2"></circle><circle class="p-petal" cx="55.6" cy="47" r="2"></circle><circle class="p-petal" cx="54.7" cy="44.3" r="2"></circle><circle class="p-core" cx="57" cy="45" r="1.5"></circle></g>', 'bl'],
+  dust: ['bl', '<g class="pa-puff"><circle class="p-dust" cx="16" cy="54" r="1.9"></circle><circle class="p-dust" cx="11.5" cy="52.3" r="1.4"></circle><circle class="p-dust" cx="8" cy="54.5" r="1.1"></circle></g>', 'br'],
+  squiggle: ['tl', '<path class="p-mot2" d="M3 15q1.5-2 3 0t3 0t3 0M6 21q1.5-2 3 0t3 0"></path>', 'tr'],
+  zz: ['tr', '<g class="pa-float"><text class="p-z" x="47" y="12">z</text><text class="p-z sm" x="52.5" y="5.5">z</text></g>', 'tl', '<g class="pa-float"><text class="p-z" x="11" y="12">z</text><text class="p-z sm" x="6.5" y="5.5">z</text></g>'],
+  moon: ['tl', '<path class="p-moon" d="M8.5 -1.5a7 7 0 1 0 6.5 10a5.6 5.6 0 1 1-6.5-10z"></path>', 'tr'],
+  lantern: ['br', '<g class="p-glows"><circle class="p-glow" cx="57" cy="42.5" r="10"></circle><circle class="p-glow g2" cx="57" cy="42.5" r="7"></circle><circle class="p-glow g3" cx="57" cy="42.5" r="4.4"></circle></g><path class="p-hang" d="M57 33.5v-3"></path><path class="p-cap" d="M53 36h8l-1.3-2.4h-5.4z"></path><rect class="p-glass" x="53.6" y="36" width="6.8" height="10" rx="1.6"></rect><path class="p-flame pa-flicker" d="M57 44.4q-2.4-2.4 0-5.6q2.4 3.2 0 5.6z"></path><path class="p-cap" d="M53 46h8v1.8h-8z"></path>', 'bl'],
+  // gentle: a small feather drifting down in the free top corner, well clear of the lying head
+  feather: ['tr', '<g class="pa-drift"><path class="p-feather" d="M47.5 16.5q1.8-9.6 12.6-13q-1.2 9.8-12.6 13z"></path><path class="p-rib" d="M46.2 18q4.6-7.4 12.2-12.8"></path></g>', 'tl'],
+  ball: ['bl', '<g class="pa-bounce"><circle class="p-ball" cx="9" cy="50" r="5.6"></circle><path class="p-ballline" d="M3.6 48.6q5.4 3.2 10.8 0"></path><circle class="p-shine" cx="7" cy="47" r="1.1"></circle></g>', 'br'],
+  alert: ['top', '<path class="p-ray3" d="M15 4.5l-3-2M49 4.5l3-2M32 -1v-3.8"></path>'],
+  prints: ['bl', pet75Paw(4.5, 55.5) + pet75Paw(12.5, 49.5) + pet75Paw(4.5, 42.5), 'br'],
+  heart: ['tr', '<path class="p-heart pa-beat" d="M54 13c-4.2-3.1-5.8-5.4-5.8-7.4a2.9 2.9 0 0 1 5.8-1.1a2.9 2.9 0 0 1 5.8 1.1c0 2-1.6 4.3-5.8 7.4z"></path>', 'tl']
+};
+// what a blended second feeling brings: a prop, and for a few, a touch on the face or tail
+var PET75_MIX = { sleepy: { eyes: 'half', props: ['zz', 'moon'] }, restless: { tailMove: 'swish', props: ['dust', 'squiggle'] }, lonely: { ears: 'down', props: ['lantern'] } };
+function pet75Ear(c, flip) {
+  var x = function (v) { return flip ? 64 - v : v; }, cx = (c[0] + c[2] + c[4]) / 3, cy = (c[1] + c[3] + c[5]) / 3;
+  function pt(i, k) { var px = cx + k * (c[i] - cx) + 0.14 * (c[2] - cx), py = cy + k * (c[i + 1] - cy) + 0.14 * (c[3] - cy); return x(px).toFixed(1) + ' ' + py.toFixed(1); }
+  return ['M' + x(c[0]) + ' ' + c[1] + 'L' + x(c[2]) + ' ' + c[3] + 'L' + x(c[4]) + ' ' + c[5] + 'Z', 'M' + pt(0, 0.55) + 'L' + pt(2, 0.55) + 'L' + pt(4, 0.55) + 'Z'];
+}
+// eyes are drawn a quarter larger than the head's first sketch, so a face still reads at card size
+function pet75Eyes(k) {
+  function eye(x, y, r, sh) { r = r * 1.25; sh = sh * 1.25; return '<circle class="p-eye" cx="' + x + '" cy="' + y + '" r="' + r.toFixed(2) + '"></circle>' + (sh ? '<circle class="p-shine" cx="' + (x + r * 0.35).toFixed(2) + '" cy="' + (y - r * 0.38).toFixed(2) + '" r="' + sh.toFixed(2) + '"></circle>' : ''); }
+  if (k === 'wide') return eye(28, 22.4, 1.9, 0.7) + eye(36, 22.4, 1.9, 0.7);
+  if (k === 'happy') return '<path class="p-line" d="M26 23.3q2-2.3 4 0M34 23.3q2-2.3 4 0"></path>';
+  if (k === 'closed') return '<path class="p-line" d="M26 22.4q2 1.6 4 0M34 22.4q2 1.6 4 0"></path>';
+  if (k === 'half') return '<ellipse class="p-eye" cx="28" cy="23.2" rx="1.75" ry="1.05"></ellipse><ellipse class="p-eye" cx="36" cy="23.2" rx="1.75" ry="1.05"></ellipse><path class="p-line" d="M25.9 22.1q2.1 1 4.2 0M33.9 22.1q2.1 1 4.2 0"></path>';
+  if (k === 'soft') return '<ellipse class="p-eye" cx="28" cy="23" rx="1.6" ry="1.4"></ellipse><ellipse class="p-eye" cx="36" cy="23" rx="1.6" ry="1.4"></ellipse><path class="p-brow" d="M26 20.6q2-1.1 4 0M34 20.6q2-1.1 4 0"></path>';
+  if (k === 'focus') return eye(28, 22.8, 1.35, 0.45) + eye(36, 22.8, 1.35, 0.45) + '<path class="p-brow" d="M25.6 19.1l4.2 1.5M38.4 19.1l-4.2 1.5"></path>';
+  if (k === 'intent') return eye(28, 22.7, 1.4, 0.5) + eye(36, 22.7, 1.4, 0.5) + '<path class="p-brow" d="M25.9 19.6h4M34.1 19.6h4"></path>';
+  if (k === 'up') return eye(28.4, 21.8, 1.5, 0.55) + eye(36.4, 21.8, 1.5, 0.55) + '<path class="p-brow" d="M25.9 18.6q2.1-1.5 4.2 0M33.9 18.6q2.1-1.5 4.2 0"></path>';
+  if (k === 'down') return eye(28, 23.5, 1.3, 0) + eye(36, 23.5, 1.3, 0) + '<path class="p-brow" d="M25.8 20.3l4-1.3M38.2 20.3l-4-1.3"></path>';
+  if (k === 'wink') return '<path class="p-line" d="M26 23.3q2-2.3 4 0"></path>' + eye(36, 22.4, 1.6, 0.6);
+  if (k === 'side') return eye(29.1, 22.4, 1.45, 0.5) + eye(37.1, 22.4, 1.45, 0.5);
+  // curious: one brow up, as if asking a question
+  if (k === 'quiz') return eye(28, 22.6, 1.45, 0.55) + eye(36, 22.4, 1.6, 0.6) + '<path class="p-brow" d="M34 18.6q2.2-1.8 4.3-.3"></path>';
+  return eye(28, 22.4, 1.5, 0.55) + eye(36, 22.4, 1.5, 0.55);
+}
+var PET75_MOUTH = {
+  smile: '<path class="p-line" d="M29.6 29.2q2.4 2 4.8 0"></path>',
+  open: '<path class="p-mouth" d="M29.7 28.9q2.3 3.8 4.6 0z"></path>',
+  tongue: '<path class="p-mouth" d="M29.7 28.9q2.3 3.8 4.6 0z"></path><ellipse class="p-tongue" cx="32.8" cy="31.4" rx="1.3" ry="1.2"></ellipse>',
+  flat: '<path class="p-line" d="M30.2 29.7h3.6"></path>',
+  wobble: '<path class="p-line" d="M29.6 29.9q1.2-1 2.4 0t2.4 0"></path>',
+  set: '<path class="p-line" d="M30 29.9q2-1 4 0"></path>'
+};
+function pet75Svg(k, k2, name, label) {
+  var a = PET75_ART[k] || PET75_ART.calm, m = k2 && PET75_MIX[k2] ? PET75_MIX[k2] : null, used = Object.create(null), props = [];
+  var ears = m && m.ears ? m.ears : a.ears, eyes = m && m.eyes && a.eyes !== 'closed' ? m.eyes : a.eyes, tailMove = m && m.tailMove ? m.tailMove : a.tailMove, lie = a.pose === 'lie';
+  // the lead feeling's first prop, then one from the second feeling (its own corner if free, else the spare
+  // corner), then the lead's other props where there is still room
+  function place(p, spare) {
+    var d = PET75_PROPS[p]; if (!d) return false;
+    if (!spare) { if (used[d[0]]) return false; used[d[0]] = 1; props.push([d[0], d[1]]); return true; }
+    if (!d[2] || used[d[2]]) return false;
+    used[d[2]] = 1; props.push([d[2], d[3] || '<g transform="matrix(-1 0 0 1 64 0)">' + d[1] + '</g>']); return true;
+  }
+  var own = a.props || [];
+  if (own.length) place(own[0]);
+  if (k2) {
+    var extra = m ? m.props : (PET75_ART[k2] || {}).props || [], ok = false, i;
+    for (i = 0; i < extra.length && !ok; i++) ok = place(extra[i]);
+    for (i = 0; i < extra.length && !ok; i++) ok = place(extra[i], true);
+  }
+  own.slice(1).forEach(function (p) { place(p); });
+  var e1, e2;
+  if (ears === 'tilt') { e1 = pet75Ear(PET75_EARS.perk, false); e2 = pet75Ear(PET75_EARS.fold, true); }
+  else { var ec = PET75_EARS[ears] || PET75_EARS.up; e1 = pet75Ear(ec, false); e2 = pet75Ear(ec, true); }
+  var neck = '', front = '', back = '';
+  props.forEach(function (p) { if (p[0] === 'neck') neck += p[1]; else if (p[0] === 'front') front += p[1]; else back += p[1]; });
+  var head = '<g' + (PET75_HEAD[lie ? 'lie' : a.head] ? ' transform="' + PET75_HEAD[lie ? 'lie' : a.head] + '"' : '') + '>' +
+    '<path class="p-fur" d="' + e1[0] + ' ' + e2[0] + '"></path><path class="p-inner" d="' + e1[1] + ' ' + e2[1] + '"></path>' +
+    '<circle class="p-fur" cx="32" cy="23.5" r="11"></circle>' + (a.blush ? '<ellipse class="p-blush" cx="24.7" cy="26.7" rx="2.1" ry="1.3"></ellipse><ellipse class="p-blush" cx="39.3" cy="26.7" rx="2.1" ry="1.3"></ellipse>' : '') +
+    '<ellipse class="p-belly" cx="32" cy="28.5" rx="6" ry="4.2"></ellipse><ellipse class="p-nose" cx="32" cy="26.5" rx="1.6" ry="1.25"></ellipse>' + pet75Eyes(eyes) + (PET75_MOUTH[a.mouth] || '') + neck + '</g>';
+  var body = lie ? '<ellipse class="p-fur" cx="33" cy="47.5" rx="16" ry="7.2"></ellipse><ellipse class="p-belly" cx="30" cy="50" rx="7" ry="3.4"></ellipse><ellipse class="p-paw" cx="19.5" cy="54" rx="3.4" ry="1.8"></ellipse><ellipse class="p-paw" cx="26.5" cy="54.6" rx="3.4" ry="1.8"></ellipse>'
+    : '<ellipse class="p-fur" cx="32" cy="41" rx="12.5" ry="10.5"></ellipse><ellipse class="p-belly" cx="32" cy="44" rx="6.5" ry="6.5"></ellipse><ellipse class="p-paw" cx="27" cy="51.3" rx="3.2" ry="1.9"></ellipse><ellipse class="p-paw" cx="37" cy="51.3" rx="3.2" ry="1.9"></ellipse>';
+  var tail = '<g' + (tailMove ? ' class="pa-' + tailMove + '"' : '') + '><path class="p-fur" d="' + (PET75_TAIL[a.tail] || PET75_TAIL.rest) + '"></path></g>';
+  var fox = '<g class="p-all' + (a.move ? ' pa-' + a.move : '') + '">' + tail + body + head + front + '</g>';
+  return '<svg class="fox pet75-fox pet75-f-' + k + (k2 ? ' pet75-f2-' + k2 : '') + '" viewBox="-4 -6 80 64" role="img" aria-label="' + esc(name + ', a small fox, ' + label) + '">' + back + fox + '</svg>';
+}
+function pet75Card(r, nameHtml, nm) {
+  var p = r.p, sec = r.sec, f = PET75_F[p.k], f2 = sec ? PET75_F[sec.k] : null;
+  var label = f2 ? f.w.toLowerCase() + (PET75_LOW[sec.k] && !PET75_LOW[p.k] ? ', but ' : ' and ') + f2.w.toLowerCase() : f.w.toLowerCase();
+  // both chips in title case; a second feeling in the same colour family as the first gets an outline chip
+  var same = f2 && (PET75_FAM[f.c] || f.c) === (PET75_FAM[f2.c] || f2.c);
+  var chips = '<span class="pet75-chips"><span class="pet75-chip" style="--c:var(--' + f.c + ')">' + esc(f.w) + '</span>' + (f2 ? '<span class="pet75-chip' + (same ? ' pet75-chip-o' : '') + '" style="--c:var(--' + f2.c + ')">' + esc(f2.w) + '</span>' : '') + '</span>';
+  var shown = r.list.filter(function (x) { return x.k !== 'calm'; }); if (!shown.length) shown = r.list.slice(0, 1);
+  var how = '<details class="pet75-how"' + (PET75.open ? ' open' : '') + '><summary>How I feel</summary><ul>' + shown.map(function (x) {
+    return '<li style="--c:var(--' + PET75_F[x.k].c + ')"><i aria-hidden="true"></i><span><b>' + esc(PET75_F[x.k].w) + '</b> because ' + esc(x.cause) + '.</span></li>';
+  }).join('') + '</ul><p class="pet75-note">My mood follows what you do. It’s never a score, and a quiet day costs nothing.</p></details>';
+  return '<div class="companion pet75" data-feel="' + p.k + '"' + (sec ? ' data-feel2="' + sec.k + '"' : '') + ' style="--pc:var(--' + f.c + ')">' + pet75Svg(p.k, sec ? sec.k : '', nm, 'feeling ' + label) +
+    '<div class="pet75-txt"><div class="compn">' + nameHtml + chips + '</div><p class="small pet75-line">' + esc(r.line) + '</p>' + how + '</div></div>';
+}
+try { document.addEventListener('toggle', function (e) { var t = e.target; if (t && t.classList && t.classList.contains('pet75-how')) PET75.open = !!t.open; }, true); } catch (e) {}
+
+// v75: the fox's lead feeling (the old five moods grew into the set above)
+function companionMood(g) { return pet75Read(g).p.k; }
+function foxSvg(mood, name) { return pet75Svg(PET75_ART[mood] ? mood : 'calm', '', name, 'feeling ' + (PET75_F[mood] || PET75_F.calm).w.toLowerCase()); }
 function companionHtml(g) {
-  var cm = G.meta.get('companion') || {}, nm = str(cm.name, 24).trim() || 'Pip', mood = companionMood(g), care = careList(g);
-  var line = mood === 'sleep' ? nm + ' is asleep by the fire, and wakes the moment you do anything today.'
-    : mood === 'proud' ? nm + ' is strutting about camp. Today’s run is done.'
-    : mood === 'happy' ? 'You’re ' + listJoin(care) + ', so ' + nm + ' is ready to roam.'
-    : mood === 'content' ? nm + ' is curled up nearby, content.' : nm + ' is sniffing the air, curious where today goes.';
+  var cm = G.meta.get('companion') || {}, nm = str(cm.name, 24).trim() || 'Pip', r = pet75Read(g);
   var nameHtml = G.compEdit ? '<input type="text" id="compName" maxlength="24" value="' + esc(nm) + '" aria-label="Your fox’s name">' : '<button class="cname sm" data-act="comp-name" title="Rename your fox">' + esc(nm) + '</button>';
-  return '<div class="companion">' + foxSvg(mood, nm) + '<div><div class="compn">' + nameHtml + '</div><p class="small">' + esc(line) + '</p></div></div>';
+  return pet75Card(r, nameHtml, nm);
 }
+window.__pet75Test = { P: PET75, F: PET75_F, FAM: PET75_FAM, ART: PET75_ART, ORDER: PET75_ORDER, EARS: PET75_EARS, sig: pet75Sig, list: pet75List, read: pet75Read, line: pet75Line, svg: pet75Svg, card: pet75Card, pair: pet75Pair, mile: pet75Mile,
+  G: G, calc: function () { return gameCalc(); }, render: function () { renderQuests(true); }, mood: function (g) { return companionMood(g); }, fox: function (m, n) { return foxSvg(m, n); } };
+
 function saveCompName(v) {
   if (!G.compEdit) return; G.compEdit = false;
   var nm = str(v, 24).trim() || 'Pip';
@@ -9910,6 +10929,7 @@ document.addEventListener('click', function (e) {
   else if (act === 'al-mapply') alMaintApply(id, t, +(t.dataset.v || 0));
   else if (act === 'al-mdrop') alMaintDrop(id, t);
   else if (act === 'al-mopen') { setTab('insight'); var alm = $('#alMaint'); if (alm && alm.scrollIntoView) alm.scrollIntoView({ block: 'start' }); }
+  else if (act.slice(0, 4) === 'q75-') q75Act(act, t);
   else if (act === 'p-reveal' && S.practice) { S.practice.revealed = true; renderPractice(); }
   else if (act === 'p-mark') markPractice(+t.dataset.v);
   else if (act === 'p-skip' && S.practice && !S.practice.revealed && S.practice.queue.length > 1) { S.practice.queue.push(S.practice.queue.shift()); renderPractice(); }
@@ -11057,6 +12077,88 @@ details.settings .stack{padding-bottom:16px}
   .brand span{display:none}
 }
 
+/* v75 (sb75): the goal stays pinned, next-step suggestions, loud alarm toggle.
+   Secondary text uses --sb75-mu: the page's own --muted when it resolves, otherwise a softened ink. */
+:host{--sb75-mu:var(--muted,color-mix(in srgb,currentColor 64%,transparent))}
+.sb75-pin{position:relative;display:flex;flex-direction:column;gap:8px;margin:2px 0 6px;padding:12px 14px 12px 18px;border-radius:18px;background:var(--panel);border:1.5px solid var(--line);box-shadow:var(--shadow);overflow:hidden;container-type:inline-size}
+.sb75-pin::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:linear-gradient(180deg,var(--ice),var(--accent))}
+.sb75-row{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.sb75-k{flex:none;min-width:56px;text-align:center;font:700 .7rem/1 "Atkinson Hyperlegible",sans-serif;text-transform:uppercase;letter-spacing:.1em;padding:6px 8px;border-radius:999px;margin-top:2px;background:var(--ice-soft);color:var(--ink);border:1.5px solid var(--ice)}
+.sb75-n .sb75-k{background:var(--warm-soft);border-color:var(--accent)}
+.sb75-v{flex:1;min-width:0;font:600 1.06rem/1.32 Fredoka,system-ui,sans-serif;overflow-wrap:anywhere}
+.sb75-clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sb75-v.sb75-none{font:italic 400 .98rem/1.35 "Atkinson Hyperlegible",sans-serif;color:var(--sb75-mu)}
+.sb75-ed{flex:none;min-height:44px;padding:4px 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--sb75-mu);font:600 .9rem Fredoka,system-ui,sans-serif;cursor:pointer;margin:-9px -4px -7px 0}
+.sb75-ed:hover{color:inherit;border-color:var(--ice)}
+.sb75-gform{align-items:center}
+.sb75-gform .sb75-k{margin-top:0}
+.sb75-gform input[type=text]{flex:1;min-width:0;font-size:1rem;padding:9px 12px;border-radius:12px}
+.sb75-gform .sb75-ed{margin:0;color:inherit;border-color:var(--ice)}
+.sb75-trail{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:start}
+.sb75-tk{min-width:56px;text-align:center;padding-top:8px;font:700 .7rem/1 "Atkinson Hyperlegible",sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--sb75-mu)}
+.sb75-tl{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0}
+.sb75-step{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:3px 10px 3px 4px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:.86rem;overflow-wrap:anywhere}
+.sb75-step i{position:relative;width:16px;height:16px;border-radius:50%;background:var(--good);flex:none}
+.sb75-step i::after{content:"";position:absolute;left:5px;top:4.5px;width:6px;height:3px;border-left:2px solid var(--panel);border-bottom:2px solid var(--panel);transform:rotate(-45deg)}
+.sb75-moren{font-size:.82rem;color:var(--sb75-mu);white-space:nowrap}
+.sb75-mn{display:none}
+@container (max-width:480px){ .sb75-step.sb75-old,.sb75-moren.sb75-mw{display:none} .sb75-moren.sb75-mn{display:inline} }
+/* with the pin showing, the ball's stage drops its empty growing room (the ball's view is cropped to fit it) */
+.sb75-pin:not([hidden]) ~ #screens .stage{min-height:0}
+.sb75-pin:not([hidden]) ~ #screens :is([data-screen="win"],[data-screen="afterPrize"]){gap:14px}
+.sb75-next{display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:20px;background:linear-gradient(160deg,var(--ice-soft),var(--panel) 60%);border:1.5px solid var(--line);box-shadow:var(--shadow)}
+.sb75-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.sb75-title{font:600 1.18rem/1.2 Fredoka,system-ui,sans-serif}
+.sb75-src{display:inline-flex;align-items:center;gap:6px;font:700 .72rem/1 "Atkinson Hyperlegible",sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--ink);padding:5px 10px;border-radius:999px;background:var(--panel);border:1.5px solid var(--ice)}
+.sb75-src svg{width:14px;height:14px;color:var(--ice)}
+.sb75-list{display:flex;flex-direction:column;gap:10px}
+/* colour means the kind of step: a new part (and Claude's ideas) violet, the same step green, wrapping up amber */
+.sb75-sug{--c:var(--accent);display:grid;grid-template-columns:1fr auto;grid-template-areas:"tag min" "t t";gap:6px 10px;align-items:center;width:100%;text-align:left;padding:12px 14px 13px 16px;border-radius:16px;border:2px solid var(--line);border-left:7px solid var(--c);background:var(--panel);color:var(--ink);cursor:pointer;font:inherit;transition:transform .12s,border-color .12s,box-shadow .12s}
+.sb75-sug[data-k="keep"]{--c:var(--good)}
+.sb75-sug[data-k="wrap"]{--c:var(--s1,#C98A1B)}
+.sb75-sug.sb75-first{background:color-mix(in srgb,var(--c) 9%,var(--panel));border-color:color-mix(in srgb,var(--c) 45%,var(--line));border-left-color:var(--c)}
+.sb75-sug:hover{border-color:var(--c);box-shadow:0 6px 18px var(--accent-glow);transform:translateY(-1px)}
+.sb75-tag{grid-area:tag;display:inline-flex;align-items:center;gap:7px;font:700 .72rem/1 "Atkinson Hyperlegible",sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--sb75-mu)}
+.sb75-tag::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+.sb75-t{grid-area:t;font:600 1.12rem/1.28 Fredoka,system-ui,sans-serif;overflow-wrap:anywhere}
+.sb75-min{grid-area:min;display:inline-flex;align-items:center;gap:5px;font:700 .82rem/1 "Atkinson Hyperlegible",sans-serif;padding:7px 11px 7px 9px;border-radius:999px;background:var(--panel);border:1.5px solid var(--line);white-space:nowrap}
+.sb75-first .sb75-min{border-color:var(--c)}
+.sb75-min svg{width:12px;height:12px;color:var(--c)}
+.sb75-msg{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:.92rem}
+.sb75-msgt{color:var(--sb75-mu)}
+.sb75-dots{display:inline-flex;gap:4px}
+.sb75-dots i{width:7px;height:7px;border-radius:50%;background:var(--ice);animation:sb75b 1s infinite ease-in-out}
+.sb75-dots i:nth-child(2){animation-delay:.15s}
+.sb75-dots i:nth-child(3){animation-delay:.3s}
+@keyframes sb75b{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.sb75-link{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel);color:inherit;font:600 .95rem Fredoka,system-ui,sans-serif;cursor:pointer}
+.sb75-link:hover{border-color:var(--ice)}
+.sb75-more{display:flex;flex-wrap:wrap;gap:8px}
+.sb75-chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font:600 .98rem Fredoka,system-ui,sans-serif;cursor:pointer}
+.sb75-chip:hover{border-color:var(--ice)}
+.sb75-chip svg{width:16px;height:16px;color:var(--ice);flex:none}
+.sb75-fin{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:48px;margin-top:2px;padding:12px 8px 2px;border:0;border-top:1.5px dashed var(--line);border-radius:0;background:none;color:var(--sb75-mu);font:600 1rem Fredoka,system-ui,sans-serif;cursor:pointer}
+.sb75-fin:hover{color:inherit}
+.sb75-fin svg{width:18px;height:18px;color:var(--good);flex:none}
+.sb75-alarmrow{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
+.sb75-alarmrow.sb75-left{justify-content:flex-start}
+.sb75-alarmcap{font-size:.88rem;color:var(--sb75-mu)}
+.sb75-alarm{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px 8px 12px;border-radius:999px;border:1.5px solid var(--accent);background:var(--warm-soft);color:var(--ink);font:600 .95rem Fredoka,system-ui,sans-serif;cursor:pointer}
+.sb75-alarm svg{width:20px;height:20px;color:var(--accent);flex:none}
+.sb75-alarm .sb75-offi{display:none}
+.sb75-alarm.sb75-off{border-color:var(--line);background:var(--panel);color:var(--sb75-mu)}
+.sb75-alarm.sb75-off svg{color:var(--sb75-mu)}
+.sb75-alarm.sb75-off .sb75-on{display:none}
+.sb75-alarm.sb75-off .sb75-offi{display:block}
+#soundBtn[aria-pressed="true"]{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+#soundBtn[aria-pressed="false"]{color:var(--sb75-mu)}
+#prizeInput.sb75-dim{color:color-mix(in srgb,currentColor 55%,transparent)}
+.sb75-using{font-size:.88rem;color:var(--sb75-mu)}
+@media (prefers-reduced-motion: reduce){ .sb75-sug{transition:none} .sb75-sug:hover{transform:none} .sb75-dots i{animation:none;opacity:.7} }
+:host([data-motion="calm"]) .sb75-sug{transition:none}
+:host([data-motion="calm"]) .sb75-sug:hover{transform:none}
+:host([data-motion="calm"]) .sb75-dots i{animation:none;opacity:.7}
+
 /* embedded in Second Nature: the tab title above already names it */
 [hidden]{display:none!important}
 .app{min-height:0;padding:0 0 8px}
@@ -11071,14 +12173,20 @@ details.settings .stack{padding-bottom:16px}
       <span>Snowball Starter</span>
     </div>
     <div class="bar-right">
-      <button class="iconbtn" id="soundBtn" type="button" aria-pressed="true" aria-label="Sound on: bell rings when a timer ends" title="Toggle bell">
-        <svg id="icoOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a8 8 0 0 1 0 11"/></svg>
-        <svg id="icoOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+      <button class="iconbtn" id="soundBtn" type="button" aria-pressed="true" aria-label="Sound on: bell rings when a timer ends" title="Loud alarm on or off">
+        <svg id="icoOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="M2 5.5a9 9 0 0 1 2.2-3"/><path d="M22 5.5a9 9 0 0 0-2.2-3"/></svg>
+        <svg id="icoOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M8.7 3A6 6 0 0 1 18 8c0 2.4.4 4.3.9 5.8"/><path d="M17 17H3s3-2 3-9c0-.7.1-1.3.3-1.9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="M2 2l20 20"/></svg>
       </button>
       <button class="rescue" id="rescueBtn" type="button">I’m frozen</button>
     </div>
   </header>
 
+  <div class="sb75-pin" id="sb75Pin" hidden>
+    <div class="sb75-row sb75-g" id="sb75GRow"><span class="sb75-k">Goal</span><span class="sb75-v sb75-clamp" id="sb75GoalT"></span><button type="button" class="sb75-ed" id="sb75Ed" aria-label="Change the goal">Edit</button></div>
+    <form class="sb75-row sb75-gform" id="sb75GForm" hidden><span class="sb75-k" aria-hidden="true">Goal</span><input type="text" id="sb75GoalIn" autocomplete="off" maxlength="200" aria-label="Your goal" placeholder="Your goal"><button type="submit" class="sb75-ed">Save</button></form>
+    <div class="sb75-row sb75-n" id="sb75NRow"><span class="sb75-k">Now</span><span class="sb75-v sb75-clamp" id="sb75NowT"></span></div>
+    <div class="sb75-trail" id="sb75Trail" hidden></div>
+  </div>
   <main id="screens">
 
     <!-- HOME -->
@@ -11222,8 +12330,10 @@ details.settings .stack{padding-bottom:16px}
         <span>Pick a real prize for when the bell rings</span>
         <div class="chips" id="prizeChips" role="radiogroup" aria-label="Prize"></div>
         <input type="text" id="prizeInput" autocomplete="off" placeholder="or type your own prize">
+        <p class="sb75-using" id="sb75Using" hidden></p>
       </div>
       <p class="why">Keep this prize small and real: 5 minutes or less, something you can have right after the bell. Longer prizes go in the prize bank, which fills up as you push.</p>
+      <div class="sb75-alarmrow sb75-left"><button type="button" class="sb75-alarm" data-sb75="alarm" aria-pressed="true"><svg class="sb75-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="M2 5.5a9 9 0 0 1 2.2-3"/><path d="M22 5.5a9 9 0 0 0-2.2-3"/></svg><svg class="sb75-offi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.7 3A6 6 0 0 1 18 8c0 2.4.4 4.3.9 5.8"/><path d="M17 17H3s3-2 3-9c0-.7.1-1.3.3-1.9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="M2 2l20 20"/></svg><span>Loud alarm on</span></button><span class="sb75-alarmcap">Rings loudly when the timer ends</span></div>
       <div class="actions">
         <button class="btn primary" id="stepGo" type="button">Roll · 2 min</button>
         <button class="btn ghost" id="stepBack" type="button">Back</button>
@@ -11259,6 +12369,17 @@ details.settings .stack{padding-bottom:16px}
       <h2 class="center" id="wTitle">Snowball got bigger.</h2>
       <p class="center muted" id="wSub"></p>
       <p class="bankline" id="wBank" hidden></p>
+      <div class="sb75-slot"><div class="sb75-next" id="sb75Next">
+        <div class="sb75-head"><span class="sb75-title" id="sb75Title">Next snowball for this goal</span><span class="sb75-src" id="sb75Src" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.9L19 9.7l-5.2 1.8L12 16.5l-1.8-5L5 9.7l5.2-1.8Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8Z"/></svg><span id="sb75SrcT">From Claude</span></span></div>
+        <div class="sb75-list" id="sb75List"></div>
+        <div class="sb75-msg" id="sb75Msg" role="status" aria-live="polite" hidden><span class="sb75-dots" id="sb75Dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="sb75-msgt" id="sb75MsgT"></span><button type="button" class="sb75-link" id="sb75Stop" hidden>Stop</button></div>
+        <div class="sb75-more">
+          <button type="button" class="sb75-chip" id="sb75Own"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Type my own</button>
+          <button type="button" class="sb75-chip" id="sb75Same" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span>Same step again</span></button>
+          <button type="button" class="sb75-chip" id="sb75Other" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.9L19 9.7l-5.2 1.8L12 16.5l-1.8-5L5 9.7l5.2-1.8Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8Z"/></svg>Other ideas</button>
+        </div>
+        <button type="button" class="sb75-fin" id="sb75Fin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4"/><path d="M4 4h13l-2.5 4.5L17 13H4"/></svg>I’m done with this goal</button>
+      </div></div>
       <div class="actions">
         <button class="btn primary" id="wNext" type="button">Keep rolling · 5 min</button>
         <button class="btn secondary" id="wSame" type="button">Same size again · 2 min</button>
@@ -11273,6 +12394,7 @@ details.settings .stack{padding-bottom:16px}
       <div class="eyebrow center">Prize done</div>
       <h2 class="center">Roll again while it’s warm?</h2>
       <p class="center muted">The ball is still big. Restarting now is much cheaper than restarting tomorrow.</p>
+      <div class="sb75-slot"></div>
       <div class="actions">
         <button class="btn primary" id="apNext" type="button">Keep rolling · 5 min</button>
         <button class="btn ghost" id="apStop" type="button">Stop and save</button>
@@ -11439,8 +12561,8 @@ var HOST=document.getElementById('snowHost'), TPL=document.getElementById('snowT
 if(!HOST || !TPL || !HOST.attachShadow || !TPL.content){ if(HOST) HOST.innerHTML='<p class="muted">The Snowball needs a newer browser.</p>'; return; }
 var ROOT=HOST.shadowRoot || HOST.attachShadow({mode:'open'});
 ROOT.appendChild(TPL.content.cloneNode(true));
-function syncTheme(){ var t=document.documentElement.getAttribute('data-theme'); if(t) HOST.setAttribute('data-theme',t); else HOST.removeAttribute('data-theme'); }
-syncTheme(); try{ new MutationObserver(syncTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']}); }catch(e){}
+function syncTheme(){ var t=document.documentElement.getAttribute('data-theme'); if(t) HOST.setAttribute('data-theme',t); else HOST.removeAttribute('data-theme'); var m=document.documentElement.getAttribute('data-motion'); if(m) HOST.setAttribute('data-motion',m); else HOST.removeAttribute('data-motion'); }
+syncTheme(); try{ new MutationObserver(syncTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme','data-motion']}); }catch(e){}
 (function(){
 'use strict';
 const $=(s,r)=> (r||ROOT).querySelector(s);
@@ -11486,10 +12608,11 @@ function load(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v)
 function save(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
 function del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 
-const fresh=()=>({screen:'home',task:'',kind:null,stuckWhy:null,headStart:0,door:DOORS[0].id,step:'',prize:PRIZES[0],pushes:0,minutes:0,lastMin:0,tactics:[],timer:null,parkId:null,outcome:null,link:''});
+const fresh=()=>({screen:'home',task:'',kind:null,stuckWhy:null,headStart:0,door:DOORS[0].id,step:'',prize:PRIZES[0],pushes:0,minutes:0,lastMin:0,tactics:[],timer:null,parkId:null,outcome:null,link:'',goal:'',trail:[],sug:null,sb75from:'',sb75was:null,prizeOwn:null,prizeChip:''});
 function ballLevel(){ return S.pushes + (S.headStart||0); }
 let S=Object.assign(fresh(), load('sb.inflight',{}));
 if(!Array.isArray(S.tactics)) S.tactics=[];
+sb75Fix();
 let H=load('sb.history',[]); if(!Array.isArray(H)) H=[];
 let PK=load('sb.parked',[]); if(!Array.isArray(PK)) PK=[];
 let FN=load('sb.finished',[]); if(!Array.isArray(FN)) FN=[];
@@ -11692,10 +12815,10 @@ function claimTimer(T){
   try{ const c=JSON.parse(localStorage.getItem('sb.claim')||'null'); if(c && c.id===id) return false; localStorage.setItem('sb.claim',JSON.stringify({id:id,at:Date.now()})); }catch(e){}
   return true;
 }
-function quietShow(name){ $$('[data-screen]').forEach(s=>{ s.hidden = s.dataset.screen!==name; }); placeBall(name); if(name!=='timer') rollOff(); }
-function adoptState(nx){
+function quietShow(name){ $$('[data-screen]').forEach(s=>{ s.hidden = s.dataset.screen!==name; }); placeBall(name); sb75Pin(name); if(name!=='timer') rollOff(); }
+function adoptState(nx){ sb75Disarm();
   if(tickHandle){ clearInterval(tickHandle); tickHandle=null; } rollOff(); stopFlash();
-  S=Object.assign(fresh(), nx&&typeof nx==='object'?nx:{}); if(!Array.isArray(S.tactics)) S.tactics=[];
+  S=Object.assign(fresh(), nx&&typeof nx==='object'?nx:{}); if(!Array.isArray(S.tactics)) S.tactics=[]; sb75Fix();
   if(S.timer && S.timer.endAt){ resumeTo=null; quietShow('timer'); renderTimer(); ensureTick(); return; }
   badge(''); document.title=APP;
   if(S.screen==='timer') standBy=true;   /* the other tab is between the bell and its next screen */
@@ -11703,7 +12826,7 @@ function adoptState(nx){
   resumeTo = canResume ? S.screen : null;
   renderHome(); quietShow('home');
 }
-function standDown(){
+function standDown(){ sb75Disarm();
   S.timer=null; if(tickHandle){ clearInterval(tickHandle); tickHandle=null; } rollOff(); badge(''); document.title=APP;
   const nx=load('sb.inflight',null);
   if(nx && !(nx.timer && nx.timer.endAt)) adoptState(nx); else { standBy=true; resumeTo=null; renderHome(); quietShow('home'); }
@@ -11723,10 +12846,10 @@ function applyR(r){
   shadow.setAttribute('rx',(r*0.95).toFixed(1)); shadow.setAttribute('ry',(3+r*0.06).toFixed(1));
 }
 function setBall(level,animate){
-  const target=rFor(level);
+  const target=rFor(level); sb75View(animate&&!reduced ? Math.max(target,curR) : target);
   if(!animate||reduced){ curR=target; applyR(target); return; }
   const from=curR, t0=performance.now();
-  const step=t=>{ const k=Math.min(1,(t-t0)/650); const e=1-Math.pow(1-k,3); applyR(from+(target-from)*e); if(k<1) requestAnimationFrame(step); else curR=target; };
+  const step=t=>{ const k=Math.max(0,Math.min(1,(t-t0)/650)); const e=1-Math.pow(1-k,3); applyR(from+(target-from)*e); if(k<1) requestAnimationFrame(step); else { curR=target; sb75View(target); } };
   requestAnimationFrame(step);
 }
 function rollOn(){ if(reduced||rollRaf) return; lastT=performance.now(); const f=t=>{ angle=(angle+(t-lastT)*0.06)%360; lastT=t; texR.setAttribute('transform','rotate('+angle.toFixed(1)+')'); rollRaf=requestAnimationFrame(f); }; rollRaf=requestAnimationFrame(f); }
@@ -11742,6 +12865,7 @@ function show(name){
   $$('[data-screen]').forEach(s=>{ s.hidden = s.dataset.screen!==name; });
   placeBall(name);
   S.screen=name; persist();
+  sb75Pin(name); sb75Place(name);
   const h=$('[data-screen="'+name+'"] h1, [data-screen="'+name+'"] h2');
   if(h){ h.setAttribute('tabindex','-1'); if(onTab()){ try{ h.focus({preventScroll:true}); }catch(e){} } }
   toTop();
@@ -11751,23 +12875,18 @@ function show(name){
 
 /* sound */
 let AC=null;
-function unlockAudio(){ try{ const C=window.AudioContext||window.webkitAudioContext; if(!C) return; AC=AC||new C(); if(AC.state==='suspended') AC.resume(); }catch(e){} }
+function unlockAudio(){ try{ const C=window.AudioContext||window.webkitAudioContext; if(!C) return; if(!AC){ try{ if(navigator.audioSession) navigator.audioSession.type='playback'; }catch(e){} } AC=AC||new C(); if(AC.state==='suspended') AC.resume(); }catch(e){} }
 document.addEventListener('pointerdown', unlockAudio, {passive:true});
-function ring(){
-  try{ if(navigator.vibrate) navigator.vibrate([160,90,160]); }catch(e){}
-  if(!P.sound) return;
-  try{
-    unlockAudio(); if(!AC) return;
-    const t=AC.currentTime;
-    [[660,0],[880,.2],[660,.55],[988,.75]].forEach(([f,dt])=>{
-      const o=AC.createOscillator(), g=AC.createGain();
-      o.type='sine'; o.frequency.value=f;
-      g.gain.setValueAtTime(0.0001,t+dt);
-      g.gain.exponentialRampToValueAtTime(0.22,t+dt+0.025);
-      g.gain.exponentialRampToValueAtTime(0.0001,t+dt+0.22);
-      o.connect(g).connect(AC.destination); o.start(t+dt); o.stop(t+dt+0.26);
-    });
-  }catch(e){}
+function ring(soft){
+  /* soft = you ended it yourself (Done early, skip ahead, stop early): one quiet round, a short buzz */
+  if(soft){ try{ if(navigator.vibrate) navigator.vibrate(90); }catch(e){} sb75Disarm(true); if(!P.sound) return; try{ unlockAudio(); if(!AC) return; sb75Chime(1,null,0.22); }catch(e){} return; }
+  try{ if(navigator.vibrate) navigator.vibrate([320,120,320,120,320,380,320,120,320,120,320]); }catch(e){}
+  if(!P.sound){ sb75Disarm(true); return; }
+  /* the alarm was scheduled ahead on the audio clock and is already sounding: do not ring twice */
+  try{ if(SB75A && AC && AC.currentTime>=SB75A.t0-0.3){ SB75A=null; return; } }catch(e){}
+  sb75Disarm(true);
+  if(sb75Elsewhere(SB75_END)) return;   /* another open tab is already ringing this bell */
+  try{ unlockAudio(); if(!AC) return; sb75Chime(3,null,1); }catch(e){}
 }
 function softRing(){
   try{ if(navigator.vibrate) navigator.vibrate(120); }catch(e){}
@@ -11785,8 +12904,8 @@ function softRing(){
     });
   }catch(e){}
 }
-function renderSound(){ $('#soundBtn').setAttribute('aria-pressed', String(!!P.sound)); $('#icoOn').toggleAttribute('hidden',!P.sound); $('#icoOff').toggleAttribute('hidden',!!P.sound); $('#soundBtn').setAttribute('aria-label', P.sound?'Sound on: bell rings when a timer ends':'Sound off'); }
-$('#soundBtn').addEventListener('click',()=>{ P.sound=!P.sound; save('sb.prefs',P); renderSound(); if(P.sound) ring(); });
+function renderSound(){ sb75AlarmUi(); $('#soundBtn').setAttribute('aria-pressed', String(!!P.sound)); $('#icoOn').toggleAttribute('hidden',!P.sound); $('#icoOff').toggleAttribute('hidden',!!P.sound); $('#soundBtn').setAttribute('aria-label', P.sound?'Loud alarm on. Tap to turn it off':'Alarm off. Tap to turn it on'); }
+$('#soundBtn').addEventListener('click',()=>{ sb75Sound(); });
 
 /* title flash */
 let flash=null;
@@ -11810,6 +12929,7 @@ function tick(){
 }
 function showWarn(T){ $('#tWarn').hidden=false; $('#tWarn').textContent=Math.round(T.warnMs/60000)+' minutes left. Head for a save point.'; }
 function startTimer(mode,minutes,label){
+  unlockAudio(); if(mode==='push'){ sb75Stop(); S.sug=null; S.sb75from=''; S.sb75was=null; }
   const total=minutes*60000;
   S.timer={id:uid(),mode,total,endAt:Date.now()+total,remaining:null,paused:false,label,minutes};
   persist(); show('timer'); renderTimer(); ensureTick();
@@ -11840,6 +12960,7 @@ function renderTimer(){
   setBall(ballLevel(),false);
   if(m==='push' && !T.paused) rollOn(); else rollOff();
   drawClock(T.paused ? T.remaining : Math.max(0,T.endAt-Date.now()));
+  sb75Pin('timer'); sb75Arm();
 }
 function togglePause(){
   const T=S.timer; if(!T) return;
@@ -11847,7 +12968,7 @@ function togglePause(){
   else { T.remaining=Math.max(0,T.endAt-Date.now()); T.paused=true; }
   persist(); renderTimer();
 }
-function cancelTimer(){ S.timer=null; if(tickHandle){ clearInterval(tickHandle); tickHandle=null; } rollOff(); document.title=APP; badge(''); persist(); }
+function cancelTimer(){ SB75_END=S.timer?{id:S.timer.id,endAt:S.timer.endAt}:null; sb75Disarm(); S.timer=null; if(tickHandle){ clearInterval(tickHandle); tickHandle=null; } rollOff(); document.title=APP; badge(''); persist(); }
 function timerDone(early){
   const T=S.timer; if(!T) return;
   if(!claimTimer(T)){ standDown(); return; }
@@ -11855,18 +12976,18 @@ function timerDone(early){
   const elapsedMin = Math.max(0.25,(T.total-left)/60000);
   cancelTimer(); bellAway(T.mode);
   if(T.mode==='push'){
-    S.pushes++; S.minutes+=elapsedMin; S.lastMin=T.minutes; try{ document.dispatchEvent(new CustomEvent('snowball:push',{detail:{minutes:elapsedMin,task:S.task||S.step||'',link:S.link||''}})); }catch(e){}
+    S.pushes++; S.minutes+=elapsedMin; S.lastMin=T.minutes; sb75Trail(T.label); try{ document.dispatchEvent(new CustomEvent('snowball:push',{detail:{minutes:elapsedMin,task:S.task||S.step||'',link:S.link||''}})); }catch(e){}
     S.lastEarned=earnBank(elapsedMin);
     addT('tiny'); addT('timer'); if(S.prize!==PRIZES[0]) addT('prize');
-    persist(); ring(); show('win'); renderWin(elapsedMin); startFlash('Done! The ball grew');
+    persist(); ring(early); show('win'); renderWin(elapsedMin); startFlash('Done! The ball grew');
   } else if(T.mode==='door'){
-    addT('door'); persist(); ring(); show('doorOpen'); setBall(ballLevel(),false); startFlash('Door’s open');
+    addT('door'); persist(); ring(early); show('doorOpen'); setBall(ballLevel(),false); startFlash('Door’s open');
   } else if(T.mode==='bank'){
     const back = early ? refundMin(left) : 0;
     bankRefund(back);
-    persist(); ring(); show('bankDone'); renderBankDone(early,back); startFlash(early?'Nice stop':B.label+' is up. Save and close.');
+    persist(); ring(early); show('bankDone'); renderBankDone(early,back); startFlash(early?'Nice stop':B.label+' is up. Save and close.');
   } else {
-    persist(); ring(); show('afterPrize'); setBall(ballLevel(),false); $('#apNext').textContent='Keep rolling · '+nextMin()+' min'; startFlash('Prize done. Roll again?');
+    persist(); ring(early); show('afterPrize'); setBall(ballLevel(),false); $('#apNext').textContent='Keep rolling · '+nextMin()+' min'; startFlash('Prize done. Roll again?');
   }
 }
 $('#pauseBtn').addEventListener('click',togglePause);
@@ -11904,6 +13025,7 @@ function renderWin(m){
   else if(B.earnedToday>=B.cap){ $('#wBank').hidden=false; $('#wBank').textContent='Prize bank is full for today. The pushes still count.'; }
   else { $('#wBank').hidden=true; }
   setBall(ballLevel(),true);
+  sb75Win();
 }
 $('#wNext').addEventListener('click',()=>startPush(nextMin()));
 $('#wSame').addEventListener('click',()=>startPush(S.lastMin||2));
@@ -11929,7 +13051,7 @@ function renderHome(){
   $('#worked').hidden = !top.length;
   $('#workedChips').innerHTML = top.map(([t,n])=>'<span class="chip static">'+(TLABEL[t]||t)+' <b>×'+n+'</b></span>').join('');
   $('#resume').hidden = !resumeTo;
-  if(resumeTo){ $('#resumeText').textContent = (S.task?'“'+S.task+'”':'Your snowball') + (S.pushes?' · '+S.pushes+(S.pushes===1?' push':' pushes')+' done':'') + (S.step?' · next: '+S.step:''); }
+  if(resumeTo){ $('#resumeText').textContent = (sb75Goal()?'Goal: “'+sb75Goal()+'”':'Your snowball') + (S.pushes?' · '+S.pushes+(S.pushes===1?' push':' pushes')+' done':'') + (S.step?' · next: '+S.step:''); }
   setBall(resumeTo?ballLevel():0,false);
   renderShelf(); renderDone(); renderBankCard();
 }
@@ -12044,9 +13166,9 @@ function quickPark(){
   if(S.pushes>0){ H.push({t:now,task:S.task,step:S.step,minutes:r1(S.minutes),pushes:S.pushes,tactics:S.tactics.slice(),note:'',outcome:'park'}); saveH(); }
   if(existing){
     existing.totalPushes=(existing.totalPushes||0)+S.pushes; existing.totalMinutes=r1((existing.totalMinutes||0)+S.minutes);
-    existing.level=Math.max(existing.level||0,ballLevel()); if(S.lastMin) existing.lastMin=S.lastMin; existing.parkedAt=now;
+    existing.level=Math.max(existing.level||0,ballLevel()); if(S.lastMin) existing.lastMin=S.lastMin; existing.parkedAt=now; sb75Keep(existing);
   } else if(S.task||S.step||S.pushes>0){
-    PK.push({id:uid(),name:S.task||S.step||'Untitled snowball',note:S.step||'',level:ballLevel(),totalPushes:S.pushes,totalMinutes:r1(S.minutes),lastMin:S.lastMin,sessions:1,parkedAt:now,createdAt:now,prize:S.prize});
+    PK.push({id:uid(),name:S.task||S.step||'Untitled snowball',goal:sb75Goal().slice(0,200),trail:sb75TrailCopy(),note:S.step||'',level:ballLevel(),totalPushes:S.pushes,totalMinutes:r1(S.minutes),lastMin:S.lastMin,sessions:1,parkedAt:now,createdAt:now,prize:S.prize});
   }
   savePK();
   endLink(); S=fresh(); del('sb.inflight'); resumeTo=null;
@@ -12055,7 +13177,7 @@ function quickPark(){
 /* resume a parked snowball */
 function resumeParked(p){
   if(resumeTo) quickPark();
-  S=Object.assign(fresh(),{kind:'resume',task:p.name,step:p.note||'',parkId:p.id,headStart:p.level||0,prize:p.prize||PRIZES[0]});
+  S=Object.assign(fresh(),{kind:'resume',task:p.name,goal:typeof p.goal==='string'?p.goal:'',trail:Array.isArray(p.trail)?p.trail.filter(x=>typeof x==='string').slice(-12):[],step:p.note||'',parkId:p.id,headStart:p.level||0,prize:p.prize||PRIZES[0]});
   persist(); show('reentry'); renderReentry(p);
 }
 function renderReentry(p){
@@ -12091,7 +13213,7 @@ $('#resumeBtn').addEventListener('click',()=>{
 $('#freshBtn').addEventListener('click',()=>{ quickPark(); renderHome(); });
 
 /* task */
-$('#taskNext').addEventListener('click',()=>{ S.task=$('#taskInput').value.trim(); persist(); show('kind'); });
+$('#taskNext').addEventListener('click',()=>{ S.task=$('#taskInput').value.trim(); S.goal=S.task; persist(); show('kind'); });
 $('#taskBack').addEventListener('click',()=>{ endLink(); renderHome(); show('home'); });
 $('#taskInput').addEventListener('keydown',e=>{ if(e.key==='Enter') $('#taskNext').click(); });
 
@@ -12122,19 +13244,21 @@ $('#doorOpenNext').addEventListener('click',()=>{ show('step'); renderStep(); })
 function renderStep(){
   $('#stepInput').value = S.step||'';
   const custom = PRIZES.includes(S.prize) ? '' : (S.prize||'');
-  $('#prizeInput').value = custom;
+  $('#prizeInput').value = (typeof S.prizeOwn==='string') ? S.prizeOwn : custom;
   $('#prizeChips').innerHTML = PRIZES.map(p=>'<button type="button" class="chip" role="radio" data-p="'+p.replace(/"/g,'&quot;')+'" aria-checked="'+(S.prize===p)+'">'+p+'</button>').join('');
   $('#stepGo').textContent = 'Roll · '+nextMin()+' min';
   $('#stepHint').textContent = hintFor();
   $('#stepInput').placeholder = currentExamples()[0];
   $('[data-screen="step"] .eyebrow').textContent = S.kind==='stuck' ? 'Restart, tiny' : S.kind==='resume' ? 'Your next move' : 'Step 3 of 3';
   smallerShow();
+  sb75StepExtra();
 }
-$('#prizeChips').addEventListener('click',e=>{ const c=e.target.closest('.chip'); if(!c) return; S.prize=c.dataset.p; $('#prizeInput').value=''; persist(); renderStep(); });
-$('#prizeInput').addEventListener('input',()=>{ const v=$('#prizeInput').value.trim(); if(v){ S.prize=v; $$('#prizeChips .chip').forEach(c=>c.setAttribute('aria-checked','false')); } else { S.prize=PRIZES[0]; renderStep(); } persist(); });
+$('#prizeChips').addEventListener('click',e=>{ const c=e.target.closest('.chip'); if(!c) return; S.prize=c.dataset.p; S.prizeChip=c.dataset.p; persist(); sb75PrizeMark(); });
+$('#prizeInput').addEventListener('input',()=>{ const v=$('#prizeInput').value.trim(); S.prizeOwn=$('#prizeInput').value.slice(0,120); S.prize = v || (PRIZES.includes(S.prizeChip) ? S.prizeChip : PRIZES[0]); persist(); sb75PrizeMark(); });
+$('#prizeInput').addEventListener('click',()=>{ const v=$('#prizeInput').value.trim(); if(v && S.prize!==v){ S.prize=v; persist(); sb75PrizeMark(); } });
 $('#stepGo').addEventListener('click',()=>{
   S.step=$('#stepInput').value.trim()||'One small move toward it';
-  const v=$('#prizeInput').value.trim(); if(v) S.prize=v;
+  const v=$('#prizeInput').value.trim(); if(v && !PRIZES.includes(S.prize)) S.prize=v;
   persist(); startPush(nextMin());
 });
 $('#stepInput').addEventListener('keydown',e=>{ if(e.key==='Enter') $('#stepGo').click(); });
@@ -12152,7 +13276,7 @@ document.addEventListener('snowball:smaller-done',function(e){
   if(d.step){ $('#stepInput').value=d.step; $('#smallerMsg').textContent='A smaller move is in the box. Change it if you like.'; }
   else $('#smallerMsg').textContent=d.stopped?'Stopped.':(d.error||'No answer this time.');
 });
-$('#stepBack').addEventListener('click',()=>{ const rp=S.kind==='resume'&&findPK(S.parkId); if(rp){ show('reentry'); renderReentry(rp); } else if(S.kind==='stuck') show('stuck'); else if(S.kind==='feeling') { show('door'); renderDoors(); } else if(S.kind==='task') show('kind'); else { renderHome(); show('home'); } });
+$('#stepBack').addEventListener('click',()=>{ if(S.sb75from && S.pushes>0){ const to=S.sb75from; S.sb75from=''; sb75Back(); persist(); show(to); if(to==='win') renderWin(S.lastMin); return; } const rp=S.kind==='resume'&&findPK(S.parkId); if(rp){ show('reentry'); renderReentry(rp); } else if(S.kind==='stuck') show('stuck'); else if(S.kind==='feeling') { show('door'); renderDoors(); } else if(S.kind==='task') show('kind'); else { renderHome(); show('home'); } });
 
 /* log */
 function outOptions(){
@@ -12190,20 +13314,21 @@ $('#logSave').addEventListener('click',()=>{
   let parked=null, finished=null;
   if(out==='park'){
     if(existing){
-      Object.assign(existing,{name:name, note:pnote||existing.note||'', level:Math.max(existing.level||0,ballLevel()), totalPushes:(existing.totalPushes||0)+S.pushes, totalMinutes:r1((existing.totalMinutes||0)+S.minutes), lastMin:S.lastMin||existing.lastMin||0, sessions:(existing.sessions||1)+1, parkedAt:now, prize:S.prize});
+      Object.assign(existing,{name:name, note:pnote||existing.note||'', level:Math.max(existing.level||0,ballLevel()), totalPushes:(existing.totalPushes||0)+S.pushes, totalMinutes:r1((existing.totalMinutes||0)+S.minutes), lastMin:S.lastMin||existing.lastMin||0, sessions:(existing.sessions||1)+1, parkedAt:now, prize:S.prize}); sb75Keep(existing);
       parked=existing;
     } else {
       parked={id:uid(), name:name, note:pnote, level:ballLevel(), totalPushes:S.pushes, totalMinutes:r1(S.minutes), lastMin:S.lastMin, sessions:1, parkedAt:now, createdAt:now, prize:S.prize};
-      PK.push(parked);
+      sb75Keep(parked); PK.push(parked);
     }
     savePK();
   } else if(out==='done'){
     if(existing){ PK=PK.filter(x=>x.id!==existing.id); savePK(); }
     finished={id:existing?existing.id:uid(), name:name, totalPushes:((existing&&existing.totalPushes)||0)+S.pushes, totalMinutes:r1(((existing&&existing.totalMinutes)||0)+S.minutes), finishedAt:now};
-    FN.unshift(finished); saveFN(); try{ document.dispatchEvent(new CustomEvent('snowball:finished',{detail:{name:finished.name,link:S.link||''}})); }catch(e){}
+    sb75Keep(finished); FN.unshift(finished); saveFN(); try{ document.dispatchEvent(new CustomEvent('snowball:finished',{detail:{name:finished.name,link:S.link||''}})); }catch(e){}
   } else if(existing){
     PK=PK.filter(x=>x.id!==existing.id); savePK();
   }
+  SB75_LAST={goal:sb75Goal(),out:out,note:pnote,trail:sb75TrailCopy()};
   $('#noteInput').value=''; $('#parkNote').value='';
   endLink(); S=fresh(); del('sb.inflight');
   show('summary'); renderSummary(entry,parked,finished);
@@ -12265,6 +13390,278 @@ $('#rSmaller').addEventListener('click',()=>{ closeRescue(false); stopAnyTimer()
 $('#rDoor').addEventListener('click',()=>{ closeRescue(false); stopAnyTimer(); show('door'); renderDoors(); });
 $('#rStop').addEventListener('click',()=>{ closeRescue(false); stopAnyTimer(); enterLog(); });
 
+/* v75 (sb75): the goal stays pinned on every screen next to the current step. When a push is done,
+   three next steps for the same goal: rule-based ones at once, then Claude's (through the page) when it answers.
+   The alarm is scheduled ahead on the audio clock when a timer starts, so it rings on time in a background tab. */
+var SB75_DEF=['One small move toward it','Anything toward it, for one minute'];
+/* kinds of goal, scored by keyword hits in the goal and the last step: object nouns and clear verbs count
+   double (hi), words with several meanings count once (lo). The best wins only if it scores 2 or more and
+   beats the next; otherwise the general ideas are used. */
+var SB75_KINDS=[
+  {hi:/\b(inbox|unread|notifications)\b/gi, lo:/\b(emails|messages)\b/gi, s:['Archive ten emails you do not need','Reply to the quickest one in two lines','Star the three that matter most']},
+  {hi:/\b(e-?mail|reply|replies|respond|letter|message|dms?|voicemail)\b/gi, lo:/\b(texts?|emails|messages)\b/gi, s:['Write the greeting and one line on why you are writing','List the two or three points it needs to make','Read it once, fix one thing, then send it']},
+  {hi:/\b(essay|report|draft|intro|introduction|article|blog|thesis|dissertation|cv|cover letter|proposal|paragraph|slides|presentation|speech|script for)\b/gi, lo:/\b(write|writing|doc|document|post|story|chapter)\b/gi, s:['Write three bullet points for the next part','Write a rough first draft of one paragraph','Read the last bit back and fix one sentence']},
+  {hi:/\b(tidy|tidying|dishes|washing[- ]up|laundry|hoover|hoovering|vacuum|vacuuming|declutter|decluttering|kitchen|bathroom|bedroom|rubbish|bins|mess|messy|dust|dusting|mop|mopping|sink|hob|oven|fridge)\b/gi, lo:/\b(clean|cleaning|wash|washing|room|desk|clothes|bin|clear|flat|house)\b/gi, s:['Clear one more surface, just one','Put ten things back where they live','Take one bag of rubbish or washing out']},
+  {hi:/\b(call|calls|phone|ring|dentist|doctors?|gp|vet|appointment|hairdresser|optician)\b/gi, lo:/\b(book|booking|contact)\b/gi, s:['Find the number and write it down','Write the first sentence you will say','Dial the number and let it ring']},
+  {hi:/\b(study|studying|revise|revising|revision|exams?|homework|lectures?|flashcards?|textbook|coursework|quiz|syllabus)\b/gi, lo:/\b(learn|learning|read|reading|course|notes|practise|practice|chapter|book|lesson)\b/gi, s:['Read one page and write one line about it','Close the book and recall three points','Make three quick flashcards']},
+  {hi:/\b(gym|exercise|exercising|workout|yoga|pilates|stretch|stretching|swim|swimming|jog|jogging|running|cycling|weights|squats|press-ups|push-ups|for a run|for a walk|for a swim)\b/gi, lo:/\b(run|walk|walking|train|training|bike|cycle|steps)\b/gi, s:['Put your kit on and fill a water bottle','Move for five minutes at any pace','Stretch for two minutes']},
+  {hi:/\b(code|coding|bugs?|deploy|tests|scripts?|feature|program|programming|repo|api|function|css|html|javascript|python|login|refactor|debug|pull request)\b/gi, lo:/\b(app|website|site|build|fix|test|page|error)\b/gi, s:['Write in one line what should happen next','Run it and read the first error','Make one small change and test it']},
+  {hi:/\b(tax|taxes|bills|paperwork|budget|invoices?|insurance|pension|council|receipts|mortgage|passport|visa|forms|admin|renew|renewal|expenses)\b/gi, lo:/\b(bill|form|bank|pay|apply|application|account|money)\b/gi, s:['Gather the papers you need into one pile','Fill in the first section only','Write down the one question you are stuck on']},
+  {hi:/\b(cook|cooking|meals?|dinner|lunch|breakfast|recipe|groceries|bake|baking)\b/gi, lo:/\b(food|shop|shopping|eat)\b/gi, s:['Get out everything you need','Do five minutes of prep','Write a list of what is missing']},
+  {hi:/\b(pack|packing|boxes|garage|wardrobe|loft|attic|suitcase|move house|moving house)\b/gi, lo:/\b(sort|organise|organize|move|moving|files|photos|drawer|cupboard)\b/gi, s:['Fill one box or bag, then stop','Sort one small pile into keep and go','Label what you have done so far']},
+  {hi:/\b(parcel|package|post office|errands?|pharmacy|prescription|returns|dry cleaning)\b/gi, lo:/\b(post|collect|return|pick up|drop off)\b/gi, s:['Check the address and write it down','Put it by the door with your keys','Look up when the place closes today']}
+];
+var SB75_WRAP=['Tidy up and note where you stopped','Write your very next move on a note','Check what is left and pick the smallest bit'];
+var SB75_TAG={next:'Next part',keep:'Keep going',wrap:'Wrap up'};
+var SB75_OFF={home:1,task:1,bank:1,bankDone:1};
+var SB75_MSG={error:'No ideas from Claude this time. These still work.',stopped:'Stopped. These still work.',slow:'Claude took too long, so these are quick ideas. They still work.'};
+var SB75_LAST=null, SB75_BUSY='', SB75_TO=null, SB75A=null, SB75_END=null, SB75_CROP=false, SB75_TAB=uid(), SB75_KEY='sb75.arm';
+function sb75Fix(){ if(!Array.isArray(S.trail)) S.trail=[]; S.trail=S.trail.filter(function(x){ return typeof x==='string' && x.trim(); }).slice(-12); if(typeof S.goal!=='string') S.goal=''; if(S.sug && (typeof S.sug!=='object' || !Array.isArray(S.sug.list))) S.sug=null; }
+function sb75Goal(){ return String(S.goal||S.task||'').trim(); }
+function sb75Norm(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+function sb75TrailCopy(){ return (Array.isArray(S.trail)?S.trail:[]).filter(function(x){ return typeof x==='string'; }).slice(-12); }
+function sb75Last(){ var tr=Array.isArray(S.trail)?S.trail:[], st=String(S.step||'').trim(); if(st && SB75_DEF.indexOf(st)<0) return st; return tr.length ? tr[tr.length-1] : ''; }
+function sb75Trail(label){
+  if(!Array.isArray(S.trail)) S.trail=[];
+  var s=String(label||'').trim().slice(0,200); if(!s || SB75_DEF.indexOf(s)>=0) return;
+  if(sb75Norm(S.trail[S.trail.length-1])!==sb75Norm(s)) S.trail.push(s);
+  if(S.trail.length>12) S.trail=S.trail.slice(-12);
+}
+function sb75Keep(p){ if(!p) return; var g=sb75Goal(); if(g) p.goal=g.slice(0,200); var tr=sb75TrailCopy(); if(tr.length) p.trail=tr; }
+function sb75Short(s,n){ s=String(s||'').replace(/\s+/g,' ').trim(); if(s.length<=n) return s; s=s.slice(0,n-1); var sp=s.lastIndexOf(' '); if(sp>n*0.6) s=s.slice(0,sp); return s.replace(/[\s,;:.-]+$/,'')+'…'; }
+
+/* the ball's view: cropped to the ball (plus a little sky) while the pin shows, the full growing room otherwise */
+function sb75View(r){
+  var b=$('#ball'); if(!b) return;
+  var top = SB75_CROP ? Math.max(-10, Math.floor(124-2*(Number(r)||16)-14)) : -10;
+  b.setAttribute('viewBox','0 '+top+' 240 '+(150-top));
+}
+function sb75Crop(on){ if(SB75_CROP===!!on) return; SB75_CROP=!!on; sb75View(curR); }
+
+/* the pinned card: Goal, Now, and the steps done so far. On the timer the step sits under the clock, and on the win\n   screens the next step is picked in the card below, so there only the goal and the steps done show. */
+function sb75Pin(name){
+  var pin=$('#sb75Pin'); if(!pin) return;
+  name=name||S.screen;
+  var T=S.timer, g='', now='', none=false, trail=Array.isArray(S.trail)?S.trail:[];
+  if(SB75_OFF[name] || (name==='timer' && T && T.mode==='bank')){ pin.hidden=true; sb75Crop(false); return; }
+  if(name==='summary'){
+    var L=SB75_LAST; if(!L || !L.goal){ pin.hidden=true; sb75Crop(false); return; }
+    g=L.goal; trail=L.trail||[];
+    now = L.out==='done' ? 'Finished. Well done.' : L.out==='park' ? (L.note ? 'Parked. Next: '+L.note : 'Parked for later') : 'Logged for today';
+  } else {
+    g=sb75Goal();
+    if(name==='timer'){ now=''; }
+    else if(name==='step'){ now=$('#stepInput').value.trim(); if(!now){ now='Type your next step below'; none=true; } }
+    else if(name==='win' || name==='afterPrize'){ now=''; }
+    else if(name==='kind' || name==='stuck'){ now=S.step||'Choosing how to start'; none=!S.step; }
+    else if(name==='door'){ now='Pick a way to change your state'; none=true; }
+    else if(name==='doorOpen'){ now=S.step||'The tiny first step'; none=!S.step; }
+    else if(name==='reentry'){ var p=findPK(S.parkId); now=(p&&p.note)||S.step||'Write your next move'; none=!((p&&p.note)||S.step); }
+    else if(name==='log'){ now='Saving this snowball'; none=true; }
+    else { now=S.step||''; none=!now; }
+  }
+  var gt=$('#sb75GoalT'), nt=$('#sb75NowT');
+  gt.textContent = g || 'Not named yet'; gt.classList.toggle('sb75-none', !g);
+  if(g) gt.title=g; else gt.removeAttribute('title');
+  $('#sb75Ed').textContent = g ? 'Edit' : 'Name it';
+  $('#sb75Ed').setAttribute('aria-label', g ? 'Change the goal' : 'Name your goal');
+  $('#sb75Ed').hidden = name==='summary';
+  $('#sb75NRow').hidden = name==='timer' || name==='win' || name==='afterPrize';
+  nt.textContent = now; nt.classList.toggle('sb75-none', none);
+  if(now && !none) nt.title=now; else nt.removeAttribute('title');
+  /* the last three steps done; in a narrow pin only the last two (the CSS picks which "more" count shows) */
+  var n=trail.length, shown=trail.slice(-3);
+  $('#sb75Trail').hidden = !n;
+  $('#sb75Trail').innerHTML = n ? '<span class="sb75-tk">Done</span><span class="sb75-tl">'+shown.map(function(s,i){ return '<span class="sb75-step'+(shown.length===3&&i===0?' sb75-old':'')+'" title="'+esc(s)+'"><i aria-hidden="true"></i>'+esc(sb75Short(s,60))+'</span>'; }).join('')+
+    (n>3?'<span class="sb75-moren sb75-mw">+'+(n-3)+' more</span>':'')+(n>2?'<span class="sb75-moren sb75-mn">+'+(n-2)+' more</span>':'')+'</span>' : '';
+  pin.hidden=false;
+  sb75Crop(!!$('[data-screen="'+name+'"] .stage'));
+}
+function sb75GoalEdit(open){
+  $('#sb75GForm').hidden=!open; $('#sb75GRow').hidden=!!open;
+  if(open){ $('#sb75GoalIn').value=sb75Goal(); setTimeout(function(){ try{ $('#sb75GoalIn').focus(); }catch(e){} },30); }
+}
+$('#sb75Ed').addEventListener('click',function(){ sb75GoalEdit(true); });
+$('#sb75GForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var old=sb75Goal(), v=$('#sb75GoalIn').value.replace(/\s+/g,' ').trim().slice(0,200);
+  S.goal=v; if(!S.task || S.task===old) S.task=v;
+  persist(); sb75GoalEdit(false); sb75Pin(S.screen);
+  /* a new goal gets new suggestions: quick ones at once, and Claude is asked again */
+  if(v!==old && (S.screen==='win' || S.screen==='afterPrize')){ if(S.sug) S.sug.rid=''; sb75Stop(); S.sug=null; sb75Sug(); }
+});
+$('#sb75GoalIn').addEventListener('keydown',function(e){ if(e.key==='Escape'){ e.stopPropagation(); sb75GoalEdit(false); } });
+$('#stepInput').addEventListener('input',function(){ S.step=$('#stepInput').value.slice(0,200); persist(); sb75Pin('step'); });
+/* a smaller step from Claude lands in the box without an input event: keep the saved state in step */
+document.addEventListener('snowball:smaller-done',function(){ var v=$('#stepInput').value; if(v!==S.step){ S.step=v.slice(0,200); persist(); if(S.screen==='step') sb75Pin('step'); } });
+
+/* the step screen: typed fields keep their values whatever prize is picked */
+function sb75PrizeMark(){
+  var own=$('#prizeInput').value.trim(), onOwn=!!own && !PRIZES.includes(S.prize), off=!!own && !onOwn;
+  $$('#prizeChips .chip').forEach(function(c){ c.setAttribute('aria-checked', String(!onOwn && c.dataset.p===S.prize)); });
+  $('#prizeInput').classList.toggle('sb75-dim', off);
+  var u=$('#sb75Using'); if(u){ u.hidden=!off; u.textContent = off ? 'Using “'+S.prize+'”. Tap your own prize to switch back.' : ''; }
+}
+function sb75StepExtra(){
+  if(S.sb75from){ $('[data-screen="step"] .eyebrow').textContent='Your next step'; $('#stepHint').textContent = sb75Goal() ? 'What is the next small move toward your goal?' : 'What is the next small move?'; }
+  sb75PrizeMark(); sb75AlarmUi(); sb75Pin('step');
+}
+function sb75Back(){ var tr=Array.isArray(S.trail)?S.trail:[]; S.step = (typeof S.sb75was==='string') ? S.sb75was : (tr.length ? tr[tr.length-1] : ''); S.sb75was=null; }
+
+/* suggested next snowballs */
+function sb75AiOn(){ var d={}; try{ document.dispatchEvent(new CustomEvent('snowball:ai',{detail:d})); }catch(e){} return !!d.on; }
+function sb75Hits(re,txt){ var m=txt.match(re)||[], seen={}, n=0; m.forEach(function(w){ w=w.toLowerCase(); if(!seen[w]){ seen[w]=1; n++; } }); return n; }
+function sb75Kind(g,last){
+  var txt=String(g||'')+' \n '+String(last||''), best=null, bs=0, second=0;
+  SB75_KINDS.forEach(function(k){ var sc=2*sb75Hits(k.hi,txt)+sb75Hits(k.lo,txt); if(sc>bs){ second=bs; bs=sc; best=k; } else if(sc>second) second=sc; });
+  return (bs>=2 && bs>second) ? best : null;
+}
+/* order: a new next part first, then the same step again, then a way to wrap up */
+function sb75Rules(){
+  var g=sb75Goal(), tr=Array.isArray(S.trail)?S.trail:[], last=sb75Last(), used={}, out=[], kind=sb75Kind(g,last);
+  tr.forEach(function(s){ used[sb75Norm(s)]=1; });
+  if(last) used[sb75Norm(last)]=1;
+  function add(t,k,cap){ t=String(t||'').trim(); var n=sb75Norm(t); if(!n || used[n] || out.length>=(cap||3)) return; used[n]=1; out.push({t:t.slice(0,120),k:k}); }
+  var general=[g ? 'Do the next small part of “'+sb75Short(g,50)+'”' : 'Do the next small bit after that', 'Spend two minutes on the part you keep skipping'];
+  var nexts=(kind?kind.s:[]).concat(general);
+  nexts.forEach(function(s){ add(s,'next',1); });
+  if(last) out.push({t:last.slice(0,120),k:'keep'});
+  else nexts.forEach(function(s){ add(s,'next',2); });
+  SB75_WRAP.forEach(function(s){ add(s,'wrap'); });
+  nexts.forEach(function(s){ add(s,'next'); });
+  if(out.length<3) add('Take two more minutes on it','keep');
+  return out.slice(0,3);
+}
+var ICON_PLAY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
+function sb75SugPaint(){
+  var box=$('#sb75Next'); if(!box || !S.sug) return;
+  var on=sb75AiOn(), busy=!!SB75_BUSY && S.sug.rid===SB75_BUSY, nm=nextMin(), last=sb75Last(), ai=0;
+  $('#sb75Title').textContent = sb75Goal() ? 'Next snowball for this goal' : 'Next snowball';
+  $('#sb75List').innerHTML = S.sug.list.map(function(x,i){
+    var k=SB75_TAG[x.k] ? x.k : 'ai', tag = k==='ai' ? 'Idea '+(++ai) : SB75_TAG[k];
+    return '<button type="button" class="sb75-sug'+(i===0?' sb75-first':'')+'" data-i="'+i+'" data-k="'+k+'" aria-label="'+esc('Start '+nm+' minutes: '+x.t)+'"><span class="sb75-tag">'+tag+'</span><span class="sb75-min">'+ICON_PLAY+'Start · '+nm+' min</span><span class="sb75-t">'+esc(x.t)+'</span></button>';
+  }).join('');
+  var mixed=S.sug.list.some(function(x){ return !!SB75_TAG[x.k]; });
+  $('#sb75Src').hidden = S.sug.src!=='claude';
+  $('#sb75SrcT').textContent = mixed ? 'Claude + quick ideas' : 'From Claude';
+  var msg = busy ? 'Claude is thinking of next steps for your goal' : (on && SB75_MSG[S.sug.msg]) || '';
+  $('#sb75Msg').hidden = !msg; $('#sb75MsgT').textContent = msg; $('#sb75Stop').hidden = !busy; $('#sb75Dots').hidden = !busy;
+  $('#sb75Same').hidden = S.sug.src!=='claude' || !last || S.sug.list.some(function(x){ return x.k==='keep'; });
+  $('#sb75Same').querySelector('span').textContent = 'Same step again · '+nm+' min';
+  $('#sb75Other').hidden = !on || busy;
+}
+function sb75Ask(fresh){
+  if(!S.sug || !sb75AiOn()) return;
+  var rid=uid(), avoid=fresh ? S.sug.list.map(function(x){ return x.t; }) : [];
+  S.sug.rid=rid; S.sug.msg=''; SB75_BUSY=rid; persist();
+  clearTimeout(SB75_TO);
+  SB75_TO=setTimeout(function(){
+    if(SB75_BUSY!==rid) return;
+    SB75_BUSY=''; if(S.sug && S.sug.rid===rid){ S.sug.msg='slow'; persist(); sb75SugPaint(); }
+    try{ document.dispatchEvent(new CustomEvent('snowball:next',{detail:{stop:true}})); }catch(e){}
+  },25000);
+  sb75SugPaint();
+  try{ document.dispatchEvent(new CustomEvent('snowball:next',{detail:{goal:sb75Goal(),done:sb75TrailCopy().slice(-8),rid:rid,fresh:!!fresh,avoid:avoid}})); }catch(e){}
+}
+function sb75Stop(){ if(!SB75_BUSY) return; SB75_BUSY=''; clearTimeout(SB75_TO); try{ document.dispatchEvent(new CustomEvent('snowball:next',{detail:{stop:true}})); }catch(e){} }
+document.addEventListener('snowball:next-done',function(e){
+  var d=e.detail||{}; if(!S.sug || !d.rid || S.sug.rid!==d.rid) return;
+  if(SB75_BUSY===d.rid){ SB75_BUSY=''; clearTimeout(SB75_TO); }
+  var L=[], have={};
+  if(Array.isArray(d.steps)) d.steps.forEach(function(s){ if(typeof s!=='string') return; var t=s.replace(/\s+/g,' ').trim().slice(0,120), n=sb75Norm(t); if(n && !have[n] && L.length<3){ have[n]=1; L.push({t:t,k:'ai'}); } });
+  /* fewer than three came back (some were steps already done): top up with the quick ideas, which keep their own kind */
+  if(L.length && L.length<3) sb75Rules().forEach(function(x){ var n=sb75Norm(x.t); if(!have[n] && L.length<3){ have[n]=1; L.push(x); } });
+  if(L.length){ S.sug.list=L; S.sug.src='claude'; S.sug.msg=''; }
+  else if(S.sug.msg!=='slow') S.sug.msg = d.stopped ? 'stopped' : 'error';
+  persist(); sb75SugPaint();
+});
+/* quick ideas at once; Claude is asked when the list is still the quick one and has not been answered, stopped or failed */
+function sb75Sug(){
+  if(!S.sug || !Array.isArray(S.sug.list) || !S.sug.list.length){ S.sug={list:sb75Rules(),src:'rule',msg:'',rid:''}; persist(); sb75SugPaint(); sb75Ask(false); return; }
+  sb75SugPaint();
+  if(S.sug.src==='rule' && !S.sug.msg && !SB75_BUSY) sb75Ask(false);
+}
+function sb75Place(name){
+  if(name!=='win' && name!=='afterPrize' && name!=='timer'){
+    /* left the suggestions: the request is dropped quietly (no "Stopped" note) and asked again on the way back */
+    if(SB75_BUSY && S.sug && S.sug.rid===SB75_BUSY){ S.sug.rid=''; persist(); }
+    sb75Stop();
+  }
+  var box=$('#sb75Next'); if(!box || (name!=='win' && name!=='afterPrize')) return;
+  var slot=$('[data-screen="'+name+'"] .sb75-slot'); if(slot && box.parentNode!==slot) slot.appendChild(box);
+  if(name==='afterPrize') $('#apNext').hidden=true;
+  sb75Sug();
+}
+function sb75Win(){ $('#wNext').hidden=true; $('#wSame').hidden=true; sb75Sug(); }
+function sb75Go(t){ sb75Stop(); S.step=String(t||'').slice(0,200); S.sug=null; S.sb75from=''; S.sb75was=null; persist(); startPush(nextMin()); }
+$('#sb75List').addEventListener('click',function(e){ var b=e.target.closest('.sb75-sug'); if(!b || !S.sug) return; var x=S.sug.list[Number(b.dataset.i)]; if(x) sb75Go(x.t); });
+$('#sb75Same').addEventListener('click',function(){ var l=sb75Last(); if(l) sb75Go(l); });
+$('#sb75Other').addEventListener('click',function(){ sb75Ask(true); });
+$('#sb75Stop').addEventListener('click',function(){ var rid=SB75_BUSY; sb75Stop(); if(S.sug && S.sug.rid===rid){ S.sug.msg='stopped'; persist(); } sb75SugPaint(); });
+$('#sb75Own').addEventListener('click',function(){ S.sb75was=String(S.step||''); S.sb75from=(S.screen==='afterPrize')?'afterPrize':'win'; S.step=''; persist(); show('step'); renderStep(); setTimeout(function(){ $('#stepInput').focus(); },50); });
+$('#sb75Fin').addEventListener('click',function(){ sb75Stop(); S.outcome='done'; persist(); enterLog(); });
+/* going back from the log undoes "done with this goal", so a later "Stop here and save" starts on Park */
+$('#logBack').addEventListener('click',function(){ if(S.outcome==='done'){ S.outcome=null; persist(); } });
+
+/* the loud alarm: a three-note chime, three times, through a compressor so it is loud without clipping */
+function sb75Chime(rounds,at,vol){
+  var nodes=[]; if(!AC) return nodes;
+  var t0=(at!=null)?at:AC.currentTime+0.03, out=AC.destination, NOTES=[880,1108.73,1318.51];
+  try{ var comp=AC.createDynamicsCompressor(); comp.threshold.value=-10; comp.knee.value=0; comp.ratio.value=10; comp.attack.value=0.002; comp.release.value=0.15; comp.connect(AC.destination); out=comp; nodes.push(comp); }catch(e){}
+  var master=AC.createGain(); master.gain.value=vol||1; master.connect(out); nodes.push(master);
+  for(var r=0;r<rounds;r++){ for(var i=0;i<3;i++){
+    var t=t0+r*0.95+i*0.2;
+    [['square',0.34],['sine',0.72]].forEach(function(v){
+      var o=AC.createOscillator(), g=AC.createGain();
+      o.type=v[0]; o.frequency.setValueAtTime(NOTES[i],t);
+      g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(v[1],t+0.012); g.gain.setValueAtTime(v[1],t+0.09); g.gain.exponentialRampToValueAtTime(0.0001,t+0.19);
+      o.connect(g); g.connect(master); o.start(t); o.stop(t+0.21); nodes.push(o);
+    });
+  } }
+  return nodes;
+}
+/* without force, an alarm that is already sounding is left to finish */
+function sb75Disarm(force){
+  if(!SB75A) return;
+  var started=false; try{ started=!!AC && AC.currentTime>=SB75A.t0-0.02; }catch(e){}
+  if(started && !force) return;
+  SB75A.nodes.forEach(function(n){ try{ if(n.stop) n.stop(0); }catch(e){} try{ n.disconnect(); }catch(e){} });
+  SB75A=null;
+}
+/* one open tab holds the scheduled alarm: the last one to arm it writes a claim (refreshed while armed),
+   the others stand theirs down, and a tab that reaches the bell without it stays quiet while the holder rings */
+function sb75Claim(){ try{ return JSON.parse(localStorage.getItem(SB75_KEY)||'null'); }catch(e){ return null; } }
+function sb75Mark(){ if(!SB75A) return; try{ localStorage.setItem(SB75_KEY,JSON.stringify({id:SB75A.id,endAt:SB75A.endAt,tab:SB75_TAB,at:Date.now()})); }catch(e){} }
+function sb75Elsewhere(E){ var c=sb75Claim(), n=Date.now(); return !!(c && E && c.tab!==SB75_TAB && c.id===E.id && Math.abs(c.endAt-E.endAt)<50 && n-(Number(c.at)||0)<150000 && n>=c.endAt-250 && n-c.endAt<4000); }
+/* scheduled ahead, so a background tab with slowed timers still rings on the second */
+function sb75Arm(force){
+  var T=S.timer;
+  if(!T || T.paused || !P.sound || !AC){ sb75Disarm(); return; }
+  if(AC.state==='suspended'){ try{ AC.resume().then(function(){ if(AC.state==='running') sb75Arm(force); },function(){}); }catch(e){} return; }
+  if(AC.state!=='running') return;
+  var rem=T.endAt-Date.now(); if(rem<1500) return;
+  if(SB75A && SB75A.id===T.id && Math.abs(SB75A.endAt-T.endAt)<50) return;
+  var c=sb75Claim();
+  if(!force && c && c.tab!==SB75_TAB && c.id===T.id && Math.abs(c.endAt-T.endAt)<50 && Date.now()-(Number(c.at)||0)<150000) return;
+  sb75Disarm(true);
+  var t0=AC.currentTime+rem/1000;
+  try{ SB75A={id:T.id,endAt:T.endAt,t0:t0,nodes:sb75Chime(3,t0,1)}; }catch(e){ SB75A=null; return; }
+  sb75Mark();
+}
+setInterval(sb75Mark,20000);
+window.addEventListener('storage',function(e){
+  if(e.key!==SB75_KEY) return;
+  var c=null; try{ c=JSON.parse(e.newValue||'null'); }catch(er){}
+  if(c && c.tab!==SB75_TAB){ if(SB75A && SB75A.id===c.id) sb75Disarm(); }
+  else if(!c) setTimeout(function(){ sb75Arm(false); },60);
+});
+window.addEventListener('pagehide',function(){ var c=sb75Claim(); if(c && c.tab===SB75_TAB){ try{ localStorage.removeItem(SB75_KEY); }catch(e){} } });
+function sb75Sound(){ P.sound=!P.sound; save('sb.prefs',P); renderSound(); if(P.sound){ unlockAudio(); try{ sb75Chime(1,null,0.6); }catch(e){} } sb75Arm(true); }
+function sb75AlarmUi(){ $$('[data-sb75="alarm"]').forEach(function(b){ b.setAttribute('aria-pressed',String(!!P.sound)); b.classList.toggle('sb75-off',!P.sound); b.querySelector('span').textContent = P.sound ? 'Loud alarm on' : 'Alarm off'; b.setAttribute('aria-label', P.sound ? 'Loud alarm on. Tap to turn it off' : 'Alarm off. Tap to turn it on'); }); }
+ROOT.addEventListener('click',function(e){ var b=e.target && e.target.closest ? e.target.closest('[data-sb75="alarm"]') : null; if(b) sb75Sound(); });
+document.addEventListener('pointerdown',function(){ setTimeout(function(){ sb75Arm(true); },80); },{passive:true});
+document.addEventListener('keydown',function(){ unlockAudio(); setTimeout(function(){ sb75Arm(true); },80); });
+
 /* boot */
 renderSound();
 applyR(rFor(0));
@@ -12301,6 +13698,8 @@ window.addEventListener('storage',e=>{
   standBy=false; adoptState(nx);
 });
 window.__snowTest={ expire(){ if(S.timer && !S.timer.paused){ S.timer.endAt=Date.now()-1; } }, state(){ return JSON.parse(JSON.stringify(S)); } };
+window.__snowTest.sb75=function(){ return {armed:!!SB75A, t0:SB75A?SB75A.t0:null, busy:SB75_BUSY, sound:!!P.sound, rules:sb75Rules(), tab:SB75_TAB, view:$('#ball').getAttribute('viewBox')}; };
+window.__snowTest.sb75kind=function(g,l){ var k=sb75Kind(g,l||''); return k?k.s[0]:''; };
 })();
 })();
 </script>

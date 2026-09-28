@@ -2,6 +2,17 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-09-27 — next snowballs, ranks and medals, and more of Pip's feelings
+- Snowball: the goal you typed stays pinned at the top of every screen, with the steps you have done under it.
+- When a push ends, three suggested next snowballs show straight away, built from that goal. With Claude available, its own ideas replace them a moment later; Other ideas asks again, Type my own lets you write one, and I'm done with this goal closes it out.
+- Picking a prize no longer clears the first-step box.
+- Loud alarm: when the timer runs out, a rising three-note chime plays three times (about 2.5 seconds) and phones vibrate. It is scheduled ahead, so it still sounds when the tab is in the background, and only one open tab rings. Ending a push early yourself plays one quiet chime instead. The bell button switches the alarm off.
+- Quests: Add a quest opens about 40 everyday ideas grouped into Body, Mind, Work, Home and Habits, with search. You can still write your own.
+- Ranks and medals: XP now earns a rank with an emblem, and 20 achievements come in bronze, silver and gold. They count what you have already done, so existing progress shows at once.
+- Quest rows carry category icons and colours.
+- The "keeps not happening", Next best and Plan for today panels are hidden from the Quests page for now.
+- Pip has 19 feelings now (hopeful, proud, determined, missing you, restless, curious, cosy and more), driven by the kinds of quests you do, streaks, the time of day, your fuel, recalls and snowballs. Pip can show two at once, and How I feel says why.
+
 ## 2026-09-26 — smooth on every computer
 - The background glows no longer blur on every frame. On computers without graphics acceleration (acceleration switched off, older laptops, virtual machines, remote desktops) a first visit ran at about 13 frames a second; it now runs at 60. It looks the same.
 - If a device still draws slowly, a first visit switches to Calm motion by itself and says so once. Anyone who has tapped Motion keeps their choice.
