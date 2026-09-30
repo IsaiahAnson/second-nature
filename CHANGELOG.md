@@ -2,6 +2,13 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-09-29 — Focus: a daily plan, a focus room and a toolkit
+A new Focus group in the tab bar, built on research about motivation, attention and time, including studies of ADHD. Every step and tool shows how solid its evidence is (68 findings, each with an honest grade), and tapping a grade shows what the studies found and what they don't show.
+- My day: one card that always shows the next step, with one big Start button and Smaller, Later and Skip. Every step has a smaller version that counts in full. The day adapts to your fuel (Low, Some, Full) and the time you get up: daylight, food, moving before your first focus block, your one thing and its first move, focus blocks, a walk after lunch, a short block of dull jobs, recall, an evening shutdown that writes tomorrow's first step, and a wind-down. Steps you do elsewhere (a Starter push, a walk quest, a recall) tick themselves.
+- Focus room: a gently moving scene you can change (eight of them), a mixer of twelve ambient sounds made in the browser (rain, fire, stream, brown noise and more) with presets and saved mixes, a big timer with Sprint, Short, Long and Flow modes, break cards that suggest a quick move, Pip working beside you, a place to park stray thoughts, stats with a heatmap, and a full-screen focus view. Sound is off until you turn it on. Calm motion shows a still scene.
+- Toolkit: 21 tools you tap and do, grouped by what's happening (can't start, drifting, time slipping, head too full, feeling bad, can't stop, can't sleep): a two-minute start, a task slicer, if-then plans, want and should pairs, a prize shelf, move now, time guessing, a brain dump and more, plus myth cards and the full evidence library.
+- Focus sessions and moves feed XP, your effects, Pip's feelings and the best-hour curve, with daily caps. Nothing is ever taken away for a missed step.
+
 ## 2026-09-27 — next snowballs, ranks and medals, and more of Pip's feelings
 - Snowball: the goal you typed stays pinned at the top of every screen, with the steps you have done under it.
 - When a push ends, three suggested next snowballs show straight away, built from that goal. With Claude available, its own ideas replace them a moment later; Other ideas asks again, Type my own lets you write one, and I'm done with this goal closes it out.
