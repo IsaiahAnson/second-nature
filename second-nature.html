@@ -1560,6 +1560,28 @@ body.ad76r-lock { overflow: hidden; }
 .ad76k-libb { display: flex; flex-direction: column; gap: 14px; padding: 2px 0 18px; }
 /* ad76: kit css */
 /* ad76: css end */
+/* ---------- v77 time12: room for 12-hour times ---------- */
+.ad76d-time, .ad76d-rtime, .ad76r-ends { white-space: nowrap; }
+.t12-ap { font-size: 0.6em; font-weight: 600; }
+.ad76d-row { grid-template-columns: 4.4rem minmax(0, 1fr) auto auto; }
+/* energy chart axis: the chart scales with its width, so on a phone its own "7 AM" labels shrink. There the labels are an
+   HTML row (t12EnAxis) at a fixed 11px instead, pulled up over the chart's empty label strip (--t12sb is minus that
+   strip's height as a share of the width; the chart is full width on a phone) */
+.t12-axr { display: none; }
+@media (max-width: 640px) {
+  .en-chart .t12-axl { display: none; }
+  .en-chart { margin-bottom: var(--t12sb, 10px); }
+  .t12-axr { display: block; position: relative; max-width: 560px; height: 15px; margin: 4px 0 10px; font-family: var(--mono); font-size: 11px; line-height: 15px; color: var(--muted); }
+  .t12-axr span { position: absolute; top: 0; white-space: nowrap; left: clamp(0px, calc(var(--p) - var(--n) * 0.5ch), calc(100% - var(--n) * 1ch)); }
+  .t12-axr i { font-style: normal; }
+  .ad76d-row { grid-template-columns: 4.3rem minmax(0, 1fr) auto; }
+  .ad76d-time { font-size: 1.15rem; }
+  .ad76d-clock { gap: 8px; }
+}
+@media (max-width: 420px) {
+  .t12-axr .t12-sp { display: none; }
+  .t12-axr span { left: clamp(0px, calc(var(--p) - (var(--n) - 1) * 0.5ch), calc(100% - (var(--n) - 1) * 1ch)); }
+}
 /* ---------- memory curve ---------- */
 .mcurve { position: relative; max-width: 760px; }
 .mcurve svg { width: 100%; height: auto; display: block; }
@@ -6019,7 +6041,7 @@ function aiDaysText(days) {
 }
 // Claude has no memory between calls, so every prompt carries the whole chunk, capped.
 var AI_HEAD = 'You are helping a learner in a spaced-repetition learning app called Second Nature. A "chunk" is one idea or procedure written in the learner\'s own words: a name, a one-line gist, a metaphor or picture, when to use it, and when not to.';
-var AI_TAIL = 'Plain language and British spelling. Reply with only a JSON object of this shape:';
+var AI_TAIL = 'Plain language and British spelling. Write any clock time 12-hour with AM or PM, like 7:30 AM. Reply with only a JSON object of this shape:';
 function aiChunkText(c) {
   function line(k, v, n) { v = aiCap(v, n); return k + ': ' + (v || '(not written)'); }
   return [line('Chunk name', c.name, 160), line('Subject', c.domain, 80), line('Gist', c.gist, 700), line('Metaphor or picture', c.metaphor, 600), line('When to use it', c.useWhen, 600), line('When not to', c.notWhen, 600)].join('\n');
@@ -8615,7 +8637,7 @@ var EN_LV = ['Low fuel', 'Some fuel', 'Full fuel'];
 var EN_DEF = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1, 0.25, 0.45, 0.7, 0.92, 1, 0.75, 0.42, 0.36, 0.48, 0.66, 0.86, 0.9, 0.7, 0.45, 0.3, 0.15, 0.08];
 var EN_KC = { recall: 's2', dread: 's0', quest: 's3', snow: 'release', recalls: 'load' };
 function enNow() { return EN.now ? new Date(EN.now) : new Date(); }
-function enHm(h) { h = h % 24; return (h < 10 ? '0' : '') + h + ':00'; }
+function enHm(h) { return t12h(h); }   /* time12: "9 AM", "12 PM"; the hour maths stays 0-23 */
 function enWin(h) { return enHm(h) + ' to ' + enHm(h + 1); }
 function enDoc() {
   var d = G.ready.meta ? G.meta.get('energy') : null, days = {}, hrs = {};
@@ -8736,9 +8758,9 @@ function enChart(p) {
   for (h = s; h < e; h++) {
     var v = top ? cur.c[h] / top : 0, bh = Math.max(2, Math.round(v * (H - 16))), x = (h - s) * 24 + 3;
     out += '<rect class="en-b' + (pick[h] ? ' pick' : h < p.now ? ' past' : '') + '"' + (pick[h] ? ' style="--c:var(--' + EN_KC[pick[h]] + ')"' : '') + ' x="' + x + '" y="' + (H - 14 - bh) + '" width="18" height="' + bh + '" rx="3"><title>' + enWin(h) + (pick[h] ? ': planned' : '') + '</title></rect>';
-    if ((h - s) % 3 === 0) out += '<text x="' + (x + 9) + '" y="' + (H - 2) + '" text-anchor="middle">' + enHm(h).slice(0, 2) + '</text>';
+    if ((h - s) % 3 === 0) out += '<text class="t12-axl" x="' + Math.min(W - 15, Math.max(15, x + 9)) + '" y="' + (H - 2) + '" text-anchor="middle">' + enHm(h) + '</text>';
   }
-  return '<svg class="en-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc((cur.learned ? 'Your learned hours' : 'The starting guess') + ', from ' + enHm(s) + ' to ' + enHm(e) + '. Taller bars are hours when you usually finish things.') + '">' + out + '</svg>';
+  return '<svg class="en-chart" style="--t12sb:' + (-1400 / W).toFixed(3) + '%" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc((cur.learned ? 'Your learned hours' : 'The starting guess') + ', from ' + enHm(s) + ' to ' + enHm(e) + '. Taller bars are hours when you usually finish things.') + '">' + out + '</svg>' + t12EnAxis(s, e);
 }
 function enHowHtml(p) {
   var cur = p.cur, kinds = {}, leg = '';
@@ -8776,7 +8798,7 @@ function enRecallLine() {
   var today = todayStr(), lv = enLevel(today);
   if (lv < 0 || EN.edit) return enCheckHtml(today);
   var p = enPlan(gameCalc()), rb = null; p.blocks.forEach(function (b) { if (!rb && b.kind === 'recall') rb = b; });
-  var t = lv === 0 ? '<b>Low day.</b> One recall is enough today.' : rb ? 'Plan: the hardest, “' + esc(rb.name) + '”, ' + (rb.h === p.now ? '<b>now</b>.' : 'at <b>' + enWin(rb.h) + '</b>.') : 'Today: <b>' + EN_LV[lv] + '</b>.';
+  var t = lv === 0 ? '<b>Low day.</b> One recall is enough today.' : rb ? 'Plan: the hardest, “' + esc(rb.name) + '”, ' + (rb.h === p.now ? '<b>now</b>.' : 'from <b>' + enWin(rb.h) + '</b>.') : 'Today: <b>' + EN_LV[lv] + '</b>.';
   return t + '<span class="en-links"><button class="linkbtn" data-act="en-plan">See today’s plan</button><button class="linkbtn" data-act="en-edit">change</button></span>';
 }
 function enTodayHook() {
@@ -12301,7 +12323,7 @@ window.__ad76Test = {
     ad76Tick();
   },
   s: {
-    dayKey: ad76DayKey, nowMin: ad76NowMin, hm: ad76Hm, min: ad76Min, can: ad76Can, id: ad76Id, save: ad76Save, dayOf: ad76DayOf, logSave: ad76LogSave, logDay: ad76LogDay,
+    dayKey: ad76DayKey, nowMin: ad76NowMin, hm: ad76Hm, h12: t12, h12h: t12h, h12s: t12s, parseHm: t12Parse, h12when: t12When, h12text: t12Text, min: ad76Min, can: ad76Can, id: ad76Id, save: ad76Save, dayOf: ad76DayOf, logSave: ad76LogSave, logDay: ad76LogDay,
     room: ad76Room, roomSave: ad76RoomSave, sub: ad76Sub, emit: ad76Emit, chip: ad76Chip, chips: ad76Chips, evList: ad76EvList, legend: ad76Legend, G: AD76_G, POP: AD76_POP,
     pip: ad76Pip, pipName: ad76PipName, guide: ad76Guide, guideLink: ad76GuideLink, motiv: ad76Motiv, GUIDE: AD76_GUIDE,
     ac: function () { return AD76_AC; }, acMake: ad76AC, audioUse: ad76AudioUse, chime: ad76Chime, bellArm: ad76BellArm, bellDisarm: ad76BellDisarm, ring: ad76Ring, bell: function () { return AD76_BELL; }, bellStyle: ad76BellStyle,
@@ -12380,7 +12402,7 @@ function ad76dBedOf(wake, sleep) { var W = ad76Min(wake); return W < 0 ? -1 : W 
 function ad76dBedOk(wake, sleep) { return ad76dBedOf(wake, sleep) <= AD76D_BMAX; }
 function ad76dBedMsg(wake, sleep) {
   var sl = Number(sleep) || 8, B = ad76dBedOf(wake, sl);
-  return 'That puts lights out at ' + ad76Hm(B) + '. For now My day plans lights out by 03:30, so pick a wake time up to ' + ad76Hm(AD76D_BMAX + Math.round(sl * 60)) + (sl < 9 ? ', or more sleep.' : '.');
+  return 'That puts lights out at ' + t12(B) + '. For now My day plans lights out by ' + t12(AD76D_BMAX) + ', so pick a wake time up to ' + t12(AD76D_BMAX + Math.round(sl * 60)) + (sl < 9 ? ', or more sleep.' : '.');
 }
 function ad76dOpt(verb, id, v, label, on, extra) {
   return '<button type="button" class="ad76-opt" data-ad76="d:' + verb + '"' + (id ? ' data-id="' + id + '"' : '') + ' data-v="' + esc(v) + '" aria-pressed="' + (on ? 'true' : 'false') + '"' + (extra || '') + ad76dRo() + '>' + esc(label) + '</button>';
@@ -12551,12 +12573,12 @@ function ad76dModel(noWrite) {
   var up = ad76dPm(day.up), late = up >= W + 180 && up < 1440;
   var head = [];
   /* after midnight counts as late only once the wind-down has begun (a late body clock keeps its evening) */
-  if (now >= 1440 && now >= P.B - 60) head.push(['It\'s late. Tomorrow starts at ' + ad76Hm(W) + '.', 'load']);
+  if (now >= 1440 && now >= P.B - 60) head.push(['It\'s late. Tomorrow starts at ' + t12(W) + '.', 'load']);
   else if (by.up && by.up.state === 'open' && now < W - 120) head.push(['You\'re up early. Tap I\'m up to start your day now.', 's1']);
   if (P.rest) head.push(['Rest day. Light, a walk, and an early night.', 'release']);
   else if (P.low) head.push(['Low fuel. Here\'s a small day. Small days count.', 's1']);
-  if (late && now < shutAt) head.push(['Starting at ' + day.up + '. Here\'s the rest of today.', 'accent']);
-  else if (!late && P.sh >= 30 && now < P.Wp + 180) head.push(['Up at ' + day.up + '. Morning steps moved ' + plural(P.sh, 'minute') + ' later.', 'spark']);
+  if (late && now < shutAt) head.push(['Starting at ' + t12s(day.up) + '. Here\'s the rest of today.', 'accent']);
+  else if (!late && P.sh >= 30 && now < P.Wp + 180) head.push(['Up at ' + t12s(day.up) + '. Morning steps moved ' + plural(P.sh, 'minute') + ' later.', 'spark']);
   if (S.readOnly) head.push(['View only', 'muted']);
   var hint = '';
   /* the Quick launch hint is a morning-and-daytime nudge: never after the shutdown, never near bedtime (E19, E15) */
@@ -12609,7 +12631,7 @@ function ad76dTx(M, s) {
     o.dur = tiny ? 10 : s.len; o.go = 'Start focus';
     if (day.one.step) o.lines.push('First move: ' + day.one.step);
     if (day.why) o.lines.push('Why it matters: ' + day.why);
-    if (P.best >= 0) o.lines.push('Your best hour looks like ' + ad76Hm(P.best * 60) + (P.cur.learned ? ' (learned from ' + P.cur.n + ' days).' : ' (a typical curve until you\'ve had 10 active days).'));
+    if (P.best >= 0) o.lines.push('Your best hour looks like ' + t12h(P.best) + (P.cur.learned ? ' (learned from ' + P.cur.n + ' days).' : ' (a typical curve until you\'ve had 10 active days).'));
   }
   else if (id === 'green') {
     o.full = 'Walk for 20 minutes after lunch, somewhere green if you can.'; o.small = '5 minutes outside.';
@@ -12623,12 +12645,13 @@ function ad76dTx(M, s) {
   else if (id === 'recall') { o.n = tiny ? 3 : s.n; o.title = 'Recall ' + o.n + ' cards'; o.full = 'About ' + o.n + ' minutes, and it keeps what you learned.'; o.dur = o.n; o.go = 'Start recall'; }
   else if (id === 'shut') { o.full = 'Sort what you parked, write tomorrow\'s first step, clear one surface.'; o.small = 'Write one line for tomorrow.'; }
   else if (id === 'wind') { o.full = 'Screens down, lights low, phone charging in another room.'; o.small = 'Dim one light.'; }
-  else if (id === 'bed') { o.full = 'Lights out at ' + ad76Hm(P.B) + '. Tomorrow starts at ' + ad76Hm(P.W) + '.'; o.go = 'Lights out'; }
+  else if (id === 'bed') { o.full = 'Lights out at ' + t12(P.B) + '. Tomorrow starts at ' + t12(P.W) + '.'; o.go = 'Lights out'; }
   o.isTiny = !!(tiny && o.small);
   o.text = o.isTiny ? o.small : o.full;
   return o;
 }
 function ad76dWhen(M, s) {
+  var ad76Hm = t12;   /* time12: this function only makes display text */
   var n = M.nowMin;
   if (s.id === 'up') return '';
   if (s.later >= 0 && n < s.later) return 'back at ' + ad76Hm(s.later);
@@ -12640,6 +12663,7 @@ function ad76dWhen(M, s) {
   return 'now until ' + ad76Hm(s.end);
 }
 function ad76dAtTx(M, s) {
+  var ad76Hm = t12;   /* time12: this function only makes display text */
   var n = M.nowMin;
   if (s.later >= 0 && n < s.later) return 'back at ' + ad76Hm(s.later);
   if (s.passed) return 'was until ' + ad76Hm(s.end);
@@ -12647,6 +12671,7 @@ function ad76dAtTx(M, s) {
 }
 /* Up next never says "now": only the Now card does */
 function ad76dNextTx(M, s) {
+  var ad76Hm = t12;   /* time12: this function only makes display text */
   var n = M.nowMin;
   if (s.later >= 0 && n < s.later) return 'back at ' + ad76Hm(s.later);
   if (n < s.at) return 'at ' + ad76Hm(s.at);
@@ -12658,13 +12683,13 @@ function ad76dCue(M, s) {
   M.doc.cues.forEach(function (c) {
     if (hit) return;
     if (c.step && c.step === s.id) { hit = c; return; }
-    var m = /(^|[^\d])([01]?\d|2[0-3]):([0-5]\d)/.exec(c.when);
+    var t0 = t12Parse(c.when), m = t0 >= 0 ? [0, 0, Math.floor(t0 / 60), t0 % 60] : null;
     if (m) { var t = Number(m[2]) * 60 + Number(m[3]); if (t < 240) t += 1440; if (Math.abs(t - n) <= 30) hit = c; }
   });
   if (!hit) return '';
   var w = hit.when.replace(/^if\s+/i, ''), th = hit.then.replace(/^then\s+/i, '');
   if (!/^I[\s']/.test(w)) w = w.charAt(0).toLowerCase() + w.slice(1);
-  return 'If ' + w + ', then ' + th + (/[.!?]$/.test(th) ? '' : '.');
+  return 'If ' + t12When(w) + ', then ' + th + (/[.!?]$/.test(th) ? '' : '.');
 }
 /* a: the short form (always shown), b: the rest (hidden on a phone, where the day strip card says it in full) */
 function ad76dStreakTx() {
@@ -12718,7 +12743,7 @@ function ad76dFrac(T) { return T.up ? 1 : ad76TLeft() / Math.max(1, T.end - T.at
 function ad76dTopHtml(M, pr) {
   var ph = ad76dPhase(M), lv = M.lvl, F = AD76D_FUEL[lv] || ['', 'Fuel: pick one', 'muted'], sk = ad76dStreakTx(), nm = ad76PipName(), feel = pr && pr.p ? pr.p.k : 'calm', ro = ad76dRo();
   var fw = PET75_F[feel] ? PET75_F[feel].w.toLowerCase() : 'calm';
-  var h = '<div class="ad76d-clock"><span class="ad76d-time">' + ad76Hm(M.nowMin) + '</span><span class="ad76d-phase" style="--c:var(--' + ph[1] + ')">' + ph[0] + '</span></div>';
+  var h = '<div class="ad76d-clock"><span class="ad76d-time">' + t12(M.nowMin).replace(/ ([AP]M)$/, '<small class="t12-ap"> $1</small>') + '</span><span class="ad76d-phase" style="--c:var(--' + ph[1] + ')">' + ph[0] + '</span></div>';
   /* fuel, ring and streak share one row on a phone (.ad76d-r2); on wider screens the wrapper is display: contents */
   h += '<div class="ad76d-r2"><button type="button" class="ad76d-fpill" data-ad76="d:fuel" data-lvl="' + lv + '" aria-expanded="' + (AD76D.fuelOpen ? 'true' : 'false') + '" style="--c:var(--' + F[2] + ')"' + ro + '><i aria-hidden="true"></i>' + F[1] + '</button>';
   h += '<span class="ad76d-ringbox" role="img" aria-label="' + M.done + ' of ' + M.total + ' steps done">' + ad76dRing(M) + '<span aria-hidden="true">' + M.done + ' of ' + M.total + '</span></span>';
@@ -12761,7 +12786,7 @@ function ad76dCardHtml(M, s) {
   if (just) return h + '<p class="ad76d-do ad76d-okline">Done. Nice.</p></section>';
   var back = M.viewing ? '<button type="button" class="ad76-ghost ad76d-back" data-ad76="d:back">Back to now</button>' : '';
   if (s.state !== 'open') {
-    var what = s.state === 'skip' ? 'Skipped for today.' : s.state === 'auto' ? 'Done elsewhere.' : id === 'up' ? 'Up at ' + M.day.up + '.' : 'Done' + (s.st && s.st.at ? ' at ' + s.st.at : '') + '.';
+    var what = s.state === 'skip' ? 'Skipped for today.' : s.state === 'auto' ? 'Done elsewhere.' : id === 'up' ? 'Up at ' + t12s(M.day.up) + '.' : 'Done' + (s.st && s.st.at ? ' at ' + t12s(s.st.at) : '') + '.';
     return h + '<p class="ad76d-do">' + what + '</p>' + (s.state === 'skip' ? ad76dBtn('anyway', id, 'Do it anyway', 'ad76-btn ad76d-wide') : '') + back + '</section>';
   }
   if (o.text) h += '<p class="ad76d-do' + (o.named ? ' ad76d-named' : '') + '">' + esc(o.text) + '</p>';
@@ -12830,7 +12855,7 @@ function ad76dAskHtml(M, s, a) {
 }
 function ad76dRunHtml(M, s, T, o) {
   var q = ' data-id="' + s.id + '"', ro = ad76dRo(), room = T.kind === 'focus', end = new Date(T.end || 0);
-  var ends = T.doneAt ? 'Time\'s up. Tap Done.' : T.paused ? 'Paused' : T.up || !T.end ? 'Counting up' : 'ends at ' + ad76Hm(end.getHours() * 60 + end.getMinutes());
+  var ends = T.doneAt ? 'Time\'s up. Tap Done.' : T.paused ? 'Paused' : T.up || !T.end ? 'Counting up' : 'ends at ' + t12d(end);
   if (room) ends = T.ph === 'focus' ? ends : T.ph === 'break' ? 'On a break' : T.ph === 'done' ? 'Block done' : 'Break\'s over';
   var h = room ? '<p class="ad76d-line">Running in the Focus room.</p>' : '';
   h += '<div class="ad76d-run" id="ad76dRun" role="timer" aria-label="%LEFT%"><svg class="ad76d-disc" viewBox="0 0 72 72" aria-hidden="true" focusable="false"><circle class="ad76d-dtr" cx="36" cy="36" r="34"></circle><path class="ad76d-dw" id="ad76dWedge" d="%DISC%"></path></svg>' +
@@ -12896,7 +12921,7 @@ function ad76dFreeHtml(M) {
   var n = M.after; if (!n) return '';
   var o = ad76dTx(M, n);
   return '<section class="ad76-card ad76d-now ad76d-free" id="ad76dCard" data-step="" data-state="free" style="--c:var(--release)" aria-labelledby="ad76dNowH"><div class="ad76d-nh">' + ad76dIcon('free') +
-    '<div class="ad76d-ntt"><p class="ad76d-kick">Free time</p><h3 id="ad76dNowH" tabindex="-1">Next at ' + ad76Hm(n.from) + '. Free time until then.</h3></div></div>' +
+    '<div class="ad76d-ntt"><p class="ad76d-kick">Free time</p><h3 id="ad76dNowH" tabindex="-1">Next at ' + t12(n.from) + '. Free time until then.</h3></div></div>' +
     '<p class="ad76d-do">Up next: ' + esc(o.title) + '.</p>' + ad76dBtn('early', n.id, 'Start early', 'ad76-btn ad76d-wide') + '</section>';
 }
 /* all done: free time (with an end time) only before the wind-down; from then on, or once lights-out is done, it's goodnight */
@@ -12905,7 +12930,7 @@ function ad76dFinHtml(M) {
   var nf = M.doc.next.d === M.key ? M.doc.next.first : '', night = ad76dNight(M);
   return '<section class="ad76-card ad76d-now ad76d-fin" id="ad76dCard" data-step="" data-state="fin" style="--c:var(--s3)" aria-labelledby="ad76dNowH"><div class="ad76d-nh">' + ad76dIcon('fin') +
     '<div class="ad76d-ntt"><p class="ad76d-kick">All done</p><h3 id="ad76dNowH" tabindex="-1">That\'s the day. Stop here.</h3></div></div>' +
-    (night ? '<p class="ad76d-do">Goodnight. Tomorrow starts at ' + ad76Hm(M.P.W) + '.</p>' : '') +
+    (night ? '<p class="ad76d-do">Goodnight. Tomorrow starts at ' + t12(M.P.W) + '.</p>' : '') +
     (nf ? '<p class="ad76d-do">Tomorrow starts with: ' + esc(nf) + '</p>' : '') +
     (night ? ad76dBtn('bedlist', '', 'Bedtime list', 'ad76-btn ad76d-wide') : ad76dBtn('free', '', 'Free time, with an end time', 'ad76-go')) + '</section>';
 }
@@ -12940,7 +12965,7 @@ function ad76dStripHtml(M) {
   var sk = ad76Streak(), W = { done: 'done', auto: 'done elsewhere', skip: 'skipped' };
   var dots = M.vis.map(function (s) {
     var o = ad76dTx(M, s), k = s.state === 'done' || s.state === 'auto' ? 'done' : s.state === 'skip' ? 'skip' : s === M.natural ? 'now' : s.passed ? 'passed' : 'open';
-    var lab = o.title + ', ' + ad76Hm(s.from) + ', ' + (W[s.state] || (k === 'now' ? 'now' : k === 'passed' ? 'passed' : 'to come'));
+    var lab = o.title + ', ' + t12(s.from) + ', ' + (W[s.state] || (k === 'now' ? 'now' : k === 'passed' ? 'passed' : 'to come'));
     return '<button type="button" class="ad76d-dot" data-ad76="d:dot" data-id="' + s.id + '" data-s="' + k + '" aria-pressed="' + (M.viewing && M.now === s ? 'true' : 'false') + '" aria-label="' + esc(lab) + '" title="' + esc(lab) + '" style="--c:var(--' + s.col + ')"><i>' + (k === 'done' ? AD76D_CHECK : '') + '</i></button>';
   }).join('');
   var line = sk.bent ? 'Streaks bend. Do 3 steps today and it\'s mended.' : sk.n > 0 ? plural(sk.n, 'day') + ' in a row. Best: ' + sk.best + '.' : sk.fresh || sk.best > 0 ? 'New run. Your best was ' + plural(sk.best, 'day') + ', and those days still happened.' : '3 steps or 10 focus minutes makes a streak day.';
@@ -13000,7 +13025,7 @@ function ad76dAllHtml(M) {
     var o = ad76dTx(M, s), k = WORD[s.state] ? s.state : s === M.natural ? 'now' : s.passed ? 'passed' : s.later >= 0 && M.nowMin < s.later ? 'later' : 'open';
     var w = WORD[s.state] || (k === 'now' ? 'Now' : k === 'passed' ? 'Passed' : k === 'later' ? 'Later' : ''), btn = '';
     if (s.state === 'open' && s.id !== 'up' && s !== M.natural) btn = s.passed ? ad76dBtn('not', s.id, 'Not today', 'ad76-btn ad76d-rb') : ad76dBtn('early', s.id, 'Start', 'ad76-btn ad76d-rb');
-    h += '<li class="ad76d-row" data-s="' + k + '" style="--c:var(--' + s.col + ')"><span class="ad76d-rtime">' + ad76Hm(s.from) + '</span><span class="ad76d-rn"><i aria-hidden="true"></i>' + esc(o.title) + '</span>' + (w ? '<span class="ad76d-rs">' + w + '</span>' : '<span></span>') + (btn || '<span></span>') + '</li>';
+    h += '<li class="ad76d-row" data-s="' + k + '" style="--c:var(--' + s.col + ')"><span class="ad76d-rtime">' + t12(s.from) + '</span><span class="ad76d-rn"><i aria-hidden="true"></i>' + esc(o.title) + '</span>' + (w ? '<span class="ad76d-rs">' + w + '</span>' : '<span></span>') + (btn || '<span></span>') + '</li>';
   });
   h += '</ol>';
   if (M.by.recall && M.by.recall.hidden) h += '<p class="ad76d-note">Nothing is due in Recall today, so that step is off.</p>';
@@ -13030,7 +13055,7 @@ function ad76dSetHtml(M) {
   h += row('Sleep you need', opts('sleep', [[7, '7 hours'], [7.5, '7.5 hours'], [8, '8 hours'], [8.5, '8.5 hours'], [9, '9 hours']], set.sleep));
   /* a refused pair says why; a pair saved before the limit says where lights-out is held */
   if (AD76D.setErr) h += '<div class="ad76d-srow ad76d-bedn"><p class="ad76d-err" role="alert">' + esc(AD76D.setErr) + '</p></div>';
-  else if (!ad76dBedOk(set.wake, set.sleep)) h += '<div class="ad76d-srow ad76d-bedn"><p class="ad76d-note">Lights out is held at 03:30, the latest My day can plan for now.</p></div>';
+  else if (!ad76dBedOk(set.wake, set.sleep)) h += '<div class="ad76d-srow ad76d-bedn"><p class="ad76d-note">Lights out is held at ' + t12(AD76D_BMAX) + ', the latest My day can plan for now.</p></div>';
   var win = opts('win', [['am', 'Morning'], ['pm', 'Afternoon'], ['eve', 'Evening'], ['day', 'Whole day'], ['custom', 'Custom']], set.win);
   if (set.win === 'custom') win += '<span class="ad76d-cw"><label>From <input type="time" class="ad76-field ad76d-tf" id="ad76dWs" data-ad76in="d:set" data-k="ws" value="' + set.ws + '" data-def="' + set.ws + '"' + ro + '></label><label>to <input type="time" class="ad76-field ad76d-tf" id="ad76dWe" data-ad76in="d:set" data-k="we" value="' + set.we + '" data-def="' + set.we + '"' + ro + '></label></span>';
   h += row('When you get things done', win);
@@ -13061,7 +13086,7 @@ function ad76dSetupHtml() {
   function chip(v, t, label, on, extra) { return '<button type="button" class="ad76-opt" data-ad76="d:setup" data-v="' + v + '" data-t="' + esc(t) + '" aria-pressed="' + (on ? 'true' : 'false') + '"' + (extra || '') + ro + '>' + esc(label) + '</button>'; }
   if (i === 0) {
     h += '<h3 id="ad76dSetupH" tabindex="-1">When do you usually wake up?</h3><div class="ad76d-chipset" role="group" aria-labelledby="ad76dSetupH">';
-    for (var m = 360; m <= 600; m += 30) h += chip('wake', ad76Hm(m), ad76Hm(m), !Q.other && Q.wake === ad76Hm(m));
+    for (var m = 360; m <= 600; m += 30) h += chip('wake', ad76Hm(m), t12(m), !Q.other && Q.wake === ad76Hm(m));
     h += chip('other', '', 'Other', Q.other) + '</div>';
     if (Q.other) h += '<label class="ad76d-lab" for="ad76dOther">Your wake time</label><input type="time" id="ad76dOther" class="ad76-field ad76d-tf" data-ad76in="d:setup-other" value="' + Q.wake + '" data-def="' + Q.wake + '"' + ro + '>';
     if (Q.err) h += '<p class="ad76d-err" role="alert">' + esc(Q.err) + '</p>';
@@ -13216,7 +13241,7 @@ function ad76dToCard() { var c = document.getElementById('ad76dCard'); if (c && 
 function ad76dLater(id, v) {
   var n = ad76NowMin(), at = v === '15' ? n + 15 : v === '60' ? n + 60 : n < 810 ? 810 : n < 1080 ? 1080 : n + 120;
   ad76dSetSt(id, { s: 'later', at: ad76Hm(n), until: ad76Hm(at), why: '' });
-  ad76dClear(); ad76dSaid('Back at ' + ad76Hm(at) + '.');
+  ad76dClear(); ad76dSaid('Back at ' + t12(at) + '.');
   ad76dPaint(true);
 }
 function ad76dMust0(M) { var m0 = M.day.must[0]; return { task: m0 ? m0.t : '', qid: m0 && m0.q ? m0.q : '' }; }
@@ -13567,7 +13592,7 @@ function ad76rSc(id) { for (var i = 0; i < AD76R_SCENES.length; i++) if (AD76R_S
 function ad76rIco(d) { return '<svg class="ad76r-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' + d + '"></path></svg>'; }
 function ad76rShown() { return AD76R.built && S.tab === 'adroom' && !!AD76R.room && document.body.contains(AD76R.room); }
 function ad76rQ(s) { return AD76R.room ? AD76R.room.querySelector(s) : null; }
-function ad76rHmOf(ms) { var d = new Date(ms); return ad76Hm(d.getHours() * 60 + d.getMinutes()); }
+function ad76rHmOf(ms) { return t12d(new Date(ms)); }
 function ad76rQuote(s) { return '“' + s + '”'; }
 function ad76rLow() { try { return typeof enLevel === 'function' && enLevel(todayStr()) === 0; } catch (e) { return false; } }
 function ad76rFull() { try { return typeof enLevel === 'function' && enLevel(todayStr()) === 2; } catch (e) { return false; } }
@@ -14721,7 +14746,7 @@ function ad76rHelps(log) {
   function nm(k) { if (k === 'off') return 'Silence'; if (k === 'mix') return 'Your own mix'; var p = ad76rPre(k); return p ? p.t : k; }
   g.p.sort(by).slice(0, 3).forEach(function (x) { lines.push(nm(x.k) + ': ' + x.avg.toFixed(1) + ' from ' + plural(x.n, 'session')); });
   g.s.sort(by).slice(0, 3).forEach(function (x) { lines.push(ad76rSc(x.k).t + ': ' + x.avg.toFixed(1) + ' from ' + plural(x.n, 'session')); });
-  var hrs = g.h.sort(by).slice(0, 2).map(function (x) { return ad76Hm(Number(x.k) * 60); });
+  var hrs = g.h.sort(by).slice(0, 2).map(function (x) { return t12h(Number(x.k)); });
   if (hrs.length === 2) lines.push('Your best start hours: ' + hrs[0] + ' and ' + hrs[1] + '.');
   else if (hrs.length === 1) lines.push('Your best start hour: ' + hrs[0] + '.');
   if (log.guess.length >= 3) {
@@ -14792,7 +14817,7 @@ function ad76rInvite() {
   var R = AD76R, t = ad76T(), mode = ad76rMode(), pr = ad76Room(), f = mode === 'custom' ? pr.cf : { warm: 10, sprint: 25, deep: 50 }[mode] || 0, now = ad76Now(), m = now.getHours() * 60 + now.getMinutes();
   var at = Math.ceil((m + 1) / 5) * 5;
   if (t && t.kind === 'focus' && t.ph === 'focus' && !t.up) { f = t.f; var s = new Date(t.at); at = s.getHours() * 60 + s.getMinutes(); }
-  var text = 'I\'m starting a ' + (f ? f + '-minute ' : '') + 'focus block at ' + ad76Hm(at) + '. Want to work alongside me on a call?';
+  var text = 'I\'m starting a ' + (f ? f + '-minute ' : '') + 'focus block at ' + t12(at) + '. Want to work alongside me on a call?';
   function fallback() { R.inviteText = text; if (R.sheet === 'scene') { ad76rSheetPaint(); var inp = R.sheetEl.querySelector('#ad76rInv'); if (inp) { try { inp.focus(); inp.select(); } catch (e) {} } } }
   try {
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { R.inviteText = ''; toast('Invite copied. Paste it wherever you chat.'); }, fallback);
@@ -15093,7 +15118,7 @@ var AD76K_MYTHS = [
   ['Medication: what do the trials show?', 'The strongest short-term evidence for core symptoms, at about 12 weeks. Long-term data are limited. Choice, dose and timing are for your prescriber.', ['E26']]
 ];
 /* when chips: key, label, the cue as it reads after "If", the My day step it shows on */
-var AD76K_WHEN = [['desk', 'I sit at my desk', 'I sit at my desk', 'b1'], ['lunch', 'I finish lunch', 'I finish lunch', 'green'], ['phone', 'I pick up my phone', 'I pick up my phone', 'b1'], ['switch', 'I want to switch tasks', 'I want to switch tasks', 'b1'], ['time', 'It\'s 10:00', '', ''], ['other', 'Other', '', '']];
+var AD76K_WHEN = [['desk', 'I sit at my desk', 'I sit at my desk', 'b1'], ['lunch', 'I finish lunch', 'I finish lunch', 'green'], ['phone', 'I pick up my phone', 'I pick up my phone', 'b1'], ['switch', 'I want to switch tasks', 'I want to switch tasks', 'b1'], ['time', 'At a set time', '', ''], ['other', 'Other', '', '']];
 /* plans in your own words (Other, WOOP, Claude) need a My day step to show on; a plan with a time shows at that time */
 var AD76K_SHOW = [['b1', 'Focus block'], ['green', 'After lunch'], ['shut', 'Evening']];
 var AD76K_STEPW = { up: 'when you get up', light: 'with your daylight step', fuel: 'with your fuel check', move: 'with your move step', one: 'with your one thing', b1: 'with your focus block', green: 'after lunch', b2: 'with your second focus block', admin: 'with your dull-jobs step', recall: 'with your recall step', shut: 'in the evening', wind: 'at wind-down', bed: 'at bedtime' };
@@ -15204,7 +15229,7 @@ function ad76kClock(T, tool, word) {
     (T.paused ? ad76kBtn('ad76-btn', 'resume', 'Resume') : '') + '</div>' +
     (T.up ? '' : '<div class="ad76k-bar" aria-hidden="true"><i data-kbar="' + tool + '" style="transform:scaleX(' + frac.toFixed(3) + ')"></i></div>');
 }
-function ad76kCueText(c) { return 'If ' + c.when + ', then ' + c.then + '.'; }
+function ad76kCueText(c) { return 'If ' + t12When(c.when) + ', then ' + c.then + '.'; }
 function ad76kThen(s) {
   s = ad76S(s, 80).replace(/^then\s+/i, '').replace(/[.,;\s]+$/, '');
   if (s && !/^(i|my|me|i'm|i've)\b/i.test(s)) s = 'I will ' + s.charAt(0).toLowerCase() + s.slice(1);
@@ -15514,7 +15539,7 @@ var AD76K_B = {
   },
   timer: function () {
     return '<div class="ad76k-demo"><svg class="ad76k-disc" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="54"></circle><path d="M60 60L60 6A54 54 0 1 1 13.2 87Z"></path></svg>' +
-      '<div><p class="ad76k-demot">16:40</p><p class="ad76k-note">ends at 10:42</p></div></div>' +
+      '<div><p class="ad76k-demot">16:40</p><p class="ad76k-note">ends at 10:42 AM</p></div></div>' +
       '<p>The Focus room shows time as a shrinking disc, with the end time beside it. A cue comes at halfway and at 5 minutes left, so you don\'t have to remember to look.</p>' +
       ad76kBtn('ad76-go', 'tm-room', 'Open the Focus room');
   },
@@ -15589,10 +15614,10 @@ var AD76K_B = {
     return h + ad76kSaid(st.said) + ad76kNote('Lines go to For later. You\'ll find them in Sort the list and at the end of My day.');
   },
   wind: function (m, st) {
-    var set = ad76Doc().set, w = ad76Min(set.wake), b = ad76Hm((w < 0 ? 450 : w) + 1440 - set.sleep * 60), n = AD76K_WIND.filter(function (x) { return st[x[0]]; }).length;
+    var set = ad76Doc().set, w = ad76Min(set.wake), b = t12((w < 0 ? 450 : w) + 1440 - set.sleep * 60), n = AD76K_WIND.filter(function (x) { return st[x[0]]; }).length;
     return '<ul class="ad76k-ticks">' + AD76K_WIND.map(function (x) { return '<li><button type="button" class="ad76k-tick" data-ad76="k:wd-tick" data-v="' + x[0] + '" aria-pressed="' + !!st[x[0]] + '"><span class="ad76k-box" aria-hidden="true"></span><span>' + esc(x[1]) + '</span></button></li>'; }).join('') + '</ul>' +
       '<p class="ad76k-big">Lights out at ' + b + '.</p>' + (n === AD76K_WIND.length ? ad76kSaid('Wind-down done. Sleep well.') : '') +
-      ad76kNote('That comes from your wake time (' + set.wake + ') and the sleep you need (' + set.sleep + ' hours). Change them in My day\'s Plan settings.');
+      ad76kNote('That comes from your wake time (' + t12s(set.wake) + ') and the sleep you need (' + set.sleep + ' hours). Change them in My day\'s Plan settings.');
   },
   myths: function (m, st) {
     var f = st.f || {};
@@ -15608,18 +15633,18 @@ function ad76kMythHtml(x, i, on) {
 }
 function ad76kPrev(st) {
   var w = ad76kWhenOf(st), t = ad76kThen(st.then);
-  return w && t ? ad76kCueText({ when: w, then: t }) : w ? 'If ' + w + ', then…' : 'Pick when, then write what you\'ll do.';
+  return w && t ? ad76kCueText({ when: w, then: t }) : w ? 'If ' + t12When(w) + ', then…' : 'Pick when, then write what you\'ll do.';
 }
 /* where a plan in your own words shows in My day (a plan that names a time shows at that time instead) */
 function ad76kShowOf(st) { return AD76K_SHOW.some(function (x) { return x[0] === st.show; }) ? st.show : 'b1'; }
-function ad76kStepFor(when, step) { return AD76K_HM.test(String(when || '')) ? '' : step; }
+function ad76kStepFor(when, step) { return t12Parse(when) >= 0 ? '' : step; }
 function ad76kShowHtml(st, i) {
   var cur = ad76kShowOf(st);
   return '<div class="ad76k-show" role="group" aria-label="Show it in My day"><span class="ad76k-mlab" aria-hidden="true">Show it in My day</span><span class="ad76k-opts">' +
     AD76K_SHOW.map(function (x) { return ad76kOpt('it-show', x[0], x[1], cur === x[0], ' data-i="' + i + '"'); }).join('') + '</span></div>';
 }
 function ad76kWhere(c) {
-  var m = AD76K_HM.exec(c.when || ''), at = m ? (m[2].length < 2 ? '0' : '') + m[2] + ':' + m[3] : '', w = AD76K_STEPW[c.step] || '';
+  var t0 = t12Parse(c.when), at = t0 >= 0 ? t12(t0) : '', w = AD76K_STEPW[c.step] || '';
   if (w) return 'Shows in My day ' + w + (at ? ' and around ' + at : '') + '.';
   return at ? 'Shows in My day around ' + at + '.' : 'Not shown in My day.';
 }
@@ -16306,6 +16331,55 @@ window.__ad76Test.k = {
 
 /* ad76: kit js */
 /* ad76: shell end */
+
+/* ---------- v77 time12: clock times are shown 12-hour; saved values stay "HH:MM" ---------- */
+/* t12(minutes after midnight) -> "7:30 AM"; noon is "12:00 PM", midnight "12:00 AM"; it wraps past 24 hours.
+   short drops ":00" ("7 AM"). Built by hand with a plain space: Intl can put U+202F before AM/PM, and callers
+   strip ":00" before a space ("around tomorrow at 8 AM"). */
+function t12(min, short) { var m = ((Math.round(Number(min) || 0) % 1440) + 1440) % 1440, h = Math.floor(m / 60), mm = m % 60; return (h % 12 || 12) + (short && !mm ? '' : ':' + (mm < 10 ? '0' : '') + mm) + ' ' + (h < 12 ? 'AM' : 'PM'); }
+function t12h(h) { return t12(Number(h) * 60, true); }
+function t12d(d, short) { return t12(d.getHours() * 60 + d.getMinutes(), short); }
+/* a saved "HH:MM" shown 12-hour; anything else comes back as it was */
+function t12s(s) { var m = typeof s === 'string' ? /^([01]?\d|2[0-3]):([0-5]\d)$/.exec(s) : null; return m ? t12(Number(m[1]) * 60 + Number(m[2])) : String(s == null ? '' : s); }
+/* the clock times in typed text, in order: [start, end, minutes after midnight, has minutes]. Reads "14:30", "7:30",
+   "2:30 pm", "2:30PM", "2:30 p.m.", "7.30pm", "2 pm" and "9am". Not times: "13:30 pm", "2 minutes", "7.30", "1:30:00",
+   and "2:30 pmish" (a letter right after am/pm: which time is meant is not clear). Words like "noon" are left alone. */
+function t12Find(text) {
+  var s = String(text == null ? '' : text), re = /(^|[^\d:.])(\d{1,2})(?:([:.])([0-5]\d))?(?![\d:])(\s*(?:([ap])\.\s*m\.?|([ap])m)(?![a-z\d]))?/gi, m, out = [], h, ap, min;
+  while ((m = re.exec(s))) {
+    h = Number(m[2]); ap = (m[6] || m[7] || '').toLowerCase(); min = -1;
+    if (ap) { if (h >= 1 && h <= 12) min = (h % 12 + (ap === 'p' ? 12 : 0)) * 60 + Number(m[4] || 0); }
+    else if (m[3] === ':' && h <= 23 && !/^\s*[ap]\.?m/i.test(s.slice(re.lastIndex))) min = h * 60 + Number(m[4]);
+    if (min >= 0) out.push([m.index + m[1].length, re.lastIndex, min, !!m[3]]);
+  }
+  return out;
+}
+/* the first clock time in typed text, as minutes after midnight, or -1 */
+function t12Parse(text) { var f = t12Find(text); return f.length ? f[0][2] : -1; }
+/* display only: every time t12Find reads in the when part of a plan shows the one way ("2:30 pm", "14:30" -> "2:30 PM",
+   "2pm" -> "2 PM", "7:30" -> "7:30 AM"). Only for text that says when; the saved text never changes. */
+function t12When(text) {
+  var s = String(text == null ? '' : text), out = '', at = 0;
+  t12Find(s).forEach(function (x) { out += s.slice(at, x[0]) + t12(x[2], !x[3]); at = x[1]; });
+  return out + s.slice(at);
+}
+/* display only, for free text (Daily Digest lines): a 24-hour "HH:MM" (two-digit hour, no AM/PM after it) reads 12-hour.
+   "7:30" and "2:30 pm" stay as written, and the saved text never changes. */
+function t12Text(text) {
+  return String(text == null ? '' : text).replace(/(^|[^\d:.])([01]\d|2[0-3]):([0-5]\d)(?![\d:])(?!\s*[ap]\.?\s*m\b)/gi, function (all, pre, h, mm) { return pre + t12(Number(h) * 60 + Number(mm)); });
+}
+/* the energy chart's hour labels as an HTML row, shown on a phone only (CSS), so they keep one readable size however
+   far the chart scales down; same ticks as enChart (24 units an hour, a label every 3 hours, centred on its bar). The
+   row's font is monospaced, so a label is --n ch wide: centred on its tick (--p), never past either end of the row.
+   On the narrowest phones the space before AM/PM is dropped ("7AM", CSS), so neighbours keep a gap. */
+function t12EnAxis(s, e) {
+  var W = 24 * (e - s), out = '', h, t;
+  for (h = s; h < e; h++) if ((h - s) % 3 === 0) {
+    t = t12h(h);
+    out += '<span style="--p:' + (((h - s) * 24 + 12) / W * 100).toFixed(2) + '%;--n:' + t.length + '">' + t.replace(' ', '<i class="t12-sp"> </i>') + '</span>';
+  }
+  return '<div class="t12-axr" aria-hidden="true">' + out + '</div>';
+}
 
 /* ---------- editor ---------- */
 function openEditor(id) {

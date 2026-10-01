@@ -2,6 +2,11 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-09-30 — 12-hour clock
+- Every time of day the app shows is now on a 12-hour clock with AM and PM ("7:30 AM", "2:10 PM", "12:00 PM" at noon), the same in every browser and language setting. Hour labels read "9 AM".
+- Timers, countdowns and durations ("25:00", "15:46", "1h 20m") are unchanged, and so are saved data and the time pickers.
+- If-then plans read typed times either way ("14:30" or "2:30 pm"), and show them as "2:30 PM".
+
 ## 2026-09-29 — Focus: a daily plan, a focus room and a toolkit
 A new Focus group in the tab bar, built on research about motivation, attention and time, including studies of ADHD. Every step and tool shows how solid its evidence is (68 findings, each with an honest grade), and tapping a grade shows what the studies found and what they don't show.
 - My day: one card that always shows the next step, with one big Start button and Smaller, Later and Skip. Every step has a smaller version that counts in full. The day adapts to your fuel (Low, Some, Full) and the time you get up: daylight, food, moving before your first focus block, your one thing and its first move, focus blocks, a walk after lunch, a short block of dull jobs, recall, an evening shutdown that writes tomorrow's first step, and a wind-down. Steps you do elsewhere (a Starter push, a walk quest, a recall) tick themselves.
