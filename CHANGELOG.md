@@ -2,6 +2,12 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-10-16 — the Journal is gone
+- The Journal panel on the Quests page has been removed, together with everything that lived only there: dreads, expeditions, chapters (with their paths and vows) and the regions map.
+- Their medals (Dread feller, Summiteer, Storyteller, Explorer) are gone, so there are 16 medals now. Dread and expedition steps no longer appear in plans, cost fuel or give XP and effects, and Pip no longer talks about them.
+- Trail stages on quest rows and landmarks from Recall stay. XP already earned stays in your rank.
+- Saved dreads, expeditions and chapters are left untouched in the database; the app just no longer shows or changes them.
+
 ## 2026-09-30 — 12-hour clock
 - Every time of day the app shows is now on a 12-hour clock with AM and PM ("7:30 AM", "2:10 PM", "12:00 PM" at noon), the same in every browser and language setting. Hour labels read "9 AM".
 - Timers, countdowns and durations ("25:00", "15:46", "1h 20m") are unchanged, and so are saved data and the time pickers.

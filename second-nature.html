@@ -2244,7 +2244,6 @@ body { padding-inline: clamp(16px, 1.8vw, 40px); }
   #questBody { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
   #questBody > .runbar { grid-column: 1 / -1; }
   #questBody > .qgrid { grid-column: 1; grid-template-columns: minmax(0, 1fr); }
-  #questBody > #journal { grid-column: 2; }
   .grid2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .viz { max-width: 100%; }
   .gsteps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -2586,7 +2585,6 @@ body { padding-inline: clamp(16px, 1.8vw, 40px); }
      and the way in when you cannot start, side by side. The character card follows underneath. */
   .qgrid > .qboard { order: 1; }
   .qgrid > .charcard { order: 2; }
-  #questBody > #journal { grid-column: 2; grid-row: 3; }
   /* and the Journal takes the full width underneath, which its lists were always short of */
   .qgrid > .qboard { order: 1; }
 }
@@ -3261,11 +3259,11 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
   </details>
     <div id="todayBody"></div></section>
     <section class="view" id="view-traits" role="tabpanel" aria-labelledby="tab-traits" hidden><header class="vhead" style="--g:var(--s3)"><span class="vcap">Chunks</span><h2>Traits</h2><p>Knowing a technique doesn’t make it automatic; doing it does. Tie one small action to a moment you already meet, do it each time the moment comes, and check each week how automatic it has become.</p></header><div id="traitsBody"></div></section>
-    <section class="view" id="view-snow" role="tabpanel" aria-labelledby="tab-snow" hidden><header class="vhead vart" style="--g:var(--s2)"><span class="vcap">Every day</span><h2>Quests</h2><p>Your run, your quests, and the map you chart by doing them. Each week is a new chapter.</p><span class="vhart qbun" aria-hidden="true"></span></header><div id="questBody"></div></section>
+    <section class="view" id="view-snow" role="tabpanel" aria-labelledby="tab-snow" hidden><header class="vhead vart" style="--g:var(--s2)"><span class="vcap">Every day</span><h2>Quests</h2><p>Your run, your quests, and the trails you wear by doing them.</p><span class="vhart qbun" aria-hidden="true"></span></header><div id="questBody"></div></section>
     <section class="view" id="view-snowball" role="tabpanel" aria-labelledby="tab-snowball" hidden><header class="vhead" style="--g:var(--s1)"><span class="vcap">Snowball</span><h2>Snowball starter</h2><p>Can’t get going? Start with a two-minute push. Each win makes the next one a little longer, and you stop whenever you like.</p></header><div class="snowwrap"><div id="snowHost"></div></div></section>
     <section class="view" id="view-build" role="tabpanel" aria-labelledby="tab-build" hidden><header class="vhead vart" style="--g:var(--s1)"><span class="vcap">Chunks</span><h2>Capture</h2><p>Catch ideas while you read, then turn one into a chunk in your own words.</p><span class="vhart" aria-hidden="true"><svg class="crystal smil" viewBox="-290 -290 580 580" focusable="false"><g class="crgrid"><path d="M-234 -273V273M-273 -234H273M-195 -273V273M-273 -195H273M-156 -273V273M-273 -156H273M-117 -273V273M-273 -117H273M-78 -273V273M-273 -78H273M-39 -273V273M-273 -39H273M0 -273V273M-273 0H273M39 -273V273M-273 39H273M78 -273V273M-273 78H273M117 -273V273M-273 117H273M156 -273V273M-273 156H273M195 -273V273M-273 195H273M234 -273V273M-273 234H273"></path><path class="edge" d="M-273 -273H273V273H-273Z"></path></g><g class="crshape"><path class="cf" d="M-137.125,-101.125C-137.125,-101.125,-34.625,170.5,-34.625,170.5C-34.625,170.5,-0.25,0.5,-0.25,0.5C-0.25,0.5,-137.125,-101.125,-137.125,-101.125Z"><animate repeatCount="indefinite" attributeName="d" dur="9.6s" begin="0s" calcMode="spline" values="M-137.125,-101.125C-137.125,-101.125,-34.625,170.5,-34.625,170.5C-34.625,170.5,-0.25,0.5,-0.25,0.5C-0.25,0.5,-137.125,-101.125,-137.125,-101.125Z; M-156.375,-107.125C-156.375,-107.125,-47.625,192.75,-47.625,192.75C-47.625,192.75,72.5,-19,72.5,-19C72.5,-19,-156.375,-107.125,-156.375,-107.125Z; M-162.5,-109.625C-162.5,-109.625,-50.125,204.375,-50.125,204.375C-50.125,204.375,97.375,-24.25,97.375,-24.25C97.375,-24.25,-162.5,-109.625,-162.5,-109.625Z; M-165.625,-115.125C-165.625,-115.125,-49.625,213,-49.625,213C-49.625,213,117.25,-29.5,117.25,-29.5C117.25,-29.5,-165.625,-115.125,-165.625,-115.125Z; M-168.625,-123.406C-168.625,-123.406,-45,220.063,-45,220.063C-45,220.063,127.25,-31.812,127.25,-31.812C127.25,-31.812,-168.625,-123.406,-168.625,-123.406Z; M-164.125,-128.188C-164.125,-128.188,-36.375,224.625,-36.375,224.625C-36.375,224.625,137.25,-34.125,137.25,-34.125C137.25,-34.125,-164.125,-128.188,-164.125,-128.188Z; M-157.375,-134.969C-157.375,-134.969,-22.5,229.188,-22.5,229.188C-22.5,229.188,137.75,-33.937,137.75,-33.937C137.75,-33.937,-157.375,-134.969,-157.375,-134.969Z; M-144.625,-140.25C-144.625,-140.25,-5.625,229.25,-5.625,229.25C-5.625,229.25,138.25,-33.75,138.25,-33.75C138.25,-33.75,-144.625,-140.25,-144.625,-140.25Z; M-130.875,-144.563C-130.875,-144.563,14.438,225.938,14.438,225.938C14.438,225.938,133,-32.062,133,-32.062C133,-32.062,-130.875,-144.563,-130.875,-144.563Z; M-113.125,-148.875C-113.125,-148.875,36.5,219.625,36.5,219.625C36.5,219.625,127.75,-30.375,127.75,-30.375C127.75,-30.375,-113.125,-148.875,-113.125,-148.875Z; M-73.625,-154C-73.625,-154,81.125,200.5,81.125,200.5C81.125,200.5,108.25,-26,108.25,-26C108.25,-26,-73.625,-154,-73.625,-154Z; M-50.563,-154.625C-50.563,-154.625,104.563,187.75,104.563,187.75C104.563,187.75,95.188,-23.063,95.188,-23.063C95.188,-23.063,-50.563,-154.625,-50.563,-154.625Z; M-30.5,-153.25C-30.5,-153.25,122,173,122,173C122,173,82.125,-20.125,82.125,-20.125C82.125,-20.125,-30.5,-153.25,-30.5,-153.25Z; M-14.188,-150.375C-14.188,-150.375,133.938,160.5,133.938,160.5C133.938,160.5,69.062,-14.438,69.062,-14.438C69.062,-14.438,-14.188,-150.375,-14.188,-150.375Z; M0.125,-148.5C0.125,-148.5,145.875,148,145.875,148C145.875,148,52,-13.75,52,-13.75C52,-13.75,0.125,-148.5,0.125,-148.5Z; M12.25,-144.5C12.25,-144.5,152.875,137.75,152.875,137.75C152.875,137.75,36.25,-9.75,36.25,-9.75C36.25,-9.75,12.25,-144.5,12.25,-144.5Z; M20.375,-142.5C20.375,-142.5,155.875,128.5,155.875,128.5C155.875,128.5,20.5,-5.75,20.5,-5.75C20.5,-5.75,20.375,-142.5,20.375,-142.5Z; M27.5,-136.25C27.5,-136.25,157.625,119,157.625,119C157.625,119,2,-0.5,2,-0.5C2,-0.5,27.5,-136.25,27.5,-136.25Z; M31.625,-132C31.625,-132,156.375,112.5,156.375,112.5C156.375,112.5,-16.5,4.75,-16.5,4.75C-16.5,4.75,31.625,-132,31.625,-132Z; M31.625,-129.063C31.625,-129.063,152.563,107.25,152.563,107.25C152.563,107.25,-36.25,9.5,-36.25,9.5C-36.25,9.5,31.625,-129.063,31.625,-129.063Z; M31.625,-126.125C31.625,-126.125,146.75,102,146.75,102C146.75,102,-56,14.25,-56,14.25C-56,14.25,31.625,-126.125,31.625,-126.125Z; M28.625,-122.063C28.625,-122.063,140.563,99.75,140.563,99.75C140.563,99.75,-76.5,20.5,-76.5,20.5C-76.5,20.5,28.625,-122.063,28.625,-122.063Z; M25.625,-118C25.625,-118,130.375,97.5,130.375,97.5C130.375,97.5,-97,26.75,-97,26.75C-97,26.75,25.625,-118,25.625,-118Z; M19,-114.5C19,-114.5,123.375,97.5,123.375,97.5C123.375,97.5,-120.5,31.25,-120.5,31.25C-120.5,31.25,19,-114.5,19,-114.5Z; M12.375,-111C12.375,-111,113.375,97.5,113.375,97.5C113.375,97.5,-141,36.75,-141,36.75C-141,36.75,12.375,-111,12.375,-111Z; M-4.875,-104.5C-4.875,-104.5,91.875,99.5,91.875,99.5C91.875,99.5,-181.5,46.75,-181.5,46.75C-181.5,46.75,-4.875,-104.5,-4.875,-104.5Z; M-26.875,-100.5C-26.875,-100.5,69.125,107.5,69.125,107.5C69.125,107.5,-213.75,54,-213.75,54C-213.75,54,-26.875,-100.5,-26.875,-100.5Z; M-51.375,-96C-51.375,-96,42.375,118,42.375,118C42.375,118,-218.5,55.75,-218.5,55.75C-218.5,55.75,-51.375,-96,-51.375,-96Z; M-79.852,-95.762C-79.852,-95.762,14.406,134.047,14.406,134.047C14.406,134.047,-179.477,45.758,-179.477,45.758C-179.477,45.758,-79.852,-95.762,-79.852,-95.762Z; M-108.852,-93.071C-108.852,-93.071,-11.277,153.141,-11.277,153.141C-11.277,153.141,-96.096,24.051,-96.096,24.051C-96.096,24.051,-108.852,-93.071,-108.852,-93.071Z; M-125.988,-98.098C-125.988,-98.098,-24.951,166.321,-24.951,166.321C-24.951,166.321,-40.673,11.276,-40.673,11.276C-40.673,11.276,-125.988,-98.098,-125.988,-98.098Z; M-137.125,-101.125C-137.125,-101.125,-34.625,170.5,-34.625,170.5C-34.625,170.5,-0.25,0.5,-0.25,0.5C-0.25,0.5,-137.125,-101.125,-137.125,-101.125Z; M-137.125,-101.125C-137.125,-101.125,-34.625,170.5,-34.625,170.5C-34.625,170.5,-0.25,0.5,-0.25,0.5C-0.25,0.5,-137.125,-101.125,-137.125,-101.125Z" keyTimes="0; 0.052083; 0.078125; 0.104167; 0.130208; 0.15625; 0.182292; 0.208333; 0.234375; 0.260417; 0.3125; 0.338542; 0.364583; 0.390625; 0.416667; 0.442708; 0.46875; 0.494792; 0.520833; 0.546875; 0.572917; 0.598958; 0.625; 0.651042; 0.677083; 0.729167; 0.78125; 0.833333; 0.890625; 0.947917; 0.973958; 0.994792; 1" keySplines="0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1" fill="freeze" /></path><path class="cf" d="M-0.25,0.25C-0.25,0.25,149.75,-89.875,149.75,-89.875C149.75,-89.875,-137.625,-102.125,-137.625,-102.125"><animate repeatCount="indefinite" attributeName="d" dur="9.6s" begin="0s" calcMode="spline" values="M-0.25,0.25C-0.25,0.25,149.75,-89.875,149.75,-89.875C149.75,-89.875,-137.625,-102.125,-137.625,-102.125; M71.5,-18.75C71.5,-18.75,128.25,-81.125,128.25,-81.125C128.25,-81.125,-156.563,-107.875,-156.563,-107.875; M97.625,-24.5C97.625,-24.5,116,-77.75,116,-77.75C116,-77.75,-163.063,-110.563,-163.063,-110.563; M117.375,-29.625C117.375,-29.625,102.875,-74.625,102.875,-74.625C102.875,-74.625,-166.063,-115.938,-166.063,-115.938; M128,-31.875C128,-31.875,88.375,-71,88.375,-71C88.375,-71,-168.938,-124.063,-168.938,-124.063; M138,-34.25C138,-34.25,72.875,-68,72.875,-68C72.875,-68,-164.438,-128.938,-164.438,-128.938; M138.875,-34.5C138.875,-34.5,59.25,-65.125,59.25,-65.125C59.25,-65.125,-157.438,-135.313,-157.438,-135.313; M138.875,-34.5C138.875,-34.5,46.25,-61.125,46.25,-61.125C46.25,-61.125,-144.688,-140.313,-144.688,-140.313; M132.875,-32.25C132.875,-32.25,31.25,-59.875,31.25,-59.875C31.25,-59.875,-129.938,-144.063,-129.938,-144.063; M127.375,-29.75C127.375,-29.75,16,-57.875,16,-57.875C16,-57.875,-112.688,-148.563,-112.688,-148.563; M108.125,-25.25C108.125,-25.25,-12.5,-55.875,-12.5,-55.875C-12.5,-55.875,-73.938,-154.063,-73.938,-154.063; M95.125,-23.25C95.125,-23.25,-29.5,-55.375,-29.5,-55.375C-29.5,-55.375,-49.938,-153.813,-49.938,-153.813; M82.125,-20.375C82.125,-20.375,-42.625,-56.125,-42.625,-56.125C-42.625,-56.125,-30.188,-153.438,-30.188,-153.438; M68.625,-16.125C68.625,-16.125,-52.562,-59.25,-52.562,-59.25C-52.562,-59.25,-14.25,-150.313,-14.25,-150.313; M51.875,-15.125C51.875,-15.125,-60.812,-62,-60.812,-62C-60.812,-62,1,-148.563,1,-148.563; M36.375,-9.875C36.375,-9.875,-65.562,-66.125,-65.562,-66.125C-65.562,-66.125,12.625,-144.563,12.625,-144.563; M20.25,-6C20.25,-6,-64.062,-71.75,-64.062,-71.75C-64.062,-71.75,20.5,-142.188,20.5,-142.188; M1.75,-0.938C1.75,-0.938,-58.937,-79,-58.937,-79C-58.937,-79,27.625,-137.688,27.625,-137.688; M-16.125,4.813C-16.125,4.813,-48.937,-85,-48.937,-85C-48.937,-85,31.75,-133.063,31.75,-133.063; M-35.625,9.813C-35.625,9.813,-30.937,-92.875,-30.937,-92.875C-30.937,-92.875,31.75,-130.188,31.75,-130.188; M-55.875,14.188C-55.875,14.188,-8.937,-99.75,-8.937,-99.75C-8.937,-99.75,31.562,-127,31.562,-127; M-76.375,20.688C-76.375,20.688,19.063,-109,19.063,-109C19.063,-109,28.937,-122.5,28.937,-122.5; M-97,26.813C-97,26.813,48.938,-117.625,48.938,-117.625C48.938,-117.625,25.812,-118.5,25.812,-118.5; M-120.125,31.313C-120.125,31.313,79.063,-123.625,79.063,-123.625C79.063,-123.625,18.937,-114.875,18.937,-114.875; M-140.375,36.563C-140.375,36.563,107.563,-126.875,107.563,-126.875C107.563,-126.875,12.437,-111.375,12.437,-111.375; M-181,46.563C-181,46.563,157.688,-129.75,157.688,-129.75C157.688,-129.75,-5,-104.375,-5,-104.375; M-213.5,53.688C-213.5,53.688,177.063,-123.5,177.063,-123.5C177.063,-123.5,-26.625,-101.125,-26.625,-101.125; M-216.375,54.875C-216.375,54.875,194.313,-119.625,194.313,-119.625C194.313,-119.625,-51.188,-96.563,-51.188,-96.563; M-178.875,45.125C-178.875,45.125,189.813,-109.875,189.813,-109.875C189.813,-109.875,-79.937,-96.188,-79.937,-96.188; M-95.625,23.938C-95.625,23.938,174.313,-98.875,174.313,-98.875C174.313,-98.875,-109.187,-92.438,-109.187,-92.438; M-41.375,10.813C-41.375,10.813,161.938,-93.375,161.938,-93.375C161.938,-93.375,-126.062,-97.938,-126.062,-97.938; M-0.25,0.25C-0.25,0.25,149.75,-89.875,149.75,-89.875C149.75,-89.875,-137.625,-102.125,-137.625,-102.125; M-8.825,2.813C-8.825,2.813,161.938,-93.375,161.938,-93.375C161.938,-93.375,-126.062,-97.938,-126.062,-97.938" keyTimes="0; 0.052083; 0.078125; 0.104167; 0.130208; 0.15625; 0.182292; 0.208333; 0.234375; 0.260417; 0.3125; 0.338542; 0.364583; 0.390625; 0.416667; 0.442708; 0.46875; 0.494792; 0.520833; 0.546875; 0.572917; 0.598958; 0.625; 0.651042; 0.677083; 0.729167; 0.78125; 0.833333; 0.890625; 0.947917; 0.973958; 0.994792; 1" keySplines="0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1" fill="freeze" /></path><path class="cf" d="M151.875,-90.438C151.875,-90.438,13.75,47.5,13.75,47.5C13.75,47.5,-34.5,171.938,-34.5,171.938C-34.5,171.938,151.875,-90.438,151.875,-90.438Z"><animate repeatCount="indefinite" attributeName="d" dur="9.6s" begin="0s" calcMode="spline" values="M151.875,-90.438C151.875,-90.438,13.75,47.5,13.75,47.5C13.75,47.5,-34.5,171.938,-34.5,171.938C-34.5,171.938,151.875,-90.438,151.875,-90.438Z; M128.625,-81.438C128.625,-81.438,8.75,30,8.75,30C8.75,30,-47.75,192.813,-47.75,192.813C-47.75,192.813,128.625,-81.438,128.625,-81.438Z; M116.125,-77.563C116.125,-77.563,1.875,31.875,1.875,31.875C1.875,31.875,-50.125,204.313,-50.125,204.313C-50.125,204.313,116.125,-77.563,116.125,-77.563Z; M101.625,-73.313C101.625,-73.313,-7.875,34.625,-7.875,34.625C-7.875,34.625,-49.375,212.188,-49.375,212.188C-49.375,212.188,101.625,-73.313,101.625,-73.313Z; M87.625,-70.313C87.625,-70.313,-16.375,37.375,-16.375,37.375C-16.375,37.375,-45.375,218.688,-45.375,218.688C-45.375,218.688,87.625,-70.313,87.625,-70.313Z; M73.125,-67.563C73.125,-67.563,-26.875,40.125,-26.875,40.125C-26.875,40.125,-36.125,224.438,-36.125,224.438C-36.125,224.438,73.125,-67.563,73.125,-67.563Z; M59.375,-64.313C59.375,-64.313,-38.125,43.125,-38.125,43.125C-38.125,43.125,-22.375,229.438,-22.375,229.438C-22.375,229.438,59.375,-64.313,59.375,-64.313Z; M43.875,-61.063C43.875,-61.063,-47.625,45.125,-47.625,45.125C-47.625,45.125,-5.375,228.688,-5.375,228.688C-5.375,228.688,43.875,-61.063,43.875,-61.063Z; M30.375,-59.563C30.375,-59.563,-59.375,47.625,-59.375,47.625C-59.375,47.625,14.375,226.188,14.375,226.188C14.375,226.188,30.375,-59.563,30.375,-59.563Z; M14.75,-57.438C14.75,-57.438,-71.375,51.875,-71.375,51.875C-71.375,51.875,36.875,219.438,36.875,219.438C36.875,219.438,14.75,-57.438,14.75,-57.438Z; M-13.75,-56.688C-13.75,-56.688,-94.625,60.375,-94.625,60.375C-94.625,60.375,79.875,200.438,79.875,200.438C79.875,200.438,-13.75,-56.688,-13.75,-56.688Z; M-29.5,-55.938C-29.5,-55.938,-106.875,64.875,-106.875,64.875C-106.875,64.875,103.875,186.188,103.875,186.188C103.875,186.188,-29.5,-55.938,-29.5,-55.938Z; M-42.75,-55.938C-42.75,-55.938,-117.375,69.375,-117.375,69.375C-117.375,69.375,121.625,173.188,121.625,173.188C121.625,173.188,-42.75,-55.938,-42.75,-55.938Z; M-52.875,-58.438C-52.875,-58.438,-125.375,72.375,-125.375,72.375C-125.375,72.375,132.125,158.188,132.125,158.188C132.125,158.188,-52.875,-58.438,-52.875,-58.438Z; M-60.75,-61.438C-60.75,-61.438,-131.5,75.375,-131.5,75.375C-131.5,75.375,144.25,146.938,144.25,146.938C144.25,146.938,-60.75,-61.438,-60.75,-61.438Z; M-65.75,-65.188C-65.75,-65.188,-136.875,78.125,-136.875,78.125C-136.875,78.125,151.25,136.438,151.25,136.438C151.25,136.438,-65.75,-65.188,-65.75,-65.188Z; M-64,-71.188C-64,-71.188,-140,80.375,-140,80.375C-140,80.375,154,127.313,154,127.313C154,127.313,-64,-71.188,-64,-71.188Z; M-59.313,-78.375C-59.313,-78.375,-140.875,82.375,-140.875,82.375C-140.875,82.375,155.125,118.063,155.125,118.063C155.125,118.063,-59.313,-78.375,-59.313,-78.375Z; M-48.938,-84.375C-48.938,-84.375,-136.125,82.875,-136.125,82.875C-136.125,82.875,155.875,112.813,155.875,112.813C155.875,112.813,-48.938,-84.375,-48.938,-84.375Z; M-31.188,-92.25C-31.188,-92.25,-130,82.5,-130,82.5C-130,82.5,151.875,107.063,151.875,107.063C151.875,107.063,-31.188,-92.25,-31.188,-92.25Z; M-8.313,-100C-8.313,-100,-119.25,80.5,-119.25,80.5C-119.25,80.5,146.125,101.563,146.125,101.563C146.125,101.563,-8.313,-100,-8.313,-100Z; M19.062,-109C19.062,-109,-107,76.75,-107,76.75C-107,76.75,139.875,98.813,139.875,98.813C139.875,98.813,19.062,-109,19.062,-109Z; M49.937,-117.5C49.937,-117.5,-93,73.25,-93,73.25C-93,73.25,130.875,98.063,130.875,98.063C130.875,98.063,49.937,-117.5,49.937,-117.5Z; M81.062,-123.5C81.062,-123.5,-77,69.125,-77,69.125C-77,69.125,123.125,96.813,123.125,96.813C123.125,96.813,81.062,-123.5,81.062,-123.5Z; M107.312,-126C107.312,-126,-61.125,63.625,-61.125,63.625C-61.125,63.625,113.375,97.688,113.375,97.688C113.375,97.688,107.312,-126,107.312,-126Z; M157.062,-128.5C157.062,-128.5,-29.625,54.125,-29.625,54.125C-29.625,54.125,92.25,99.688,92.25,99.688C92.25,99.688,157.062,-128.5,157.062,-128.5Z; M177.437,-124.375C177.437,-124.375,-1.75,44.5,-1.75,44.5C-1.75,44.5,68.625,106.688,68.625,106.688C68.625,106.688,177.437,-124.375,177.437,-124.375Z; M193.937,-119.625C193.937,-119.625,15.75,35.875,15.75,35.875C15.75,35.875,43.125,117.313,43.125,117.313C43.125,117.313,193.937,-119.625,193.937,-119.625Z; M188.437,-109.625C188.437,-109.625,26.125,31.375,26.125,31.375C26.125,31.375,15.75,132.313,15.75,132.313C15.75,132.313,188.437,-109.625,188.437,-109.625Z; M173.937,-99.125C173.937,-99.125,26.25,29.75,26.25,29.75C26.25,29.75,-11.875,152.438,-11.875,152.438C-11.875,152.438,173.937,-99.125,173.937,-99.125Z; M161.312,-93C161.312,-93,24,27.25,24,27.25C24,27.25,-25.125,164.938,-25.125,164.938C-25.125,164.938,161.312,-93,161.312,-93Z; M151.875,-90.438C151.875,-90.438,13.75,47.5,13.75,47.5C13.75,47.5,-34.5,171.938,-34.5,171.938C-34.5,171.938,151.875,-90.438,151.875,-90.438Z; M162.687,-93.5C162.687,-93.5,21.5,27.25,21.5,27.25C21.5,27.25,-32.625,169.813,-32.625,169.813C-32.625,169.813,162.687,-93.5,162.687,-93.5Z" keyTimes="0; 0.052083; 0.078125; 0.104167; 0.130208; 0.15625; 0.182292; 0.208333; 0.234375; 0.260417; 0.3125; 0.338542; 0.364583; 0.390625; 0.416667; 0.442708; 0.46875; 0.494792; 0.520833; 0.546875; 0.572917; 0.598958; 0.625; 0.651042; 0.677083; 0.729167; 0.78125; 0.833333; 0.890625; 0.947917; 0.973958; 0.994792; 1" keySplines="0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.99 0.99; 0.167 0 0.833 1" fill="freeze" /></path><path class="cf" d="M-136,-101.625C-136,-101.625,13.937,47.187,13.937,47.187C13.937,47.187,-0.125,0.625,-0.125,0.625"><animate repeatCount="indefinite" attributeName="d" dur="9.6s" begin="0s" calcMode="spline" values="M-136,-101.625C-136,-101.625,13.937,47.187,13.937,47.187C13.937,47.187,-0.125,0.625,-0.125,0.625; M-155.187,-106.125C-155.187,-106.125,8.406,29.99,8.406,29.99C8.406,29.99,72.146,-18.604,72.146,-18.604; M-162.081,-109.425C-162.081,-109.425,1.366,31.816,1.366,31.816C1.366,31.816,97.006,-24.219,97.006,-24.219; M-165.058,-114.517C-165.058,-114.517,-7.786,34.656,-7.786,34.656C-7.786,34.656,116.506,-29.417,116.506,-29.417; M-167.317,-122.843C-167.317,-122.843,-17.375,36.417,-17.375,36.417C-17.375,36.417,126.224,-31.49,126.224,-31.49; M-163.379,-127.312C-163.379,-127.312,-26.768,39.143,-26.768,39.143C-26.768,39.143,136.656,-34.08,136.656,-34.08; M-156.378,-134.406C-156.378,-134.406,-37.807,42.495,-37.807,42.495C-37.807,42.495,137.547,-34.109,137.547,-34.109; M-144.802,-140.224C-144.802,-140.224,-47.295,45.271,-47.295,45.271C-47.295,45.271,138.312,-34.112,138.312,-34.112; M-130.508,-144.7C-130.508,-144.7,-59.347,48.015,-59.347,48.015C-59.347,48.015,132.797,-32.084,132.797,-32.084; M-113.464,-149.091C-113.464,-149.091,-70.689,52.26,-70.689,52.26C-70.689,52.26,127.364,-30.056,127.364,-30.056; M-74.125,-154.125C-74.125,-154.125,-94.5,60.75,-94.5,60.75C-94.5,60.75,108.25,-26,108.25,-26; M-50.125,-154C-50.125,-154,-106.25,64.375,-106.25,64.375C-106.25,64.375,94.75,-23.375,94.75,-23.375; M-30.75,-152.5C-30.75,-152.5,-116.75,68.875,-116.75,68.875C-116.75,68.875,81.875,-20.25,81.875,-20.25; M-14.625,-150C-14.625,-150,-124.125,71.625,-124.125,71.625C-124.125,71.625,67.625,-16.5,67.625,-16.5; M0.5,-147.5C0.5,-147.5,-130.625,74.5,-130.625,74.5C-130.625,74.5,52.125,-14.875,52.125,-14.875; M12.625,-143.875C12.625,-143.875,-135.5,76.625,-135.5,76.625C-135.5,76.625,36.125,-9.625,36.125,-9.625; M20.125,-141.625C20.125,-141.625,-139.625,80,-139.625,80C-139.625,80,20.25,-6,20.25,-6; M26.75,-136.875C26.75,-136.875,-140.25,81.875,-140.25,81.875C-140.25,81.875,2,-1.125,2,-1.125; M31.375,-132.125C31.375,-132.125,-135.75,82.75,-135.75,82.75C-135.75,82.75,-16.625,4.125,-16.625,4.125; M31.375,-129.625C31.375,-129.625,-129.5,82.5,-129.5,82.5C-129.5,82.5,-35.75,9.125,-35.75,9.125; M31.25,-126.5C31.25,-126.5,-118.875,80.5,-118.875,80.5C-118.875,80.5,-55.25,13.5,-55.25,13.5; M29,-122C29,-122,-107.375,77,-107.375,77C-107.375,77,-76.375,20.25,-76.375,20.25; M26.125,-118.125C26.125,-118.125,-93.125,73.375,-93.125,73.375C-93.125,73.375,-97,27,-97,27; M18.875,-113.375C18.875,-113.375,-76.75,68.625,-76.75,68.625C-76.75,68.625,-121.125,31.25,-121.125,31.25; M11.875,-110.75C11.875,-110.75,-60.625,63.75,-60.625,63.75C-60.625,63.75,-140.5,36.25,-140.5,36.25; M-5.625,-103.75C-5.625,-103.75,-29.188,54.25,-29.188,54.25C-29.188,54.25,-181.25,46.125,-181.25,46.125; M-26.75,-100.75C-26.75,-100.75,-2.063,44.375,-2.063,44.375C-2.063,44.375,-214,54.125,-214,54.125; M-50.25,-96.5C-50.25,-96.5,15.187,35.875,15.187,35.875C15.187,35.875,-216.25,55.125,-216.25,55.125; M-80.125,-95.125C-80.125,-95.125,25.312,31.625,25.312,31.625C25.312,31.625,-179.25,45.375,-179.25,45.375; M-108.375,-92.125C-108.375,-92.125,25.437,29,25.437,29C25.437,29,-95.625,24.375,-95.625,24.375; M-124.5,-97.375C-124.5,-97.375,23.937,27.937,23.937,27.937C23.937,27.937,-40.375,10.875,-40.375,10.875; M-136,-101.625C-136,-101.625,13.937,47.187,13.937,47.187C13.937,47.187,-0.125,0.625,-0.125,0.625; M-136,-101.625C-136,-101.625,13.937,47.187,13.937,47.187C13.937,47.187,-0.125,0.625,-0.125,0.625" keyTimes="0; 0.052083; 0.078125; 0.104167; 0.130208; 0.15625; 0.182292; 0.208333; 0.234375; 0.260417; 0.3125; 0.338542; 0.364583; 0.390625; 0.416667; 0.442708; 0.46875; 0.494791; 0.520833; 0.546875; 0.572916; 0.598958; 0.625; 0.651041; 0.677083; 0.729166; 0.78125; 0.833333; 0.890625; 0.947917; 0.973959; 0.994792; 1" keySplines="0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.833 1; 0.167 0 0.99 0.99; 0 0 1 1" fill="freeze" /></path></g></svg></span></header><div id="buildBody"></div></section>
     <section class="view" id="view-ledger" role="tabpanel" aria-labelledby="tab-ledger" hidden>
-      <header class="vhead" style="--g:var(--s1)"><span class="vcap">Chunks</span><h2>Collection</h2><p>Every chunk you’ve built. Search, filter, open one to edit it, or practise its cards.</p><button class="linkbtn" data-act="atlas-open" id="atlasLink" hidden>See your collection as an atlas</button></header>
+      <header class="vhead" style="--g:var(--s1)"><span class="vcap">Chunks</span><h2>Collection</h2><p>Every chunk you’ve built. Search, filter, open one to edit it, or practise its cards.</p></header>
       <div class="netband" id="netband" hidden><div class="nettxt"><span class="eyebrow">Your web of chunks</span><b id="netN"></b><span id="netS" class="muted small"></span></div><svg class="netsvg" viewBox="0 0 420 150" aria-hidden="true" focusable="false"><defs><filter id="nbBlur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="7"></feGaussianBlur></filter></defs><circle class="nb-blob" cx="150" cy="116" r="13" filter="url(#nbBlur)"></circle><circle class="nb-blob b2" cx="366" cy="74" r="15" filter="url(#nbBlur)"></circle><circle class="nb-far" cx="46" cy="64" r="34"></circle><circle class="nb-far" cx="404" cy="52" r="42"></circle><path class="nb-dash" d="M0 26L118 60M236 22L300 47M324 89L420 138"></path><path class="nb-line" d="M300 47V4M276 89L208 115M324 89L377 116M324 61L380 38"></path><path class="nb-live" d="M276 61L199 42"></path><circle class="nb-ring t" cx="190" cy="40" r="10"></circle><circle class="nb-ring t" cx="200" cy="118" r="9"></circle><circle class="nb-ring b" cx="388" cy="34" r="9"></circle><circle class="nb-ring b" cx="386" cy="120" r="10"></circle><circle class="nb-dot t" cx="118" cy="60" r="3"></circle><circle class="nb-o" cx="118" cy="60" r="7"></circle><circle class="nb-dot b" cx="244" cy="120" r="2.5"></circle><circle class="nb-o" cx="352" cy="104" r="5"></circle><circle class="nb-dot t" cx="352" cy="104" r="2"></circle><circle class="nb-o" cx="236" cy="22" r="5"></circle><path class="nb-cube" d="M300 47L324 61V89L300 103L276 89V61ZM300 75L276 61M300 75L324 61M300 75V103"></path><circle class="nb-v t" cx="300" cy="47" r="2.6"></circle><circle class="nb-v b" cx="276" cy="89" r="2.6"></circle><circle class="nb-v b" cx="324" cy="89" r="2.6"></circle></svg></div>
       <div class="toolbar">
         <label class="f" for="q">Search<input type="search" id="q" placeholder="Name, gist or metaphor" autocomplete="off"></label>
@@ -5455,7 +5453,6 @@ function linksIn(chunks) {
 /* things that follow the data rather than any one view */
 function afterData() {
   guideSync();
-  var al = document.getElementById('atlasLink'); if (al) al.hidden = !(S.ready && S.chunks.size);
 }
 // The guide is open on a first visit and stays open until there is a chunk, unless you have opened or closed it yourself.
 function guideSync() { var gd = document.getElementById('guide'); if (!gd || guideOwn || !S.ready) return; var want = S.chunks.size === 0; if (gd.open !== want) gd.open = want; }
@@ -6024,7 +6021,6 @@ document.addEventListener('click', function (e) {
   else if (v === 'x') { aiDrop(key); aiPaint(key); }
   else if (v === 'use') { if (j && aiLive(j) && j.state === 'done' && AIF[kind] && AIF[kind].act) AIF[kind].act(arg, j, t); }
   else if (v === 'mk' || v === 'mk-save' || v === 'mk-x') fbMake(v, t);
-  else if (v === 'bclear') { G.bform.step = ''; renderQuests(true); }
 });
 function aiReady() { var dl = $('#chunkDlg'); if (dl && dl.open) aiEdSlots(); }
 
@@ -6688,59 +6684,6 @@ AIF.qfix = { label: 'Ask Claude how to shrink it', busy: 'Claude is reshaping th
       '<div class="qa"><button type="button" class="btn small primary" data-act="q-fix" data-v="ai" data-id="' + esc(id) + '">Apply</button></div>';
   } };
 function aiStepClean(d) { d = aiObj(d); if (!d) return null; var s = aiStepText(d.step); if (!s) return null; var m = Math.round(Number(d.minutes)); return { step: s, minutes: m >= 1 && m <= 10 ? m : 5 }; }
-function bossSetStep(id, step) {
-  var b = bossById(id); if (!b || b.done) return;
-  b.step = str(String(step || ''), 120).trim(); putBoss(b); renderQuests(true);
-  toast(b.step ? 'First step for “' + b.name + '”: ' + b.step + '. Face it with a snowball and the step is waiting.' : 'First step cleared.');
-}
-function bformStepHtml() {
-  var st = G.bform.step || '';
-  return (st ? '<p class="bstepnew">First step: <b>' + esc(st) + '</b> <button type="button" class="linkbtn" data-ai="bclear">Clear</button></p>' : '') + aiBoxHtml('bstep', 'new');
-}
-AIF.bstep = { label: 'First step', busy: 'Claude is finding a first step', title: 'A first step', c: 's0', quick: true,
-  prompt: function (id, meta) {
-    var b = id === 'new' ? { name: String(G.bform.name || '').trim(), dread: clampN(G.bform.dread, 1, 3), step: G.bform.step || '' } : bossById(id);
-    if (!b || !b.name) { meta.need = 'Name the dread first.'; return ''; }
-    return ['Someone is using a game in an app called Second Nature to face a task they keep avoiding (a "dread"). Suggest the very first physical move: so small it feels silly, five minutes or less, something a camera could see them do. Start with a verb. Under 15 words. No advice and no pep talk.' + (b.step ? ' Make it smaller than the step they already have.' : ''),
-      '', 'The task: ' + aiCap(b.name, 120), 'How heavy it feels: ' + DREAD_L[b.dread] + ' (' + b.dread + ' of 3)', b.step ? 'Their current first step: ' + aiCap(b.step, 120) : '', '', AI_TAIL, '{"step": "…", "minutes": 5}'].join('\n');
-  },
-  clean: aiStepClean,
-  body: function (d, id) { return '<p>First step: <b>' + esc(d.step) + '</b> <span class="muted">· about ' + d.minutes + ' min</span></p><div><button type="button" class="btn small" data-ai="use" data-k="bstep" data-a="' + esc(id) + '" data-v="1">Use this step</button></div>'; },
-  act: function (id, j) { var st = j.data.step; aiDrop(j.key); if (id === 'new') { G.bform.step = st; renderQuests(true); } else bossSetStep(id, st); } };
-AIF.xsteps = { label: 'Draft steps', busy: 'Claude is drafting a route', title: 'A route to start from', quick: true,
-  prompt: function (a, meta) {
-    var nm = $('#xName'), name = (nm ? nm.value : G.xform.name || '').trim(), ta = $('#xSteps'), have = (ta ? ta.value : G.xform.steps || '').trim(), zs = $('#xZone');
-    if (!name) { meta.need = 'Name the expedition first.'; return ''; }
-    return ['Someone is planning an "expedition" in an app called Second Nature: a project too big for one day, walked one small step a day. Draft the route as short steps in order.', '', 'Rules:',
-      '- At most 8 steps, in the order they would do them.', '- Each step is one short imperative line under 10 words that fits in one sitting, e.g. "Update my CV".', '- The first step is small enough to do today.',
-      '- Leave out planning the route; that is already done.', have ? '- They have written some steps already. Do not repeat them; fill the gaps around them.' : '', '',
-      'The expedition: ' + aiCap(name, 80), zs && zs.selectedOptions && zs.selectedOptions[0] ? 'It is about: ' + aiCap(zs.selectedOptions[0].textContent, 60) : '', have ? 'Their steps so far:\n' + have.slice(0, 1200) : '', '',
-      AI_TAIL, '{"steps": ["…", "…"]}'].join('\n');
-  },
-  clean: function (d) { var arr = aiArr(d, 'steps', 12); if (!arr) return null; var out = []; arr.forEach(function (x) { var s = aiStepText(x); if (s && out.length < 8 && out.indexOf(s) < 0) out.push(s); }); return out.length ? { steps: out } : null; },
-  body: function (d, a, j) {
-    return '<ol class="aisteps">' + d.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>' +
-      (j.used ? '<p class="help">They are in the steps box. Edit them, then press Set out.</p>' : '<div><button type="button" class="btn small" data-ai="use" data-k="xsteps" data-a="" data-v="1">Use these steps</button></div><p class="help">They go into the steps box after anything you wrote. Nothing is set until you press Set out.</p>');
-  },
-  act: function (a, j) {
-    var ta = $('#xSteps'), cur = String(ta ? ta.value : G.xform.steps || '').replace(/\s+$/, ''), txt = j.data.steps.join('\n');
-    G.xform.steps = cur ? cur + '\n' + txt : txt; if (ta) ta.value = G.xform.steps;
-    j.used = 1; aiPaint(j.key);
-  } };
-function chStoryHtml(c) { return c.story ? '<div class="chstoryw"><div class="k">The week as a story</div><p class="chstory">' + esc(c.story) + '</p></div>' : aiBoxHtml('story', c.id); }
-AIF.story = { label: 'Write a short story of the week', busy: 'Claude is writing the story', title: 'The week as a story',
-  prompt: function (id) {
-    var c = chapterOf(id); if (!c) return '';
-    var rc = weekRecap(c, gameCalc().dr), hi = document.getElementById('rvHelped-' + id), helped = hi ? hi.value.trim() : '';
-    return ['You are writing a very short story of one week for someone using a daily-quests game in an app called Second Nature. Each week is a chapter. Use only the facts below; do not invent events, feelings or numbers.', '',
-      'Rules:', '- Under 80 words, second person ("you"), past tense.', '- Warm and plain. No flattery, no exclamation marks, no advice.', '- A quiet week is told kindly and honestly, as rest rather than failure.', '',
-      'Chapter ' + c.n + ', ' + human(c.id) + ' to ' + human(addDays(c.id, 6)) + '.', 'What happened:\n' + rc.lines.map(function (l) { return '- ' + aiCap(l, 200); }).join('\n'),
-      c.vows.length ? 'Vows: ' + c.vows.map(function (v) { return aiCap(vowText(v), 100); }).join('; ') : '', helped ? 'What they said helped most: ' + aiCap(helped, 120) : '', '',
-      AI_TAIL, '{"story": "…"}'].join('\n');
-  },
-  clean: function (d) { d = aiObj(d); if (!d) return null; var s = aiS(d.story, 700); if (!s) return null; var w = s.split(' '); if (w.length > 90) s = w.slice(0, 90).join(' ') + '…'; return { story: s }; },
-  body: function (d, id) { return '<p class="chstory">' + esc(d.story) + '</p><div><button type="button" class="btn small" data-ai="use" data-k="story" data-a="' + esc(id) + '" data-v="1">Keep it</button></div><p class="help">A kept story stays with the chapter. Close this to leave it out.</p>'; },
-  act: function (id, j) { var c = chapterOf(id); if (!c) return; c.story = j.data.story; putChapter(c); aiDrop(j.key); renderQuests(true); toast('Kept with chapter ' + c.n + '.'); } };
 
 /* 8. the Snowball asks for a smaller step through events, since it lives in its own shadow root */
 document.addEventListener('snowball:ai', function (e) { if (e.detail && typeof e.detail === 'object') e.detail.on = sampleOn(); });
@@ -7674,7 +7617,7 @@ function bindCurve() {
   });
 }
 
-/* ---------- quests: a cartographer whose effects fade, a map and atlas that stay, daily runs, weekly chapters, a pack and expeditions ---------- */
+/* ---------- quests: effects that fade, trails that stay, and daily runs ---------- */
 var STATS = [{ k: 'body', label: 'Body', c: 's3' }, { k: 'mom', label: 'Momentum', c: 's1' }, { k: 'res', label: 'Resolve', c: 'accent' }, { k: 'mind', label: 'Mind', c: 's2' }];
 var STATC = { body: 's3', mom: 's1', res: 'accent', mind: 's2' }, STATL = { body: 'Body', mom: 'Momentum', res: 'Resolve', mind: 'Mind' };
 var BUFFS = {
@@ -7697,29 +7640,24 @@ var DEFAULT_QUESTS = [
   ['q-meal', 'Eat a real meal', 'body', 'times', 3, 'fed'], ['q-shower', 'Shower', 'body', 'times', 1, 'fresh'], ['q-move', 'Move for 20 minutes', 'body', 'times', 1, 'moved'], ['q-sleep', 'Slept 7 hours or more', 'body', 'times', 1, 'rested'],
   ['q-cook', 'Cook something', 'home', 'times', 1, 'fed'], ['q-tidy', 'Tidy up for 10 minutes', 'home', 'times', 1, 'tidy'], ['q-putoff', 'Do one task you’ve been putting off', 'work', 'times', 1, 'courage'], ['q-learn', 'Learn something', 'mind', 'min', 30, 'studied']
 ];
-/* the map: six regions, levelled by what you actually do */
+/* v78: the regions map is gone. Its six buckets stay behind the scenes: they add up the XP you have earned for your rank. */
 var ZONES = [
   { k: 'archive', name: 'Archive', plain: 'Recall, practice and study', c: 's2', how: 'Recall a chunk, practise cards or tick off a study quest to start charting it.' },
   { k: 'pass', name: 'Pass', plain: 'Snowball pushes', c: 'release', how: 'Finish a Snowball push to start charting it.' },
   { k: 'frontier', name: 'Frontier', plain: 'Work quests', c: 'accent', how: 'Tick off a work quest to start charting it.' },
   { k: 'wilds', name: 'Wilds', plain: 'Body quests', c: 's3', how: 'Tick off a body quest to start charting it.' },
   { k: 'hearth', name: 'Hearth', plain: 'Home quests', c: 's1', how: 'Tick off a home quest to start charting it.' },
-  { k: 'fog', name: 'Fog', plain: 'Dreads', c: 's0', how: 'Name a dread and land a hit to start charting it.' }
+  { k: 'fog', name: 'Fog', plain: 'XP earned before v78 on dreads, which are gone', c: 's0', how: '' }
 ];
 var ZONEK = Object.create(null); ZONES.forEach(function (z) { ZONEK[z.k] = z; });
 var ZCAT = { home: 'hearth', body: 'wilds', work: 'frontier', mind: 'archive' };
 var TRAIL = [[0, 'Footprints', 0, 'footprints'], [7, 'Path', 2, 'a Path'], [16, 'Trail', 4, 'a Trail'], [31, 'Road', 6, 'a Road'], [66, 'Second nature', 8, 'second nature']];
 var TITLES = [[75, 'Wayfinder'], [45, 'Cartographer'], [25, 'Surveyor'], [12, 'Pathfinder'], [4, 'Scout'], [0, 'Wanderer']];
-var DREAD_HP = [0, 20, 45, 75], DREAD_L = ['', 'Uneasy', 'Heavy', 'Dreaded'];
 var RUST_DAYS = 4, HOME_GAP = 3, HOME_N = 5, KEEP_DAYS = 14;
-var JTABS = [['chapter', 'Chapter'], ['trails', 'Trails'], ['dreads', 'Dreads'], ['exp', 'Expeditions'], ['map', 'Regions']];
-var HEXPOS = [[0, -52], [45, -26], [45, 26], [0, 52], [-45, 26], [-45, -26]];
-var G = { ready: { quests: false, events: false, meta: false, bosses: false, days: false, runs: false, chapters: false, items: false, expeditions: false }, quests: new Map(), events: new Map(), meta: new Map(), bosses: new Map(), days: new Map(), runs: new Map(), chapters: new Map(), items: new Map(), expeditions: new Map(),
-  editing: false, nameEdit: false, link: null, seeding: false, rolled: false, dead: false, jtab: 'chapter', bform: { name: '', dread: '2' }, vform: { kind: 'quest', ref: '', goal: '4', t: '' }, review: { helped: '' }, pathPick: false, reviewWk: '', compEdit: false, xform: { name: '', zone: 'frontier', steps: '' }, xOpen: Object.create(null), atlasSel: '', qtPick: '' };
-try { var lk0 = JSON.parse(localStorage.getItem(LS_KEY + '-qlink') || 'null'); if (lk0 && validId(lk0.id) && isDate(lk0.day)) G.link = { id: lk0.id, day: lk0.day, kind: lk0.kind === 'boss' || lk0.kind === 'step' ? lk0.kind : 'quest', step: validId(lk0.step) ? lk0.step : '', tok: validId(lk0.tok) ? lk0.tok : '' }; } catch (e6) {}
-try { var jt0 = localStorage.getItem(LS_KEY + '-jtab'); JTABS.forEach(function (t) { if (t[0] === jt0) G.jtab = jt0; }); } catch (e8) {}
+var G = { ready: { quests: false, events: false, meta: false, days: false, runs: false, items: false }, quests: new Map(), events: new Map(), meta: new Map(), days: new Map(), runs: new Map(), items: new Map(),
+  editing: false, nameEdit: false, link: null, seeding: false, rolled: false, dead: false, compEdit: false, qtPick: '' };
+try { var lk0 = JSON.parse(localStorage.getItem(LS_KEY + '-qlink') || 'null'); if (lk0 && validId(lk0.id) && isDate(lk0.day) && lk0.kind !== 'boss' && lk0.kind !== 'step') G.link = { id: lk0.id, day: lk0.day, kind: 'quest', step: validId(lk0.step) ? lk0.step : '', tok: validId(lk0.tok) ? lk0.tok : '' }; } catch (e6) {}
 function saveLink() { try { if (G.link) localStorage.setItem(LS_KEY + '-qlink', JSON.stringify(G.link)); else localStorage.removeItem(LS_KEY + '-qlink'); } catch (e) {} }
-function setJtab(v) { var ok = false; JTABS.forEach(function (t) { if (t[0] === v) ok = true; }); if (!ok) return; G.jtab = v; try { localStorage.setItem(LS_KEY + '-jtab', v); } catch (e) {} }
 function clampN(v, lo, hi) { v = Math.round(Number(v) || 0); return Math.max(lo, Math.min(hi, v)); }
 function normQuest(id, d) {
   d = d && typeof d === 'object' ? d : {};
@@ -7733,14 +7671,6 @@ function questBody(q) { return { name: q.name, cat: q.cat, unit: q.unit, goal: q
 function questList() { var a = []; G.quests.forEach(function (d, id) { a.push(normQuest(id, d)); }); a.sort(function (x, y) { return x.order - y.order || byName(x, y); }); return a; }
 function questById(id) { return id && G.quests.has(id) ? normQuest(id, G.quests.get(id)) : null; }
 function linkedQuest() { return G.link && G.link.day === todayStr() && G.link.kind === 'quest' ? questById(G.link.id) : null; }
-function linkedBoss() { var b = G.link && G.link.day === todayStr() && G.link.kind === 'boss' ? bossById(G.link.id) : null; return b && !b.done ? b : null; }
-function normBoss(id, d) {
-  d = d && typeof d === 'object' ? d : {};
-  return { id: id, name: str(d.name, 80).trim() || 'Unnamed dread', dread: clampN(d.dread, 1, 3), dmg: clampN(d.dmg, 0, 999), created: isDate(d.created) ? d.created : '', done: isDate(d.done) ? d.done : '', order: Number(d.order) || 0, step: str(d.step, 120).trim() };
-}
-function bossBody(b) { return { name: b.name, dread: b.dread, dmg: b.dmg, created: b.created, done: b.done, order: b.order, step: b.step || '' }; }
-function bossList() { var a = []; G.bosses.forEach(function (d, id) { a.push(normBoss(id, d)); }); a.sort(function (x, y) { return x.order - y.order || byName(x, y); }); return a; }
-function bossById(id) { return id && G.bosses.has(id) ? normBoss(id, G.bosses.get(id)) : null; }
 function traitMap() {
   var d = G.meta.get('traits'), out = Object.create(null);
   if (d && d.q && typeof d.q === 'object') Object.keys(d.q).forEach(function (id) { var t = d.q[id]; if (validId(id) && t && typeof t === 'object' && STATL[t.stat]) out[id] = { id: id, name: str(t.name, 80) || 'A habit', stat: t.stat, day: isDate(t.day) ? t.day : '' }; });
@@ -7757,11 +7687,11 @@ function saveTraits(qs) {
 /* ---------- loading, seeding, and the day archive ---------- */
 function startGame(st) {
   if (!st.watch) return;
-  ['quests', 'events', 'meta', 'bosses', 'days', 'runs', 'chapters', 'items', 'expeditions', 'traits'].forEach(function (name) {
+  ['quests', 'events', 'meta', 'days', 'runs', 'items', 'traits'].forEach(function (name) {
     st.watch(name, function (m) { if (store !== st) return; G[name] = vwrap(m); G.ready[name] = true; G.dead = false; gameLoaded(); }, function () { if (store === st) { G.dead = true; renderQuests(true); } });
   });
 }
-function gameReady() { var r = G.ready; return r.quests && r.events && r.meta && r.bosses && r.days && r.runs && r.chapters && r.items && r.expeditions; }
+function gameReady() { var r = G.ready; return r.quests && r.events && r.meta && r.days && r.runs && r.items; }
 function gameLoaded() {
   if (G.ready.quests && G.ready.meta && !G.seeding && !S.readOnly) { var mq = G.meta.get('quests'); if (!(mq && mq.seeded) && !G.quests.size) { G.seeding = true; seedQuests(); } }
   if (gameReady() && !EN.rolled) { EN.rolled = true; enArchive(); }   // v70
@@ -7795,7 +7725,7 @@ function dayBody(r) { return { v: 2, n: r.n, xp: r.xp, hx: r.hx, fz: r.fz || {},
 // The day's path shapes its XP here, so the archive keeps what each day was actually worth.
 function summarize(evs, prev, day, goals) {
   var out = { n: evs.filter(function (e) { return e && e.kind !== 'tick' && e.kind !== 'slip'; }).length, xp: {}, hx: {}, fz: {}, tr: {}, sx: [], c: {}, run: 0, cx: 0 }, units = Object.create(null), sub = Object.create(null);
-  var left = (prev && diffDays(day, prev) >= HOME_GAP) || scrollOn(day) ? HOME_N : 0, path = pathOn(day), firsts = Object.create(null);
+  var left = (prev && diffDays(day, prev) >= HOME_GAP) || scrollOn(day) ? HOME_N : 0, firsts = Object.create(null);
   evs.forEach(function (e) {
     if (e.kind === 'quest' && validId(e.ref)) units[e.ref] = (units[e.ref] || 0) + (Number(e.n) || 0);
     var ck = Object.prototype.hasOwnProperty.call(CK, e.kind) ? CK[e.kind] : ''; if (ck) out.c[ck] = (out.c[ck] || 0) + 1;
@@ -7803,8 +7733,6 @@ function summarize(evs, prev, day, goals) {
     if (e.kind === 'run' || e.kind === 'finish' || e.kind === 'felled' || e.kind === 'summit') out.cx++;
     var zx = evZX(e); if (!zx) return;
     var z = zx[0], m = 1;
-    if (path === 'scholar' && z === 'archive') m *= 1.5;
-    if (path === 'maker' && (z === 'pass' || z === 'frontier')) m *= 1.5;
     if (e.tool === 'charm' || e.tool === 'rune') m *= 1.5;
     var x = Math.round(zx[1] * m);
     out.xp[z] = (out.xp[z] || 0) + x;
@@ -7889,6 +7817,7 @@ function gameCalcNow() {
     if (!e || typeof e !== 'object') return;
     if (e.kind === 'quest' && e.ref && isDate(e.day)) { var dc = counts[e.day] || (counts[e.day] = Object.create(null)); dc[e.ref] = (dc[e.ref] || 0) + (Number(e.n) || 0); }
     if (e.day === today && evZX(e)) xpToday++;
+    if (e.kind === 'hit' || e.kind === 'felled' || e.kind === 'step' || e.kind === 'summit') return;   // v78
     var b = BUFFS[e.buff], start = Date.parse(e.t), hrs = Number(e.hours) || 0;
     if (!b || !hrs || !(start > 0)) return;
     var end = start + hrs * 3600000;
@@ -7909,8 +7838,8 @@ function gameCalcNow() {
   // The run is about what today asks of you, so an unscheduled quest is not part of it, and a
   // habit never is: a habit has no finish line to fall short of.
   var qsToday = qs.filter(function (q) { return q.onToday !== false && !q.isHabit; });
-  var run0 = runOf(today), path0 = pathOn(today);
-  qs.forEach(function (q) { q.eff = effCost(q, path0); });
+  var run0 = runOf(today);
+  qs.forEach(function (q) { q.eff = effCost(q); });
   var fuel = fuelCalc(today, qsToday);
   // regions, subjects and trails, from the day archive plus the last two weeks of events
   var dr = dayRecords(today).list, Z = Object.create(null), subj = Object.create(null), walked = Object.create(null), prevDay = '';
@@ -7952,22 +7881,14 @@ function gameCalcNow() {
   Object.keys(tm).forEach(function (id) { if (!G.quests.has(id)) { traits.push(tm[id]); floors[tm[id].stat] += TRAIL[TRAIL.length - 1][2]; } });
   var landmarks = []; S.chunks.forEach(function (c) { if (c.stage >= 5) landmarks.push(c); }); landmarks.sort(byName);
   floors.mind += 4 * landmarks.length;
-  var bosses = bossList(), active = bosses.filter(function (b) { return !b.done; }), felled = bosses.filter(function (b) { return b.done; }).sort(function (a, b) { return a.done < b.done ? 1 : a.done > b.done ? -1 : 0; });
-  floors.res += 2 * felled.length;
-  var sight = sightCalc(), cons = constellations(), stars = starMap(), newStars = [];
-  cons.forEach(function (c) { c.was = starCover(c, stars); if (c.lit && !c.was) newStars.push(c); });
-  var nStars = Object.keys(stars).length + newStars.filter(function (c) { return !stars[c.hk]; }).length, summits = expList().filter(function (x) { return x.done; });
-  floors.mind += 3 * nStars;
   var stats = {}; STATS.forEach(function (x) { floors[x.k] = Math.min(40, floors[x.k]); stats[x.k] = Math.min(100, Math.round(floors[x.k] + raw[x.k])); });
   var y = addDays(today, -1), yq = 0, yp = 0;
   qs.forEach(function (q) { if (!q.isHabit && onDay(q, y) && counts[y] && (counts[y][q.id] || 0) >= q.goal) yq++; });
   G.events.forEach(function (e) { if (e && e.kind === 'push' && e.day === y) yp++; });
   var effects = Object.keys(fx).map(function (k) { return fx[k]; }).sort(function (a, b) { return a.end - b.end; });
-  var chClosed = 0, vowsKept = 0;
-  G.chapters.forEach(function (d, id) { var ch = normChapter(id, d); if (ch.closed) { chClosed++; vowsKept += ch.review.kept; } });
-  var legend = zones.reduce(function (s, z) { return s + z.lvl; }, 0) + 5 * traits.length + 2 * landmarks.length + 2 * felled.length + 2 * chClosed + 3 * vowsKept + sight.lvl + 5 * summits.length + 3 * nStars;
+  var legend = 5 * traits.length + 2 * landmarks.length;   // v78: what can still be seen on the card
   var g = { stats: stats, floors: floors, effects: effects, quests: qs, qsToday: qsToday, done: qsToday.filter(function (q) { return q.todayN >= q.goal; }).length, yq: yq, yp: yp,
-    zones: zones, subjects: subjects, home: home, traits: traits, newTraits: newTraits, landmarks: landmarks, active: active, felled: felled, legend: legend, title: charTitle(legend), fuel: fuel, run: run0, path: path0, dr: dr, chClosed: chClosed, sight: sight, cons: cons, stars: stars, newStars: newStars, summits: summits, archived: qsArch };
+    zones: zones, subjects: subjects, home: home, traits: traits, newTraits: newTraits, landmarks: landmarks, legend: legend, title: charTitle(legend), fuel: fuel, run: run0, dr: dr, archived: qsArch };
   g.miles = milestones(g);
   return g;
 }
@@ -7999,8 +7920,6 @@ function milestones(g) {
   if (best) out.push(best.text);
   S.chunks.forEach(function (c) { if (c.stage >= 3 && c.stage < 5 && (!near || c.stage > near.stage)) near = c; });
   if (near) { var k = 5 - near.stage; out.push(near.name + ' becomes a landmark after ' + k + ' more cold ' + (k === 1 ? 'recall' : 'recalls') + ': +4 Mind for good.'); }
-  var walking = expList().filter(function (x) { return !x.done && !x.camp && stepsLeft(x); }).sort(function (a, b) { return stepsLeft(a) - stepsLeft(b); })[0];
-  if (walking) out.push(walking.name + ': ' + plural(stepsLeft(walking), 'step') + ' to the summit.');
   var tmile = traitMilestone(); if (tmile) out.push(tmile);
   return out;
 }
@@ -8023,41 +7942,22 @@ function charHtml(g) {
   var ch = G.meta.get('character') || {}, name = str(ch.name, 40).trim() || 'You', now = Date.now();
   var meters = STATS.map(function (x) { var v = g.stats[x.k], fl = g.floors[x.k]; return '<div class="meter" style="--c:var(--' + x.c + ')"><span>' + x.label + '</span><span class="bt" role="meter" aria-label="' + x.label + (fl ? ', ' + fl + ' of it for good' : '') + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + v + '"' + (fl ? ' title="' + fl + ' of this stays for good"' : '') + '><i style="width:' + v + '%"></i>' + (fl ? '<b class="floor" style="left:' + fl + '%"></b>' : '') + '</span><span class="v">' + v + '</span></div>'; }).join('');
   var fxh = g.effects.length ? g.effects.map(function (f) { var b = BUFFS[f.key]; return '<span class="fx" style="--c:var(--' + STATC[b.stat] + ')" title="' + esc(b.why) + '"><b>' + esc(b.name) + (f.n > 1 ? ' ×' + f.n : '') + '</b><small>' + STATL[b.stat] + ' · ' + fades(f.end - now) + '</small><span class="fxb"><i style="width:' + Math.round(f.frac * 100) + '%"></i></span></span>'; }).join('') : '<p class="muted small">No effects right now. Tick off a quest or finish a Snowball push to start one.</p>';
-  var bits = [], charted = g.zones.filter(function (z) { return z.xp > 0; }).length;
-  if (charted) bits.push(charted + ' of 6 regions charted');
+  var bits = [];
   if (g.traits.length) bits.push(plural(g.traits.length, 'trait'));
   if (g.landmarks.length) bits.push(plural(g.landmarks.length, 'landmark'));
-  if (g.felled.length) bits.push(g.felled.length + (g.felled.length === 1 ? ' dread' : ' dreads') + ' felled');
-  if (g.chClosed) bits.push(plural(g.chClosed, 'chapter') + ' written');
-  if (g.summits.length) bits.push(plural(g.summits.length, 'summit'));
   var home = g.home && g.home.left && g.home.scroll ? '<div class="homecoming"><b>Fresh start.</b> ' + (g.home.note ? esc(g.home.note) + '. ' : '') + 'Your next ' + (g.home.left === 1 ? 'action earns' : g.home.left + ' actions earn') + ' double XP.</div>'
     : g.home && g.home.left ? '<div class="homecoming"><b>Welcome back.</b> ' + plural(g.home.away, 'day') + ' away, and nothing was lost. Your next ' + (g.home.left === 1 ? 'action earns' : g.home.left + ' actions earn') + ' double XP.</div>' : '';
   var ms = g.miles.length ? '<ul class="hints">' + g.miles.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul>' : '<p class="muted small">Tick off any quest to start wearing a trail.</p>';
   var nameHtml = G.nameEdit ? '<input type="text" id="cName" maxlength="40" value="' + esc(name) + '" aria-label="Character name">' : '<button class="cname" data-act="q-name" title="Rename your character">' + esc(name) + '</button>';
-  return '<section class="panel charcard"><div class="chead">' + compassSvg(g.stats) + '<div>' + nameHtml + '<div class="ctitle" title="Legend adds up your region levels and your Clear Sight level, plus 5 for each trait or summit, 3 for each kept vow or lit constellation, and 2 for each landmark, felled dread or closed chapter.">' + g.title + (g.path ? ' · ' + PATHS[g.path].name : '') + ' · legend ' + g.legend + '</div>' + (bits.length ? '<div class="legendline">' + bits.join(' · ') + '</div>' : '') + '</div></div>' + companionHtml(g) + home +
+  return '<section class="panel charcard"><div class="chead">' + compassSvg(g.stats) + '<div>' + nameHtml + '<div class="ctitle" title="Legend adds 5 for each trait and 2 for each landmark. Both stay for good.">' + g.title + ' · legend ' + g.legend + '</div>' + (bits.length ? '<div class="legendline">' + bits.join(' · ') + '</div>' : '') + '</div></div>' + companionHtml(g) + home +
     '<div class="meters">' + meters + '</div>' +
     '<div class="csec"><h3 class="mini">Effects <span class="muted">· fade over time</span></h3><div class="effects">' + fxh + '</div></div>' +
     '<div class="csec"><h3 class="mini">Next milestones <span class="muted">· these stay for good</span></h3>' + ms + '</div></section>';
 }
-// v63: Next best weighs more than the stat a quest lifts: a vow that needs today, an expedition with no
-// step yet today, a dread nobody has touched (its first hit counts triple), and a trail one day from its
-// next stage. The card names the factor that won, so the pick is never a mystery.
-function vowNeeds(g) {
-  var today = todayStr(), wk = weekStart(today), c = chapterOf(wk), out = Object.create(null), rest = 7 - dow(today); if (!c || c.closed) return out;
-  var rm = recMap(g.dr);
-  c.vows.forEach(function (v) {
-    var st = vowStatus(v, wk, rm); if (st.kept) return;
-    if (v.kind === 'quest') {
-      var q = v.ref === 'q-recall' ? null : questById(v.ref), left = 0, need = v.goal - st.n;
-      for (var i = dow(today); i < 7; i++) if (!q || onDay(q, addDays(wk, i))) left++;
-      if (need > 0 && need >= left - 1) out['q:' + v.ref] = 'your vow needs it: ' + plural(need, 'more day') + ', ' + left + ' left this week';
-    } else if (v.kind === 'exp') { var nx = v.goal - st.n; if (nx > 0 && nx >= rest - 1) out['x:' + v.ref] = 'your vow needs it: ' + plural(nx, 'more step') + ', ' + plural(rest, 'day') + ' left'; }
-    else if (v.kind === 'dread' && rest <= 3) out['b:' + v.ref] = 'your vow is to fell it this week';
-  });
-  return out;
-}
+// v63: Next best weighs more than the stat a quest lifts: the time of day, and a trail one day from its next
+// stage. The card names the factor that won, so the pick is never a mystery.
 function nextBest(g) {
-  var hr = new Date().getHours(), best = null, f = g.fuel, today = todayStr(), vn = vowNeeds(g);
+  var hr = new Date().getHours(), best = null, f = g.fuel, today = todayStr();
   if (f && f.left <= 0) return null;
   // each candidate: [base, why] plus bonuses; the biggest bonus is the reason given, else the base
   function offer(o, base, why, bonus) {
@@ -8073,30 +7973,16 @@ function nextBest(g) {
     if (q.buff === 'rested' && hr >= 12) return;
     var bs = BUFFS[q.buff], st = g.stats[bs.stat], nx = TRAIL[q.stage + 1], toNx = nx ? nx[0] - (q.walked || 0) : 99;
     offer({ kind: 'quest', q: q }, 100 - st, 'lifts ' + STATL[bs.stat] + ', now ' + st, [
-      vn['q:' + q.id] ? [50, vn['q:' + q.id]] : null,
       q.fixed ? [25, q.due ? plural(q.due, 'chunk') + ' due for recall' : 'keeps your library warm'] : null,
       q.buff === 'fed' && ((hr >= 7 && hr < 10) || (hr >= 12 && hr < 14) || (hr >= 18 && hr < 21)) ? [40, 'it’s mealtime'] : null,
       q.buff === 'rested' && hr < 11 ? [30, 'it’s best done early'] : null,
       !q.fixed && nx && toNx <= 1 ? [20, 'one more day wears ' + nx[3]] : null
     ]);
   });
-  if (!f || f.left >= 2) expList().forEach(function (x) {
-    if (x.done || x.camp || x.steps.some(function (s) { return s.done === today; })) return;
-    var pk = x.pick && x.pick.day === today ? x.pick.k : '', s = null;
-    x.steps.forEach(function (y) { if (!s && pk && y.k === pk && !y.done) s = y; });
-    if (!s) s = drawn(x, today)[0]; if (!s) return;
-    offer({ kind: 'exp', x: x, s: s }, 45, 'no step taken on “' + x.name + '” today', [vn['x:' + x.id] ? [50, vn['x:' + x.id]] : null]);
-  });
-  if (!f || f.left >= 1) g.active.forEach(function (b) {
-    if (b.dmg > 0 && !vn['b:' + b.id]) return;
-    offer({ kind: 'dread', b: b }, b.dmg ? 30 : 50, 'untouched, so the first hit counts triple', [vn['b:' + b.id] ? [50, vn['b:' + b.id]] : null]);
-  });
   return best;
 }
 function nextHtml(nb, g) {
   var h = function (c, name, acts) { return '<div class="nextq" style="--c:var(--' + c + ')"><div><div class="k">Next best</div><div><b>' + name + '</b> <span class="muted">· ' + esc(nb.why) + '</span></div></div><div class="qa">' + acts + '</div></div>'; };
-  if (nb.kind === 'exp') { var x = nb.x, id = esc(x.id), sk = esc(nb.s.k); return h(ZONEK[x.zone].c, esc(nb.s.t), '<button class="btn small" data-act="x-step" data-id="' + id + '" data-k="' + sk + '">Done</button><button class="btn small quiet" data-act="x-snow" data-id="' + id + '" data-k="' + sk + '">Snowball it</button>'); }
-  if (nb.kind === 'dread') { var bid = esc(nb.b.id); return h('s0', esc(nb.b.name), '<button class="btn small" data-act="b-face" data-id="' + bid + '">Face it</button><button class="btn small quiet" data-act="b-hit" data-id="' + bid + '">Log 10 minutes</button>'); }
   var q = nb.q; return h(STATC[BUFFS[q.buff].stat], esc(q.name), qAction(q) + (q.fixed ? '<button class="btn small quiet" data-act="snow-start">Snowball it</button>' : '<button class="btn small quiet" data-act="q-snow" data-id="' + esc(q.id) + '">Snowball it</button>'));
 }
 // The library's own quest. It is not stored or edited: its goal is the chunks that came due today.
@@ -8173,8 +8059,8 @@ function cleanSteps(v) {
 }
 
 /* ---------- what happened today ---------- */
-// Checklist ticks are their own event kind. They must not be 'step', which the fuel gauge already
-// charges two pips for — that belongs to expeditions.
+// Checklist ticks are their own event kind. They are not 'step', the kind old expedition steps
+// were saved under — that belongs to expeditions.
 function stepTicks(qid, day) {
   var out = Object.create(null);
   G.events.forEach(function (e) { if (e && e.kind === 'tick' && e.ref === qid && e.day === day && e.k) out[e.k] = 1; });
@@ -8361,7 +8247,7 @@ function questsHtml(g) {
   var qs = g.qsToday || g.quests, habits = g.quests.filter(function (q) { return q.isHabit; }), off = g.quests.filter(function (q) { return !q.isHabit && q.onToday === false; }), nb = nextBest(g);
   var head = '<div class="row-between"><div><h3>Today’s quests</h3><p class="muted small">' + g.done + ' of ' + qs.length + ' done' + (g.fuel ? ' · ' + Math.max(0, g.fuel.left) + ' of ' + g.fuel.max + ' pips left' : ' · resets at midnight') + '</p>' + q75DoneBar(g.done, qs.length) + '</div><div class="qhead-btns">' + (G.editing ? '' : '<button class="btn small' + (G.reorder ? ' primary' : ' quiet') + '" data-act="q-order">' + (G.reorder ? 'Done' : 'Reorder') + '</button>') + (G.reorder ? '' : '<button class="btn small' + (G.editing ? ' primary' : ' quiet') + '" data-act="q-edit">' + (G.editing ? 'Done editing' : 'Edit quests') + '</button>') + '</div></div>';
   if (G.reorder) return qorderHtml(head);
-  if (G.editing) return '<section class="panel qboard">' + head + '<p class="muted small">Recall what’s due is always on the list: its goal is whatever your library has due that day.</p><div class="qlist">' + questList().filter(function (q) { return !q.archived; }).map(qEditHtml).join('') + '</div><div class="q75-addrow"><button class="btn small" data-act="q-add">Add a quest</button><button class="btn small primary" data-act="q75-lib" aria-expanded="' + Q75.lib + '">' + (Q75.lib ? 'Hide ideas' : 'Choose from ideas') + '</button></div>' + q75LibHtml() + '<p class="muted small">Changes save as you make them. The effect is what a quest gives you when you tick it off. Kind decides which region of your map it charts.</p>' + archHtml(g) + '</section>';
+  if (G.editing) return '<section class="panel qboard">' + head + '<p class="muted small">Recall what’s due is always on the list: its goal is whatever your library has due that day.</p><div class="qlist">' + questList().filter(function (q) { return !q.archived; }).map(qEditHtml).join('') + '</div><div class="q75-addrow"><button class="btn small" data-act="q-add">Add a quest</button><button class="btn small primary" data-act="q75-lib" aria-expanded="' + Q75.lib + '">' + (Q75.lib ? 'Hide ideas' : 'Choose from ideas') + '</button></div>' + q75LibHtml() + '<p class="muted small">Changes save as you make them. The effect is what a quest gives you when you tick it off.</p>' + archHtml(g) + '</section>';
   var nbh = '';
   if (nb) nbh = nextHtml(nb, g);
   else if (g.fuel && g.fuel.done && g.done < qs.length) nbh = '<div class="nextq" style="--c:var(--s3)"><div><div class="k">Run complete</div><div>You’ve spent today’s fuel. Anything more is a bonus, and rest is part of the plan.</div></div></div>';
@@ -8372,7 +8258,7 @@ function questsHtml(g) {
     return '<div class="qrow' + (done ? ' done' : '') + '" style="--c:var(--' + STATC[bb.stat] + ')"><span class="qc" aria-hidden="true"></span><div><div class="qn">' + q75CatIcon(q) + esc(q.name) + '</div><div class="qm">' + qProgress(q) + ' · <span title="' + esc(bb.why) + '">' + esc(bb.name) + ', ' + STATL[bb.stat] + ' ' + hoursText(bb.hours) + '</span>' + (q.stage ? ' · <span class="tpill">' + TRAIL[q.stage][1] + '</span>' : '') + (q.eff ? ' <span class="q75-nw">· <span class="qcost" title="Costs ' + plural(q.eff, 'pip') + ' of fuel" aria-label="Costs ' + plural(q.eff, 'pip') + ' of fuel">' + new Array(q.eff + 1).join('<i></i>') + '</span></span>' : '') + '</div>' + qStepsRow(q) + qtRow(q) + idleHtml(q) + '</div>' +
       '<div class="qa">' + qAction(q) + (q.unit === 'min' && !(qtLive() && qtLive().id === q.id) ? '<button class="btn small quiet" data-act="qt-pick" data-id="' + esc(q.id) + '">Timer</button>' : '') + (done ? '' : q.fixed ? '<button class="btn small quiet" data-act="snow-start">Snowball</button>' : '<button class="btn small quiet" data-act="q-snow" data-id="' + esc(q.id) + '" aria-label="Start a snowball for ' + esc(q.name) + '">Snowball</button>') + '</div></div>';
   }).join('') : '<p class="muted" style="padding:10px 0">Nothing is scheduled for today. That is allowed.</p>';
-  var hrows = habits.length ? '<div class="qsec"><h4>Habits</h4><p class="muted small">No goal and no schedule. The minus is a record, never a punishment. The first three taps a day earn XP on the map.</p></div><div class="qlist">' + habits.map(habitRow).join('') + '</div>' : '';
+  var hrows = habits.length ? '<div class="qsec"><h4>Habits</h4><p class="muted small">No goal and no schedule. The minus is a record, never a punishment. The first three taps a day earn XP.</p></div><div class="qlist">' + habits.map(habitRow).join('') + '</div>' : '';
   var offline = off.length ? '<p class="qoff">Not for today: <b>' + off.map(function (q) { return esc(q.name); }).join('</b>, <b>') + '</b>. Their trails only count the days they are due.</p>' : '';
   var yline = (g.yq || g.yp) ? '<p class="muted small">Yesterday: ' + plural(g.yq, 'quest') + ' done, ' + (g.yp === 1 ? '1 push' : g.yp + ' pushes') + '.</p>' : '';
   if (Q75_HIDE.nextBest) nbh = '';   /* v75: Next best is off for now; q75EndHtml says when the list is done */
@@ -8380,69 +8266,7 @@ function questsHtml(g) {
   return '<section class="panel qboard">' + head + nbh + struggleHtml(g) + '<div class="qlist">' + rows + '</div>' + q75EndHtml(g, qs, nb) + q75AddRowHtml() + offline + hrows + traitBoardHtml(g) + yline + archHtml(g) + '</section>';
 }
 
-/* ---------- the journal: map, trails, dreads ---------- */
-function journalHtml(g) {
-  var tabs = JTABS.map(function (t) {
-    var cnt = t[0] === 'dreads' ? g.active.length : 0, n = cnt ? '<span class="jn">' + cnt + '</span>' : '';
-    return '<button class="jtab" role="tab" id="jt-' + t[0] + '" aria-selected="' + (G.jtab === t[0]) + '" aria-controls="jbody" data-act="j-tab" data-v="' + t[0] + '">' + t[1] + n + '</button>';
-  }).join('');
-  var body = G.jtab === 'exp' ? expHtml(g) : G.jtab === 'chapter' ? chapterHtml(g) : G.jtab === 'trails' ? trailsHtml(g) : G.jtab === 'dreads' ? dreadsHtml(g) : mapHtml(g);
-  return '<section class="panel journal" id="journal"><div><h3>Journal</h3><p class="muted small">What you chart here stays. Nothing is ever taken away.</p></div><div class="jtabs" role="tablist" aria-label="Journal">' + tabs + '</div><div class="jbody" id="jbody" role="tabpanel" aria-labelledby="jt-' + G.jtab + '">' + body + '</div></section>';
-}
-function hexPts(cx, cy, r) { var p = []; for (var i = 0; i < 6; i++) { var a = Math.PI / 3 * i; p.push((cx + r * Math.cos(a)).toFixed(1) + ',' + (cy + r * Math.sin(a)).toFixed(1)); } return p.join(' '); }
-function mapSvg(g) {
-  var cells = g.zones.map(function (z, i) {
-    var p = HEXPOS[i], lit = z.xp > 0, pct = Math.min(62, 14 + z.lvl * 4);
-    var fill = lit ? 'color-mix(in srgb, var(--' + z.z.c + ') ' + pct + '%, var(--surface))' : 'var(--sunk)';
-    return '<g class="hex' + (lit ? '' : ' fogged') + (z.over ? ' over' : '') + '" style="--c:var(--' + z.z.c + ')"><polygon points="' + hexPts(p[0], p[1], 29) + '" style="fill:' + fill + '"></polygon><text x="' + p[0] + '" y="' + (p[1] - 2) + '" class="hx-n">' + z.z.name + '</text><text x="' + p[0] + '" y="' + (p[1] + 10) + '" class="hx-l">' + (lit ? 'level ' + z.lvl : 'uncharted') + '</text></g>';
-  }).join('');
-  var star = '<g transform="translate(0 -9) scale(0.62)"><polygon class="star" points="0,-15 3.2,-3.2 15,0 3.2,3.2 0,15 -3.2,3.2 -15,0 -3.2,-3.2"></polygon><circle r="2.4" class="pin"></circle></g><text class="hx-n" y="9">Sight</text><text class="hx-l" y="19">level ' + g.sight.lvl + '</text>';
-  return '<svg class="hexmap" viewBox="-80 -84 160 168" role="img" aria-label="Map of six regions: ' + esc(g.zones.map(function (z) { return z.z.name + (z.xp ? ' level ' + z.lvl : ' uncharted'); }).join(', ')) + '"><g class="hex camp"><polygon points="' + hexPts(0, 0, 29) + '"></polygon>' + star + '</g>' + cells + '</svg>';
-}
 
-function mapHtml(g) {
-  var today = todayStr();
-  var rows = g.zones.map(function (z) {
-    var st = !z.xp ? 'Uncharted. ' + z.z.how : z.over ? '<span class="og">Overgrown ' + z.over + ' days</span> · your first visit back counts double' : z.back ? '<span class="cl">Cleared today</span> · the first visit back counted double' : z.last === today ? 'Charted today' : 'Last charted ' + ago(z.last);
-    var sub = z.k === 'archive' && g.subjects.length ? '<div class="zsub">' + g.subjects.slice(0, 6).map(function (s) { return '<span>' + esc(s.name) + ' <b>' + s.lvl + '</b></span>'; }).join('') + '</div>' : '';
-    return '<div class="zrow" style="--c:var(--' + z.z.c + ')"><span class="zlv" title="Level">' + z.lvl + '</span><div class="zmain"><div><b>' + z.z.name + '</b> <span class="muted">· ' + z.z.plain + '</span></div>' + (z.xp ? '<div class="zbar" aria-hidden="true"><i style="width:' + Math.round(z.frac * 100) + '%"></i></div>' : '') + '<div class="zm">' + (z.xp ? z.toNext + ' XP to level ' + (z.lvl + 1) + ' · ' : '') + st + '</div>' + sub + '</div></div>';
-  }).join('');
-  var near = []; S.chunks.forEach(function (c) { if (c.stage >= 3 && c.stage < 5) near.push(c); });
-  near.sort(function (a, b) { return b.stage - a.stage || byName(a, b); });
-  var lmChips = g.landmarks.length ? '<div class="relics">' + g.landmarks.map(function (c) { return '<span class="relic" style="--c:var(--s2)">' + esc(c.name) + '</span>'; }).join('') + '</div>' : '';
-  var lmHint = near.length ? '<p class="muted small">' + esc(near[0].name) + ': ' + (5 - near[0].stage) + ' more cold ' + (5 - near[0].stage === 1 ? 'recall' : 'recalls') + ' to become a landmark.</p>' : (!lmChips ? '<p class="muted small">A chunk becomes a landmark once its review gap reaches 55 days. Each one adds 4 to Mind for good.</p>' : '');
-  return '<div class="mapgrid">' + mapSvg(g) + '<div class="zlist">' + rows + sightRow(g) + '</div></div>' +
-    '<p class="muted small">Regions level up from what you actually do. One you leave alone for a few days grows over, but its level never drops, and the first visit back counts double, because relearning is faster than learning.</p>' + atlasHtml(g);
-}
-function trailsHtml(g) {
-  var rows = g.quests.map(function (q) {
-    var b = BUFFS[q.buff], st = TRAIL[q.stage], nx = TRAIL[q.stage + 1];
-    var ticks = TRAIL.slice(1, TRAIL.length - 1).map(function (t) { return '<b class="tk" style="left:' + (t[0] / 66 * 100).toFixed(1) + '%"></b>'; }).join('');
-    return '<div class="trow' + (nx ? '' : ' sn') + '" style="--c:var(--' + STATC[b.stat] + ')"><div class="row-between"><b>' + esc(q.name) + '</b><span class="tstage">' + st[1] + (st[2] ? ' · +' + st[2] + ' ' + STATL[b.stat] : '') + '</span></div>' +
-      '<div class="tbar" aria-hidden="true"><i style="width:' + Math.min(100, q.walked / 66 * 100).toFixed(1) + '%"></i>' + ticks + '</div>' +
-      '<div class="tm">' + halfDays(q.walked) + ' walked · ' + (nx ? Math.max(1, Math.ceil(nx[0] - q.walked)) + ' more to ' + nx[1] + ', +' + nx[2] + ' ' + STATL[b.stat] + ' for good' : 'part of you now') + '</div></div>';
-  }).join('') || '<p class="muted small">No quests yet. Add some with Edit quests on the quest board, and each one wears a trail here.</p>';
-  var tr = g.traits.length ? '<div class="csec"><h3 class="mini">Second nature <span class="muted">· traits you keep for good</span></h3><div class="relics">' + g.traits.map(function (t) { return '<span class="relic trait" style="--c:var(--' + STATC[t.stat] + ')">' + esc(t.name) + '</span>'; }).join('') + '</div></div>' : '';
-  return '<p class="muted small">Each day you do a quest wears its trail deeper, and a day where you do part of it counts half. A missed day never wears a trail away. In one study, habits took 18 to 254 days to become automatic, with 66 typical, so the last stage sits at 66 days.</p>' +
-    '<div class="trows">' + rows + '</div>' + tr +
-    '<p class="muted small">Stages: Path at 7 days, Trail at 16, Road at 31, second nature at 66. Each one raises that stat’s floor for good.</p>';
-}
-function bossCard(b) {
-  var id = esc(b.id), hp = DREAD_HP[b.dread], left = Math.max(0, hp - b.dmg);
-  return '<div class="boss"><div class="row-between"><b class="bn">' + esc(b.name) + '</b><span class="pips" role="img" aria-label="' + DREAD_L[b.dread] + ', ' + b.dread + ' of 3">' + [1, 2, 3].map(function (i) { return '<i' + (i <= b.dread ? ' class="on"' : '') + '></i>'; }).join('') + '</span></div>' +
-    '<div class="hp" role="meter" aria-label="Dread left" aria-valuemin="0" aria-valuemax="' + hp + '" aria-valuenow="' + left + '"><i style="width:' + (left / hp * 100).toFixed(1) + '%"></i></div>' +
-    '<div class="bm">' + (left ? left + ' of ' + hp + ' dread left' : 'Worn down. Finish it and press It’s done.') + (b.dmg === 0 ? ' · the first hit counts triple' : '') + '</div>' +
-    (b.step ? '<div class="bc">First step: <b>' + esc(b.step) + '</b></div>' : '') + aiBoxHtml('bstep', b.id) +
-    '<div class="qa ba"><button class="btn small" data-act="b-face" data-id="' + id + '">Face it with a snowball</button><button class="btn small" data-act="b-hit" data-id="' + id + '">Log 10 minutes</button><button class="btn small primary" data-act="b-fell" data-id="' + id + '">It’s done</button><button class="btn small quiet" data-act="b-del" data-id="' + id + '">Let it go</button></div></div>';
-}
-function dreadsHtml(g) {
-  var bf = G.bform;
-  var dopts = [1, 2, 3].map(function (i) { return '<option value="' + i + '"' + (String(i) === bf.dread ? ' selected' : '') + '>' + DREAD_L[i] + '</option>'; }).join('');
-  var form = '<div class="bform"><label class="f bf-n" for="bName">Name a dread<input type="text" id="bName" maxlength="80" placeholder="Book the dentist appointment" value="' + esc(bf.name) + '"></label><label class="f" for="bDread">How heavy<select id="bDread">' + dopts + '</select></label><button class="btn small primary" data-act="b-add">Add</button></div>' + bformStepHtml();
-  var cards = g.active.length ? g.active.map(bossCard).join('') : '<p class="muted small">No dreads on the map. When a task keeps getting pushed to tomorrow, name it here.</p>';
-  var felled = g.felled.length ? '<div class="csec"><h3 class="mini">Felled <span class="muted">· +2 Resolve each, for good</span></h3><div class="relics">' + g.felled.slice(0, 40).map(function (b) { return '<span class="relic" style="--c:var(--s0)">' + esc(b.name) + ' <span class="muted">' + esc(human(b.done)) + '</span></span>'; }).join('') + '</div></div>' : '';
-  return '<p class="muted small">A dread is a task you keep avoiding. Snowball pushes and logged minutes wear it down, and the first hit counts triple because starting is the hard part. It never hits back.</p>' + form + '<div class="bosses">' + cards + '</div>' + felled;
-}
 function qLabel(id) { if (id === 'q-recall') return 'Recall what’s due'; var q = questById(id); return q ? q.name : ''; }
 function upper1(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 /* ---------- v50: quests in your order ----------
@@ -8611,14 +8435,14 @@ function bunnySvg(carrot) {
     (carrot ? '<g transform="translate(-94.261 106.659) scale(0.81) translate(94.261 -90.659)"><path fill="url(#' + u + 'c)" d="' + BUN_CARROT + '"></path></g>' : '') +
     '</g></svg>';
 }
-// It hops when you tap it, finish a quest, buy a reward or switch journal tabs.
+// It hops when you tap it, finish a quest or buy a reward.
 function bunnyHop() {
   var el = document.querySelector('.qbun .qb-hop'); if (!el || calmMotion()) return;
   el.classList.remove('hop'); void el.getBoundingClientRect(); el.classList.add('hop');
   clearTimeout(bunnyHop.t); bunnyHop.t = setTimeout(function () { el.classList.remove('hop'); }, 500);
 }
 document.addEventListener('click', function (e) {
-  var t = e.target && e.target.closest ? e.target.closest('.qbun, [data-act="j-tab"]') : null;
+  var t = e.target && e.target.closest ? e.target.closest('.qbun') : null;
   if (t) bunnyHop();
 });
 
@@ -8635,7 +8459,7 @@ var EN_WIN = 42, EN_MIN = 10, EN_LVL_MIN = 5, EN_KEEP = 90;
 var EN_LV = ['Low fuel', 'Some fuel', 'Full fuel'];
 // the starting guess: late morning and early evening high, a dip after lunch, quiet at the edges
 var EN_DEF = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1, 0.25, 0.45, 0.7, 0.92, 1, 0.75, 0.42, 0.36, 0.48, 0.66, 0.86, 0.9, 0.7, 0.45, 0.3, 0.15, 0.08];
-var EN_KC = { recall: 's2', dread: 's0', quest: 's3', snow: 'release', recalls: 'load' };
+var EN_KC = { recall: 's2', quest: 's3', snow: 'release', recalls: 'load' };
 function enNow() { return EN.now ? new Date(EN.now) : new Date(); }
 function enHm(h) { return t12h(h); }   /* time12: "9 AM", "12 PM"; the hour maths stays 0-23 */
 function enWin(h) { return enHm(h) + ' to ' + enHm(h + 1); }
@@ -8716,7 +8540,6 @@ function enPlan(g, now) {
   due.forEach(function (c) { var lp = lapses(c); if (lp >= LEECH && (!hard || lp > hard.lp)) hard = { c: c, lp: lp }; });
   if (hard) why = 'it keeps slipping';
   else if (due.length) { hard = { c: due[0], lp: 0 }; var od = diffDays(today, due[0].due); why = od > 0 ? plural(od, 'day') + ' overdue for its gap' : 'it is due today'; }
-  var boss = g.active && g.active.length ? g.active[0] : null;
   var quick = (g.qsToday || []).filter(function (q) { return !q.fixed && !q.isHabit && q.todayN < q.goal; });
   function size(q) { return (q.eff || 0) * 100 + (q.unit === 'min' ? q.goal - q.todayN : 10 * (q.goal - q.todayN)); }
   quick.sort(function (a, b) { return size(a) - size(b) || a.order - b.order; });
@@ -8725,7 +8548,6 @@ function enPlan(g, now) {
   quick = quick.filter(function (q) { return (q.eff || 0) <= 2 && (q.unit !== 'min' || q.goal - q.todayN <= 20); });
   if (!quick.length && small) quick = [small];
   function questBlock(q, w) { return { kind: 'quest', t: q.name, why: w, act: 'en-quest', id: q.id, btn: 'Go to it' }; }
-  function dreadBlock(w) { return { kind: 'dread', t: boss.step ? 'First step on “' + boss.name + '”: ' + boss.step : 'Ten minutes on “' + boss.name + '”', why: w, act: 'en-dread', id: boss.id, btn: 'Open in Snowball' }; }
   if (level === 0) {
     // a Low day: one short recall, the smallest quest, and a two-minute Snowball, nothing more
     var easy = null; due.forEach(function (c) { if (!easy && lapses(c) < LEECH) easy = c; }); if (!easy && due.length) easy = due[0];
@@ -8735,11 +8557,10 @@ function enPlan(g, now) {
   } else {
     var sharp = level === 2, order = sharp ? hours : best, room = 5;
     if (hard) add(take(order), { kind: 'recall', name: hard.c.name, t: 'Recall “' + hard.c.name + '”' + (due.length > 1 ? ' first, then the rest due' : ''), why: (sharp ? 'You feel sharp, so the hardest goes first: ' : 'Your best hour left, for the hardest recall: ') + why + '.', act: 'en-recall', id: hard.c.id, n: SESSION_MAX, btn: due.length > 1 ? 'Start recall' : 'Recall it' });
-    if (boss) add(take(order, true), dreadBlock(sharp ? 'Next while you are sharp. Only the first step.' : 'Your second-best hour, well before the day ends. Only the first step.'));
     var nq = Math.min(quick.length, room - blocks.length);
     for (var i = 0; i < nq; i++) add(take(low), questBlock(quick[i], i ? 'Another lower hour for something quick.' : 'A lower hour: quick things fit here.'));
     if (blocks.length < 3 && due.length > SESSION_MAX) add(take(best), { kind: 'recalls', t: 'A second recall session', why: 'More are due than one session holds. A break between them helps.', act: 'en-recall', id: '', n: SESSION_MAX, btn: 'Start recall' });
-    if (blocks.length < 3 && hours.length > blocks.length && (hard || boss || quick.length)) add(take(hours), { kind: 'snow', t: 'Roll a 2-minute snowball', why: 'Something small to get moving.', act: 'en-snow', v: '', btn: 'Start a snowball' });
+    if (blocks.length < 3 && hours.length > blocks.length && (hard || quick.length)) add(take(hours), { kind: 'snow', t: 'Roll a 2-minute snowball', why: 'Something small to get moving.', act: 'en-snow', v: '', btn: 'Start a snowball' });
   }
   blocks.sort(function (a, b) { return a.h - b.h; });
   return { level: level, cur: cur, hours: hours, blocks: blocks, now: now.getHours(), best: best[0] == null ? -1 : best[0] };
@@ -8765,11 +8586,11 @@ function enChart(p) {
 function enHowHtml(p) {
   var cur = p.cur, kinds = {}, leg = '';
   p.blocks.forEach(function (b) { kinds[b.kind] = 1; });
-  [['recall', 'hard recall'], ['dread', 'dread step'], ['quest', 'quick quest'], ['recalls', 'more recall'], ['snow', 'snowball']].forEach(function (k) { if (kinds[k[0]]) leg += '<span style="--c:var(--' + EN_KC[k[0]] + ')"><i></i>' + k[1] + '</span>'; });
+  [['recall', 'hard recall'], ['quest', 'quick quest'], ['recalls', 'more recall'], ['snow', 'snowball']].forEach(function (k) { if (kinds[k[0]]) leg += '<span style="--c:var(--' + EN_KC[k[0]] + ')"><i></i>' + k[1] + '</span>'; });
   return '<div class="en-how" id="enHow">' + enChart(p) + (leg ? '<div class="en-legend">' + leg + '</div>' : '') +
     '<p>' + (cur.learned ? 'The bars are your own hours. Over the last six weeks, the plan counts the hours when you finished something: a recall scored Mostly or Cold, a quest or quest step ticked, a Snowball push. Each hour gets its share of your active days, blended with the hours either side, so one busy afternoon does not decide much.' : 'The bars are a starting guess: late morning and early evening high, with a dip after lunch. Once you have finished things on 10 different days, the plan uses your own hours instead: recalls scored Mostly or Cold, quests ticked and Snowball pushes, counted by the hour.') + '</p>' +
     '<p>When you have picked Low, Some or Full fuel on at least 5 active days, those days get their own curve. Until then every day counts together.</p>' +
-    '<p>The hardest recall goes in your best hour left, the first step on a dread in the second best (never the last hour of the day), and quick quests in the lower hours. Sharp puts the hard things first. Low shrinks the plan to three small things.</p>' +
+    '<p>The hardest recall goes in your best hour left, and quick quests in the lower hours. Sharp puts the hard things first. Low shrinks the plan to three small things.</p>' +
     '<p>Energy does rise and fall through the day, but the shape is personal. Whether you run early or late (your chronotype) differs a lot between people <span class="en-cite">Roenneberg et al. 2003</span>, and many people slow down after lunch <span class="en-cite">Monk 2005</span>. Your own record beats any average, so this is a suggestion, not a rule.</p></div>';
 }
 function enPlanHtml(g) {
@@ -9092,7 +8913,7 @@ AIF.q75shape = { label: 'Shape it with Claude', busy: 'Claude is shaping a quest
   },
   act: function (a, j) { var d = j.data; aiDrop(j.key); q75AddQuest(d); } };
 
-/* ranks: the map XP you already have, on the levelling maths the regions use (level = floor(sqrt(xp / 20))) */
+/* ranks: the XP you already have, on the levelling maths the old regions used (level = floor(sqrt(xp / 20))) */
 // Every rank has its own colour, the first one too: green for a sprout, then teal, sky, lavender, violet, pink, gold, red.
 var Q75_RANKS = [['Newcomer', 0, 's3'], ['Apprentice', 2, 'release'], ['Adventurer', 5, 'q75-sky'], ['Ranger', 9, 's2'], ['Knight', 14, 'accent'], ['Hero', 20, 'g3'], ['Champion', 28, 's1'], ['Mythic', 38, 's0']];
 function q75Xp(g) { var x = 0; (g && g.zones || []).forEach(function (z) { x += Number(z.xp) || 0; }); return Math.round(x); }
@@ -9117,10 +8938,10 @@ function q75Emblem(i) {
 function q75RankHtml(g) {
   var r = q75Rank(q75Xp(g)), pct = Math.round(r.frac * 100);
   var ladder = Q75_RANKS.map(function (x, k) { return '<i class="' + (k < r.i ? 'got' : k === r.i ? 'now' : '') + '" style="--r:var(--' + x[2] + ')" title="' + x[0] + (k ? ' at ' + q75N(20 * x[1] * x[1]) + ' XP' : ', where everyone starts') + '"></i>'; }).join('');
-  return '<div class="q75-rank" id="q75Rank" style="--r:var(--' + r.c + ')" title="Your rank comes from all the XP on your map. Your title above comes from your legend.">' + q75Emblem(r.i) +
-    '<div class="q75-rk"><div class="q75-rn"><span class="q75-k">Quest rank ' + (r.i + 1) + ' of ' + Q75_RANKS.length + '</span><b>' + r.name + '</b><span class="q75-lv">' + q75N(r.xp) + ' map XP</span></div>' +
+  return '<div class="q75-rank" id="q75Rank" style="--r:var(--' + r.c + ')" title="Your rank comes from all the XP you have earned. Your title above comes from your legend.">' + q75Emblem(r.i) +
+    '<div class="q75-rk"><div class="q75-rn"><span class="q75-k">Quest rank ' + (r.i + 1) + ' of ' + Q75_RANKS.length + '</span><b>' + r.name + '</b><span class="q75-lv">' + q75N(r.xp) + ' XP</span></div>' +
     '<div class="q75-rbar" role="progressbar" aria-label="' + (r.next ? 'Progress to ' + r.next : 'Top rank') + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><i style="width:' + pct + '%"></i></div>' +
-    '<div class="q75-rnext">' + (r.next ? q75N(r.left) + ' XP to <b>' + r.next + '</b>' : 'The top rank. Every quest still counts on your map.') + '</div>' +
+    '<div class="q75-rnext">' + (r.next ? q75N(r.left) + ' XP to <b>' + r.next + '</b>' : 'The top rank. Every quest still counts.') + '</div>' +
     '<div class="q75-ladder" role="img" aria-label="' + esc('Ranks: ' + Q75_RANKS.map(function (x) { return x[0]; }).join(', ')) + '">' + ladder + '</div></div></div>';
 }
 charHtml = (function (inner) { return function (g) {
@@ -9147,16 +8968,12 @@ var Q75_ACH = [
   { k: 'recalls', grp: 'Recall and chunks', n: 'Memory', i: 'spark', c: 's2', t: [25, 250, 1000], u: ['recall', 'recalls'] },
   { k: 'recallrow', n: 'Sharp streak', i: 'flame', c: 's2', t: [3, 14, 45], u: ['day in a row with a recall', 'days in a row with a recall'], best: 1 },
   { k: 'chunks', n: 'Builder', i: 'cube', c: 'accent', t: [5, 25, 100], u: ['chunk built', 'chunks built'] },
-  { k: 'locked', n: 'Landmarks', i: 'pin', c: 's2', t: [1, 10, 40], u: ['chunk locked in', 'chunks locked in'] },
-  { k: 'felled', grp: 'Journey', n: 'Dread feller', i: 'sword', c: 's0', t: [1, 5, 15], u: ['dread felled', 'dreads felled'] },
-  { k: 'summits', n: 'Summiteer', i: 'flag', c: 'accent', t: [1, 3, 8], u: ['expedition finished', 'expeditions finished'] },
-  { k: 'chapters', n: 'Storyteller', i: 'book', c: 's1', t: [1, 4, 12], u: ['chapter closed', 'chapters closed'] },
-  { k: 'regions', n: 'Explorer', i: 'hex', c: 's3', t: [3, 5, 6], u: ['map region charted', 'map regions charted'] }
+  { k: 'locked', n: 'Landmarks', i: 'pin', c: 's2', t: [1, 10, 40], u: ['chunk locked in', 'chunks locked in'] }
 ];
 var Q75_AK = Object.create(null); Q75_ACH.forEach(function (a) { Q75_AK[a.k] = a; });
 // Each count, and the day it first reached each tier, so medals earned before this existed keep their real date.
 function q75Stats(g) {
-  var today = todayStr(), v = Object.create(null), at = Object.create(null), qm = Object.create(null), walk = Object.create(null), zs = Object.create(null);
+  var today = todayStr(), v = Object.create(null), at = Object.create(null), qm = Object.create(null), walk = Object.create(null);
   Q75_ACH.forEach(function (a) { v[a.k] = 0; at[a.k] = ['', '', '']; });
   function hit(k, day) { var a = Q75_AK[k]; for (var t = 0; t < 3; t++) if (v[k] >= a.t[t] && !at[k][t]) at[k][t] = isDate(day) && day <= today ? day : today; }
   function dated(k, days) { days.filter(isDate).sort().forEach(function (d) { v[k]++; hit(k, d); }); }
@@ -9175,14 +8992,10 @@ function q75Stats(g) {
     if (r.run) { v.runs++; runRow = lastRun && diffDays(D, lastRun) === 1 ? runRow + 1 : 1; lastRun = D; if (runRow > v.runrow) v.runrow = runRow; hit('runs', D); hit('runrow', D); }
     var p = Number(c.p) || 0; v.pushes += p; if (p > v.pushday) v.pushday = p; hit('pushes', D); hit('pushday', D);
     var rc = Number(c.r) || 0; if (rc > 0) { v.recalls += rc; recRow = lastRec && diffDays(D, lastRec) === 1 ? recRow + 1 : 1; lastRec = D; if (recRow > v.recallrow) v.recallrow = recRow; hit('recalls', D); hit('recallrow', D); }
-    Object.keys(r.xp || {}).forEach(function (z) { if (ZONEK[z] && r.xp[z] > 0 && !zs[z]) { zs[z] = 1; v.regions++; } }); hit('regions', D);
   });
   v.trail = Math.floor(v.trail);
   var built = []; S.chunks.forEach(function (c) { if (!c.starter) built.push(isDate(c.created) ? c.created : today); }); dated('chunks', built);
   v.locked = (g.landmarks || []).length; hit('locked', today);
-  dated('felled', (g.felled || []).map(function (b) { return b.done; }));
-  dated('summits', (g.summits || []).map(function (x) { return x.done || today; }));
-  var ch = []; G.chapters.forEach(function (d, id) { var c = normChapter(id, d); if (c.closed) ch.push(c.review.on || (isDate(id) ? addDays(id, 6) : today)); }); dated('chapters', ch.map(function (d) { return d > today ? today : d; }));
   return { v: v, at: at };
 }
 function q75Doc() {
@@ -9225,7 +9038,8 @@ function q75MedalToast(msg, tier) { toast(msg); var el = document.getElementById
 function q75AchCheck() {
   if (!S.ready || S.readOnly || G.dead || !gameReady() || !G.ready.meta || !store || !store.setDoc) return null;
   var s = q75Ach(gameCalc()); if (!s.fresh.length) return s;
-  var body = { v: 1, got: {} };
+  var body = { v: 1, got: {} }, nj78Was = G.meta.get('ach');
+  if (nj78Was && nj78Was.got && typeof nj78Was.got === 'object') Object.keys(nj78Was.got).forEach(function (k) { if (!Q75_AK[k] && k.length < 40 && Array.isArray(nj78Was.got[k])) body.got[k] = nj78Was.got[k].slice(0, 3); });
   Q75_ACH.forEach(function (a) { var x = (s.got[a.k] || ['', '', '']).slice(); s.fresh.forEach(function (f) { if (f.a.k === a.k) x[f.t] = f.d; }); if (x[0] || x[1] || x[2]) body.got[a.k] = x; });
   Q75.doc = body; G.meta.set('ach', body);   // kept either way, so this session does not try again in a loop
   var news = s.fresh.filter(function (f) { var key = f.a.k + ':' + f.t; if (Q75.shown[key]) return false; Q75.shown[key] = 1; return true; });
@@ -9239,7 +9053,7 @@ function q75AchCheck() {
 function q75AchSoon() { clearTimeout(Q75.t); Q75.t = setTimeout(function () { try { q75AchCheck(); } catch (e) {} }, 450); }
 afterData = (function (inner) { return function () { var r = inner.apply(this, arguments); q75AchSoon(); return r; }; })(afterData);
 // Open by default only once something is earned and there is room for it; on a phone, or with nothing earned yet,
-// the panel starts folded so it does not push the Journal down. Your own choice is remembered.
+// the panel starts folded so it does not push the rest of the column down. Your own choice is remembered.
 function q75AchOpen(earned) {
   if (typeof Q75.achOpen === 'boolean') return Q75.achOpen;
   var v = null; try { v = localStorage.getItem(LS_KEY + '-q75-ach'); } catch (e) {}
@@ -9291,10 +9105,10 @@ function renderQuests(force) {
   if (G.dead) { host.innerHTML = '<p class="muted">Quests could not load here. Reload the page.</p>'; return; }
   if (!S.ready || !gameReady()) { host.innerHTML = '<p class="muted loadingp">Loading your quests…</p>'; return; }
   var a = document.activeElement; if (!force && a && host.contains(a) && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA' || a.tagName === 'SELECT')) return;
-  var g = gameCalc(); if (g.newTraits.length) saveTraits(g.newTraits); if (g.newStars.length) starsSoon();
+  var g = gameCalc(); if (g.newTraits.length) saveTraits(g.newTraits);
   host.innerHTML = runHtml(g) +
     '<div class="qgrid"><div class="qcol qmain">' + questsHtml(g) + '</div>' +
-    '<div class="qcol qside">' + charHtml(g) + q75AchHtml(g) + journalHtml(g) + '</div></div>';
+    '<div class="qcol qside">' + charHtml(g) + q75AchHtml(g) + '</div></div>';
 }
 
 /* ---------- actions ---------- */
@@ -9512,14 +9326,13 @@ function checkPop(id) {
 var HABIT_XP_TAPS = 3;
 function habitTaps(id) { var n = 0, d = todayStr(); G.events.forEach(function (e) { if (e && e.kind === 'quest' && e.ref === id && e.day === d) n++; }); return n; }
 function questProgress(q, add) {
-  var g0 = gameCalc(), before = 0, st0 = 0, k0 = keptNow(g0); g0.quests.forEach(function (x) { if (x.id === q.id) { before = x.todayN; st0 = x.stage; } });
+  var g0 = gameCalc(), before = 0, st0 = 0; g0.quests.forEach(function (x) { if (x.id === q.id) { before = x.todayN; st0 = x.stage; } });
   var reach = before < q.goal && before + add >= q.goal, b = BUFFS[q.buff];
   addEvent({ kind: 'quest', ref: q.id, n: add, buff: (q.unit === 'min' ? reach : true) ? q.buff : '', label: q.name, zone: ZCAT[q.cat], xp: q.kind === 'habit' && habitTaps(q.id) >= HABIT_XP_TAPS ? 0 : q.unit === 'min' ? add : 10 * add });
-  var g1 = gameCalc(), st1 = st0, k1 = keptNow(g1), msgs = []; g1.quests.forEach(function (x) { if (x.id === q.id) st1 = x.stage; });
+  var g1 = gameCalc(), st1 = st0, msgs = []; g1.quests.forEach(function (x) { if (x.id === q.id) st1 = x.stage; });
   if (g1.newTraits.length) saveTraits(g1.newTraits);
-  if (st1 > st0) msgs.push(st1 === TRAIL.length - 1 ? q.name + ' is second nature now: +' + TRAIL[st1][2] + ' ' + STATL[b.stat] + ', for good.' : q.name + ' wore ' + TRAIL[st1][3] + ' into your map: +' + TRAIL[st1][2] + ' ' + STATL[b.stat] + ', for good.');
+  if (st1 > st0) msgs.push(st1 === TRAIL.length - 1 ? q.name + ' is second nature now: +' + TRAIL[st1][2] + ' ' + STATL[b.stat] + ', for good.' : q.name + ' wore ' + TRAIL[st1][3] + ': +' + TRAIL[st1][2] + ' ' + STATL[b.stat] + ', for good.');
   else if (reach) msgs.push(q.name + ' done. ' + b.name + ': ' + STATL[b.stat] + ' up for ' + hoursText(b.hours) + '.');
-  Object.keys(k1).forEach(function (k) { if (!k0[k]) msgs.push('Vow kept: ' + k1[k] + '.'); });
   msgs.push(checkRun());
   say(msgs);
 }
@@ -9537,7 +9350,7 @@ function unRun(today) {
   var f = fuelCalc(today, runQuests(today)); if (f && f.done) return;
   G.events.forEach(function (e, id) { if (e && e.kind === 'run' && e.day === today) { G.events.delete(id); store.delDoc('events', id).then(null, function () {}); } });
 }
-// v63: a session started for a quest, dread or step carries a token for it. The Snowball answers the
+// v63: a session started for a quest carries a token for it. The Snowball answers the
 // start on the spot: ok when it took the task, busy when a session is already under way, and then the
 // running session keeps whatever it was for. Credit only lands when a push or finish brings the token back.
 function toSnowball(task, link, step) {
@@ -9584,63 +9397,17 @@ function saveCharName(v) {
   store.setDoc('meta', 'character', { name: nm }).then(null, function (er) { toast(explain(er)); });
   setTimeout(function () { renderQuests(true); }, 0);
 }
-function putBoss(b) { G.bosses.set(b.id, bossBody(b)); return store.setDoc('bosses', b.id, bossBody(b)).then(null, function (e) { toast(explain(e)); }); }
-function bossAdd() {
-  var el = $('#bName'), name = el ? el.value.trim() : '';
-  if (!name) { if (el) { el.setCustomValidity('Name the task first.'); el.reportValidity(); el.addEventListener('input', function () { el.setCustomValidity(''); }, { once: true }); } return; }
-  var list = bossList(), b = normBoss('b' + newId(), { name: name, dread: Number(G.bform.dread) || 2, dmg: 0, created: todayStr(), done: '', order: list.length ? list[list.length - 1].order + 1 : 1, step: G.bform.step || '' });
-  putBoss(b); G.bform = { name: '', dread: '2', step: '' }; aiDrop(aiKey('bstep', 'new')); renderQuests(true);
-  toast('“' + b.name + '” is on your map. Face it when you’re ready; the first hit counts triple.');
-}
-function bossHit(id, minutes) {
-  var b = bossById(id); if (!b || b.done) return;
-  var today = todayStr(), mult = pathOn(today) === 'seeker' ? 2 : 1;
-  var hp = DREAD_HP[b.dread], base = Math.max(1, Math.round(minutes * 2 * mult)), first = b.dmg === 0, d = first ? Math.min(base * 3, base + 20) : base;
-  b.dmg = Math.min(999, b.dmg + d); putBoss(b);
-  addEvent({ kind: 'hit', ref: b.id, label: b.name, zone: 'fog', xp: d });
-  var left = Math.max(0, hp - b.dmg);
-  renderQuests(true);
-  say([(first ? 'Opening strike on “' + b.name + '”: ' + d + '. Starting was the hard part. ' : 'Hit “' + b.name + '” for ' + d + '. ') + (left ? left + ' of ' + hp + ' dread left.' : 'It’s worn down. Finish it, then press It’s done.'), checkRun()]);
-}
-function bossFell(id) {
-  var b = bossById(id); if (!b || b.done) return;
-  var k0 = keptNow(gameCalc());
-  b.done = todayStr(); putBoss(b);
-  addEvent({ kind: 'felled', ref: b.id, label: b.name, zone: 'fog', xp: 20 * b.dread, buff: 'courage', pts: 15 + 10 * b.dread });
-  if (G.link && G.link.kind === 'boss' && G.link.id === b.id) { G.link = null; saveLink(); }
-  renderQuests(true);
-  var k1 = keptNow(gameCalc()), msgs = ['Felled: ' + b.name + '. Courage lifts Resolve for 2 days, and +2 Resolve stays for good.'];
-  Object.keys(k1).forEach(function (k) { if (!k0[k]) msgs.push('Vow kept: ' + k1[k] + '.'); });
-  say(msgs);
-}
-function bossFace(id) {
-  var b = bossById(id); if (!b || b.done) return;
-  if (!toSnowball(b.name, { id: b.id, kind: 'boss' }, b.step)) return;
-  toast('Snowball ready for “' + b.name + '”. Each push hits it, and finishing the snowball fells it.');
-}
 function questBodyChange(e) {
   var t = e.target; if (!t) return;
   if (t.dataset && t.dataset.qf) { questEditChange(e); return; }
-  if (t.id === 'bDread') G.bform.dread = t.value;
-  else if (t.id === 'vKind') { G.vform.kind = t.value; G.vform.ref = ''; renderQuests(true); var vk = $('#vKind'); if (vk) vk.focus(); }
-  else if (t.id === 'vRef') { G.vform.ref = t.value; if (G.vform.kind === 'quest') { renderQuests(true); var vr = $('#vRef'); if (vr) vr.focus(); } }
-  else if (t.id === 'vGoal') G.vform.goal = t.value;
-  else if (t.id === 'xZone') G.xform.zone = t.value;
 }
 
-/* ---------- phase 2: today's run (fuel) and weekly chapters (paths, vows, review) ---------- */
+/* ---------- phase 2: today's run (fuel). Weekly chapters, paths and vows went in v78. ---------- */
 var FUEL = { low: { n: 3, name: 'Low' }, some: { n: 5, name: 'Some' }, full: { n: 8, name: 'Full' } };
 var QCOST = { 'q-meal': 1, 'q-shower': 1, 'q-move': 2, 'q-sleep': 0, 'q-cook': 2, 'q-tidy': 1, 'q-putoff': 3, 'q-learn': 2 };
 var COST_L = ['No effort', 'Light', 'Medium', 'Heavy'];
 // v63: the daily boons are gone for good. A day that had one keeps what it earned in the day archive,
 // and an old run record that still names a boon is read for its fuel only.
-var PATHS = {
-  scholar: { name: 'Scholar', c: 's2', who: 'I’m someone who learns things properly.', line: 'Recall, practice and study earn 1.5× on the map.' },
-  seeker: { name: 'Seeker', c: 's0', who: 'I’m someone who faces the hard things.', line: 'Dreads take double damage.' },
-  tender: { name: 'Tender', c: 's3', who: 'I’m someone who looks after myself and my space.', line: 'Body and home quests cost one less pip of fuel.' },
-  maker: { name: 'Maker', c: 's1', who: 'I’m someone who gets things made and done.', line: 'Snowball pushes and work quests earn 1.5× on the map.' }
-};
-var PATHK = ['scholar', 'seeker', 'tender', 'maker'];
 var CK = { push: 'p', recall: 'r', felled: 'f', hit: 'h', step: 's', summit: 'm' };
 var WD1 = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 function isCK(k) { return k === 'p' || k === 'r' || k === 'f' || k === 'h' || k === 's' || k === 'm'; }
@@ -9652,17 +9419,17 @@ function say(msgs) { msgs.filter(Boolean).forEach(function (m, i) { if (!i) toas
 /* today's run */
 function runOf(day) { var d = G.runs.get(day); d = d && typeof d === 'object' ? d : {}; return { fuel: FUEL[d.fuel] ? d.fuel : '' }; }
 function putRun(day, fuel) { var body = { fuel: fuel || '', t: new Date().toISOString() }; G.runs.set(day, body); return store.setDoc('runs', day, body).then(null, function (e) { toast(explain(e)); }); }
-function effCost(q, path) { var c = q.cost; if (path === 'tender' && (q.cat === 'body' || q.cat === 'home')) c = Math.max(0, c - 1); return c; }
+function effCost(q) { return q.cost; }
 function fuelCalc(today, qs) {
   var run = runOf(today); if (!run.fuel) return null;
-  var path = pathOn(today), units = Object.create(null), spent = 0;
+  var units = Object.create(null), spent = 0;
   var recalled = false;
-  G.events.forEach(function (e) { if (!e || e.day !== today) return; if (e.kind === 'quest' && e.ref) units[e.ref] = (units[e.ref] || 0) + (Number(e.n) || 0); else if (e.kind === 'hit') spent++; else if (e.kind === 'step') spent += 2; else if (e.kind === 'recall') recalled = true; });
+  G.events.forEach(function (e) { if (!e || e.day !== today) return; if (e.kind === 'quest' && e.ref) units[e.ref] = (units[e.ref] || 0) + (Number(e.n) || 0); else if (e.kind === 'recall') recalled = true; });
   if (recalled) spent += 2;
   qs.forEach(function (q) {
     var u = units[q.id] || 0; if (!u) return;
     var times = q.unit === 'min' ? (u >= q.goal ? 1 : 0) : u;
-    spent += effCost(q, path) * times;
+    spent += effCost(q) * times;
   });
   var max = FUEL[run.fuel].n;
   return { fuel: run.fuel, max: max, spent: spent, left: max - spent, done: spent >= max };
@@ -9678,136 +9445,12 @@ function checkRun() {
 function chooseFuel(v) { if (!FUEL[v]) return; var today = todayStr(); putRun(today, v); renderQuests(true); say([checkRun()]); }
 function refuel() { var today = todayStr(); putRun(today, ''); renderQuests(true); }
 
-/* chapters: one per week, Monday to Sunday */
-function normChapter(id, d) {
-  d = d && typeof d === 'object' ? d : {};
-  var rv = d.review && typeof d.review === 'object' ? d.review : {};
-  return { id: id, n: clampN(d.n, 1, 9999),
-    paths: (Array.isArray(d.paths) ? d.paths : []).filter(function (p) { return Array.isArray(p) && isDate(p[0]) && PATHS[p[1]]; }).slice(-20).map(function (p) { return [p[0], p[1]]; }),
-    vows: (Array.isArray(d.vows) ? d.vows : []).slice(0, 3).map(function (v, i) { v = v && typeof v === 'object' ? v : {}; return { k: validId(v.k) ? v.k : 'v' + i, kind: v.kind === 'quest' || v.kind === 'dread' || v.kind === 'exp' ? v.kind : 'free', ref: validId(v.ref) ? v.ref : '', goal: clampN(v.goal, 1, 7), t: str(v.t, 120).trim(), kept: !!v.kept }; }).filter(function (v) { return v.kind === 'free' ? !!v.t : !!v.ref; }),
-    closed: !!d.closed, story: str(d.story, 700).trim(),
-    review: { helped: str(rv.helped, 200), on: isDate(rv.on) ? rv.on : '', kept: clampN(rv.kept, 0, 3), of: clampN(rv.of, 0, 3), recap: (Array.isArray(rv.recap) ? rv.recap : []).slice(0, 14).map(function (x) { return str(x, 240); }) } };
-}
-function chapterBody(c) { return { n: c.n, paths: c.paths, vows: c.vows.map(function (v) { return { k: v.k, kind: v.kind, ref: v.ref, goal: v.goal, t: v.t, kept: v.kept }; }), closed: c.closed, review: c.review, story: c.story || '' }; }
-function chapterOf(wk) { return G.chapters.has(wk) ? normChapter(wk, G.chapters.get(wk)) : null; }
-function chapterList() { var a = []; G.chapters.forEach(function (d, id) { if (isDate(id)) a.push(normChapter(id, d)); }); a.sort(function (x, y) { return x.id < y.id ? -1 : x.id > y.id ? 1 : 0; }); return a; }
-function nextChapterN() { var n = 0; G.chapters.forEach(function (d) { n = Math.max(n, clampN(d && d.n, 0, 9999)); }); return n + 1; }
-function ensureChapter(wk) { return chapterOf(wk) || normChapter(wk, { n: nextChapterN() }); }
-function putChapter(c) { G.chapters.set(c.id, chapterBody(c)); return store.setDoc('chapters', c.id, chapterBody(c)).then(null, function (e) { toast(explain(e)); }); }
-function hasContent(c) { return !!(c && (c.paths.length || c.vows.length)); }
-// A path counts from the day it was chosen, so changing it never rewrites earlier days.
-function pathOn(day) { var c = chapterOf(weekStart(day)), p = ''; if (c) c.paths.forEach(function (x) { if (x[0] <= day) p = x[1]; }); return p; }
 function recMap(dr) { var m = Object.create(null); dr.forEach(function (r) { m[r.day] = r; }); return m; }
-function vowStatus(v, wk, rm) {
-  if (v.kind === 'quest') { var vq = v.ref === 'q-recall' ? null : questById(v.ref), n = 0; for (var i = 0; i < 7; i++) { var vd = addDays(wk, i), r = rm[vd]; if (r && r.tr[v.ref] === 1 && (!vq || onDay(vq, vd))) n++; } return { n: n, kept: n >= v.goal }; }
-  if (v.kind === 'exp') { var x = expById(v.ref), taken = 0, end = addDays(wk, 6); if (x) x.steps.forEach(function (s) { if (s.done && s.done >= wk && s.done <= end) taken++; }); return { n: taken, kept: taken >= v.goal, exp: x }; }
-  if (v.kind === 'dread') { var b = bossById(v.ref); return { boss: b, kept: !!(b && b.done && b.done <= addDays(wk, 6)) }; }
-  return { kept: v.kept };
-}
-function vowDays(q) { return !q || q.kind === 'habit' || !q.days ? 7 : q.days.split('1').length - 1; }
-function vowText(v) {
-  if (v.kind === 'quest') { var q = v.ref === 'q-recall' ? { name: 'Recall what’s due' } : questById(v.ref); return (q ? q.name : 'A removed quest') + ' on ' + v.goal + ' of ' + vowDays(q) + ' days'; }
-  if (v.kind === 'exp') { var x = expById(v.ref); return 'Take ' + plural(v.goal, 'step') + ' on “' + (x ? x.name : 'an expedition you let go') + '”'; }
-  if (v.kind === 'dread') { var b = bossById(v.ref); return 'Fell “' + (b ? b.name : 'a dread you let go') + '”'; }
-  return v.t;
-}
-function keptNow(g) { var wk = weekStart(todayStr()), c = chapterOf(wk), out = Object.create(null); if (!c) return out; var rm = recMap(g.dr); c.vows.forEach(function (v) { if (vowStatus(v, wk, rm).kept) out[v.k] = vowText(v); }); return out; }
-function weekRecap(c, dr) {
-  var wk = c.id, end = addDays(wk, 6), recs = dr.filter(function (r) { return r.day >= wk && r.day <= end; }), rm = recMap(dr), lines = [];
-  var runs = 0, quests = 0, p = 0, rc = 0, f = 0, xp = 0, xs = 0, xm = 0;
-  recs.forEach(function (r) {
-    if (r.run) runs++;
-    Object.keys(r.tr).forEach(function (k) { if (r.tr[k] === 1) quests++; });
-    p += r.c.p || 0; rc += r.c.r || 0; f += r.c.f || 0; xs += r.c.s || 0; xm += r.c.m || 0;
-    Object.keys(r.xp).forEach(function (z) { xp += r.xp[z] + (r.hx[z] || 0); });
-  });
-  var names = []; c.paths.forEach(function (x) { var nm = PATHS[x[1]].name; if (names.indexOf(nm) < 0) names.push(nm); });
-  if (names.length) lines.push('You walked this chapter as ' + (names.length === 1 ? 'a ' + names[0] : names.join(', then ')) + '.');
-  if (!recs.length) lines.push('It was a quiet week on the map. That happens, and nothing was lost.');
-  else lines.push('You were active on ' + recs.length + ' of 7 days' + (runs ? ', with ' + plural(runs, 'full run') : '') + '.');
-  var did = [];
-  if (quests) did.push('finished ' + plural(quests, 'quest'));
-  if (p) did.push('made ' + (p === 1 ? '1 Snowball push' : p + ' Snowball pushes'));
-  if (rc) did.push('did ' + plural(rc, 'recall'));
-  if (did.length) lines.push('You ' + listJoin(did) + '.');
-  if (f) lines.push('You felled ' + plural(f, 'dread') + '.');
-  if (xs) lines.push('You took ' + plural(xs, 'expedition step') + (xm ? ' and reached ' + plural(xm, 'summit') : '') + '.');
-  if (xp) lines.push('You charted ' + Math.round(xp) + ' XP across your map.');
-  var before = Object.create(null), after = Object.create(null);
-  dr.forEach(function (r) { if (r.day > end) return; Object.keys(r.tr).forEach(function (k) { after[k] = (after[k] || 0) + r.tr[k]; if (r.day < wk) before[k] = (before[k] || 0) + r.tr[k]; }); });
-  questList().forEach(function (q) { var s0 = trailStage(before[q.id] || 0), s1 = trailStage(after[q.id] || 0); if (s1 > s0) lines.push(q.name + (s1 === TRAIL.length - 1 ? ' became second nature.' : ' wore ' + TRAIL[s1][3] + '.')); });
-  var kept = 0; c.vows.forEach(function (v) { if (vowStatus(v, wk, rm).kept) kept++; });
-  if (c.vows.length) lines.push('You kept ' + kept + ' of ' + plural(c.vows.length, 'vow') + '.');
-  return { lines: lines, kept: kept, of: c.vows.length };
-}
-function choosePath(v) {
-  if (!PATHS[v]) return;
-  var today = todayStr(), c = ensureChapter(weekStart(today)), last = c.paths.length ? c.paths[c.paths.length - 1] : null;
-  G.pathPick = false;
-  if (last && last[1] === v) { renderQuests(true); return; }
-  if (last && last[0] === today) last[1] = v; else c.paths.push([today, v]);
-  putChapter(c); renderQuests(true);
-  toast('You walk this chapter as a ' + PATHS[v].name + '. ' + PATHS[v].line);
-}
-function vowAdd() {
-  var vf = G.vform, wk = weekStart(todayStr()), c = ensureChapter(wk), v = { k: 'v' + newId(), kind: vf.kind, ref: '', goal: 4, t: '', kept: false };
-  if (c.vows.length >= 3) { toast('A chapter holds three vows. Remove one first.'); return; }
-  if (vf.kind === 'quest') { var qs = $('#vRef'), gs = $('#vGoal'); v.ref = qs ? qs.value : ''; v.goal = clampN(gs ? gs.value : vf.goal, 1, 7); if (v.ref !== 'q-recall' && !questById(v.ref)) return; }
-  else if (vf.kind === 'exp') { var xr = $('#vRef'), xg = $('#vGoal'); v.ref = xr ? xr.value : ''; v.goal = clampN(xg ? xg.value : vf.goal, 1, 7); if (!expById(v.ref)) { toast('Set out on an expedition first, on the Expeditions tab.'); return; } }
-  else if (vf.kind === 'dread') { var bs = $('#vRef'); v.ref = bs ? bs.value : ''; if (!bossById(v.ref)) { toast('Name a dread on the Dreads tab first.'); return; } }
-  else {
-    var ti = $('#vText'); v.t = ti ? ti.value.trim().slice(0, 120) : '';
-    if (!v.t) { if (ti) { ti.setCustomValidity('Write the vow first.'); ti.reportValidity(); ti.addEventListener('input', function () { ti.setCustomValidity(''); }, { once: true }); } return; }
-  }
-  c.vows.push(v); putChapter(c); G.vform.t = ''; renderQuests(true);
-  toast('Vowed: ' + vowText(v) + '.');
-}
-function vowDel(k) { var c = chapterOf(weekStart(todayStr())); if (!c) return; c.vows = c.vows.filter(function (v) { return v.k !== k; }); putChapter(c); renderQuests(true); }
-function vowKeep(k) {
-  var c = chapterOf(weekStart(todayStr())); if (!c) return; var hit = null;
-  c.vows.forEach(function (v) { if (v.k === k && v.kind === 'free') { v.kept = !v.kept; hit = v; } });
-  if (!hit) return; putChapter(c); renderQuests(true);
-  if (hit.kept) toast('Vow kept: ' + hit.t + '.');
-}
-function closeChapter(id) {
-  var c = chapterOf(id); if (!c || c.closed) return;
-  var g = gameCalc(), rc = weekRecap(c, g.dr), hi = document.getElementById('rvHelped-' + id);
-  var helped = str(hi ? hi.value : G.review.wk === id ? G.review.helped : c.id < weekStart(todayStr()) ? helpedGuess(c, g) : '', 120).trim();
-  c.closed = true; c.review = { helped: helped, on: todayStr(), kept: rc.kept, of: rc.of, recap: rc.lines };
-  putChapter(c);
-  G.review = { helped: '' }; if (G.reviewWk === id) G.reviewWk = '';
-  renderQuests(true);
-  toast('Chapter ' + c.n + ' closed. ' + (rc.of ? 'You kept ' + rc.kept + ' of ' + plural(rc.of, 'vow') + '. ' : '') + '+' + (2 + 3 * rc.kept) + ' legend.');
-}
-
-// v63: the newest chapter from the last eight weeks that was never closed. Its review is already
-// written from what happened, so closing it is one tap; the guess for what helped can be changed.
-function owedChapter(wk) {
-  var cut = addDays(wk, -56), hit = null;
-  chapterList().forEach(function (c) { if (c.id < wk && c.id >= cut && !c.closed && hasContent(c)) hit = c; });
-  return hit;
-}
-function helpedGuess(c, g) {
-  var wk = c.id, end = addDays(wk, 6), cnt = Object.create(null), best = '', bn = 0;
-  g.dr.forEach(function (r) { if (r.day < wk || r.day > end) return; Object.keys(r.tr).forEach(function (k) { if (r.tr[k] === 1) cnt[k] = (cnt[k] || 0) + 1; }); });
-  Object.keys(cnt).forEach(function (k) { if (cnt[k] > bn) { bn = cnt[k]; best = k; } });
-  var q = bn >= 2 ? (best === 'q-recall' ? { name: 'Recall what’s due' } : questById(best)) : null;
-  if (q) return str('Doing “' + q.name + '” on ' + bn + ' days', 120);
-  var p = c.paths.length ? PATHS[c.paths[c.paths.length - 1][1]] : null;
-  return p ? 'Walking it as a ' + p.name : '';
-}
 
 /* the run bar */
 function pipsHtml(total, used) { var s = ''; for (var i = 0; i < Math.min(total, 16); i++) s += '<i' + (i < used ? ' class="on"' : '') + '></i>'; return '<span class="fpips" aria-hidden="true">' + s + '</span>'; }
-function chapterNudge() {
-  var today = todayStr(), wk = weekStart(today), cur = chapterOf(wk), prev = chapterOf(addDays(wk, -7)), out = [];
-  var owed = owedChapter(wk);
-  if (owed) {
-    var orc = weekRecap(owed, gameCalc().dr), gist = orc.lines.filter(function (l) { return /^(You were active|It was a quiet)/.test(l); })[0] || '';
-    out.push((owed.id === addDays(wk, -7) ? 'Last week’s chapter' : 'Chapter ' + owed.n) + ' wrote itself. ' + esc(gist) + (orc.of ? ' You kept ' + orc.kept + ' of ' + plural(orc.of, 'vow') + '.' : '') + ' <button class="linkbtn" data-act="c-close" data-id="' + esc(owed.id) + '">Close it as written</button> <button class="linkbtn" data-act="c-review" data-id="' + esc(owed.id) + '">Read it first</button>');
-  }
-  if (!hasContent(cur)) out.push('Chapter ' + (cur ? cur.n : nextChapterN()) + ' starts this week, on a clean page. <button class="linkbtn" data-act="c-open">Choose a path and vows</button>');
-  else if (!cur.closed && dow(today) >= 5) out.push('This chapter ends on Sunday. <button class="linkbtn" data-act="c-open">Write its review</button>');
+function runNudge() {
+  var out = [];
   traitNudges().forEach(function (x) { out.push(x); });
   return out.length ? '<div class="cnudge">' + out.map(function (x) { return '<p>' + x + '</p>'; }).join('') + '</div>' : '';
 }
@@ -9815,79 +9458,13 @@ function runHtml(g) {
   var today = todayStr(), run = runOf(today), f = g.fuel;
   if (!run.fuel) {
     return '<section class="panel runbar"><div><div class="k">Today’s run</div><h3>How much fuel do you have today?</h3><p class="muted small">Be honest. Quests cost fuel by effort, and a low day done well counts as a full run.</p></div>' +
-      '<div class="fuelbtns">' + ['low', 'some', 'full'].map(function (k) { return '<button class="fuelbtn" data-act="r-fuel" data-v="' + k + '"><b>' + FUEL[k].name + '</b>' + pipsHtml(FUEL[k].n, FUEL[k].n) + '<small>' + FUEL[k].n + ' pips</small></button>'; }).join('') + '</div>' + chapterNudge() + '</section>';
+      '<div class="fuelbtns">' + ['low', 'some', 'full'].map(function (k) { return '<button class="fuelbtn" data-act="r-fuel" data-v="' + k + '"><b>' + FUEL[k].name + '</b>' + pipsHtml(FUEL[k].n, FUEL[k].n) + '<small>' + FUEL[k].n + ' pips</small></button>'; }).join('') + '</div>' + runNudge() + '</section>';
   }
   var status = f.done ? '<b>Run complete.</b> ' + (f.spent > f.max ? '+' + (f.spent - f.max) + ' past the plan.' : 'Anything more is a bonus.') : plural(Math.max(0, f.left), 'pip') + ' of ' + f.max + ' left';
   return '<section class="panel runbar compact' + (f.done ? ' done' : '') + '"><div class="runline"><div><div class="k">Today’s run · ' + FUEL[run.fuel].name + ' fuel</div><div class="rstat">' + pipsHtml(f.max, Math.min(f.spent, f.max)) + '<span>' + status + '</span></div></div>' +
-    '<button class="linkbtn" data-act="r-refuel">Change fuel</button></div>' + chapterNudge() + '</section>';
+    '<button class="linkbtn" data-act="r-refuel">Change fuel</button></div>' + runNudge() + '</section>';
 }
 
-/* the Chapter tab */
-function weekDots(wk, rm, today) {
-  var runs = 0, act = 0;
-  var cells = WD1.map(function (d, i) {
-    var day = addDays(wk, i), r = rm[day], cls = day > today ? 'fut' : r && r.run ? 'run' : r && r.n ? 'act' : 'off';
-    if (cls === 'run') runs++; else if (cls === 'act') act++;
-    return '<span class="wd ' + cls + (day === today ? ' now' : '') + '" title="' + esc(human(day)) + '"><i></i><small>' + d + '</small></span>';
-  }).join('');
-  return '<div class="weekdots" role="img" aria-label="This week so far: ' + plural(runs, 'full run') + ' and ' + (act === 1 ? '1 other active day' : act + ' other active days') + '">' + cells + '</div>';
-}
-function pathCards(cur) {
-  return '<div class="paths">' + PATHK.map(function (k) { var p = PATHS[k]; return '<button class="pathcard" style="--c:var(--' + p.c + ')" data-act="c-path" data-v="' + k + '" aria-pressed="' + (cur === k) + '"><b>' + p.name + '</b><span class="who">' + p.who + '</span><span class="pl">' + p.line + '</span></button>'; }).join('') + '</div>';
-}
-function vowForm(g) {
-  var vf = G.vform, kinds = [['quest', 'Do a quest on some days'], ['exp', 'Take expedition steps'], ['dread', 'Fell a dread'], ['free', 'In my own words']];
-  var h = '<div class="vform"><label class="f" for="vKind">New vow<select id="vKind">' + kinds.map(function (k) { return '<option value="' + k[0] + '"' + (vf.kind === k[0] ? ' selected' : '') + '>' + k[1] + '</option>'; }).join('') + '</select></label>';
-  if (vf.kind === 'quest') {
-    // v63: a vow can only ask for the days a quest is actually on
-    var vq = null; g.quests.forEach(function (q) { if (q.id === vf.ref) vq = q; }); if (!vq) vq = g.quests[0];
-    var vn = vowDays(vq), vo = []; for (var vi = Math.min(2, vn); vi <= vn; vi++) vo.push(vi);
-    h += '<label class="f" for="vRef">Quest<select id="vRef">' + g.quests.map(function (q) { return '<option value="' + esc(q.id) + '"' + (vq && vq.id === q.id ? ' selected' : '') + '>' + esc(q.name) + '</option>'; }).join('') + '</select></label><label class="f" for="vGoal">Days<select id="vGoal">' + vo.map(function (n) { return '<option value="' + n + '"' + (String(n) === vf.goal || (n === vn && +vf.goal > vn) ? ' selected' : '') + '>' + n + ' of ' + vn + '</option>'; }).join('') + '</select></label>';
-  }
-  else if (vf.kind === 'exp') { var xs = expList().filter(function (x) { return !x.done; }); h += xs.length ? '<label class="f" for="vRef">Expedition<select id="vRef">' + xs.map(function (x) { return '<option value="' + esc(x.id) + '"' + (vf.ref === x.id ? ' selected' : '') + '>' + esc(x.name) + '</option>'; }).join('') + '</select></label><label class="f" for="vGoal">Steps<select id="vGoal">' + [1, 2, 3, 4, 5, 6, 7].map(function (k) { return '<option value="' + k + '"' + (String(k) === vf.goal ? ' selected' : '') + '>' + plural(k, 'step') + '</option>'; }).join('') + '</select></label>' : '<p class="muted small vwide">Set out on an expedition first, on the Expeditions tab.</p>'; }
-  else if (vf.kind === 'dread') h += g.active.length ? '<label class="f vwide" for="vRef">Dread<select id="vRef">' + g.active.map(function (b) { return '<option value="' + esc(b.id) + '"' + (vf.ref === b.id ? ' selected' : '') + '>' + esc(b.name) + '</option>'; }).join('') + '</select></label>' : '<p class="muted small vwide">Name a dread on the Dreads tab first.</p>';
-  else h += '<label class="f vwide" for="vText">Your vow<input type="text" id="vText" maxlength="120" placeholder="Finish chapter 3 of my book" value="' + esc(vf.t) + '"></label>';
-  return h + '<button class="btn small primary" data-act="c-vadd">Add vow</button></div>';
-}
-function vowsHtml(g, c, wk, rm) {
-  var rows = c.vows.map(function (v) {
-    var st = vowStatus(v, wk, rm), meta = '', act = '';
-    if (v.kind === 'quest' || v.kind === 'exp') meta = '<div class="vbar" aria-hidden="true"><i style="width:' + Math.min(100, st.n / v.goal * 100).toFixed(0) + '%"></i></div><span class="vm">' + Math.min(st.n, v.goal) + ' of ' + v.goal + (v.kind === 'exp' ? ' steps' : ' days') + (st.kept ? ' · kept' : '') + '</span>';
-    else if (v.kind === 'dread') meta = '<span class="vm">' + (st.kept ? 'Felled · kept' : st.boss ? (st.boss.done ? 'Felled ' + human(st.boss.done) : Math.max(0, DREAD_HP[st.boss.dread] - st.boss.dmg) + ' dread left') : 'This dread was let go') + '</span>';
-    else act = '<button class="btn small' + (v.kept ? ' quiet' : '') + '" data-act="c-vkeep" data-id="' + esc(v.k) + '">' + (v.kept ? 'Undo' : 'Mark kept') + '</button>';
-    return '<div class="vow' + (st.kept ? ' kept' : '') + '"><span class="vseal" aria-hidden="true"></span><div class="vmain"><div class="vt">' + esc(vowText(v)) + '</div>' + meta + '</div><div class="qa">' + act + (c.closed ? '' : '<button class="btn small quiet" data-act="c-vdel" data-id="' + esc(v.k) + '" aria-label="Remove this vow">Remove</button>') + '</div></div>';
-  }).join('');
-  return '<div class="csec"><h3 class="mini">Vows <span class="muted">· up to three for this chapter</span></h3>' +
-    (rows ? '<div class="vows">' + rows + '</div>' : '<p class="muted small">A vow is one promise for this week. Pick ones you can actually keep: a kept small vow is worth more than a broken big one.</p>') +
-    (c.vows.length < 3 && !c.closed ? vowForm(g) : '') + '</div>';
-}
-function reviewHtml(g, c) {
-  var rc = weekRecap(c, g.dr), rv = G.review;
-  return '<div class="review"><div class="k">Chapter ' + c.n + ' review · ' + human(c.id) + ' to ' + human(addDays(c.id, 6)) + '</div><h3>How the chapter went</h3><ul class="recap">' + rc.lines.map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul>' +
-    '<div class="rvq"><label class="f" for="rvHelped-' + esc(c.id) + '">What helped most this chapter?<input type="text" id="rvHelped-' + esc(c.id) + '" maxlength="120" placeholder="Doing the hard thing first thing" value="' + esc(rv.wk === c.id ? rv.helped : c.id < weekStart(todayStr()) ? helpedGuess(c, g) : '') + '"></label></div>' +
-    chStoryHtml(c) + '<p class="muted small">Optional. What you write here stays with this chapter.</p><div><button class="btn primary small" data-act="c-close" data-id="' + esc(c.id) + '">Close chapter ' + c.n + '</button></div></div>';
-}
-function pastChaptersHtml(wk, rvWk) {
-  var list = chapterList().filter(function (c) { return c.id < wk && c.id !== rvWk && (c.closed || hasContent(c)); }).reverse().slice(0, 8);
-  if (!list.length) return '';
-  return '<div class="csec"><h3 class="mini">Past chapters</h3><div class="pastch">' + list.map(function (c) {
-    var names = []; c.paths.forEach(function (x) { var nm = PATHS[x[1]].name; if (names.indexOf(nm) < 0) names.push(nm); });
-    var head = 'Chapter ' + c.n + (names.length ? ' · ' + names.join(', ') : '') + (c.closed ? (c.review.of ? ' · kept ' + c.review.kept + ' of ' + c.review.of + ' vows' : '') : ' · not reviewed yet');
-    if (!c.closed) return '<div class="pc"><span>' + esc(head) + '</span><button class="btn small" data-act="c-review" data-id="' + esc(c.id) + '">Review</button></div>';
-    return '<details class="pc"><summary><span>' + esc(head) + '</span><span class="hint" aria-hidden="true"></span></summary><ul class="recap">' + c.review.recap.map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + (c.review.helped ? '<li>What helped: ' + esc(c.review.helped) + '</li>' : '') + '</ul>' + (c.story ? '<p class="chstory">' + esc(c.story) + '</p>' : '') + '</details>';
-  }).join('') + '</div></div>';
-}
-function chapterHtml(g) {
-  var today = todayStr(), wk = weekStart(today), cur = chapterOf(wk), rm = recMap(g.dr), prevWk = addDays(wk, -7), prev = chapterOf(prevWk), out = '';
-  var rvWk = G.reviewWk && G.reviewWk < wk ? G.reviewWk : (owedChapter(wk) || {}).id || '', rvc = rvWk ? chapterOf(rvWk) : null;
-  if (rvc && !rvc.closed) out += reviewHtml(g, rvc); else rvWk = '';
-  var c = cur || normChapter(wk, { n: nextChapterN() }), p = PATHS[pathOn(today)];
-  out += '<div class="chap"><div class="row-between"><div><div class="k">Chapter ' + c.n + ' · ' + human(wk) + ' to ' + human(addDays(wk, 6)) + '</div><h3>' + (p ? 'The ' + p.name + '’s chapter' : 'A clean page') + '</h3></div>' + (p && !G.pathPick ? '<button class="btn small quiet" data-act="c-pathpick">Change path</button>' : '') + '</div>' + weekDots(wk, rm, today);
-  out += !p || G.pathPick ? '<p class="muted small">Choose who you want to be this week. Each path gives one small advantage, and you can change it any time.</p>' + pathCards(p ? pathOn(today) : '') : '<p class="pathline" style="--c:var(--' + p.c + ')"><b>' + p.who + '</b> ' + p.line + '</p>';
-  out += vowsHtml(g, c, wk, rm) + '</div>';
-  if (cur && !cur.closed && hasContent(cur) && dow(today) >= 5) out += reviewHtml(g, cur);
-  return out + pastChaptersHtml(wk, rvWk);
-}
 
 /* ---------- phase 3: the companion ----------
    v58 took out the workshop, Wren's journal and the wardrobe with the Keepsakes tab. Tools already
@@ -9911,7 +9488,7 @@ function scrollOn(day) { var s = null; G.items.forEach(function (d, id) { var it
 function careList(g) { var map = { fed: 'fed', rested: 'rested', moved: 'stretched', fresh: 'fresh', cared: 'looked after' }, out = []; g.effects.forEach(function (f) { if (map[f.key]) out.push(map[f.key]); }); return out; }
 /* ---------- v75 pet75: the companion's feelings ----------
    The fox reads what you did today and lately (quest kinds, recalls and how they went, Snowball pushes,
-   dreads, chunks, streaks, gaps, fuel, time of day, weekends) and feels up to two things at once. The
+   chunks, streaks, gaps, fuel, time of day, weekends) and feels up to two things at once. The
    first feeling in PET75_ORDER that applies leads; the next one that fits is blended in ("proud, but
    sleepy"). The line names what caused the lead feeling, and no feeling is ever a telling-off. */
 var PET75 = { clock: 0, open: false };
@@ -9954,9 +9531,9 @@ function pet75Now() { return PET75.clock ? new Date(PET75.clock) : new Date(); }
 // What today and the last few days hold, read from the events and the day archive.
 function pet75Sig(g) {
   var today = todayStr(), now = pet75Now(), hr = now.getHours(), wd = now.getDay(), yd = addDays(today, -1);
-  var s = { hr: hr, weekend: wd === 0 || wd === 6, q: { body: [], mind: [], work: [], home: [] }, mindQ: [], workQ: [], moved: [], care: [], careFx: [], rec: 0, good: 0, hard: 0, practice: 0, built: [], pushes: 0, hits: [], felled: [], finished: [], summits: [], run: false,
+  var s = { hr: hr, weekend: wd === 0 || wd === 6, q: { body: [], mind: [], work: [], home: [] }, mindQ: [], workQ: [], moved: [], care: [], careFx: [], rec: 0, good: 0, hard: 0, practice: 0, built: [], pushes: 0, finished: [], run: false,
     fuel: g.run && g.run.fuel ? g.run.fuel : '', active: false, streak: 0, gap: 0, home: 0, movedY: false, sitY: false, sit: 0, cats: [] };
-  var units = Object.create(null), last = Object.create(null), hits = [], fell = Object.create(null);
+  var units = Object.create(null), last = Object.create(null);
   G.events.forEach(function (e) {
     if (!e || typeof e !== 'object' || e.day !== today) return;
     var k = e.kind, lb = str(e.label, 80).trim(), ref = typeof e.ref === 'string' ? e.ref : '';
@@ -9966,14 +9543,8 @@ function pet75Sig(g) {
     else if (k === 'build') s.built.push(lb);
     else if (k === 'push') s.pushes++;
     else if (k === 'finish') s.finished.push(lb || 'a snowball');
-    else if (k === 'hit') hits.push({ t: lb || 'a dread', ref: ref });
-    else if (k === 'felled') { s.felled.push(lb || 'a dread'); if (ref) fell['r' + ref] = 1; fell['l' + (lb || 'a dread')] = 1; }
-    else if (k === 'summit') s.summits.push(lb || 'an expedition');
     else if (k === 'run') s.run = true;
-    else if (k === 'step' && PET75_ZC[e.zone]) s.q[PET75_ZC[e.zone]].push({ t: lb || 'a step', step: true });
   });
-  // a hit on a dread you went on to beat today is part of beating it, so it is not named twice
-  hits.forEach(function (h) { if (!(h.ref && fell['r' + h.ref]) && !fell['l' + h.t]) s.hits.push(h.t); });
   Object.keys(units).forEach(function (id) {
     if (!(units[id] > 0)) return;
     var e = last[id], q = questById(id), cat = q ? q.cat : PET75_ZC[e.zone] || '', buff = q ? q.buff : e.buff, nm = q ? q.name : str(e.label, 80).trim() || 'a quest';
@@ -9984,7 +9555,6 @@ function pet75Sig(g) {
     if (x.care && cat !== 'home') s.care.push(x);
     else if (cat === 'body' && buff === 'moved') s.moved.push(x);
   });
-  s.q.body.forEach(function (x) { if (x.step) s.moved.push(x); });
   s.mindQ = s.q.mind.filter(function (x) { return !x.care; });
   s.workQ = s.q.work.filter(function (x) { return !x.care; });
   if (g.fuel && g.fuel.done) s.run = true;
@@ -10006,7 +9576,6 @@ function pet75Sig(g) {
 }
 function pet75Q(t) { return '“' + t + '”'; }
 function pet75Did(x) {
-  if (x.step) return 'you took the step ' + pet75Q(x.t);
   if (x.part) return (x.min ? 'you put time into ' : 'you made a start on ') + pet75Q(x.t);
   return 'you ticked off ' + pet75Q(x.t);
 }
@@ -10015,12 +9584,9 @@ function pet75List(s) {
   var out = [];
   function add(k, cause, feel) { out.push(feel ? { k: k, cause: cause, feel: feel } : { k: k, cause: cause }); }
   if (s.home || (s.active && s.gap >= 3)) add('hopeful', (s.active ? 'you came back after ' : 'you’re back after ') + plural(s.home || s.gap - 1, 'day') + ' away');
-  if (s.felled.length) add('proud', 'you beat ' + pet75Q(s.felled[0]));
-  else if (s.summits.length) add('proud', 'you reached the top of ' + pet75Q(s.summits[0]));
-  else if (s.finished.length) add('proud', 'you finished ' + pet75Q(s.finished[0]));
+  if (s.finished.length) add('proud', 'you finished ' + pet75Q(s.finished[0]));
   else if (s.run) add('proud', s.fuel === 'low' ? 'you finished your run on a low day' : 'your run is done');
-  if (s.hits.length) add('determined', 'you landed a hit on ' + pet75Q(s.hits[0]));
-  else if (s.pushes) add('determined', s.pushes === 1 ? 'you pushed a snowball' : s.pushes === 2 ? 'you pushed a snowball twice' : 'you pushed a snowball ' + s.pushes + ' times');
+  if (s.pushes) add('determined', s.pushes === 1 ? 'you pushed a snowball' : s.pushes === 2 ? 'you pushed a snowball twice' : 'you pushed a snowball ' + s.pushes + ' times');
   // full days away, the way the Welcome back banner counts them
   if (!s.active && !s.home && s.gap >= 3) add('lonely', 'you’ve been away for ' + plural(s.gap - 1, 'day'));
   if (s.hr >= 22 || s.hr < 5) add('sleepy', s.hr < 5 ? 'it’s the small hours' : 'it’s late');
@@ -10233,254 +9799,6 @@ function saveCompName(v) {
 }
 
 
-/* ---------- phase 4: expeditions, the atlas of your chunks, and Clear Sight ---------- */
-var XZONES = [['frontier', 'Work'], ['archive', 'Study'], ['hearth', 'Home'], ['wilds', 'Body']];
-var MAX_EXP = 3, STEP_XP = 20, SUMMIT_XP = 60, DRAW_WINDOW = 5;
-
-/* expeditions (collection expeditions): a project walked one step a day, three steps drawn to choose from */
-function normExp(id, d) {
-  d = d && typeof d === 'object' ? d : {};
-  var steps = (Array.isArray(d.steps) ? d.steps : []).slice(0, 40).map(function (s, i) { s = s && typeof s === 'object' ? s : {}; return { k: validId(s.k) ? s.k : 's' + i, t: str(s.t, 120).trim(), done: isDate(s.done) ? s.done : '' }; }).filter(function (s) { return s.t; });
-  var pk = d.pick && typeof d.pick === 'object' && isDate(d.pick.day) && validId(d.pick.k) ? { day: d.pick.day, k: d.pick.k } : null;
-  return { id: id, name: str(d.name, 80).trim() || 'Unnamed expedition', zone: ZONEK[d.zone] ? d.zone : 'frontier', steps: steps, created: isDate(d.created) ? d.created : '', done: isDate(d.done) ? d.done : '', camp: !!d.camp, pick: pk, order: Number(d.order) || 0 };
-}
-function expBody(x) { return { name: x.name, zone: x.zone, steps: x.steps.map(function (s) { return { k: s.k, t: s.t, done: s.done }; }), created: x.created, done: x.done, camp: x.camp, pick: x.pick, order: x.order }; }
-function expList() { var a = []; G.expeditions.forEach(function (d, id) { a.push(normExp(id, d)); }); a.sort(function (x, y) { return x.order - y.order || byName(x, y); }); return a; }
-function expById(id) { return id && G.expeditions.has(id) ? normExp(id, G.expeditions.get(id)) : null; }
-function putExp(x) { G.expeditions.set(x.id, expBody(x)); return store.setDoc('expeditions', x.id, expBody(x)).then(null, function (e) { toast(explain(e)); }); }
-function stepsLeft(x) { return x.steps.filter(function (s) { return !s.done; }).length; }
-// Three cards from the front of the route, in an order that changes each day but is the same on every device.
-function drawn(x, day) {
-  var win = x.steps.filter(function (s) { return !s.done; }).slice(0, DRAW_WINDOW);
-  return win.map(function (s) { return { s: s, h: hash32(day + '|' + x.id + '|' + s.k) }; }).sort(function (a, b) { return a.h - b.h; }).slice(0, 3).map(function (o) { return o.s; });
-}
-function linkedStep() {
-  if (!G.link || G.link.kind !== 'step' || G.link.day !== todayStr()) return null;
-  var x = expById(G.link.id); if (!x || x.done) return null;
-  var ok = false; x.steps.forEach(function (s) { if (s.k === G.link.step && !s.done) ok = true; });
-  return ok ? { id: x.id, k: G.link.step } : null;
-}
-function expAdd() {
-  var nm = $('#xName'), name = nm ? nm.value.trim() : '', zs = $('#xZone'), ta = $('#xSteps');
-  if (!name) { if (nm) { nm.setCustomValidity('Name the expedition first.'); nm.reportValidity(); nm.addEventListener('input', function () { nm.setCustomValidity(''); }, { once: true }); } return; }
-  var lines = (ta ? ta.value : '').split(/\n+/).map(function (l) { return l.replace(/^\s*(?:[-*•]|\d+[.)])\s*/, '').trim(); }).filter(Boolean).slice(0, 39);
-  if (!lines.length) { if (ta) { ta.setCustomValidity('Write at least one step.'); ta.reportValidity(); ta.addEventListener('input', function () { ta.setCustomValidity(''); }, { once: true }); } return; }
-  if (expList().filter(function (x) { return !x.done; }).length >= MAX_EXP) { toast('Three expeditions at once is plenty. Finish one or let one go first.'); return; }
-  var today = todayStr(), list = expList(), x = normExp('x' + newId(), { name: name, zone: zs ? zs.value : 'frontier', created: today, order: list.length ? list[list.length - 1].order + 1 : 1,
-    steps: [{ k: 's0', t: 'Plan the route', done: today }].concat(lines.map(function (t, i) { return { k: 's' + (i + 1), t: t.slice(0, 120), done: '' }; })) });
-  putExp(x); G.xform = { name: '', zone: 'frontier', steps: '' }; renderQuests(true);
-  toast('“' + x.name + '” is on the map. Planning the route was step one, so you’re already on your way.');
-}
-function stepPick(id, k) { var x = expById(id); if (!x || x.done) return; x.pick = { day: todayStr(), k: k }; putExp(x); renderQuests(true); }
-function stepDone(id, k) {
-  var x = expById(id); if (!x || x.done) return;
-  var s = null; x.steps.forEach(function (y) { if (y.k === k && !y.done) s = y; }); if (!s) return;
-  var today = todayStr(), k0 = keptNow(gameCalc()), msgs = [];
-  s.done = today; if (x.pick && x.pick.k === k) x.pick = null;
-  var left = stepsLeft(x);
-  if (!left) x.done = today;
-  putExp(x);
-  addEvent({ kind: 'step', ref: x.id, label: s.t, zone: x.zone, xp: STEP_XP, buff: 'progress' });
-  if (!left) { addEvent({ kind: 'summit', ref: x.id, label: x.name, zone: x.zone, xp: SUMMIT_XP, buff: 'closer' }); msgs.push('Summit reached: ' + x.name + '. It stays on your map for good.'); }
-  else msgs.push('Step taken: ' + s.t + '. ' + (left === 1 ? 'One step' : left + ' steps') + ' to the summit.');
-  if (G.link && G.link.kind === 'step' && G.link.id === x.id && G.link.step === k) { G.link = null; saveLink(); }
-  var k1 = keptNow(gameCalc()); Object.keys(k1).forEach(function (v) { if (!k0[v]) msgs.push('Vow kept: ' + k1[v] + '.'); });
-  msgs.push(checkRun());
-  renderQuests(true); say(msgs);
-}
-function stepSnow(id, k) {
-  var x = expById(id), s = null; if (!x) return; x.steps.forEach(function (y) { if (y.k === k) s = y; }); if (!s) return;
-  if (!toSnowball(s.t, { id: x.id, kind: 'step', step: k })) return;
-  toast('Snowball ready for “' + s.t + '”. Finishing the snowball takes the step.');
-}
-function stepAdd(id) {
-  var x = expById(id), el = document.getElementById('xs-' + id); if (!x || !el) return;
-  var t = el.value.trim(); if (!t) { el.focus(); return; }
-  if (x.steps.length >= 40) { toast('An expedition holds up to 40 steps.'); return; }
-  var n = 0; x.steps.forEach(function (s) { var m = /^s(\d+)$/.exec(s.k); if (m) n = Math.max(n, +m[1]); });
-  x.steps.push({ k: 's' + (n + 1), t: t.slice(0, 120), done: '' }); x.done = ''; putExp(x); renderQuests(true);
-  var e2 = document.getElementById('xs-' + id); if (e2) e2.focus();
-}
-function stepDel(id, k) { var x = expById(id); if (!x) return; x.steps = x.steps.filter(function (s) { return s.k !== k || s.done; }); if (x.pick && x.pick.k === k) x.pick = null; putExp(x); renderQuests(true); }
-
-/* Clear Sight: grows when your confidence before a recall matches how the recall goes */
-function sightCalc() {
-  var recs = [];
-  S.chunks.forEach(function (c) { c.history.forEach(function (h) { if (h.p != null && !h.e && isDate(h.d)) recs.push(h); }); });
-  recs.sort(function (a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : 0; });
-  var xp = 0; recs.forEach(function (h) { var err = Math.abs(h.p - coldPct(h.s)); xp += err <= 20 ? 10 : err <= 40 ? 4 : 0; });
-  var last = recs.slice(-20), match = last.filter(function (h) { return Math.abs(h.p - coldPct(h.s)) <= 20; }).length, lvl = zoneLevel(xp), lo = 20 * lvl * lvl, hi = 20 * (lvl + 1) * (lvl + 1);
-  return { xp: xp, lvl: lvl, frac: Math.max(0, Math.min(1, (xp - lo) / (hi - lo))), toNext: Math.max(1, Math.ceil(hi - xp)), n: recs.length, recent: last.length, match: match };
-}
-function sightRow(g) {
-  var s = g.sight;
-  var note = s.n ? (s.xp ? s.toNext + ' XP to level ' + (s.lvl + 1) + ' · ' : '') + 'Your guess matched how the recall went on ' + s.match + ' of your last ' + plural(s.recent, 'recall') + '.'
-    : 'Grows when your confidence before a recall matches how it goes. An honest low guess that turns out right counts fully.';
-  return '<div class="zrow" style="--c:var(--ink)"><span class="zlv" title="Level">' + s.lvl + '</span><div class="zmain"><div><b>Clear Sight</b> <span class="muted">· knowing what you know</span></div>' + (s.xp ? '<div class="zbar" aria-hidden="true"><i style="width:' + Math.round(s.frac * 100) + '%"></i></div>' : '') + '<div class="zm">' + note + '</div></div></div>';
-}
-
-/* constellations: three or more linked chunks; when every one reaches a 9-day gap, it lights up for good */
-function constellations() {
-  var adj = Object.create(null);
-  S.chunks.forEach(function (c) { adj[c.id] = adj[c.id] || []; });
-  S.chunks.forEach(function (c) { c.links.forEach(function (l) { if (l !== c.id && S.chunks.has(l)) { adj[c.id].push(l); adj[l].push(c.id); } }); });
-  var seen = Object.create(null), out = [];
-  Object.keys(adj).sort().forEach(function (id) {
-    if (seen[id]) return; var st = [id], comp = []; seen[id] = 1;
-    while (st.length) { var v = st.pop(); comp.push(v); adj[v].forEach(function (w) { if (!seen[w]) { seen[w] = 1; st.push(w); } }); }
-    if (comp.length < 3) return;
-    comp.sort();
-    var cs = comp.map(function (i) { return S.chunks.get(i); }), ready = cs.filter(function (c) { return c.stage >= 3; }).length;
-    var hub = cs.slice().sort(function (a, b) { return (adj[b.id].length - adj[a.id].length) || byName(a, b); })[0];
-    out.push({ ids: comp, hk: 'k' + hash32(comp.join('|')).toString(36), n: comp.length, ready: ready, hub: hub, lit: ready === comp.length });
-  });
-  return out;
-}
-function starMap() {
-  var d = G.meta.get('stars'), out = Object.create(null);
-  if (d && d.s && typeof d.s === 'object') Object.keys(d.s).forEach(function (k) { var v = d.s[k]; if (validId(k) && v && typeof v === 'object') out[k] = { name: str(v.name, 80) || 'A constellation', n: clampN(v.n, 3, 999), day: isDate(v.day) ? v.day : '', ids: Array.isArray(v.ids) ? v.ids.filter(validId).slice(0, 400) : [] }; });
-  return out;
-}
-// v63: linking a chunk into a lit constellation gives it a new id, but it is the same sky. It counts as
-// lit already when it holds every chunk of one that lit before, or two thirds of its chunks were in one.
-// Stars saved before v63 have no member list, so their name (the hub chunk) is matched instead.
-function starCover(c, stars) {
-  if (stars[c.hk]) return c.hk;
-  var has = Object.create(null), hit = '';
-  c.ids.forEach(function (id) { has[id] = 1; });
-  Object.keys(stars).forEach(function (k) {
-    if (hit) return; var s = stars[k], n = 0;
-    if (s.ids.length) { s.ids.forEach(function (id) { if (has[id]) n++; }); if (n === s.ids.length || n * 3 >= c.n * 2) hit = k; }
-    else c.ids.forEach(function (id) { var ch = S.chunks.get(id); if (ch && s.name === 'The ' + ch.name + ' constellation') hit = k; });
-  });
-  return hit;
-}
-// Lighting a star is a write, so it never happens while the board is being drawn: it waits a beat,
-// checks again, and saves once.
-function starsSoon() {
-  clearTimeout(starsSoon.t);
-  starsSoon.t = setTimeout(function () { if (!store || !gameReady()) return; var g = gameCalc(); if (g.newStars.length) saveStars(g.newStars); }, 1200);
-}
-function saveStars(list) {
-  var cur = starMap(), body = {};
-  list.forEach(function (c) { cur[c.hk] = { name: 'The ' + c.hub.name + ' constellation', n: c.n, day: todayStr(), ids: c.ids.slice(0, 400) }; });
-  Object.keys(cur).forEach(function (k) { body[k] = cur[k]; });
-  G.meta.set('stars', { s: body }); store.setDoc('meta', 'stars', { s: body }).then(null, function (e) { toast(explain(e)); });
-  toast(list.length === 1 ? 'A constellation lit up: the ' + list[0].hub.name + ' constellation. +3 Mind, for good.' : list.length + ' constellations lit up. +3 Mind each, for good.');
-}
-
-/* the atlas: subjects are islands, chunks are landmarks, links are roads */
-function stageName(st) { return st >= 5 ? 'Landmark' : st >= 2 ? 'Charted' : 'Sighted'; }
-function isleShape(is) {
-  var h = hash32(is.name), pts = [];
-  for (var k = 0; k < 30; k++) { var a = k / 30 * Math.PI * 2, w = 1 + 0.07 * Math.sin(a * 3 + (h % 7)) + 0.05 * Math.sin(a * 5 + (h % 11)); pts.push((is.cx + Math.cos(a) * is.r * w).toFixed(1) + ' ' + (is.cy + Math.sin(a) * is.r * w * 0.86).toFixed(1)); }
-  return 'M' + pts.join('L') + 'Z';
-}
-function atlasSvg(g) {
-  var W = 640, pad = 22, today = todayStr(), groups = Object.create(null), pos = Object.create(null);
-  S.chunks.forEach(function (c) { var d = c.domain || 'Unnamed isle'; (groups[d] = groups[d] || []).push(c); });
-  var isles = Object.keys(groups).map(function (n) { return { name: n, cs: groups[n].sort(byName) }; }).sort(function (a, b) { return b.cs.length - a.cs.length || (a.name < b.name ? -1 : 1); });
-  isles.forEach(function (is) { is.r = Math.round(34 + 13 * Math.sqrt(is.cs.length)); });
-  var rows = [], row = [], x = pad;
-  isles.forEach(function (is) { var w = is.r * 2; if (row.length && x + w > W - pad) { rows.push(row); row = []; x = pad; } row.push(is); x += w + pad; });
-  if (row.length) rows.push(row);
-  var y = pad;
-  rows.forEach(function (r) {
-    var h = Math.max.apply(null, r.map(function (i) { return i.r * 2 * 0.86; })), tw = r.reduce(function (s, i) { return s + i.r * 2; }, 0) + pad * (r.length - 1), x0 = (W - tw) / 2;
-    r.forEach(function (is) { is.cx = x0 + is.r; is.cy = y + 16 + h / 2; x0 += is.r * 2 + pad; });
-    y += h + 16 + pad;
-  });
-  isles.forEach(function (is) { var n = is.cs.length; is.cs.forEach(function (c, i) { var a = i * 2.39996 + 0.6, rr = n === 1 ? 0 : (is.r - 16) * Math.sqrt((i + 0.6) / (n + 0.2)); pos[c.id] = [is.cx + rr * Math.cos(a), is.cy + rr * Math.sin(a) * 0.86 + 3]; }); });
-  var litIds = Object.create(null); g.cons.forEach(function (c) { if (c.lit) c.ids.forEach(function (i) { litIds[i] = 1; }); });
-  var land = isles.map(function (is) { return '<path class="isle" d="' + isleShape(is) + '"></path><text class="iname" x="' + is.cx.toFixed(1) + '" y="' + (is.cy - is.r * 0.86 - 5).toFixed(1) + '">' + esc(is.name.length > 28 ? is.name.slice(0, 27) + '…' : is.name) + '</text>'; }).join('');
-  var seen = Object.create(null), roads = '';
-  S.chunks.forEach(function (c) {
-    c.links.forEach(function (l) {
-      if (l === c.id || !S.chunks.has(l)) return; var key = c.id < l ? c.id + '|' + l : l + '|' + c.id; if (seen[key]) return; seen[key] = 1;
-      var a = pos[c.id], b = pos[l], same = (c.domain || '') === (S.chunks.get(l).domain || ''), mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2 - (same ? 8 : 26);
-      roads += '<path class="road' + (same ? '' : ' sea') + (litIds[c.id] && litIds[l] ? ' lit' : '') + '" d="M' + a[0].toFixed(1) + ' ' + a[1].toFixed(1) + 'Q' + mx.toFixed(1) + ' ' + my.toFixed(1) + ' ' + b[0].toFixed(1) + ' ' + b[1].toFixed(1) + '"></path>';
-    });
-  });
-  var nodes = '';
-  S.chunks.forEach(function (c) {
-    var p = pos[c.id], st = Math.max(0, Math.min(6, c.stage)), cls = st >= 5 ? 'lm' : st >= 2 ? 'ch' : 'si', due = c.due <= today, r = 4 + st * 0.8, sel = G.atlasSel === c.id, px = p[0].toFixed(1), py = p[1].toFixed(1);
-    nodes += '<g class="anode ' + cls + (due ? ' due' : '') + (sel ? ' sel' : '') + '" data-act="a-sel" data-id="' + esc(c.id) + '" tabindex="0" role="button" aria-pressed="' + sel + '" aria-label="' + esc(c.name + ', ' + stageName(st).toLowerCase() + (due ? ', due for recall' : '')) + '">' +
-      '<circle class="halo" cx="' + px + '" cy="' + py + '" r="' + (r + 5).toFixed(1) + '"></circle><circle class="dot" cx="' + px + '" cy="' + py + '" r="' + r.toFixed(1) + '"></circle>' +
-      (st >= 5 ? '<path class="flag" d="M' + px + ' ' + (p[1] - r).toFixed(1) + 'v-9l7 2.8-7 2.8"></path>' : '') +
-      (st >= 5 || sel ? '<text class="alab" x="' + px + '" y="' + (p[1] + r + 11).toFixed(1) + '">' + esc(c.name.length > 24 ? c.name.slice(0, 23) + '…' : c.name) + '</text>' : '') + '<title>' + esc(c.name) + '</title></g>';
-  });
-  return '<svg class="atlas" viewBox="0 0 ' + W + ' ' + Math.round(y) + '" role="group" aria-label="Atlas of your chunks: ' + plural(S.chunks.size, 'chunk') + ' on ' + plural(isles.length, 'island') + '"><rect class="sea" x="0" y="0" width="' + W + '" height="' + Math.round(y) + '" rx="14"></rect>' + land + roads + nodes + '</svg>';
-}
-function atlasDetail() {
-  var c = G.atlasSel ? S.chunks.get(G.atlasSel) : null;
-  if (!c) return '<p class="muted small">Tap a landmark to see where it stands.</p>';
-  var today = todayStr(), roads = c.links.filter(function (l) { return l !== c.id && S.chunks.has(l); }).length;
-  return '<div class="adetail"><div><b>' + esc(c.name) + '</b> <span class="muted small">· ' + esc(c.domain || 'No subject') + '</span></div><div class="small">' + stageName(c.stage) + ' · ' + GAPS[Math.max(0, Math.min(6, c.stage))] + '-day gap · ' + (c.due <= today ? 'due now' : 'next recall ' + esc(human(c.due))) + ' · ' + plural(roads, 'road') + '</div>' +
-    '<div class="qa"><button class="btn small primary" data-act="review-one" data-id="' + esc(c.id) + '">Recall it now</button><button class="btn small quiet" data-act="edit" data-id="' + esc(c.id) + '">Open</button></div></div>';
-}
-function consHtml(g) {
-  var cur = g.cons, stars = g.stars, curKeys = Object.create(null), rows = '';
-  cur.forEach(function (c) {
-    curKeys[c.hk] = 1; if (c.was) curKeys[c.was] = 1; var lit = c.lit || !!c.was;
-    rows += '<div class="con' + (lit ? ' lit' : '') + '"><span class="cstar" aria-hidden="true"></span><div><b>The ' + esc(c.hub.name) + ' constellation</b><div class="muted small">' + c.n + ' linked chunks · ' + (lit ? 'lit: +3 Mind for good' : c.ready + ' of ' + c.n + ' at a 9-day gap or more') + '</div></div></div>';
-  });
-  Object.keys(stars).forEach(function (k) { if (!curKeys[k]) rows += '<div class="con lit"><span class="cstar" aria-hidden="true"></span><div><b>' + esc(stars[k].name) + '</b><div class="muted small">lit ' + esc(stars[k].day ? human(stars[k].day) : '') + ': +3 Mind for good</div></div></div>'; });
-  return '<div class="csec"><h3 class="mini">Constellations <span class="muted">· three or more linked chunks</span></h3>' + (rows || '<p class="muted small">Link three or more chunks and they form a constellation. When every chunk in it reaches a 9-day gap, it lights up for good and adds 3 to Mind.</p>') + '</div>';
-}
-function atlasHtml(g) {
-  if (!S.chunks.size) return '<div class="csec" id="atlas"><h3 class="mini">Atlas</h3><p class="muted small">Your chunks appear here as landmarks once you build some.</p></div>';
-  var near = []; S.chunks.forEach(function (c) { if (c.stage >= 3 && c.stage < 5) near.push(c); });
-  near.sort(function (a, b) { return b.stage - a.stage || byName(a, b); });
-  var hint = near.length ? '<p class="muted small">' + esc(near[0].name) + ': ' + (5 - near[0].stage) + ' more cold ' + (5 - near[0].stage === 1 ? 'recall' : 'recalls') + ' to become a landmark, worth +4 Mind for good.</p>' : '';
-  return '<div class="csec" id="atlas"><h3 class="mini">Atlas <span class="muted">· your library as a map</span></h3><div class="atlaswrap">' + atlasSvg(g) + '</div>' +
-    '<div class="akey" aria-hidden="true"><span><i class="k-si"></i>Sighted</span><span><i class="k-ch"></i>Charted, 4-day gap or more</span><span><i class="k-lm"></i>Landmark, 55 days or more</span><span><i class="k-due"></i>Due for recall</span><span><i class="k-lit"></i>Lit road</span></div>' +
-    atlasDetail() + hint + '</div>' + consHtml(g);
-}
-
-/* the Expeditions tab */
-function routeSvg(x) {
-  var n = x.steps.length, done = n - stepsLeft(x), W = 320, pts = [], r = Math.max(2.4, Math.min(5, 150 / Math.max(1, n)));
-  for (var i = 0; i < n; i++) { var t = n === 1 ? 0.5 : i / (n - 1); pts.push([14 + t * (W - 50), 24 + Math.sin(t * Math.PI * 2.2) * 11]); }
-  var line = pts.length > 1 ? '<path class="rline" d="M' + pts.map(function (p) { return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join('L') + 'L' + (W - 18) + ' 20"></path>' : '';
-  var dots = pts.map(function (p, i) { return '<circle class="' + (i < done ? 'rdone' : 'rtodo') + '" cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="' + r.toFixed(1) + '"></circle>'; }).join('');
-  var flag = '<path class="rpole" d="M' + (W - 18) + ' 34V8"></path><path class="rflag' + (x.done ? ' up' : '') + '" d="M' + (W - 18) + ' 8l12 4.5-12 4.5z"></path>';
-  return '<svg class="route" viewBox="0 0 ' + W + ' 44" role="img" aria-label="' + done + ' of ' + n + ' steps taken">' + line + dots + flag + '</svg>';
-}
-function expCard(x) {
-  var id = esc(x.id), today = todayStr(), n = x.steps.length, left = stepsLeft(x), zn = ZONEK[x.zone];
-  var head = '<div class="row-between"><div><b class="xn">' + esc(x.name) + '</b><div class="muted small">Charts the ' + zn.name + ' · ' + (n - left) + ' of ' + n + ' steps · ' + (left === 1 ? 'one step' : left + ' steps') + ' to the summit</div></div>' +
-    '<button class="btn small quiet" data-act="x-camp" data-id="' + id + '">' + (x.camp ? 'Break camp' : 'Make camp') + '</button></div>';
-  var body;
-  if (x.camp) body = '<p class="muted small">Camped. Nothing is lost while you rest here. Break camp when you’re ready to walk on.</p>';
-  else {
-    var pick = x.pick && x.pick.day === today ? x.pick.k : '', cards = drawn(x, today), tookToday = x.steps.filter(function (s) { return s.done === today; }).length;
-    body = '<div class="k">' + (tookToday ? 'Today’s step is taken. Another is a bonus.' : 'Today’s draw: pick one step') + '</div><div class="draw">' + cards.map(function (s) {
-      var on = pick === s.k, sk = esc(s.k);
-      return '<div class="card3' + (on ? ' picked' : pick ? ' dim' : '') + '"><span class="ct">' + esc(s.t) + '</span><div class="qa">' + (on
-        ? '<button class="btn small primary" data-act="x-step" data-id="' + id + '" data-k="' + sk + '">Done</button><button class="btn small quiet" data-act="x-snow" data-id="' + id + '" data-k="' + sk + '">Snowball it</button>'
-        : '<button class="btn small" data-act="x-pick" data-id="' + id + '" data-k="' + sk + '">Pick this</button>') + '</div></div>';
-    }).join('') + '</div>';
-  }
-  var all = x.steps.map(function (s) {
-    return '<li class="' + (s.done ? 'sdone' : '') + '"><span>' + esc(s.t) + '</span>' + (s.done ? '<span class="muted small">' + esc(human(s.done)) + '</span>'
-      : '<span class="qa"><button class="btn small" data-act="x-step" data-id="' + id + '" data-k="' + esc(s.k) + '">Done</button><button class="btn small quiet" data-act="x-sdel" data-id="' + id + '" data-k="' + esc(s.k) + '" aria-label="Remove this step">Remove</button></span>') + '</li>';
-  }).join('');
-  return '<div class="exp" style="--c:var(--' + zn.c + ')">' + head + routeSvg(x) + body +
-    '<details class="xsteps"' + (G.xOpen[x.id] ? ' open' : '') + ' data-xid="' + id + '"><summary><span>All steps</span><span class="hint" aria-hidden="true"></span></summary><ol>' + all + '</ol>' +
-    '<div class="addc"><input type="text" id="xs-' + id + '" data-xs="' + id + '" maxlength="120" placeholder="Add a step" aria-label="New step for ' + esc(x.name) + '"><button class="btn small" data-act="x-sadd" data-id="' + id + '">Add</button></div></details>' +
-    '<div><button class="btn small quiet danger" data-act="x-del" data-id="' + id + '">Let it go</button></div></div>';
-}
-function expHtml(g) {
-  var list = expList(), live = list.filter(function (x) { return !x.done; }), done = list.filter(function (x) { return x.done; }).sort(function (a, b) { return a.done < b.done ? 1 : -1; }), xf = G.xform;
-  var form = live.length < MAX_EXP ? '<div class="xform"><label class="f" for="xName">New expedition<input type="text" id="xName" maxlength="80" placeholder="Launch a side project" value="' + esc(xf.name) + '"></label>' +
-    '<label class="f" for="xZone">It charts<select id="xZone">' + XZONES.map(function (z) { return '<option value="' + z[0] + '"' + (xf.zone === z[0] ? ' selected' : '') + '>' + z[1] + ' · ' + ZONEK[z[0]].name + '</option>'; }).join('') + '</select></label>' +
-    '<label class="f xwide" for="xSteps">Steps, one per line<textarea id="xSteps" rows="4" placeholder="Decide what done looks like&#10;List the parts&#10;Build the smallest version&#10;Show it to one person">' + esc(xf.steps) + '</textarea></label>' +
-    aiBoxHtml('xsteps', '') + '<div><button class="btn small primary" data-act="x-add">Set out</button></div></div>' : '<p class="muted small">Three expeditions at once is plenty. Finish one or let one go to start another.</p>';
-  var sums = done.length ? '<div class="csec"><h3 class="mini">Summits <span class="muted">· +5 legend each, for good</span></h3><div class="relics">' + done.map(function (x) { return '<span class="relic" style="--c:var(--' + ZONEK[x.zone].c + ')">' + esc(x.name) + ' <span class="muted">' + esc(human(x.done)) + '</span></span>'; }).join('') + '</div></div>' : '';
-  return '<p class="muted small">An expedition is a project too big for one day, like launching a side project. Each day you draw three steps from the front of the route and pick one. Planning the route counts as the first step, so you start on your way.</p>' +
-    (live.length ? '<div class="exps">' + live.map(expCard).join('') + '</div>' : '') + form + sums;
-}
-
 /* ---------- the glance strip: what's due, how today's quests stand, and the shape of the week ---------- */
 var RING_C = 97.4;
 function ringSvg(frac, mid, c, label) {
@@ -10535,8 +9853,8 @@ function renderGlance() {
       if (rr) Object.keys(rr.xp).forEach(function (z) { v += rr.xp[z] + (rr.hx[z] || 0); });
       xp.push(Math.round(v)); if (i < 7) sum += v;
     }
-    cards += glanceCard('s2', 'Momentum', sparkSvg(xp, 's2', 'Map XP earned on each of the last fourteen days'),
-      Math.round(sum) + ' XP', 'charted in the last 7 days');
+    cards += glanceCard('s2', 'Momentum', sparkSvg(xp, 's2', 'XP earned on each of the last fourteen days'),
+      Math.round(sum) + ' XP', 'earned in the last 7 days');
   }
   host.innerHTML = cards;
 }
@@ -12977,7 +12295,6 @@ function ad76dSuggest(M) {
   M.day.must.forEach(function (m) { have[m.t.toLowerCase()] = 1; });
   function add(t, q) { t = ad76S(t, 120); if (!t || have[t.toLowerCase()] || out.length >= 6) return; have[t.toLowerCase()] = 1; out.push({ t: t, q: q || '' }); }
   (g.qsToday || []).forEach(function (q) { if (!q.fixed && q.todayN < q.goal) add(q.name, validId(q.id) ? q.id : ''); });
-  (g.active || []).forEach(function (b) { add(b.name, ''); });
   var nx = M.doc.next; if (nx && nx.first && nx.d === addDays(M.key, -1)) add(nx.first, '');
   return out;
 }
@@ -14353,7 +13670,6 @@ function ad76rPicks() {
     if (G.ready.quests && G.ready.events) {
       var g = gameCalc();
       (g.qsToday || []).forEach(function (q) { if (!q.fixed && !q.isHabit && q.todayN < q.goal) add(q.name, q.id); });
-      (g.active || []).forEach(function (b) { add(b.name, '', b.step); });
     }
   } catch (e2) {}
   return out.slice(0, 5);
@@ -16554,7 +15870,8 @@ function scoreCurrent(v) {
 /* ---------- backup ---------- */
 /* v63: version 1 carried chunks only, so a restore brought the chunks back and nothing that had grown around them.
    Version 2 carries everything this page keeps: chunks, the capture inbox, traits, quests, the last two weeks of
-   activity, the day archive, chapters, dreads, expeditions, the pack, settings, and links where this copy has them.
+   activity, the day archive, the pack, settings, and links where this copy has them. Chapters, dreads and expeditions
+   went in v78: their saved data stays in the database, a new backup leaves them out, and an old one says so.
    The chunks stay under "chunks" in the same shape, so an older copy of the app can still read them. */
 var BK_COLS = ['traits', 'quests', 'events', 'days', 'chapters', 'bosses', 'expeditions', 'items', 'meta', 'links'];
 var BK_NAMES = { chunks: 'Chunks', inbox: 'Capture notes', traits: 'Traits', quests: 'Quests', events: 'Recent activity', days: 'Day archive', chapters: 'Chapters', bosses: 'Dreads', expeditions: 'Expeditions', items: 'Pack', meta: 'Settings', links: 'Links' };
@@ -16817,12 +16134,6 @@ document.addEventListener('click', function (e) {
   else if (act === 'q-add') questAdd();
   else if (act === 'q-del') { if (t.dataset.armed !== '1') { t.dataset.armed = '1'; t.textContent = 'Remove for good?'; return; } G.quests.delete(id); store.delDoc('quests', id).then(null, function (er) { toast(explain(er)); }); renderQuests(true); }
   else if (act === 'q-name') { G.nameEdit = true; renderQuests(true); var ci = $('#cName'); if (ci) { ci.focus(); ci.select(); } }
-  else if (act === 'j-tab') { setJtab(t.dataset.v); renderQuests(true); var jb = document.getElementById('jt-' + G.jtab); if (jb) jb.focus(); }
-  else if (act === 'b-add') bossAdd();
-  else if (act === 'b-face') bossFace(id);
-  else if (act === 'b-hit') bossHit(id, 10);
-  else if (act === 'b-fell') bossFell(id);
-  else if (act === 'b-del') { if (t.dataset.armed !== '1') { t.dataset.armed = '1'; t.textContent = 'Let it go for good?'; return; } G.bosses.delete(id); store.delDoc('bosses', id).then(null, function (er) { toast(explain(er)); }); if (G.link && G.link.id === id) { G.link = null; saveLink(); } renderQuests(true); toast('Let go. No penalty: not every dread is worth the fight.'); }
   else if (act === 'q-day') questDayToggle(id, +t.dataset.d);
   else if (act === 'q-step-add') questStepAdd(id);
   else if (act === 'q-step-del') questStepDel(id, t.dataset.k);
@@ -16831,25 +16142,7 @@ document.addEventListener('click', function (e) {
   else if (act === 'h-down') habitDown(id);
   else if (act === 'r-fuel') chooseFuel(t.dataset.v);
   else if (act === 'r-refuel') refuel();
-  else if (act === 'c-open') { setJtab('chapter'); renderQuests(true); var jc = $('#journal'); if (jc && jc.scrollIntoView) jc.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
-  else if (act === 'c-path') choosePath(t.dataset.v);
-  else if (act === 'c-pathpick') { G.pathPick = true; renderQuests(true); }
-  else if (act === 'c-vadd') vowAdd();
-  else if (act === 'c-vdel') { if (t.dataset.armed !== '1') { t.dataset.armed = '1'; t.textContent = 'Remove for good?'; return; } vowDel(id); }
-  else if (act === 'c-vkeep') vowKeep(id);
-  else if (act === 'c-close') closeChapter(id);
-  else if (act === 'c-review') { G.reviewWk = id; setJtab('chapter'); renderQuests(true); var jr2 = $('#journal'); if (jr2 && jr2.scrollIntoView) jr2.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
   else if (act === 'comp-name') { G.compEdit = true; renderQuests(true); var cn = $('#compName'); if (cn) { cn.focus(); cn.select(); } }
-  else if (act === 'x-add') expAdd();
-  else if (act === 'x-pick') stepPick(id, t.dataset.k);
-  else if (act === 'x-step') stepDone(id, t.dataset.k);
-  else if (act === 'x-snow') stepSnow(id, t.dataset.k);
-  else if (act === 'x-sadd') stepAdd(id);
-  else if (act === 'x-sdel') stepDel(id, t.dataset.k);
-  else if (act === 'x-camp') { var xc = expById(id); if (xc) { xc.camp = !xc.camp; putExp(xc); renderQuests(true); toast(xc.camp ? 'Camped. Nothing is lost while you rest.' : 'Camp broken. Back on the route.'); } }
-  else if (act === 'x-del') { if (t.dataset.armed !== '1') { t.dataset.armed = '1'; t.textContent = 'Let it go for good?'; return; } G.expeditions.delete(id); store.delDoc('expeditions', id).then(null, function (er) { toast(explain(er)); }); if (G.link && G.link.id === id) { G.link = null; saveLink(); } renderQuests(true); toast('Let go. Not every route is worth walking.'); }
-  else if (act === 'a-sel') { G.atlasSel = G.atlasSel === id ? '' : id; renderQuests(true); var an = document.querySelector('.anode[data-id="' + id + '"]'); if (an && an.focus) an.focus(); }
-  else if (act === 'atlas-open') { setTab('snow'); setJtab('map'); renderQuests(true); var at = $('#atlas'); if (at && at.scrollIntoView) at.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
   else if (act === 'qt-pick') { G.qtPick = G.qtPick === id ? '' : id; renderQuests(true); }
   else if (act === 'qt-start') qtStart(id, +t.dataset.m);
   else if (act === 'qt-pause') qtPause();
@@ -16876,7 +16169,6 @@ document.addEventListener('click', function (e) {
   else if (act === 'en-fold') { enOpenSet(!enOpen()); renderQuests(true); }
   else if (act === 'en-how') { EN.how = !EN.how; renderQuests(true); }
   else if (act === 'en-recall') enRecall(id, +t.dataset.n || SESSION_MAX);
-  else if (act === 'en-dread') bossFace(id);
   else if (act === 'en-quest') enToQuest(id);
   else if (act === 'en-snow') toSnowball(t.dataset.v || '', null);
   else if (act === 'en-plan') { if (!enOpen()) enOpenSet(true); setTab('snow'); var enp = $('#enPlan'); if (enp && enp.scrollIntoView) enp.scrollIntoView({ block: 'start', behavior: calmMotion() ? 'auto' : 'smooth' }); }
@@ -16914,7 +16206,7 @@ $('#chunkDlg').addEventListener('input', draftSave);
 $('#chunkDlg').addEventListener('change', draftSave);
 $('#chunkDlg').addEventListener('click', function () { setTimeout(draftSave, 0); });
 document.addEventListener('snowball:bell', function (e) { if (S.tab !== 'snowball' && e.detail && e.detail.msg) toast(String(e.detail.msg)); });
-// v63: pushes and finishes credit a quest, dread or step only when they bring back the token of the
+// v63: pushes and finishes credit a quest only when they bring back the token of the
 // session that was started for it. A session that ends without finishing says so, and the link goes.
 var SNOWQ = [];
 function snowLinked(tok) { return !!(tok && G.link && G.link.tok === tok && G.link.day === todayStr()); }
@@ -16923,14 +16215,11 @@ function snowPush(d) {
   addEvent({ kind: 'push', buff: 'rolling', label: d.task || 'Snowball push', zone: 'pass', xp: Math.max(2, Math.round(m)) });
   if (!snowLinked(d.link)) return;
   var q = linkedQuest(); if (q && q.unit === 'min') questProgress(q, Math.max(1, Math.round(m)));
-  var b = linkedBoss(); if (b) bossHit(b.id, Math.max(0.5, m));
 }
 function snowFinished(d) {
   addEvent({ kind: 'finish', buff: 'closer', label: d.name || 'A snowball', zone: 'pass', xp: 10 });
   if (!snowLinked(d.link)) return;
   var q = linkedQuest(); if (q && q.unit === 'times') questProgress(q, 1);
-  var b = linkedBoss(); if (b) bossFell(b.id);
-  var ls = linkedStep(); if (ls) stepDone(ls.id, ls.k);
   G.link = null; saveLink();
 }
 // A push can arrive a moment after the page opens (its timer ran out while the page was closed),
@@ -16949,7 +16238,7 @@ window.addEventListener('storage', function (e) {
     qtLoop(); if (S.tab === 'snow') renderQuests(true);
   } else if (e.key === LS_KEY + '-qlink') {
     var l = null; try { l = JSON.parse(e.newValue || 'null'); } catch (er2) {}
-    G.link = l && validId(l.id) && isDate(l.day) ? { id: l.id, day: l.day, kind: l.kind === 'boss' || l.kind === 'step' ? l.kind : 'quest', step: validId(l.step) ? l.step : '', tok: validId(l.tok) ? l.tok : '' } : null;
+    G.link = l && validId(l.id) && isDate(l.day) && l.kind !== 'boss' && l.kind !== 'step' ? { id: l.id, day: l.day, kind: 'quest', step: validId(l.step) ? l.step : '', tok: validId(l.tok) ? l.tok : '' } : null;
   }
 });
 // The day turning over: the minute check runs on every tab and only compares the date, and coming
@@ -16970,21 +16259,12 @@ bootNav();
 bootGlow();
 bootParallax();
 setTimeout(function () { playIn($('#view-' + S.tab)); }, 60);
-$('#questBody').addEventListener('input', function (e) { var t = e.target; if (!t) return; if (t.id === 'bName') G.bform.name = t.value; else if (t.id === 'vText') G.vform.t = t.value; else if (t.id && t.id.indexOf('rvHelped-') === 0) G.review = { helped: t.value, wk: t.id.slice(9) }; else if (t.id === 'xName') G.xform.name = t.value; else if (t.id === 'xSteps') G.xform.steps = t.value; });
-$('#questBody').addEventListener('toggle', function (e) {
-  var d = e.target; if (!d || !d.classList) return;
-  if (d.classList.contains('xsteps') && d.dataset.xid) { if (d.open) G.xOpen[d.dataset.xid] = 1; else delete G.xOpen[d.dataset.xid]; }
-}, true);
 $('#questBody').addEventListener('focusout', function (e) { if (e.target && e.target.id === 'cName') saveCharName(e.target.value); else if (e.target && e.target.id === 'compName') saveCompName(e.target.value); });
 $('#questBody').addEventListener('keydown', function (e) {
   var t = e.target;
-  if ((e.key === 'Enter' || e.key === ' ') && t && t.getAttribute && t.getAttribute('data-act') === 'a-sel') { e.preventDefault(); t.dispatchEvent(new MouseEvent('click', { bubbles: true })); return; }
   if (e.key !== 'Enter' || !t) return;
   if (t.id === 'cName') { e.preventDefault(); saveCharName(t.value); }
-  else if (t.id === 'bName') { e.preventDefault(); G.bform.name = t.value; bossAdd(); }
-  else if (t.id === 'vText') { e.preventDefault(); G.vform.t = t.value; vowAdd(); }
   else if (t.id === 'compName') { e.preventDefault(); saveCompName(t.value); }
-  else if (t.dataset && t.dataset.xs) { e.preventDefault(); stepAdd(t.dataset.xs); }
   else if (t.dataset && t.dataset.qf === 'name') { e.preventDefault(); questEditChange({ target: t }); t.blur(); }
 });
 $('#insightBody').addEventListener('change', function (e) { if (e.target && e.target.id === 'mcFollow') { MC.follow = e.target.value; MC.stage = null; renderInsight(); var sel = $('#mcFollow'); if (sel) sel.focus(); } });
@@ -17114,7 +16394,7 @@ boot();
 qtLoop();
 document.addEventListener('visibilitychange', function () { if (document.hidden) return; if (qtLive() && qtLeft() <= 0) qtFinish(); else qtLoop(); });
 document.addEventListener('open:motiv', function () { setTab('motiv'); window.scrollTo(0, 0); });
-window.__ledgerTest = { lapses: lapses, interleave: interleave, dueList: dueList, calBand: calBand, calRead: calRead, heldFor: heldFor, easeLoad: easeLoad, isRetest: isRetest, relearnDone: relearnDone,  RS: RS, runSig: runSig, runAdopt: runAdopt, runPush: runPush, runLoad: runLoad, runPack: runPack, runLive: runLive, fbPrompt: fbPrompt, fbClean: fbClean, fbBoxHtml: fbBoxHtml, normTrait: normTrait, traitBody: traitBody, traitList: traitList, traitCalc: traitCalc, tFlags: tFlags, autoIdx: autoIdx, parseUse: parseUse, cueText: cueText, tPlanText: tPlanText, recallShift: recallShift, traitTap: traitTap, traitGraduate: traitGraduate, renderTraits: renderTraits, traitsHtml: traitsHtml, traitMilestone: traitMilestone, traitNudges: traitNudges, bunnyHop: bunnyHop, questMove: questMove, qorderGroups: qorderGroups, recallOrder: recallOrder, navGlide: navGlide, bunnySvg: bunnySvg, netbandSet: netbandSet, smilSync: smilSync, checkPop: checkPop, kaleidoSvg: kaleidoSvg, repeaterHtml: repeaterHtml, gapOf: gapOf, gapKeep: gapKeep, sessionVerdict: sessionVerdict, mcProjection: mcProjection, draftKey: draftKey, easeOf: easeOf, clampEase: clampEase, paceWord: paceWord, whenNote: whenNote, gameCalc: gameCalc, G: G, navMark: navMark, navClose: navClose, riseWatch: riseWatch, onDay: onDay, cleanDays: cleanDays, daysWord: daysWord, habitTally: habitTally, habitWeek: habitWeek, stepTicks: stepTicks, questTick: questTick, habitUp: habitUp, habitDown: habitDown, questDayToggle: questDayToggle, countUp: countUp, drawLine: drawLine, currentsIn: currentsIn, setTheme: setTheme, setMotion: setMotion, qtFinish: qtFinish, qtLive: qtLive, recallQuest: recallQuest, renderGlance: renderGlance, sightCalc: sightCalc, constellations: constellations, expList: expList, drawn: drawn, stepDone: stepDone, companionMood: companionMood, hash32: hash32, foxSvg: foxSvg, fuelCalc: fuelCalc, weekRecap: weekRecap, weekStart: weekStart, pathOn: pathOn, runOf: runOf, chapterOf: chapterOf, dayRecords: dayRecords, summarize: summarize, rollUp: rollUp, bossHit: bossHit, trailStage: trailStage, zoneLevel: zoneLevel, MC: MC, agenda: agenda, dzCompose: dzCompose, normCards: normCards, pickCards: pickCards, schedule: schedule, normalize: normalize, addDays: addDays, diffDays: diffDays, gapStat: gapStat, GAPS: GAPS };
+window.__ledgerTest = { lapses: lapses, interleave: interleave, dueList: dueList, calBand: calBand, calRead: calRead, heldFor: heldFor, easeLoad: easeLoad, isRetest: isRetest, relearnDone: relearnDone,  RS: RS, runSig: runSig, runAdopt: runAdopt, runPush: runPush, runLoad: runLoad, runPack: runPack, runLive: runLive, fbPrompt: fbPrompt, fbClean: fbClean, fbBoxHtml: fbBoxHtml, normTrait: normTrait, traitBody: traitBody, traitList: traitList, traitCalc: traitCalc, tFlags: tFlags, autoIdx: autoIdx, parseUse: parseUse, cueText: cueText, tPlanText: tPlanText, recallShift: recallShift, traitTap: traitTap, traitGraduate: traitGraduate, renderTraits: renderTraits, traitsHtml: traitsHtml, traitMilestone: traitMilestone, traitNudges: traitNudges, bunnyHop: bunnyHop, questMove: questMove, qorderGroups: qorderGroups, recallOrder: recallOrder, navGlide: navGlide, bunnySvg: bunnySvg, netbandSet: netbandSet, smilSync: smilSync, checkPop: checkPop, kaleidoSvg: kaleidoSvg, repeaterHtml: repeaterHtml, gapOf: gapOf, gapKeep: gapKeep, sessionVerdict: sessionVerdict, mcProjection: mcProjection, draftKey: draftKey, easeOf: easeOf, clampEase: clampEase, paceWord: paceWord, whenNote: whenNote, gameCalc: gameCalc, G: G, navMark: navMark, navClose: navClose, riseWatch: riseWatch, onDay: onDay, cleanDays: cleanDays, daysWord: daysWord, habitTally: habitTally, habitWeek: habitWeek, stepTicks: stepTicks, questTick: questTick, habitUp: habitUp, habitDown: habitDown, questDayToggle: questDayToggle, countUp: countUp, drawLine: drawLine, currentsIn: currentsIn, setTheme: setTheme, setMotion: setMotion, qtFinish: qtFinish, qtLive: qtLive, recallQuest: recallQuest, renderGlance: renderGlance, companionMood: companionMood, hash32: hash32, foxSvg: foxSvg, fuelCalc: fuelCalc, weekStart: weekStart, runOf: runOf, dayRecords: dayRecords, summarize: summarize, rollUp: rollUp, trailStage: trailStage, zoneLevel: zoneLevel, MC: MC, agenda: agenda, dzCompose: dzCompose, normCards: normCards, pickCards: pickCards, schedule: schedule, normalize: normalize, addDays: addDays, diffDays: diffDays, gapStat: gapStat, GAPS: GAPS };
 })();
 </script>
 <!--MOTIV-->
@@ -18761,7 +18041,7 @@ async function connectSync(){
 }
 let P=Object.assign({sound:true}, load('sb.prefs',{}));
 const persist=()=>save('sb.inflight',S);
-/* v63: what a session was started for (a quest, dread or step on the Quests tab) rides along as a token.
+/* v63: what a session was started for (a quest on the Quests tab) rides along as a token.
    A session that ends without finishing tells the page, so that item stops waiting on it. */
 function endLink(){ const l=S.link; if(!l) return; S.link=''; try{ document.dispatchEvent(new CustomEvent('snowball:ended',{detail:{link:l}})); }catch(e){} }
 /* v63: two open tabs both run the timer from sb.inflight. The first to finish it claims it; the other
