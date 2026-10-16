@@ -1582,6 +1582,11 @@ body.ad76r-lock { overflow: hidden; }
   .t12-axr .t12-sp { display: none; }
   .t12-axr span { left: clamp(0px, calc(var(--p) - (var(--n) - 1) * 0.5ch), calc(100% - (var(--n) - 1) * 1ch)); }
 }
+/* v79: the rank and Momentum card while the XP is still being added up */
+.q75-rank.xp79-wait .q75-rn b { color: var(--muted); font-size: 1.05rem; line-height: calc(1.3rem * 1.2); }
+.q75-rank.xp79-wait .q75-emb .sh { stroke-dasharray: 4 3; }
+.q75-rank.xp79-wait .q75-rbar i { width: 0; }
+
 /* ---------- memory curve ---------- */
 .mcurve { position: relative; max-width: 760px; }
 .mcurve svg { width: 100%; height: auto; display: block; }
@@ -3217,7 +3222,7 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
     <div class="tgrp" data-grp="quests" style="--g:var(--s1)">
       <button type="button" class="tpar" id="par-quests" aria-haspopup="true" aria-expanded="false" aria-controls="menu-quests"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 21V4"></path><path d="M5 4h12l-2.5 4.5L17 13H5"></path></svg><span class="tl">Quests</span><span class="tcar" aria-hidden="true"></span></button>
       <div class="tmenu" id="menu-quests" role="group" aria-labelledby="par-quests">
-        <button class="tab" role="tab" id="tab-snow" data-act="tab" data-tab="snow" aria-selected="false" aria-controls="view-snow">Quests<span class="tsub">today’s run, and the map</span></button>
+        <button class="tab" role="tab" id="tab-snow" data-act="tab" data-tab="snow" aria-selected="false" aria-controls="view-snow">Quests<span class="tsub">today’s run, quests and trails</span></button>
         <button class="tab" role="tab" id="tab-snowball" data-act="tab" data-tab="snowball" aria-selected="false" aria-controls="view-snowball">Starter<span class="tsub">a two-minute push to get going</span><span class="count" id="cnt-snow" hidden></span></button>
         <button class="tab" role="tab" id="tab-motiv" data-act="tab" data-tab="motiv" aria-selected="false" aria-controls="view-motiv">Motivation<span class="tsub">what drives it, and how to get unstuck</span></button>
       </div>
@@ -7647,7 +7652,7 @@ var ZONES = [
   { k: 'frontier', name: 'Frontier', plain: 'Work quests', c: 'accent', how: 'Tick off a work quest to start charting it.' },
   { k: 'wilds', name: 'Wilds', plain: 'Body quests', c: 's3', how: 'Tick off a body quest to start charting it.' },
   { k: 'hearth', name: 'Hearth', plain: 'Home quests', c: 's1', how: 'Tick off a home quest to start charting it.' },
-  { k: 'fog', name: 'Fog', plain: 'XP earned before v78 on dreads, which are gone', c: 's0', how: '' }
+  { k: 'fog', name: 'Fog', plain: 'Dreads and old foes, both gone. Since v79 its XP counts for nothing', c: 's0', how: '' }
 ];
 var ZONEK = Object.create(null); ZONES.forEach(function (z) { ZONEK[z.k] = z; });
 var ZCAT = { home: 'hearth', body: 'wilds', work: 'frontier', mind: 'archive' };
@@ -7776,6 +7781,71 @@ function dayRecordsNow(today) {
   });
   return { list: list, writes: writes };
 }
+/* v79: XP once earned on dreads and expeditions no longer counts. Both went in v78, and what they gave stays in the
+   saved day records and events, so it is taken out each time the day records are read; nothing is rewritten.
+   Fog held only dread XP (and, before v60, foes), so it counts for nothing. A step gave 20 and a summit 60 to the
+   expedition's region on the day it was done; the dates come from the expeditions collection, read here and never
+   written or shown, and from the step and summit events still kept. Plan the route was done when the expedition
+   was made and never gave XP. Per day and region the base drops by that amount (never below 0) and no bonus can
+   be bigger than what is left. A region emptied this way still counts as visited that day. */
+var XP79 = { m: null, ready: false, late: false, sig: '', STEP: 20, SUMMIT: 60, WAIT: 6000 };
+function xp79Ready() { return XP79.ready || XP79.late; }
+function xp79Sig(m) { var a = []; if (m && m.forEach) m.forEach(function (d, id) { a.push(id + '=' + JSON.stringify(d)); }); a.sort(); return a.join('|'); }
+function xp79Redraw() { if (S.ready) renderSoon(); else dataV++; }   // like gameLoaded: no draw before the chunks are in
+function xp79Watch(st) {
+  if (!st || !st.watch) return;
+  var t = setTimeout(function () { if (store === st && !XP79.ready) { XP79.late = true; xp79Redraw(); } }, XP79.WAIT);
+  st.watch('expeditions', function (m) {
+    if (store !== st) return;
+    var sig = xp79Sig(m); if (XP79.ready && sig === XP79.sig) return;
+    XP79.m = m; XP79.sig = sig; XP79.ready = true; clearTimeout(t); xp79Redraw();
+  }, function () { if (store === st && !XP79.ready) { XP79.ready = true; clearTimeout(t); xp79Redraw(); } });
+}
+startGame = (function (inner) { return function (st) { var r = inner.apply(this, arguments); xp79Watch(st); return r; }; })(startGame);
+// What expeditions gave, by day and region: the larger of the collection's dates and the step and summit events.
+function xp79Ded() {
+  var col = Object.create(null), ev = Object.create(null), out = Object.create(null);
+  function add(o, day, z, x) { if (!isDate(day) || !ZONEK[z] || !(x > 0)) return; var d = o[day] || (o[day] = Object.create(null)); d[z] = (d[z] || 0) + x; }
+  if (XP79.m && XP79.m.forEach) XP79.m.forEach(function (d) {
+    if (!d || typeof d !== 'object') return;
+    var z = ZONEK[d.zone] ? d.zone : 'frontier';
+    (Array.isArray(d.steps) ? d.steps : []).slice(0, 40).forEach(function (s, i) {
+      if (!s || typeof s !== 'object' || !str(s.t, 120).trim()) return;
+      if ((validId(s.k) ? s.k : 's' + i) === 's0') return;   // Plan the route: done when the expedition was made, never worth XP
+      add(col, s.done, z, XP79.STEP);
+    });
+    add(col, d.done, z, XP79.SUMMIT);
+  });
+  G.events.forEach(function (e) { if (e && (e.kind === 'step' || e.kind === 'summit')) { var zx = evZX(e); if (zx) add(ev, e.day, zx[0], zx[1]); } });
+  [col, ev].forEach(function (src) { Object.keys(src).forEach(function (day) { var o = out[day] || (out[day] = Object.create(null)); Object.keys(src[day]).forEach(function (z) { o[z] = Math.max(o[z] || 0, src[day][z]); }); }); });
+  return out;
+}
+// One day record without Fog and without what expeditions gave that day. A changed record is a copy; the original
+// (which rollUp may be about to store) is never touched.
+function xp79Day(r, ded) {
+  if (!r || !r.xp || typeof r.xp !== 'object') return r;
+  var d = ded && r.day ? ded[r.day] : null, hx0 = r.hx || {}, fz0 = r.fz && typeof r.fz === 'object' ? r.fz : null;
+  if (!d && !(r.xp.fog > 0) && !(hx0.fog > 0) && !(fz0 && fz0.fog > 0)) return r;
+  var o = {}, xp = {}, hx = {}, fz = fz0 ? {} : null, gone = null;
+  Object.keys(r).forEach(function (k) { o[k] = r[k]; });
+  Object.keys(r.xp).forEach(function (z) { if (z !== 'fog') xp[z] = r.xp[z]; });
+  Object.keys(hx0).forEach(function (z) { if (z !== 'fog') hx[z] = hx0[z]; });
+  if (fz0) Object.keys(fz0).forEach(function (z) { if (z !== 'fog') fz[z] = fz0[z]; });
+  if (d) Object.keys(d).forEach(function (z) {
+    if (z === 'fog' || !(xp[z] > 0)) return;
+    var left = Math.max(0, xp[z] - d[z]);
+    if (left > 0) { xp[z] = left; if (hx[z] > left) hx[z] = left; if (fz && fz[z] > left) fz[z] = left; }
+    else { delete xp[z]; delete hx[z]; if (fz) delete fz[z]; (gone || (gone = {}))[z] = 1; }
+  });
+  o.xp = xp; o.hx = hx; o.fz = fz; if (gone) o.xv79 = gone;
+  return o;
+}
+dayRecordsNow = (function (inner) { return function (today) {
+  var r = inner.apply(this, arguments), ded = xp79Ded();
+  if (r && Array.isArray(r.list)) r.list = r.list.map(function (rec) { return xp79Day(rec, ded); });
+  return r;
+}; })(dayRecordsNow);
+window.__xp79Test = { X: XP79, ready: xp79Ready, ded: xp79Ded, day: xp79Day };
 // Past days are archived once, then their raw events are pruned after two weeks. Only archived days are pruned.
 function rollUp() {
   var today = todayStr(), r = dayRecords(today);
@@ -7847,6 +7917,7 @@ function gameCalcNow() {
   dr.forEach(function (r) {
     if (r.day < today) prevDay = r.day;
     ZONES.forEach(function (z) {
+      if (r.xv79 && r.xv79[z.k] && !(r.xp[z.k] > 0)) { Z[z.k].last = r.day; return; }   // v79: only an old expedition step was there
       var base = r.xp[z.k] || 0; if (!base) return;
       var zz = Z[z.k], mult = zz.last && diffDays(r.day, zz.last) >= RUST_DAYS ? 2 : 1, gain = base + (r.hx[z.k] || 0);
       // v63: the first visit back doubles the first thing done there, as the map says, not the whole day,
@@ -8950,6 +9021,16 @@ charHtml = (function (inner) { return function (g) {
   return r && h.indexOf('<div class="meters">') >= 0 ? h.replace('<div class="meters">', function () { return r + '<div class="meters">'; }) : h;
 }; })(charHtml);
 
+// v79: until the expeditions collection has loaded (or 6 seconds have passed) the rank shows no number, so it never
+// shows a total that is about to drop.
+q75RankHtml = (function (inner) { return function (g) {
+  if (xp79Ready()) return inner.apply(this, arguments);
+  return '<div class="q75-rank xp79-wait" id="q75Rank" aria-busy="true" style="--r:var(--muted)" title="Your rank comes from all the XP you have earned.">' +
+    '<svg class="q75-emb" viewBox="0 0 48 54" aria-hidden="true" focusable="false"><path class="sh" d="M24 2.8c5.8 2.7 11.5 3.9 18.6 3.8.4 17.8-4.7 33.1-18.6 44.4C10.1 39.7 5 24.4 5.4 6.6c7.1.1 12.8-1.1 18.6-3.8z"></path></svg>' +
+    '<div class="q75-rk"><div class="q75-rn"><span class="q75-k">Quest rank</span><b>Adding up your XP…</b></div><div class="q75-rbar" aria-hidden="true"><i></i></div>' +
+    '<div class="q75-rnext" aria-hidden="true">&nbsp;</div><div class="q75-ladder" aria-hidden="true">' + Q75_RANKS.map(function () { return '<i></i>'; }).join('') + '</div></div></div>';   // same rows, so nothing jumps
+}; })(q75RankHtml);
+
 /* achievements: bronze, silver and gold, worked out from what is already stored */
 var Q75_TN = ['Bronze', 'Silver', 'Gold'];
 var Q75_ACH = [
@@ -9827,6 +9908,11 @@ function sparkSvg(vals, c, label) {
 function glanceCard(c, k, chart, main, sub) {
   return '<div class="gcard" style="--c:var(--' + c + ')"><div class="gk">' + k + '</div><div class="grow">' + chart + '<div class="gtxt"><b>' + main + '</b><span>' + sub + '</span></div></div></div>';
 }
+// v79: the Momentum card waits for the expeditions collection too, like the rank.
+glanceCard = (function (inner) { return function (c, k, chart, main, sub) {
+  if (k === 'Momentum' && !xp79Ready()) return inner.call(this, c, k, '<svg class="gspark" viewBox="0 0 116 40" role="img" aria-label="Adding up your XP"></svg>', '…', 'adding up your XP');
+  return inner.apply(this, arguments);
+}; })(glanceCard);
 function renderGlance() {
   var host = $('#glance'); if (!host) return;
   if (!S.ready) { host.innerHTML = ''; return; }

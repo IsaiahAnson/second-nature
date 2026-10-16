@@ -2,6 +2,11 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-10-16 — old dread and expedition XP no longer counts
+- XP earned on dreads and expeditions before they were removed no longer counts towards your total XP, your quest rank or the Momentum card. Each expedition step took 20 off and each summit 60; the automatic "Plan the route" step never gave XP, so nothing comes off for it.
+- Nothing saved is changed: the app simply leaves that XP out when it adds up your total. While your old expeditions load, the rank card says "Adding up your XP…" for a moment, so the number never jumps.
+- The Quests menu line now reads "today's run, quests and trails" instead of mentioning the old map.
+
 ## 2026-10-16 — the Journal is gone
 - The Journal panel on the Quests page has been removed, together with everything that lived only there: dreads, expeditions, chapters (with their paths and vows) and the regions map.
 - Their medals (Dread feller, Summiteer, Storyteller, Explorer) are gone, so there are 16 medals now. Dread and expedition steps no longer appear in plans, cost fuel or give XP and effects, and Pip no longer talks about them.
