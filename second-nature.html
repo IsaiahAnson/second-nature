@@ -1587,6 +1587,43 @@ body.ad76r-lock { overflow: hidden; }
 .q75-rank.xp79-wait .q75-emb .sh { stroke-dasharray: 4 3; }
 .q75-rank.xp79-wait .q75-rbar i { width: 0; }
 
+/* ---------- v80 nav80: five things on the bar ----------
+   Today, Recall, Learn, Guides and Life (the template: Today, Recall and Learn). Each parent wears its group
+   colour on its icon, and a small dot when a page inside it has something waiting. The rules carry nav.tabs
+   so they win over the older bar rules further down. */
+nav.tabs .tpar { position: relative; }
+.nav80-ic { position: relative; display: inline-flex; flex: none; }
+nav.tabs .tgrp > .tpar .ti, nav.tabs.glide .tgrp.on > .tpar .ti { color: var(--g); }
+nav.tabs > #tab-today .ti, nav.tabs.glide > #tab-today[aria-selected="true"] .ti { color: var(--s2); }
+.nav80-dot { position: absolute; top: -3px; right: -4px; width: 9px; height: 9px; border-radius: 50%; background: var(--s0); box-shadow: 0 0 0 2px var(--surface); pointer-events: none; }
+.nav80-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* a menu shuts once you pick a page, press Escape or tap its parent again, even while the pointer or focus is still on it */
+nav.tabs .tgrp.nav80-shut > .tmenu { opacity: 0; visibility: hidden; transform: translateY(-6px) scale(0.985); }
+/* a menu with no room below the bar opens above it; one taller than any room scrolls inside itself */
+nav.tabs .tgrp.nav80-up > .tmenu { top: auto; bottom: calc(100% + 8px); transform-origin: 50% 100%; }
+nav.tabs .tgrp.nav80-up > .tmenu::before { top: auto; bottom: -10px; }
+nav.tabs .tgrp > .tmenu.nav80-scroll { max-height: var(--nav80-mh, 70vh); overflow-y: auto; overscroll-behavior: contain; }
+/* the two long menus sit in two columns */
+nav.tabs .tgrp[data-grp="guides"] > .tmenu, nav.tabs .tgrp[data-grp="life"] > .tmenu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; gap: 2px; }
+@media (min-width: 641px) {
+  nav.tabs .tgrp[data-grp="guides"] > .tmenu, nav.tabs .tgrp[data-grp="life"] > .tmenu { width: min(540px, calc(100vw - 40px)); }
+  /* Life is the rightmost, so it hangs from its right edge; any other menu flips when it would leave the screen */
+  nav.tabs .tgrp[data-grp="life"] > .tmenu, nav.tabs .tgrp.nav80-r > .tmenu { left: auto; right: 0; transform-origin: 80% 0; }
+  nav.tabs .tgrp.nav80-l > .tmenu { left: 0; right: auto; transform-origin: 20% 0; }
+}
+/* one row on a phone, however many sections the bar holds */
+@media (max-width: 640px) {
+  nav.tabs.glide { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 2px; padding: 5px; }
+  nav.tabs.glide > .tab, nav.tabs.glide .tgrp > .tpar { font-size: 0.74rem; padding-inline: 2px; }
+  .nav80-dot { top: -2px; right: -5px; }
+  /* tighter entries, so the nine guides fit above the bar on a small phone without scrolling */
+  nav.tabs .tmenu .tab { padding: 6px 12px; line-height: 1.3; }
+  nav.tabs .tmenu .tab .tsub { line-height: 1.35; }
+  nav.tabs .tmenu .tab .count { top: 8px; }
+}
+@media (max-width: 479px) {
+  nav.tabs .tgrp[data-grp="guides"] > .tmenu, nav.tabs .tgrp[data-grp="life"] > .tmenu { grid-template-columns: minmax(0, 1fr); }
+}
 /* ---------- memory curve ---------- */
 .mcurve { position: relative; max-width: 760px; }
 .mcurve svg { width: 100%; height: auto; display: block; }
@@ -3219,26 +3256,21 @@ body.qdrag, body.qdrag * { user-select: none; -webkit-user-select: none; cursor:
 <section class="glance" id="glance" aria-label="At a glance"></section>
 
   <nav class="tabs" role="tablist" aria-label="Sections">
-    <div class="tgrp" data-grp="quests" style="--g:var(--s1)">
-      <button type="button" class="tpar" id="par-quests" aria-haspopup="true" aria-expanded="false" aria-controls="menu-quests"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 21V4"></path><path d="M5 4h12l-2.5 4.5L17 13H5"></path></svg><span class="tl">Quests</span><span class="tcar" aria-hidden="true"></span></button>
-      <div class="tmenu" id="menu-quests" role="group" aria-labelledby="par-quests">
+    <div class="tgrp" data-grp="today" style="--g:var(--s1)">
+      <button type="button" class="tpar" id="par-today" aria-haspopup="true" aria-expanded="false" aria-controls="menu-today"><span class="nav80-ic"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"></path></svg><span class="nav80-dot" aria-hidden="true" hidden></span></span><span class="tl">Today</span><span class="nav80-sr" hidden> (new inside)</span><span class="tcar" aria-hidden="true"></span></button>
+      <div class="tmenu" id="menu-today" role="group" aria-labelledby="par-today">
+        <button class="tab" role="tab" id="tab-adplan" data-act="tab" data-tab="adplan" aria-selected="false" aria-controls="view-adplan">My day<span class="tsub">the next step, one at a time</span></button>
         <button class="tab" role="tab" id="tab-snow" data-act="tab" data-tab="snow" aria-selected="false" aria-controls="view-snow">Quests<span class="tsub">today’s run, quests and trails</span></button>
         <button class="tab" role="tab" id="tab-snowball" data-act="tab" data-tab="snowball" aria-selected="false" aria-controls="view-snowball">Starter<span class="tsub">a two-minute push to get going</span><span class="count" id="cnt-snow" hidden></span></button>
+        <button class="tab" role="tab" id="tab-adroom" data-act="tab" data-tab="adroom" aria-selected="false" aria-controls="view-adroom">Focus room<span class="tsub">a cosy scene, sound and a timer</span><span class="count" id="cnt-adroom" hidden></span></button>
+        <button class="tab" role="tab" id="tab-adkit" data-act="tab" data-tab="adkit" aria-selected="false" aria-controls="view-adkit">Toolkit<span class="tsub">quick fixes for stuck moments</span></button>
         <button class="tab" role="tab" id="tab-motiv" data-act="tab" data-tab="motiv" aria-selected="false" aria-controls="view-motiv">Motivation<span class="tsub">what drives it, and how to get unstuck</span></button>
       </div>
     </div>
-    <div class="tgrp" data-grp="adhd" style="--g:var(--release)">
-      <button type="button" class="tpar" id="par-adhd" aria-haspopup="true" aria-expanded="false" aria-controls="menu-adhd"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 3h8l3 7H5z"></path><path d="M12 10v11"></path><path d="M8 21h8"></path></svg><span class="tl">Focus</span><span class="tcar" aria-hidden="true"></span></button>
-      <div class="tmenu" id="menu-adhd" role="group" aria-labelledby="par-adhd">
-        <button class="tab" role="tab" id="tab-adplan" data-act="tab" data-tab="adplan" aria-selected="false" aria-controls="view-adplan">My day<span class="tsub">the next step, one at a time</span></button>
-        <button class="tab" role="tab" id="tab-adroom" data-act="tab" data-tab="adroom" aria-selected="false" aria-controls="view-adroom">Focus room<span class="tsub">a cosy scene, sound and a timer</span><span class="count" id="cnt-adroom" hidden></span></button>
-        <button class="tab" role="tab" id="tab-adkit" data-act="tab" data-tab="adkit" aria-selected="false" aria-controls="view-adkit">Toolkit<span class="tsub">quick fixes for stuck moments</span></button>
-      </div>
-    </div>
     <button class="tab" role="tab" id="tab-today" data-act="tab" data-tab="today" aria-selected="true" aria-controls="view-today"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 11a8 8 0 1 0-2.3 6.3"></path><path d="M20 4v7h-7"></path></svg><span class="tl">Recall</span><span class="count" id="cnt-today">0</span></button>
-    <div class="tgrp" data-grp="chunks" style="--g:var(--s1)">
-      <button type="button" class="tpar" id="par-chunks" aria-haspopup="true" aria-expanded="false" aria-controls="menu-chunks"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8l8 4.4v9.6l-8 4.4-8-4.4V7.2z"></path><path d="M4 7.2l8 4.6 8-4.6M12 11.8v9.4"></path></svg><span class="tl">Chunks</span><span class="tcar" aria-hidden="true"></span></button>
-      <div class="tmenu" id="menu-chunks" role="group" aria-labelledby="par-chunks">
+    <div class="tgrp" data-grp="learn" style="--g:var(--release)">
+      <button type="button" class="tpar" id="par-learn" aria-haspopup="true" aria-expanded="false" aria-controls="menu-learn"><span class="nav80-ic"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8l8 4.4v9.6l-8 4.4-8-4.4V7.2z"></path><path d="M4 7.2l8 4.6 8-4.6M12 11.8v9.4"></path></svg><span class="nav80-dot" aria-hidden="true" hidden></span></span><span class="tl">Learn</span><span class="nav80-sr" hidden> (new inside)</span><span class="tcar" aria-hidden="true"></span></button>
+      <div class="tmenu" id="menu-learn" role="group" aria-labelledby="par-learn">
         <button class="tab" role="tab" id="tab-build" data-act="tab" data-tab="build" aria-selected="false" aria-controls="view-build">Capture<span class="tsub">ideas as you read</span><span class="count" id="cnt-build" hidden>0</span></button>
         <button class="tab" role="tab" id="tab-ledger" data-act="tab" data-tab="ledger" aria-selected="false" aria-controls="view-ledger">Collection<span class="tsub">every chunk you have built</span><span class="count" id="cnt-ledger">0</span></button>
         <button class="tab" role="tab" id="tab-traits" data-act="tab" data-tab="traits" aria-selected="false" aria-controls="view-traits">Traits<span class="tsub">turn what you know into what you do</span><span class="count" id="cnt-traits" hidden>0</span></button>
@@ -9297,6 +9329,78 @@ function bootNav() {
   });
   navMark();
 }
+
+/* ---------- v80 nav80: five things on the bar ----------
+   A parent shows a dot while a page inside it has a count waiting; a menu stays on screen, scrolls when it is
+   taller than the room below it, and shuts once you pick a page or press Escape. */
+var NAV80_QUIET = { 'cnt-ledger': 1 };   // the Collection count is a running total, not something waiting
+function nav80Dots() {
+  var gs = document.querySelectorAll('nav.tabs .tgrp');
+  for (var i = 0; i < gs.length; i++) {
+    var cs = gs[i].querySelectorAll('.tmenu .count'), on = false;
+    for (var k = 0; k < cs.length && !on; k++) {
+      var c = cs[k], x = c.textContent.replace(/\s+/g, '');
+      if (!NAV80_QUIET[c.id] && !c.hidden && x && x !== '0') on = true;
+    }
+    var d = gs[i].querySelector('.nav80-dot'), r = gs[i].querySelector('.nav80-sr');
+    if (d && d.hidden === on) d.hidden = !on;
+    if (r && r.hidden === on) r.hidden = !on;
+    if (gs[i].hasAttribute('data-nav80-dot') !== on) { if (on) gs[i].setAttribute('data-nav80-dot', ''); else gs[i].removeAttribute('data-nav80-dot'); }
+  }
+}
+function nav80Fit(g) {
+  var m = g && g.querySelector('.tmenu'); if (!m) return;
+  var W = window.innerWidth, H = window.innerHeight;
+  g.classList.remove('nav80-r'); g.classList.remove('nav80-l');
+  if (W > 640) {
+    var r = m.getBoundingClientRect(), o1 = Math.max(0, r.right - (W - 8)) + Math.max(0, 8 - r.left);
+    if (o1 > 0) {
+      var f = r.right > W - 8 ? 'nav80-r' : 'nav80-l'; g.classList.add(f);
+      var r2 = m.getBoundingClientRect(), o2 = Math.max(0, r2.right - (W - 8)) + Math.max(0, 8 - r2.left);
+      if (o2 >= o1) g.classList.remove(f);
+    }
+  }
+  // height: below the bar if it fits; else above it when there is more room there (a phone shows the bar low on
+  // the first screen); else it scrolls inside itself
+  m.classList.remove('nav80-scroll'); g.classList.remove('nav80-up');
+  var need = m.scrollHeight, below = Math.floor(H - Math.max(m.getBoundingClientRect().top, 0) - 12), room = below;
+  if (need > below + 2) {
+    g.classList.add('nav80-up');
+    var above = Math.floor(m.getBoundingClientRect().bottom - 12);
+    if (above > below) room = above; else g.classList.remove('nav80-up');
+  }
+  if (need > room + 2 && room >= 160) { m.style.setProperty('--nav80-mh', room + 'px'); m.classList.add('nav80-scroll'); }
+}
+function nav80Boot() {
+  var nav = document.querySelector('nav.tabs'); if (!nav) return;
+  var gs = nav.querySelectorAll('.tgrp');
+  for (var i = 0; i < gs.length; i++) (function (g) {
+    g.addEventListener('pointerenter', function () { g.classList.remove('nav80-shut'); nav80Fit(g); });
+    g.addEventListener('focusin', function (e) { if (!e.relatedTarget || !g.contains(e.relatedTarget)) g.classList.remove('nav80-shut'); nav80Fit(g); });
+  })(gs[i]);
+  // capture, so this sees whether the menu was open before the parent click toggles it
+  nav.addEventListener('click', function (e) {
+    var t = e.target; if (!t || !t.closest) return;
+    var g = t.closest('.tgrp'); if (!g) return;
+    if (t.closest('.tpar')) { if (g.classList.contains('open')) g.classList.add('nav80-shut'); else { g.classList.remove('nav80-shut'); nav80Fit(g); } return; }
+    if (!t.closest('.tmenu .tab')) return;
+    g.classList.add('nav80-shut');
+    var a = document.activeElement, p = g.querySelector('.tpar');
+    if (p && a && a !== p && g.contains(a)) { try { p.focus({ preventScroll: true }); } catch (er) {} }
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape' && e.key !== 'Esc') return;
+    var a = document.activeElement, g = nav.querySelector('.tgrp.open') || (a && a.closest ? a.closest('nav.tabs .tgrp') : null) || nav.querySelector('.tgrp:hover');
+    if (!g) return;
+    g.classList.add('nav80-shut');
+    var p = g.querySelector('.tpar');
+    if (p && a && a !== p && g.contains(a)) { try { p.focus({ preventScroll: true }); } catch (er) {} }
+  });
+  window.addEventListener('resize', function () { var o = nav.querySelector('.tgrp.open'); if (o) nav80Fit(o); });
+  nav80Dots();
+  if (window.MutationObserver) new MutationObserver(nav80Dots).observe(nav, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden'] });
+}
+try { nav80Boot(); } catch (e) {}
 
 /* ---------- a light that follows the pointer ----------
    Read on pointermove and written straight back as two custom properties. No layout, no timer, and

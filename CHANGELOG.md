@@ -2,6 +2,12 @@
 
 Second Nature is one HTML file, so each entry here is one new version of that file. Versions are the ones the app shows in its footer.
 
+## 2026-10-16 — a shorter menu bar
+- The top bar now has three items: Today (My day, Quests, Starter, Focus room, Toolkit, Motivation), Recall with its due count, and Learn (Capture, Collection, Traits, Progress, Method). Every page is still there; only where it sits in the menu changed.
+- A small dot on Today or Learn means something inside wants your attention.
+- On phones the bar fits on one row, and menus open upwards when there is more room above, so nothing runs off the screen.
+- Menus now close as soon as you pick a page, press Escape or tap the open tab again.
+
 ## 2026-10-16 — old dread and expedition XP no longer counts
 - XP earned on dreads and expeditions before they were removed no longer counts towards your total XP, your quest rank or the Momentum card. Each expedition step took 20 off and each summit 60; the automatic "Plan the route" step never gave XP, so nothing comes off for it.
 - Nothing saved is changed: the app simply leaves that XP out when it adds up your total. While your old expeditions load, the rank card says "Adding up your XP…" for a moment, so the number never jumps.
